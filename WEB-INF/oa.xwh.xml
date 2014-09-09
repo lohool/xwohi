@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwohi>
+   <actions>
+      <action name="InBoxList" />
+      <action name="InBoxAdd" />
+      <action name="InBoxModify" />
+      <action name="InBoxDelete" />
+      <action name="InBoxInfo" />
+      <action name="InBoxInput" />
+      <action name="SignBeRead" />
+      <wohi-name>InBox</wohi-name>
+      <class>com.lohool.jproject.xwohi.mail.po.InBox</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="user" related="userID" />
+         <field type="relation" name="sender" related="senderID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="OutBoxList" />
+      <action name="OutBoxAdd" />
+      <action name="OutBoxModify" />
+      <action name="OutBoxDelete" />
+      <action name="OutBoxInfo" />
+      <action name="OutBoxInput" />
+      <wohi-name>OutBox</wohi-name>
+      <class>com.lohool.jproject.xwohi.mail.po.OutBox</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="receiver" related="receiverID" />
+         <field type="relation" name="user" related="userID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="SentBoxList" />
+      <action name="SentBoxAdd" />
+      <action name="SentBoxModify" />
+      <action name="SentBoxDelete" />
+      <action name="SentBoxInfo" />
+      <action name="SentBoxInput" />
+      <wohi-name>SentBox</wohi-name>
+      <class>com.lohool.jproject.xwohi.mail.po.SentBox</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="receiver" related="receiverID" />
+         <field type="relation" name="sender" related="senderID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="TrashBoxList" />
+      <action name="TrashBoxAdd" />
+      <action name="TrashBoxModify" />
+      <action name="TrashBoxDelete" />
+      <action name="TrashBoxInfo" />
+      <action name="TrashBoxInput" />
+      <wohi-name>TrashBox</wohi-name>
+      <class>com.lohool.jproject.xwohi.mail.po.TrashBox</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="sender" related="senderID" />
+      </fields>
+   </actions>
+      <actions>
+      <action name="WapAddressGroupList" />
+      <action name="AddressGroupList" />
+      <action name="AddressGroupAdd" />
+      <action name="AddressGroupModify" />
+      <action name="AddressGroupDelete" />
+      <action name="AddressGroupInfo" />
+      <action name="AddressGroupInput" />
+      <wohi-name>AddressGroup</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.AddressGroup</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="user" related="userID" />
+      </fields>
+   </actions>
+
+   <actions>
+      <action name="WapAddressListList" >
+		<sql>select obj from AddressList obj where obj.#group=? and obj.#user=? and obj.#name=? and obj.#mobile=? and obj.#phone=$mdn</sql>
+	  </action>
+      <action name="AddressListList" >
+		<sql>select obj from AddressList obj where obj.#group=? and obj.#user=? and obj.#name=? and obj.#mobile=? and obj.#phone=$mdn</sql>
+	  </action>
+      <action name="AddressListAdd" />
+      <action name="AddressListModify" />
+      <action name="AddressListDelete" />
+      <action name="AddressListInfo" />
+      <action name="AddressListInput" />
+      <wohi-name>AddressList</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.AddressList</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="group" related="groupID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="CalendarPlanList" />
+      <action name="CalendarPlanAdd" />
+      <action name="CalendarPlanModify" />
+      <action name="CalendarPlanDelete" />
+      <action name="CalendarPlanInfo" />
+      <action name="CalendarPlanInput" />
+      <wohi-name>CalendarPlan</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.CalendarPlan</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+
+   <actions>
+      <action name="DaySchemeList">
+		<sql>select obj from DayScheme obj where obj.#weekScheme=? order by obj.dayAtWeek</sql>
+	  </action>
+	  <!--
+      <action-name name="DaySchemeList">
+			<sql>
+				<where>
+					<field name="weekScheme.id" operator="=" relate-operator="and"/>
+				</where>
+				<ordy-by>
+					<field name="id">
+					<desc value="true"/>
+				</ordy-by>
+			</sql>
+	  " />
+	  -->
+      <action name="DaySchemeAdd" />
+      <action name="DaySchemeModify" />
+      <action name="DaySchemeDelete" />
+      <action name="DaySchemeInfo" />
+      <action name="DaySchemeInput" />
+      <wohi-name>DayScheme</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.DayScheme</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="weekScheme" related="weekSchemeID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="DocumentList" />
+      <action name="SentedDocumentList" />
+      <action name="ReceiveDocument">
+	  <sql>select obj from Document obj where obj.state!=2 and obj.#taster=$$USER order by obj.createTime desc</sql>
+	  </action>
+      <action name="DocumentAdd" />
+      <action name="DocumentModify" />
+      <action name="DocumentDelete" />
+      <action name="DocumentInfo" />
+      <action name="DocumentInfoShow" />
+      <action name="DocumentInput" />
+      <action name="DocumentPigeonhole" />
+      <action name="DocumentWaitingForPigeonhole">
+		<sql>select obj from Document obj where obj.pigeonhole=2</sql>
+	  </action>
+      <wohi-name>Document</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Document</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="taster" related="tasterID" />
+		 <field type="file" name="file"/>
+      </fields>
+   </actions>
+   <actions>
+      <action name="FileList" />
+      <action name="FileAdd" />
+      <action name="FileModify" />
+      <action name="FileDelete" />
+      <action name="FileInfo" />
+      <action name="FileInput" />
+      <wohi-name>File</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.File</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="NoticeList" />
+      <action name="NoticeList2" />
+      <action name="NoticeListFrame" />
+      <action name="NoticeAdd" />
+      <action name="NoticeModify" />
+      <action name="NoticeDelete" />
+      <action name="NoticeInfo" />
+      <action name="NoticeShow" />
+      <action name="NoticeInput" />
+      <wohi-name>Notice</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Notice</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+
+   <actions>
+      <action name="NewsList"  namespace="/News" type="Read" permission="2">
+		<sql>select obj from News obj where obj.#newsType=?</sql>
+
+	  </action>
+      <action name="NewsList2"/>
+      <action name="NewsListFrame" />
+      <action name="NewsAdd"  namespace="/News" type="Create" permission="1" />
+      <action name="NewsModify" />
+      <action name="NewsDelete" />
+      <action name="NewsInfo" />
+      <action name="NewsShow" />
+      <action name="NewsInput" />
+      <wohi-name>News</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.News</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="newsType" group-permited="true"  type="relation" relatedWohi="NewsType" group-list-namespace="/NewsType" group-list-action="NewsTypeList" />
+      </fields>
+	  <!--<group-permission field="newsType" wohi="NewsType" />-->
+
+   </actions>
+   <actions>
+      <action name="NewsTypeList" />
+      <action name="NewsTypeAdd" />
+      <action name="NewsTypeModify" />
+      <action name="NewsTypeDelete" />
+      <action name="NewsTypeInfo" />
+      <action name="NewsTypeInput" />
+      <wohi-name>NewsType</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.NewsType</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+
+
+
+   <actions>
+      <action name="WeekSchemeList" />
+      <action name="WeekSchemeUnderlingsList" />
+      <action name="WeekSchemeListByUser" >
+		<sql>select obj from WeekScheme obj where obj.#user=? order by obj.weekNumber desc</sql>
+	  </action>
+      <action name="WeekSchemeAdd" />
+      <action name="WeekSchemeModify" />
+      <action name="WeekSchemeDelete" />
+      <action name="WeekSchemeInfo" />
+      <action name="WeekSchemeInput" />
+      <wohi-name>WeekScheme</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WeekScheme</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="taster" related="tasterID" />
+         <field type="relation" name="user" related="executorID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="WorkLogList" />
+      <action name="WorkLogListByUser" >
+		<sql>select obj from WorkLog obj where obj.#user=? order by obj.id desc</sql>
+	  </action>
+      <action name="WorkLogAdd" />
+      <action name="WorkLogModify" />
+      <action name="WorkLogDelete" />
+      <action name="WorkLogInfo" />
+      <action name="WorkLogInput" />
+      <wohi-name>WorkLog</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WorkLog</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="BussinessItemList" />
+      <action name="BussinessItemAdd" />
+      <action name="BussinessItemModify" />
+      <action name="BussinessItemDelete" />
+      <action name="BussinessItemInfo" />
+      <action name="BussinessItemInput" />
+      <wohi-name>BussinessItem</wohi-name>
+      <class>com.lohool.jproject.xwohi.bussinessitem.po.BussinessItem</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="type" related="typeID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="LoanItemList" />
+      <action name="LoanItemAdd" />
+      <action name="LoanItemModify" />
+      <action name="LoanItemDelete" />
+      <action name="LoanItemInfo" />
+      <action name="LoanItemInput" />
+      <action name="MyBorrowedItemList" />
+      <wohi-name>LoanItem</wohi-name>
+      <class>com.lohool.jproject.xwohi.bussinessitem.po.LoanItem</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="borrower" related="borrowerID" />
+         <field type="relation" name="item" related="itemID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="LoanLogList" />
+      <action name="LoanLogAdd" />
+      <action name="LoanLogModify" />
+      <action name="LoanLogDelete" />
+      <action name="LoanLogInfo" />
+      <action name="LoanLogInput" />
+      <wohi-name>LoanLog</wohi-name>
+      <class>com.lohool.jproject.xwohi.bussinessitem.po.LoanLog</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="item" related="itemID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="ItemTypeList" />
+      <action name="ItemTypeAdd" />
+      <action name="ItemTypeModify" />
+      <action name="ItemTypeDelete" />
+      <action name="ItemTypeInfo" />
+      <action name="ItemTypeInput" />
+      <wohi-name>ItemType</wohi-name>
+      <class>com.lohool.jproject.xwohi.bussinessitem.po.ItemType</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="union" name="name">
+            <message>ItemType has existed.</message>
+         </field>
+      </fields>
+   </actions>
+   <actions>
+      <action name="ArchiveList">
+		<sql>select obj from Archive obj where obj.#catalogue=?</sql>
+	  </action>
+      <action name="ArchiveSearchInput" />
+      <action name="ArchiveSearch" >
+		<sql><![CDATA[select obj from Archive obj where (obj.#catalogue=? or obj.#absolutePath like ?)  and obj.#editor=? and obj.#serialNumber=? and obj.#timeLimit=? and obj.#title like ? and obj.#content like ? and obj.#createTime>$beginTime and obj.#createTime<$endTime]]></sql>
+	  </action>
+      <action name="ArchiveAdd" />
+      <action name="ArchiveModify" />
+      <action name="ArchiveDelete" />
+      <action name="ArchiveInfo" />
+      <wohi-name>Archive</wohi-name>
+      <class>com.lohool.jproject.xwohi.archive.po.Archive</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="catalogue" related="catalogueID"/>
+      </fields>
+   </actions>
+   <actions>
+       <action name="ArchiveCatalogueList" >
+		 <sql>select obj from ArchiveCatalogue obj where obj.#parent=?</sql>
+	  </action>      
+      <action name="ArchiveCatalogueSelectDialog" >
+ 		 <sql>select obj from ArchiveCatalogue obj where obj.#parent=?</sql>
+	  </action>      
+	  <action name="ArchiveCatalogueAdd" />
+      <action name="ArchiveCatalogueModify" />
+      <action name="ArchiveCatalogueDelete" />
+      <action name="ArchiveCatalogueInfo" />
+     <action name="ArchiveCatalogueInput" />
+	  <!--
+		<sql><![CDATA[select obj from ArchiveCatalogue obj where obj.#id<=$max and obj.#id>$min order by id desc]]></sql>
+	  </action>
+	  -->
+      <action name="ShowPath" />
+      <action name="ArchiveInput" />
+      <wohi-name>ArchiveCatalogue</wohi-name>
+      <class>com.lohool.jproject.xwohi.archive.po.ArchiveCatalogue</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="parent" related="parentID" />
+         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.archive.po.ArchiveCatalogue" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="NotePadList" >
+	  <sql>select obj from NotePad obj where obj.#content like ? and obj.#user.id=$$USER order by obj.id desc</sql>
+	  </action>
+      <action name="NotePadAdd" />
+      <action name="NotePadModify" />
+      <action name="NotePadDelete" />
+      <action name="NotePadInfo" />
+      <action name="NotePadInput" />
+      <wohi-name>NotePad</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.NotePad</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="user" related="userID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="KnowledgeList">
+		<sql>select obj from Knowledge obj where obj.#catalogue=? and obj.#user=?</sql>
+		<!--<sql>select obj from Knowledge obj where obj.#catalogue=? and obj.#user=? and obj.createTime=$request(beginTime)</sql>-->
+	  </action>
+      <action name="KnowledgeAdd" />
+      <action name="KnowledgeModify" />
+      <action name="KnowledgeDelete" />
+      <action name="KnowledgeInfo" />
+      <action name="KnowledgeShow" />
+      <wohi-name>Knowledge</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Knowledge</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="catalogue" related="catalogueID" />
+      </fields>
+   </actions>
+   <actions>
+       <action name="KnowledgeCatalogueList" >
+		 <sql>select obj from KnowledgeCatalogue obj where obj.#parent=? and obj.#user=?</sql>
+	  </action>      
+	  <action name="KnowledgeCatalogueAdd" />
+      <action name="KnowledgeCatalogueModify" />
+      <action name="KnowledgeCatalogueDelete" />
+      <action name="KnowledgeCatalogueInfo" />
+      <action name="KnowledgeCatalogueInput" />
+      <action name="ShowKnowledgePath" />
+      <action name="KnowledgeInput" />
+      <wohi-name>KnowledgeCatalogue</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.KnowledgeCatalogue</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="parent" related="parentID" />
+         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.po.KnowledgeCatalogue" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="ItemApplicationList" >
+		<sql>select obj from ItemApplication obj where obj.delState!=1 and obj.#user=? order by obj.state,obj.createTime desc </sql>
+	  </action>
+      <action name="ItemApplicationAdd" />
+      <action name="ItemApplicationModify" />
+      <action name="ItemApplicationRatify" />
+      <action name="ItemApplicationDelete" />
+      <action name="ItemApplicationInfo" />
+      <action name="ItemApplicationInput" />
+      <action name="ItemApplicationSendOut" />
+      <action name="ItemApplicationAudit" >
+		<sql>select obj from ItemApplication obj where obj.state=1 or obj.state=3 order by obj.state,obj.createTime desc </sql>
+	  </action>
+
+      <action name="ItemApplicationRatifyInfo" />
+      <action name="ItemApplicationRatifyList" >
+		<sql>select obj from ItemApplication obj where obj.delState!=2 and obj.#ratifier=$ratifier order by obj.state,obj.createTime desc</sql>
+	  </action>
+      <wohi-name>ItemApplication</wohi-name>
+      <class>com.lohool.jproject.xwohi.bussinessitem.po.ItemApplication</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="user" related="userID" />
+         <field type="relation" name="ratifier" related="ratifierID" />
+         <field type="relation" name="item" related="itemID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="MonthLogList" />
+      <action name="MonthLogAdd" />
+      <action name="MonthLogModify" />
+      <action name="MonthLogDelete" />
+      <action name="MonthLogInfo" />
+      <action name="MonthLogInput" />
+      <wohi-name>MonthLog</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.MonthLog</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="taster" related="tasterID" />
+         <field type="relation" name="user" related="userID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="WeekLogList" />
+      <action name="WeekLogAdd" />
+      <action name="WeekLogModify" />
+      <action name="WeekLogDelete" />
+      <action name="WeekLogInfo" />
+      <action name="WeekLogInput" />
+      <wohi-name>WeekLog</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WeekLog</class>
+      <fields>
+         <field type="primaryKey" name="content" />
+         <field type="relation" name="taster" related="tasterID" />
+         <field type="relation" name="user" related="userID" />
+      </fields>
+   </actions>
+
+</xwohi>

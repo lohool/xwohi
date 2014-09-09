@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+<!--
+        <property name="hibernate.dialect">net.sf.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/wap</property>
+        <property name="hibernate.connection.username">cqwap</property>
+        <property name="hibernate.connection.password">cqwap</property>
+        <property name="hibernate.connection.pool.size">10</property>
+        <property name="hibernate.show_sql">false</property>
+		<property name="jdbc.fetch_size">50</property>
+		<property name="jdbc.batch_size">25</property>
+		<property name="jdbc.use_scrollable_resultset">false</property>
+
+<property name="hibernate.transaction.factory_class">net.sf.hibernate.transaction.JDBCTransactionFactory </property>
+<property name="hibernate.transaction.factory_class">
+net.sf.hibernate.transaction.JBossTransactionManagerLookup
+</property>
+-->
+
+<!--
+<property name="jta.UserTransaction">
+java:comp/UserTransaction
+</property>
+//-->
+        <!-- Mapping files -->
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Operator.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Privilege.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Resource.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Role.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/po/Job.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Department.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/po/SysParam.hbm.xml"/>
+
+
+		<mapping resource="com/lohool/jproject/xwohi/po/AddressGroup.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/AddressList.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Notice.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/WeekScheme.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/DayScheme.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/File.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Document.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/CalendarPlan.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/NotePad.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/WorkLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/WeekLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/MonthLog.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/po/Joke.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/JokeClass.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/InBox.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/OutBox.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/TrashBox.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/SentBox.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/BussinessItem.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/LoanItem.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/LoanLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/ItemType.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/ItemApplication.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/archive/po/Archive.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/archive/po/ArchiveCatalogue.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/po/KnowledgeCatalogue.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Knowledge.hbm.xml"/>
+
+		<mapping resource="com/lohool/sms/increment/po/Message.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/MessageGroup.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/SendSMS.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/SentSMS.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/Customer.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/CustomerGroup.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/TradeLog.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/Product.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/ReceivedSMS.hbm.xml"/>
+
+
+		<mapping resource="com/lohool/jproject/thread/schedule/ProgramImpl.hbm.xml"/>
+
+
+		<mapping resource="com/lohool/jproject/vrmall/po/Goods.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/GoodsClass.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/OrderForm.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/Shelf.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/Shop.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/ShoppingCar.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/ShoppingLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/vrmall/po/Showcase.hbm.xml"/>
+
+<!--
+		<mapping resource="com/lohool/jproject/xwohi/user/po/User.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Association.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Team.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Handicap.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Match.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/ChipParameter.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/News.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/NewsType.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/SingleBet.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/Standard.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/Spread.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/CorrectScore.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/DoubleResult.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/FirstHalfGame.hbm.xml"/>
+        <mapping resource="com/lohool/jproject/xwohi/po/TotalGoals.hbm.xml"/>
+-->
+    </session-factory>
+
+</hibernate-configuration>

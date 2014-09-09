@@ -1,0 +1,51 @@
+.cbToolbar
+{
+	height:30px;
+	WIDTH:100%;
+	PADDING:0px;
+	font-size:10px;
+	BACKGROUND-COLOR:#FBE9C3;
+	vertical-align:bottom ;
+	BORDER:1px solid green;
+}
+.tbButton, .tbButtonDown, .tbButtonRaise,.tbButton:link
+{
+	CURSOR:hand;
+	HEIGHT:24;
+	BORDER:1px solid #FBE9C3;
+	PADDING:1px 1px 1px 1px;
+	TEXT-DECORATION:none;
+	MARGIN-TOP:1;
+	text-align:middle;
+	font-size:10px;
+}
+.monthlyDayHeader,  .cbToolbar, .tbButtonRaise,.tbButton A:hover, .tbButton:hover,A:hover
+{
+	BORDER:1px solid;
+	font-size:10px;
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+}
+.tbButtonDown,.tbButton a:active,A:active, .tbButton:active
+{
+	font-size:10px;
+	BORDER:1px solid;
+	BORDER-COLOR:threedshadow threedhighlight threedhighlight threedshadow;
+}
+.cbToolbar IMG, .cbSubmenu IMG
+{
+	BORDER:none;
+	MARGIN-RIGHT:1px;
+}
+.separator
+{
+	BORDER:1px solid;
+	BORDER-COLOR:threedshadow threedhighlight threedhighlight threedshadow ;
+	width:3px;
+	height:30px;
+	BACKGROUND-COLOR:#FBE9C3;
+	empty-cells: show ;
+	margin-left:2px;
+	margin-right:2px;
+
+	vertical-align:middle;
+}

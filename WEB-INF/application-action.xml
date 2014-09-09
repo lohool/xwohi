@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="autodetect">
+<bean id="DefaultDao" class="com.xwohi.framework.common.dao.OperationManagementImpl"  singleton="false"/>
+
+<bean id="Login" class="com.lohool.jproject.xwohi.operator.action.LoginAction" singleton="false"></bean>
+<bean id="Logout" class="com.lohool.jproject.xwohi.operator.action.LogoutAction" singleton="false"></bean>
+<bean id="OperatorModPwd" class="com.lohool.jproject.xwohi.operator.action.OperatorModPwdAction" singleton="false"></bean>
+<bean id="MyselfInfo" class="com.lohool.jproject.xwohi.operator.action.MyselfInfoAction" singleton="false"></bean>
+<bean id="OperatorLock" class="com.lohool.jproject.xwohi.operator.action.OperatorLockAction" singleton="false"></bean>
+<bean id="OperatorUnlock" class="com.lohool.jproject.xwohi.operator.action.OperatorUnlockAction" singleton="false"></bean>
+
+<bean id="BasicList" class="com.xbreeze.framework.xwohi.common.action.BasicListAction" singleton="false"></bean>
+<bean id="BasicAdd" class="com.xbreeze.framework.xwohi.common.action.BasicAddAction" singleton="false"></bean>
+<bean id="BasicDelete" class="com.xbreeze.framework.xwohi.common.action.BasicDeleteAction" singleton="false"></bean>
+<bean id="BasicInfo" class="com.xbreeze.framework.xwohi.common.action.BasicInfoAction" singleton="false"></bean>
+<bean id="BasicModify" class="com.xbreeze.framework.xwohi.common.action.BasicModifyAction" singleton="false"></bean>
+<bean id="BasicInput" class="com.xbreeze.framework.xwohi.common.action.BasicInputAction" singleton="false"></bean>
+
+</beans>
+<!--
+-->
+<!--
+<beans>
+<bean id="baseDao" abstract="true" lazy-init="true">
+<proper
+ty name="sessionFactory" ref="sessionFactory"/>
+</bean>
+<bean id="DefaultDao" class="com.xwohi.framework.common.dao.OperationManagementImpl" parent="baseDao" singleton="false"/>
+
+
+<bean id="BasicListTarget" class="com.xwohi.framework.common.service.BasicListService" singleton="false">
+<property name="dao"><ref local="DefaultDao"/></property> 
+</bean>
+
+ <bean id="BasicListService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" singleton="false">
+	  <property name="transactionManager">   <ref bean="transactionManager" />  </property>
+	  <property name="target">   <ref local="BasicListTarget" />  </property>
+	  <property name="transactionAttributes">
+	   <props>
+		<prop key="insert*">PROPAGATION_REQUIRED</prop>
+		<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="exec*">PROPAGATION_REQUIRED,readOnly</prop>
+	   </props>
+	  </property>
+</bean>
+<bean id="AccountTarget" class="com.lohool.jproject.xwohi.operator.OperatorManagementImpl" singleton="false">
+<property name="dao"><ref local="DefaultDao"/></property> 
+</bean>
+
+ <bean id="AccountService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" singleton="false">
+	  <property name="transactionManager">   <ref bean="transactionManager" />  </property>
+	  <property name="target">   <ref local="AccountTarget" />  </property>
+	  <property name="transactionAttributes">
+	   <props>
+		<prop key="insert*">PROPAGATION_REQUIRED</prop>
+		<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="is*">PROPAGATION_REQUIRED,readOnly</prop>
+	   </props>
+	  </property>
+</bean>
+
+
+<bean id="Login" class="com.lohool.jproject.xwohi.operator.action.LoginAction" singleton="false">
+<property name="service"><ref local="AccountService"/></property> 
+</bean>
+<bean id="BasicList" class="com.xbreeze.framework.xwohi.common.action.BasicListAction" singleton="false">
+<property name="service"><ref local="BasicListService"/></property> 
+</bean>
+</beans>
+-->

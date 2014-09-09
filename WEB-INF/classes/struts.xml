@@ -1,0 +1,224 @@
+<!DOCTYPE struts PUBLIC     
+ "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"  
+   "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<?xml-stylesheet type="text/xsl" href="xwork1.xsl"?>
+
+<struts>
+	
+ <constant name="struts.action.extension" value="do,action" /> 
+ <constant name="struts.serve.static.browserCache" value="false" />    
+ <constant name="struts.configuration.xml.reload" value="true" />    
+ <constant name="struts.devMode" value="false" />    
+ <!--   
+ <constant name="struts.ui.theme" value="simple" />  
+ -->   
+ <constant name="struts.i18n.encoding" value="UTF-8" /> 
+ <constant name="struts.multipart.maxSize" value="10701096"/>  
+
+
+
+	<include file="struts-default.xml" />
+
+	<package extends="struts-default" name="action-default">
+	  <global-results>
+		<result type="dispatcher" name="access_rejected">/notlimit.jsp</result>
+		<result type="dispatcher" name="error">/error.jsp</result>
+         <result type="dispatcher" name="input">/uniqueError.jsp</result>
+      </global-results>
+   </package>
+
+	<package extends="action-default" name="default">
+      <default-interceptor-ref name="defaultStack" />
+
+	  	<action name="Login" class="Login">
+			<result name="error" type="dispatcher">/index.jsp</result>
+			<result name="input" type="dispatcher">/index.jsp</result>
+			<result name="success" type="dispatcher">/win/index.jsp</result>
+		</action>
+	  	<action name="Logout" class="Logout">
+			<result name="success" type="dispatcher">/index.jsp</result>
+		</action>
+		<action name="Upload" class="UpLoad" >
+		  	<result name="success">/Knowledge/UploadSuccess.jsp</result>
+		</action>
+<!--
+		<action name="CustomerLogin" class="CustomerLogin">
+			<result name="error" type="dispatcher">/login/error.jsp</result>
+			<result name="input" type="dispatcher">/vrshop/login.jsp</result>
+			<result name="success" type="dispatcher">/vrshop/login.jsp</result>
+		</action>
+		-->
+   </package>
+   <!--
+      <package extends="action-default" name="LoginHistory" namespace="/LoginHistory">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="LoginHistoryList">
+         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.jsp</result>
+      </action>
+      <action class="BasicAdd" name="LoginHistoryAdd">
+         <result name="input" type="dispatcher">/LoginHistory/LoginHistoryAdd.jsp</result>
+         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="LoginHistoryDelete">
+         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.action</result>
+      </action>
+      <action class="BasicInfo" name="LoginHistoryInfo">
+         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="LoginHistoryModify">
+         <result name="input" type="dispatcher">/LoginHistory/LoginHistoryInfo.jsp</result>
+         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="LoginHistoryInput">
+         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryAdd.jsp</result>
+      </action>
+   </package>
+-->
+   <package name="Operator" extends="action-default" namespace="/Operator">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="OperatorList" class="BasicList">
+         <result name="success">/Operator/OperatorList.jsp</result>
+      </action>
+      <action name="OperatorSelectList" class="BasicList">
+         <result name="success">/Operator/OperatorSelector/OperatorList.jsp</result>
+      </action>
+	  <action name="OperatorAdd" class="BasicAdd">
+         <result type="redirect" name="success">/Operator/CloseRefreshList.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="OperatorDelete" class="BasicModify">
+         <result type="dispatcher" name="success">/Operator/CloseRefreshList.jsp</result>
+      </action>
+      <action name="OperatorInfo" class="BasicInfo">
+         <result type="dispatcher" name="success">/Operator/OperatorInfo.jsp</result>
+      </action>
+	  <action name="OperatorModify" class="BasicModify">
+         <result type="redirect" name="success">/Operator/CloseRefreshList.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="OperatorInput" class="BasicInput">
+         <result type="dispatcher" name="success">/Operator/OperatorAdd.jsp</result>
+      </action>
+		<action name="OperatorModPwd" class="OperatorModPwd">
+			<result name="success" type="dispatcher">/Maintain/closeDialog.jsp</result>
+			<interceptor-ref name="validationStack" /> 
+		</action>
+      <action name="MyselfInfo" class="MyselfInfo">
+         <result type="dispatcher" name="success">/Operator/MyselfInfo.jsp</result>
+      </action>
+
+   </package>
+
+   <package name="Role" extends="action-default" namespace="/Role">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="RoleList" class="BasicList">
+         <result type="dispatcher" name="success">/Operator/RoleList.jsp</result>
+      </action>
+      <action name="RoleAdd" class="BasicAdd">
+         <result type="dispatcher" name="success">/Operator/CloseRoleDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="RoleDelete" class="BasicDelete">
+         <result type="redirect" name="success">/Operator/RoleRefreshList.jsp</result>
+      </action>
+      <action name="RoleInfo" class="BasicInfo">
+         <result type="dispatcher" name="success">/Operator/RoleInfo.jsp</result>
+      </action>
+      <action name="RoleDataPermission" class="BasicInfo">
+         <result type="dispatcher" name="success">/Operator/RoleDataPermission.jsp</result>
+      </action>
+	  <!--
+      <action name="RoleDataPermissionModify" class="RoleDataPermissionModify">
+         <result type="dispatcher" name="input">/Operator/RoleDataPermission.jsp</result>
+         <result type="redirect" name="success">/Operator/RoleList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+	  -->
+      <action name="RoleModify" class="BasicModify">
+         <result type="dispatcher" name="success">/Operator/CloseRoleDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="RoleInput" class="BasicInput">
+         <result type="dispatcher" name="success">/Operator/RoleAdd.jsp</result>
+      </action>
+   </package>
+
+
+   <package name="Resource" extends="struts-default" namespace="/Resource">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="ResourceList" class="BasicList">
+         <result type="dispatcher" name="success">/Operator/ResourceList.jsp</result>
+      </action>
+   </package>
+   <package name="Privilege" extends="struts-default" namespace="/Privilege">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="PrivilegeList" class="BasicList">
+         <result type="dispatcher" name="success">/Operator/PrivilegeList.jsp</result>
+      </action>
+   </package>
+
+   <package name="Department" extends="struts-default" namespace="/Department">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="DepartmentList" class="BasicList">
+         <result type="dispatcher" name="success">/Operator/DepartmentList.jsp</result>
+      </action>
+      <action name="OperatorSelDepartmentList" class="BasicList">
+         <result type="dispatcher" name="success">/Operator/OperatorSelector/DepartmentList.jsp</result>
+      </action>
+      <action name="DepartmentAdd" class="BasicAdd">
+         <result type="redirect" name="success">/Operator/CloseDepartmentDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="DepartmentDelete" class="BasicDelete">
+         <result type="redirect" name="success">/Department/DepartmentList.action</result>
+      </action>
+      <action name="DepartmentInfo" class="BasicInfo">
+         <result type="dispatcher" name="success">/Operator/DepartmentInfo.jsp</result>
+      </action>
+      <action name="DepartmentModify" class="BasicModify">
+         <result type="redirect" name="success">/Operator/CloseDepartmentDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="DepartmentInput" class="BasicInfo">
+         <result type="dispatcher" name="success">/Operator/DepartmentAdd.jsp</result>
+      </action>
+   </package>
+
+
+   <package name="NotePad" extends="struts-default" namespace="/NotePad">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="NotePadList" class="BasicList">
+         <result type="dispatcher" name="error">/error.jsp</result>
+         <result type="dispatcher" name="success">/NotePad/NotePadList.jsp</result>
+      </action>
+      <action name="NotePadAdd" class="BasicAdd">
+         <result type="dispatcher" name="error">/error.jsp</result>
+         <result type="dispatcher" name="input">/NotePad/NotePadAdd.jsp</result>
+         <result type="chain" name="success">NotePadList</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="NotePadDelete" class="BasicDelete">
+         <result type="dispatcher" name="error">/error.jsp</result>
+         <result type="chain" name="success">NotePadList</result>
+      </action>
+      <action name="NotePadInfo" class="BasicInfo">
+         <result type="dispatcher" name="error">/error.jsp</result>
+         <result type="dispatcher" name="success">/NotePad/NotePadInfo.jsp</result>
+      </action>
+      <action name="NotePadModify" class="BasicModify">
+         <result type="dispatcher" name="error">/error.jsp</result>
+         <result type="dispatcher" name="input">/NotePad/NotePadInfo.jsp</result>
+         <result type="redirect" name="success">/NotePad/NotePadList.action?page=${page}&amp;pageSize=${pageSize}</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="NotePadInput" class="BasicInput">
+         <result type="dispatcher" name="error">/error.jsp</result>
+         <result type="dispatcher" name="success">/NotePad/NotePadAdd.jsp</result>
+      </action>
+   </package>
+
+
+
+</struts>

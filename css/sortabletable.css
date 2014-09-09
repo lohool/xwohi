@@ -1,0 +1,84 @@
+.sort-table {
+	font:		Icon;
+	border: solid #CCCCCC 1px;	
+	color:		WindowText;
+	padding:0px;
+	BORDER-COLOR:#0795BE #D7F7FD #D7F7FD #0795BE ;	
+	empty-cells: show ;
+	
+}
+
+.sort-table thead {
+	background:	#DAF1FE;
+}
+
+
+
+.sort-table thead td {
+	border:			1px solid;
+	border-color:	ButtonHighlight ButtonShadow
+					ButtonShadow ButtonHighlight;
+	cursor:			default;
+	text-align:middle;
+	height:25px;
+
+}
+
+.sort-table thead td:active {
+	border-color:	ButtonShadow ButtonHighlight
+					ButtonHighlight ButtonShadow;
+	padding:		3px 4px 1px 6px;
+	text-align:middle;
+}
+
+.sort-table thead td[_sortType=None]:active {
+	border-color:	ButtonHighlight ButtonShadow
+					ButtonShadow ButtonHighlight;
+	padding:		2px 5px;
+	text-align:middle;
+}
+
+.sort-table tbody tr 
+{
+	text-align:middle;
+}
+
+.sort-table tbody td {
+	border:			1px #DAF5FE solid;
+	cursor:			default;
+	table-layout:fixed;
+
+}
+
+.sort-arrow {
+	width:					11px;
+	height:					11px;
+	background-position:	center center;
+	background-repeat:		no-repeat;
+	margin:					0 2px;
+}
+
+.sort-arrow.descending {
+	background-image:		url("/images/downsimple.png");
+
+}
+
+.sort-arrow.ascending {
+	background-image:		url("/images/upsimple.png");
+}
+
+
+.sort-table td.headID {
+	width:20px;
+	border:inset 1px;
+	border:solid menu 1px;	
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	padding:1px;
+	empty-cells: show ;
+    border-collapse: collaps;
+    border-spacing: 2px ;
+	background-color:#DAF1FE;
+	table-layout:fixed;
+	text-align:center;
+
+}

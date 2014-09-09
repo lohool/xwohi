@@ -1,0 +1,64 @@
+.menuBar
+{
+	BACKGROUND-COLOR:#E0F8FE;
+	border:outset 1px;
+	border:inset 1px;
+	border:solid #F1C5A0 1px;	
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:0px;
+	    border-spacing: 0;
+	vertical-align:middle;
+	white-space: nowrap;
+     height:30px;
+}
+.menuBarButton,
+.menuBar .menuBarButton
+{
+	COLOR:buttontext;
+	CURSOR:hand;
+	BORDER:1px 1px solid #E0F8FE;
+	TEXT-DECORATION:none;
+	MARGIN-top:2px;
+	min-width:40px;
+	max-width:100px;
+	height:25px;
+	text-align:center;
+	vertical-align:middle;
+	float:left;
+	BACKGROUND-COLOR:#E0F8FE;
+	line-height:30px;
+     height:30px;
+
+}
+.menuBar .menuBarButton:hover
+{
+	BORDER:1px  solid;
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+}
+
+.menuBar .menuBarButton img
+{
+	width:25px;
+	height:25px;
+	vertical-align:middle;
+}
+
+
+ .menuBar .separator
+{
+	BORDER: solid 1px  red;
+	BORDER-COLOR:threedshadow threedhighlight threedhighlight threedshadow ;
+	width:2px;
+	height:100%;
+	BACKGROUND-COLOR:#E0F8FE;
+	empty-cells: show ;
+	margin-left:2px;
+	margin-right:2px;
+	float:left;
+
+	vertical-align:middle;
+}
+

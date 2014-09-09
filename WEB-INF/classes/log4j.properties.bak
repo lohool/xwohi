@@ -1,0 +1,53 @@
+# Properties file that configures logging in ecommcorporate.
+# Set the root logger to be a WebLogic logger. For the moment we will set the 
+# logging level to be debug.
+#log4j.rootCategory=INFO, Console,File
+log4j.rootCategory=DEBUG, File
+
+# If it is not possible to access the WebLogic logging interface we will use
+# the WebLogicAppender logger to write to the console.
+
+log4j.category.FileLogger=INFO, File
+
+log4j.additivity.FileLogger=false
+log4j.appender.File=org.apache.log4j.RollingFileAppender
+log4j.appender.File.File=./iCRM_Log/xss.log
+log4j.appender.File.ImmediateFlush=true
+log4j.appender.File.layout=org.apache.log4j.PatternLayout
+log4j.appender.File.layout.ConversionPattern=%d{dd MMM yyyy HH:mm:ss} %-5p %c{1} - %m%n
+# number of log files to keep before deleting the oldest one
+log4j.appender.File.MaxBackupIndex=5  
+log4j.appender.File.MaxFileSize=1024KB
+
+#log4j.category.ConsoleLogger=INFO, Console
+
+#log4j.additivity.ConsoleLogger=false
+#log4j.appender.Console=org.apache.log4j.ConsoleAppender
+#log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+#log4j.appender.Console.layout.ConversionPattern=%d{dd MMM yyyy HH:mm:ss} %-5p %c{1} - %m%n
+
+# ---> More specific loggers can go here
+# Log levels used by Log4j in ascending order are:
+# debug, info, warn, error, and fatal
+
+# Examples
+log4j.logger.org.apache=FATAL
+#log4j.logger.com.gm.dpacs=INFO
+
+# Enables or Disables logging operations
+log.debug.enabled=false
+log.info.enabled=false
+log.warn.enabled=true
+log.error.enabled=true
+log.fatal.enabled=true
+log.timing.enabled=true
+
+# Enables or Disables logging of stack trace
+log.stacktrace.enabled=true
+
+# Enables or Disables logging of stack trace in case of exception
+log.exception.stacktrace.enabled=true
+
+# Logger class
+#log.logger.class=org.apache.log4j.Logger
+ log4j.logger.org.hibernate=debug 

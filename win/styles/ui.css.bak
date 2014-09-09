@@ -1,0 +1,117 @@
+body {
+	font-size: 70%;
+	font-family: "ËÎÌו", "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+html{ 
+overflow:hidden; 
+} 
+
+table {
+	font-size: 1em;
+}
+
+.demo-description {
+	clear: both;
+	padding: 12px;
+	font-size: 1.2em;
+	line-height: 1.4em;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+div.panel 
+{
+	BACKGROUND-COLOR:#E7F7FE;
+	border:outset 0px;
+	border:inset 1px;
+	border:1px solid #C4F9FD;	
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:5px;
+	border-spacing: 0;
+	vertical-align:middle;
+	white-space: nowrap;
+    height:100%;
+	width:100%;
+}
+div.panel .container 
+{
+	BACKGROUND-COLOR:#EDF9FE;
+	border:1px solid #C4F9FD;	
+	BORDER-COLOR: threedshadow threedshadow threedhighlight threedhighlight;
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:5px;
+	border-spacing: 0;
+	vertical-align:middle;
+	white-space: nowrap;
+    height:100%;
+	width:100%;
+}
+</style>
+
+<style>
+.menuBar
+{
+	BACKGROUND-COLOR:#FBE9C3;
+	border:outset 1px;
+	border:inset 1px;
+	border:solid #F1C5A0 1px;	
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:0px;
+	    border-spacing: 0;
+	vertical-align:middle;
+}
+.menuBarButton,
+.menuBar.menuBarButton
+{
+	border:outset 1px;
+	border:inset 1px;
+	border:solid #339999 1px;	
+	empty-cells: show ;
+    border-collapse: collaps;
+	padding:2px;
+	border-spacing: 2;
+	vertical-align:middle;
+	white-space: nowrap;
+	text-align: center;
+	display:inline-block; 
+	line-height: 20px;
+	position:relative;
+
+    height:20px;
+	width:60px;
+
+}
+.menuBarButton:hover,
+.menuBar.menuBarButton:hover
+{
+	BORDER:1px  solid;
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+}
+.separator,
+.menuBar .separator
+{
+	BORDER:1px solid;
+	BORDER-COLOR:threedshadow threedhighlight threedhighlight threedshadow ;
+	width:3px;
+	height:30px;
+	BACKGROUND-COLOR:#CCEEEE;
+	empty-cells: show ;
+	margin-left:2px;
+	margin-right:2px;
+	display:inline-block; 
+
+	vertical-align:middle;
+}
+
+
