@@ -1,0 +1,43 @@
+﻿body {
+	background-image: url('../../images//bg/bg1.jpg');
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+
+
+	font-size:13px;
+}
+sup {
+	color:#ff0000;
+}
+h1
+{
+	font-size:24px;
+}
+h2
+{
+	font-size:18px;
+}
+#AboutWindow
+{
+	font-size:12px;
+}
+#AboutWindow p
+{
+	margin: 0px;
+}
+#AboutWindow ul
+{
+	margin-top: 0px;
+}
+#Works li
+{
+	font-size:14px;
+	font-weight:bold;
+}
+#footer { position: absolute; left: 0px; bottom: 0px; width: 331px; padding: 2px; font-size: 12px; font-family: Arial, 宋体; border-top: 1px solid silver; }
+#footer a span { color:#ff0000; }
+#footer a { color: #000000; text-decoration: none; }
+#footer a.siteurl { font-family:Verdana; font-weight:bold; text-decoration:underline; }
+#footer address { color:#ffff00; cursor:pointer; text-decoration:blink; }
+
+

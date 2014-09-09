@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+    <tlibversion>1.1</tlibversion>
+    <jspversion>1.2</jspversion>
+    <shortname>xwohi</shortname>
+    <uri>http://www.xwohi.com/xwohi</uri>
+    <info>xwohi</info>
+
+    <tag>
+        <name>i18n</name>
+        <tagclass>com.xbreeze.framework.xwohi.taglib.I18nTag</tagclass>
+        <bodycontent>JSP</bodycontent>
+        <info>  i18n     </info>
+        <attribute>
+            <name>text</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

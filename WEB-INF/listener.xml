@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- root element, all properties must be under this element -->
+<listeners>
+	<listener>
+		<name>WorkOrder Create Listener </name>
+		<description>Create details of work order processes</description>
+		<class>com.lohool.jproject.crm.listener.WorkOrderListener</class>
+		<listened-component>com.lohool.jproject.crm.po.WorkOrder</listened-component>
+		<listened-action>Create</listened-action>
+	</listener>
+	<listener>
+		<name>WorkOrder Update Listener </name>
+		<description>Modify details of work order processes</description>
+		<class>com.lohool.jproject.crm.listener.WorkOrderListener</class>
+		<listened-component>com.lohool.jproject.crm.po.WorkOrder</listened-component>
+		<listened-action>Update</listened-action>
+	</listener>
+	<listener>
+		<name>QualificationSheet Create Listener </name>
+		<description>Create details of QualificationSheetprocesses</description>
+		<class>com.lohool.jproject.crm.listener.QualificationSheetListener</class>
+		<listened-component>com.lohool.jproject.crm.po.QualificationSheet</listened-component>
+		<listened-action>Create</listened-action>
+	</listener>
+	<listener>
+		<name>QualityLibrary Create Listener </name>
+		<description></description>
+		<class>com.lohool.jproject.crm.listener.QualityLibListener</class>
+		<listened-component>com.lohool.jproject.crm.po.QualityLibrary</listened-component>
+		<listened-action>Create</listened-action>
+	</listener>
+	<listener>
+		<name>QualityLibrary Update Listener </name>
+		<description></description>
+		<class>com.lohool.jproject.crm.listener.QualityLibListener</class>
+		<listened-component>com.lohool.jproject.crm.po.QualityLibrary</listened-component>
+		<listened-action>Update</listened-action>
+	</listener>
+</listeners>

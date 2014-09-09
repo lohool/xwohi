@@ -1,0 +1,210 @@
+TABLE.tab
+{
+  font-size: 12px;
+  border:    0px;
+}
+
+
+TD.tabLeftUp1
+{
+  BACKGROUND: url(../pics/tab/tlUp1.gif) no-repeat;
+  height:     33px; 
+  width:      12px;
+}
+
+
+TD.tabLeftUp2
+{
+  BACKGROUND: url(../pics/tab/tlUp2.gif) repeat-x;
+  height:     33px; 
+}
+
+
+TD.tabLeftUp3
+{
+  BACKGROUND: url(../pics/tab/tlUp3.gif) no-repeat;
+  height:     33px; 
+  width:      10px;
+}
+
+
+SPAN.tabLeftTitleUp
+{
+  position:       relative;
+  left:           0 px;
+  top:            -1px;
+  font-size:      12px;
+  text-align:     right;
+  letter-spacing: 1px;
+  color:          #000000;
+}
+
+
+SPAN.tabLeftTitleDown
+{
+  position:       relative;
+  left:           0 px;
+  top:            -1px;
+  font-size:      12px;
+  text-align:     right;
+  letter-spacing: 1px;
+  color:          #000000;
+}
+
+
+SPAN.tabTitleUp
+{
+  position:       relative;
+  left:           -1 px;
+  top:            -1px;
+  font-size:      12px;
+  text-align:     right;
+  letter-spacing: 1px;
+  color:          #000000;
+}
+
+
+SPAN.tabTitleDown
+{
+  position:       relative;
+  left:           0 px;
+  top:            -1px;
+  font-size:      12px;
+  text-align:     right;
+  letter-spacing: 1px;
+  color:          #000000;
+}
+
+
+TD.tabLeftDown1
+{
+  BACKGROUND: url(../pics/tab/tlDown1.gif) no-repeat;
+  height:     33px; 
+  width:      12px;
+}
+
+
+TD.tabLeftDown2
+{
+  BACKGROUND: url(../pics/tab/tlDown2.gif) repeat-x;
+  height:     33px; 
+}
+
+
+TD.tabLeftDown3
+{
+  BACKGROUND: url(../pics/tab/tlDown3.gif) no-repeat;
+  height:     33px; 
+  width:      10px;
+}
+
+
+TD.tabUp1
+{
+  BACKGROUND: url(../pics/tab/tUp1.gif) no-repeat;
+  height:     33px; 
+  width:      12px;
+}
+
+
+TD.tabUp2
+{
+  BACKGROUND: url(../pics/tab/tUp2.gif) repeat-x;
+  height:     33px; 
+}
+
+
+TD.tabUp3
+{
+  BACKGROUND: url(../pics/tab/tUp3.gif) no-repeat;
+  height:     33px; 
+  width:      10px;
+}
+
+
+
+
+
+
+TD.tabDown1
+{
+  BACKGROUND: url(../pics/tab/tDown1.gif) no-repeat;
+  height:     33px; 
+  width:      11px;
+}
+
+
+TD.tabDown2
+{
+  BACKGROUND: url(../pics/tab/tDown2.gif) repeat-x;
+  height:     33px; 
+}
+
+
+TD.tabDown3
+{
+  BACKGROUND: url(../pics/tab/tDown3.gif) no-repeat;
+  height:     33px; 
+  width:      10px;
+}
+
+
+TD.tabLeft1
+{
+  BACKGROUND: url(../pics/tab/tableft1.gif) repeat-x;
+  height:     33px; 
+}
+
+
+TD.tabLeft2
+{
+  BACKGROUND: url(../pics/tab/tableft2.gif) no-repeat;
+  height:     33px; 
+  width:      12px;
+}
+
+
+TD.tabL
+{
+  BACKGROUND: url(../pics/tab/tabL.gif) repeat-y;
+  width:      12px;
+}
+
+
+TD.tabR
+{
+  BACKGROUND: url(../pics/tab/tabR.gif) repeat-y;
+  width:      12px;
+}
+
+
+TD.tabLBot
+{
+  BACKGROUND: url(../pics/tab/tabLBot.gif) no-repeat;
+  height:     33px; 
+  width:      12px;
+}
+
+
+TD.tabLBot
+{
+  BACKGROUND: url(../pics/tab/tabLBot.gif) no-repeat;
+  height:     14px; 
+  width:      12px;
+}
+
+
+TD.tabBot
+{
+  BACKGROUND: url(../pics/tab/tabBot.gif)  repeat-x;
+  height:     14px; 
+}
+
+
+TD.tabRBot
+{
+  BACKGROUND: url(../pics/tab/tabRBot.gif) no-repeat;
+  height:     14px; 
+  width:      13px;
+}
+

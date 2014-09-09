@@ -1,0 +1,83 @@
+.paginate {
+	BACKGROUND-COLOR: #DAF1FE;
+	border:outset 1px;
+	border:inset 1px;
+	border:solid #F1C5A0 1px;	
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:0px;
+	    border-spacing: 0;
+	vertical-align:middle;
+	white-space: nowrap;
+	width:100%;
+	height:32px;
+}
+
+.paginate tr {
+	background:	#DAF1FE;
+}
+
+.paginate td {
+	cursor:			default;
+	padding:0px;
+	text-align: center;
+}
+
+
+.paginate a,
+.paginate a:visited,
+.paginate .navigator_current,
+.paginate .navigator_longstring,
+.paginate .string
+{
+	padding: 2 2 2 2;
+	width:22px;
+	height:22px;
+	TEXT-DECORATION: none;
+	text-align:center;
+	background-color: #DAF1FE;
+	color: #1D67C2;
+	font-weight-: bold;
+	border: solid 1px #72C1F1;
+	margin:2px;
+	float:left;
+	font-size:12px;
+	line-height:16px; 
+	CURSOR:hand;
+}
+
+.paginate .navigator_longstring
+{
+	width:70px;
+}
+.paginate .string
+{
+	width:70px;
+	CURSOR:default;
+}
+.paginate .navigator_longstring:visited
+{
+	padding: 2 2 2 2;
+	width:70px;
+	height:22px;
+	TEXT-DECORATION: none;
+	text-align:center;
+	background-color: #DAF1FE;
+	color: #1D67C2;
+	font-weight: bold;
+	border: solid 1px #72C1F1;
+	margin:2px;
+}
+.paginate .navigator_current
+{
+	TEXT-DECORATION: underline;
+	color: red;
+}
+.paginate .ico
+{
+	font-family:webdings;
+	font-size:16px;;
+}
+

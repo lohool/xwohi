@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- root element, all properties must be under this element -->
+<schedule>
+	<project>
+		<name>customer birthday</name>
+		<description>say "Happy birthday" to our customer</description>
+		<class>com.lohool.sms.increment.autosms.HappyBirthday</class>
+		<type>Day</type>
+		<begin-time>00-00-00 08:00:00</begin-time>
+		<end-time>00-00-00 22:00:00</end-time>
+		<last-run-time>2005-12-28 19:07:49</last-run-time>
+		<pri>7</pri>
+	</project>
+</schedule>

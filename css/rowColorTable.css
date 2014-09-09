@@ -1,0 +1,12 @@
+code {
+	font-size:	1em;
+}
+
+/* extra rules for even and odd rows */
+.even {
+	background:	#eee;
+}
+
+.odd {
+
+}

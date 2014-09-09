@@ -1,0 +1,152 @@
+<xwohi>
+  <actions>
+      <action name="OperatorList">
+		<sql>select obj from Operator obj where obj.#state=?</sql>
+	  </action>
+      <action name="JobWorkerList" >
+		<sql>select obj from Operator obj where obj.#job=?</sql>
+	  </action>
+      <action name="OperatorAdd" />
+      <action name="OperatorModify" />
+      <action name="OperatorDelete" />
+      <action name="OperatorInfo" />
+      <action name="OperatorShow" />
+      <action name="MyselfInfo" />
+      <action name="OperatorInput" />
+      <wohi-name>Operator</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.Operator</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="roles" related="rolesID" relateClass="com.lohool.jproject.xwohi.operator.po.Role"/>
+         <field type="relation" name="job" related="jobID" />
+         <field type="relation" name="department" related="departmentID" />
+         <field type="union" name="account">
+            <message>Operator has existed.</message>
+         </field>
+      </fields>
+   </actions>
+   <actions>
+      <action name="PrivilegeList" />
+      <action name="PrivilegeAdd" />
+      <action name="PrivilegeModify" />
+      <action name="PrivilegeDelete" />
+      <action name="PrivilegeInfo" />
+      <action name="PrivilegeInput" />
+      <wohi-name>Privilege</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.Privilege</class>
+      <fields>
+         <field type="primaryKey" name="privilegeID" />
+         <field type="relation" name="resource" related="resourceID" />
+         <field type="union" name="url">
+            <message>Privilege has existed.</message>
+         </field>
+      </fields>
+   </actions>
+   <actions>
+      <action name="ResourceList" />
+      <action name="ResourceAdd" />
+      <action name="ResourceModify" />
+      <action name="ResourceDelete" />
+      <action name="ResourceInfo" />
+      <action name="ResourceInput" />
+      <wohi-name>Resource</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.Resource</class>
+      <fields>
+         <field type="primaryKey" name="resourceID" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="RoleList" />
+      <action name="RoleAdd" />
+      <action name="RoleModify">
+		<pre-sql></pre-sql>
+		<post-sql></post-sql>
+	  </action>
+      <action name="RoleDelete" />
+      <action name="RoleInfo" />
+      <action name="RoleDataPermission" />
+      <action name="RoleInput" />
+      <wohi-name>Role</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.Role</class>
+      <fields>
+         <field type="primaryKey" name="roleID" />
+         <field type="relation" name="resources" related="resourceID" relateClass="com.lohool.jproject.xwohi.operator.po.Resource"/>
+      </fields>
+   </actions>
+   <actions>
+      <action name="DepartmentList" />
+      <action name="DepartmentAdd" />
+      <action name="DepartmentModify" />
+      <action name="DepartmentDelete" />
+      <action name="DepartmentInfo" />
+      <action name="DepartmentInput" />
+      <wohi-name>Department</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Department</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="JobList">
+		 <sql>select obj from Job obj where obj.parent is null</sql>
+	  </action>
+      <action name="UnderlingJobList" >
+		<sql>select obj from Job obj where obj.#id=? </sql>
+	  </action>
+      <action name="JobAdd" />
+      <action name="JobModify" />
+      <action name="JobDelete" />
+      <action name="JobInfo" />
+      <action name="JobInput" />
+      <wohi-name>Job</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Job</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field type="relation" name="parent" related="parentID" />
+         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.po.Job"/>
+      </fields>
+   </actions>
+
+   <actions>
+      <action name="DataGroupPermissionList" />
+      <action name="DataGroupPermissionAdd" />
+      <action name="DataGroupPermissionModify" />
+      <action name="DataGroupPermissionDelete" />
+      <action name="DataGroupPermissionInfo" />
+      <action name="DataGroupPermissionInput" />
+      <wohi-name>DataGroupPermission</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.DataGroupPermission</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="PermissionList" />
+      <action name="PermissionAdd" />
+      <action name="PermissionModify" />
+      <action name="PermissionDelete" />
+      <action name="PermissionInfo" />
+      <action name="PermissionInput" />
+      <wohi-name>Permission</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.Permission</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="dataGroup" type="relation" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="DataGroupList" />
+      <action name="DataGroupAdd" />
+      <action name="DataGroupModify" />
+      <action name="DataGroupDelete" />
+      <action name="DataGroupInfo" />
+      <action name="DataGroupInput" />
+      <wohi-name>DataGroup</wohi-name>
+      <class>com.lohool.jproject.xwohi.operator.po.DataGroup</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
+
+
+</xwohi>

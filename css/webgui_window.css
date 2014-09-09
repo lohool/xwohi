@@ -1,0 +1,74 @@
+TABLE.win
+{
+  font-size: 12px;
+  border:    0px;
+}
+
+TD.wTopL
+{
+  BACKGROUND: url(../pics/win/wTopL.gif) no-repeat;
+  height: 35px;
+}
+
+TD.wTop
+{
+  BACKGROUND: url(../pics/win/wT.gif) repeat-x;
+  height: 35px;
+}
+
+TD.wTopR
+{
+  BACKGROUND: url(../pics/win/wTopR.gif) no-repeat;
+  height: 35px;
+}
+
+TD.wLeft
+{
+  BACKGROUND: url(../pics/win/wL.gif) repeat-y;
+  width: 20px;
+}
+
+TD.wRight
+{
+  BACKGROUND: url(../pics/win/wR.gif) repeat-y;
+  width: 20px;
+}
+
+IMG.wTitle
+{
+  position: relative;
+  left:     3px;
+  top:      3px;
+}
+
+span.wTitle
+{
+  position:       relative;
+  left:           4px;
+  top:            1px;
+  font-size:      12px;
+  font-weight:    bold;
+  text-align:     right;
+  letter-spacing: 5px;
+  color:          #f0f0f0;
+}
+
+TD.wBotLeft
+{
+  background: url(../pics/win/wBotL.gif) no-repeat;
+  width:      20px;
+  height:     15px;
+}
+
+TD.wBot
+{
+  background: url(../pics/win/wBot.gif)  repeat-x;
+  height:     15px;
+}
+
+TD.wBotRight
+{
+  background: url(../pics/win/wBotR.gif) no-repeat;
+  width:      20px;
+  height:     15px;
+}

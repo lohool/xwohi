@@ -1,0 +1,317 @@
+/*datagrid 大块样式*/
+.datagrid 
+{
+	position:relative;
+	background:white;
+	margin:0px;
+	padding:0px;
+	overflow:hidden;
+	border:solid 1px  #8EDEFD;
+	-moz-user-select:none;
+}
+/*
+.datagrid div .title{
+	background:url('images/datagrid_title_bg.png') repeat-x;
+	border-bottom:1px dotted #8DB2E3;
+	border-top:1px dotted #fff;
+	position:relative;
+	padding:5px 0px;
+}
+.datagrid-toolbar{
+	height:28px;
+	background:#efefef;
+	padding:1px 2px;
+	border-bottom:1px dotted #ccc;
+}
+.datagrid-btn-separator{
+	float:left;
+	height:24px;
+	border-left:1px dotted #ccc;
+	border-right:1px dotted #fff;
+	margin:2px 1px;
+}
+*/
+.datagrid .datapanel
+{
+	position:relative;
+	background:white;
+	margin:0px;
+	padding:0px;
+	overflow:hidden;
+	border:solid 0px  #8EDEFD;
+	-moz-user-select:none;
+	top:-5px;
+}
+
+/*datagrid 表格全局样式 Download by http://down.liehuo.net */
+.datagrid table 
+{
+table-layout:fixed;
+margin:0px;
+}
+.datagrid table td 
+{
+	cursor:default;
+	font-size:12px;
+	font-family:verdana;
+	text-indent:2px;
+	border-right:1px dotted buttonface;
+	border-bottom:1px dotted buttonface;
+	white-space:nowrap;
+	word-break:keep-all;
+	overflow: hidden;
+	-o-text-overflow: ellipsis; 
+	text-overflow: ellipsis; 
+}
+.datagrid table td .arrow 
+{
+font-size:8px;
+color:#808080;
+}
+.datagrid table .lastdata 
+{
+	border-right:none;
+}
+
+.datagrid table .title,
+.datagrid table .column,
+.datagrid table .title .over, 
+.datagrid table .firstcolumn, 
+.datagrid table .sortdown, 
+.datagrid table .lastcolumn 
+{
+	cursor:default;
+	background:#EBF3FD;
+	border-top:0px solid #404040;
+	border-right:1px dotted #404040;
+	border-bottom:1px solid #cccccc;
+	border-left:0px dotted #404040;
+	text-align:center;
+	padding:0;
+	text-indent:0;
+	text-align:center;
+	height:30px;
+}
+.datagrid table .title .over 
+{
+
+	cursor:default;
+	background:#fafafa;
+	text-indent:0;
+	text-align:center;
+}
+.datagrid table .firstcolumn 
+{
+	width:30px;
+	text-indent:0px;
+	border-left:0px dotted #404040;
+}
+.datagrid table .lastcolumn 
+{
+	border-right:0px dotted #404040;
+}
+
+
+.datagrid table .sortdown 
+{
+	cursor:default;
+	position:relative;
+	text-indent:0;
+	text-align:center;
+}
+.datagrid table .dataover 
+{
+background:#FAFAFA;
+}
+/*datagrid 选定行样式*/
+.datagrid table .selectedrow 
+{
+	background:#FBEC88;
+	color:blue;
+}
+/*datagrid 表头样式*/
+.datagrid .titlecolumn 
+{
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:3;
+}
+/*datagrid 左边栏样式*/
+.datagrid .slidecolumn 
+{
+	width:30px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:2;
+}
+.datagrid .slidecolumn td 
+{
+	width:30px;
+	text-indent:0px;
+	text-align:center;
+	background:#EBF3FD;
+	border-top:1px dotted #fff;
+	border-right:1px dotted #404040;
+	border-bottom:1px dotted #404040;
+	border-left:1px dotted #fff;
+}
+/*datagrid 内容表体样式*/
+.datagrid .datacolumn 
+{
+width:100%;
+position:absolute;
+top:0px;
+left:0px;
+}
+.datagrid .datacolumn tbody .over 
+{
+	background:#D0E5F5;
+}
+
+/*datagrid 原点样式*/
+.datagrid .zero 
+{
+width:30px;
+height:18px;
+margin:0px;
+padding:0px;
+position:absolute;
+top:0px;
+left:0px;
+z-index:10;
+background:#EBF3FD;
+border-top:1px dotted #fff;
+border-right:1px dotted #404040;
+border-bottom:1px dotted #404040;
+border-left:1px dotted #fff;
+text-align:center;
+font-size:10px;
+color:#A19F92;
+}
+
+
+.toolbar
+{
+	BACKGROUND-COLOR: #EBF3FD;
+	border:outset 1px;
+	border:inset 1px;
+	border:solid #CEEFFF 1px;	
+	/*BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;*/
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:0px;
+	border-spacing: 0;
+	vertical-align:middle;
+	white-space: nowrap;
+	width:100%;
+	height:32px;
+	z-index:10;
+
+}
+.toolbar .Separator{
+	float:left;
+	height:100%;
+	border-left:1px dotted #ccc;
+	border-right:1px dotted #fff;
+	margin:2px 1px;
+	width:2px;
+	margin:0 2 0 2;
+}
+.toolbar .Home,
+.toolbar .Full_page,
+.toolbar .Refresh,
+.toolbar .Edit,
+.toolbar .Add,
+.toolbar .Remove,
+.toolbar .Delete,
+.toolbar .Save,
+.toolbar .Reset,
+.toolbar .Find,
+.toolbar .Printer,
+.toolbar .Help
+
+{
+	BACKGROUND-COLOR:#E0F8FE;
+	padding:2 2 2 2;
+	border:solid 1px #E0F8FE;
+	COLOR:buttontext;
+	CURSOR:hand;
+	BORDER:1px 1px solid #E0F8FE;
+	TEXT-DECORATION:none;
+	MARGIN:1px;
+	width:25px;
+	height:25px;
+	text-align:center;
+	vertical-align:middle;
+	float:left;
+	line-height:18px;
+}
+
+.toolbar .Home:hover,
+.toolbar .Full_page:hover,
+.toolbar .Refresh:hover,
+.toolbar .Edit:hover,
+.toolbar .Add:hover,
+.toolbar .Remove:hover,
+.toolbar .Delete:hover,
+.toolbar .Save:hover,
+.toolbar .Reset:hover,
+.toolbar .Find:hover,
+.toolbar .Printer:hover,
+.toolbar .Help:hover
+{
+	BORDER:1px  solid;
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+}
+.toolbar .Refresh
+{
+	background:url('../../../images/blue_round/refresh.png') no-repeat;
+}
+.toolbar .Edit
+{
+	background:url('../../../images/blue_round/edit.png') no-repeat;
+}
+.toolbar .Add
+{
+	background:url('../../../images/blue_round/add.png') no-repeat;
+}
+.toolbar .Remove
+{
+	background:url('../../../images/blue_round/remove.png') no-repeat;
+}
+.toolbar .Delete
+{
+	background:url('../../../images/blue_round/trash.png') no-repeat;
+}
+.toolbar .Home
+{
+	background:url('../../../images/blue_round/home.png') no-repeat;
+}
+.toolbar .Full_page
+{
+	background:url('../../../images/blue_round/full_page.png') no-repeat;
+}
+.toolbar .Save
+{
+	background:url('../../../images/blue_round/save.png') no-repeat;
+}
+.toolbar .Reset
+{
+	background:url('../../../images/blue_round/reset.png') no-repeat;
+}
+.toolbar .Find
+{
+	background:url('../../../images/blue_round/find.png') no-repeat;
+}
+.toolbar .Printer
+{
+	background:url('../../../images/blue_round/printer.png') no-repeat;
+}
+.toolbar .Help
+{
+	background:url('../../../images/blue_round/help.png') no-repeat;
+}
