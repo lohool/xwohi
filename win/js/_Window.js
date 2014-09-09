@@ -177,9 +177,9 @@ _window.prototype.Creat=function(content,title)
 		{
 			case "CONTENT":
 				this.contentCase=obj;
-				obj.style.width=(this.bodyWidth-1)+"px";
+				obj.style.width=(this.bodyWidth-2)+"px";
 				this.SetContent(content);
-				obj.style.height=(this.bodyHeight-1)+"px";
+				obj.style.height=(this.bodyHeight)+"px";
 				obj.style.left=(this.sides[7].width+obj.offsetLeft)+"px";
 				obj.style.top=(this.sides[1].height+obj.offsetTop)+"px";
 				//overflow-x:auto;overflow-y:auto;overflow:auto;
@@ -228,6 +228,13 @@ _window.prototype.Creat=function(content,title)
 			case "RESIZE":
 				obj.style.cursor="se-resize";
 				eval("obj.onmousedown=function(e){ "+this.string+".PreResize(e?e:window.event);};");
+				break;
+			case "RIGHT":
+				obj.style.cursor="e-resize";
+				this.sides[i]=obj;
+				this.sides[i].width=obj.offsetWidth;
+				this.sides[i].height=obj.offsetHeight;
+				eval("obj.onmousedown=function(e){ "+this.string+".PreResize(e?e:window.event,'e');};");
 				break;
 
 			case "CLOSE":
@@ -334,7 +341,7 @@ _window.prototype.Creat=function(content,title)
 			this.createTaskButton();
 			//this.maximize.onclick();
 			this.Focus();
-
+document.getElementById("text").value=this.board.innerHTML
 };
 
 function createPanel()
@@ -372,7 +379,7 @@ _window.prototype.SetContent=function(content)
 			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
 			if(tent.indexOf("?")>0)tent=tent+ '&d='+ new Date().getTime()
 				else tent=tent+ '?d='+ new Date().getTime()
-				alert("setContent:"+tent)
+				//alert("setContent:"+tent)
 			$('#'+id).load(tent);
 				/*
 			var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
@@ -558,15 +565,25 @@ _window.prototype.AttachEvent=function(e)
 	}
 };
 
-_window.prototype.PreResize=function(e)
+_window.prototype.PreResize=function(e,direction)
 {
 	if (typeof(this.ResizeTimer)!="undefined") clearTimeout(this.ResizeTimer);
 	this.Focus();
 	this.Duplicate();
 	this.resizeX=e.clientX-this.width-4;
 	this.resizeY=e.clientY-this.height-4;
-	document.body.style.cursor="se-resize";
-	this.AttachEvent(e);
+	if(direction=="e")
+	{
+		document.body.style.cursor="e-resize";
+		this.resizeY=0;
+		this.resize="resize-x";
+	}
+	else
+	{
+		document.body.style.cursor="se-resize";
+		this.resize="resize-xy";
+	}
+	this.AttachEvent(e,direction);
 	eval("document.onmousemove=function(e){"+this.string+".Resize(e?e:window.event);};");
 	eval("document.onmouseup=function(e){"+this.string+".Resized(e?e:window.event);};");
 };
@@ -627,7 +644,7 @@ _window.prototype.ResizeBy=function(dx,dy)
 	this.sides[3].style.height=(this.height-this.sides[3].dy)+"px";
 	this.sides[7].style.height=(this.height-this.sides[7].dy)+"px";
 	this.bodyHeight+=dy;
-	this.contentCase.style.height=(this.bodyHeight-1)+"px";
+	this.contentCase.style.height=(this.bodyHeight)+"px";
 	}
 	
 	//when the window is resized, resize the DataGrid in the window
@@ -636,12 +653,16 @@ _window.prototype.ResizeBy=function(dx,dy)
 	var winHeight=this.contentCase.clientHeight;
 	var winWidth=this.contentCase.clientWidth;
 	//var winHeight=this.height-parseInt(this.titleCase.style.height);
-
-	//	alert(winWidth+":"+winHeight)
 	$("#_F"+this.id+" .datagrid").each(function(i,ele){
-			if(ele.className=="datagrid")$(ele).resizeGrid(winWidth-4,winHeight-4);
-			var winScrollWidth=contentCase.scrollWidth;
-			if(ele.offsetWidth<winScrollWidth)$(ele).resizeGrid(winScrollWidth-4,winHeight-4);
+		if(ele.className=="datagrid")$(ele).resizeGrid(winWidth-2,winHeight-2);
+		var winScrollWidth=contentCase.scrollWidth;
+		var winScrollHeight=contentCase.scrollHeight;
+		if(ele.offsetHeight+16 < winScrollHeight)winHeight=winHeight+17;
+
+		if(ele.offsetWidth<winScrollWidth )
+		{
+			$(ele).resizeGrid(winScrollWidth-2,winHeight-2);
+		}
 	})
 
 };

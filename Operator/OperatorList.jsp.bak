@@ -2,6 +2,17 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
+<script>
+var primaryKeyName="vo.id";
+var homeAction="/Operator/OperatorList.action";
+
+var inputAction="/Operator/OperatorInput.action";
+var deleteAction="OperatorDelete.action";
+var loadAction="/Operator/OperatorInfo.action";
+var thisAction="/Operator/OperatorList.action";
+var showInfoAction="/Operator/OperatorShow.action";
+var helpAction="";
+</script>
 <div id="operator_list" class="datagrid" >Loading
 </div>
 <!--

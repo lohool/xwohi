@@ -22,8 +22,6 @@ $.fn.datagrid= function (options){
 	 leftobj : null,
 	 titleobj : null,
 	 dataobj : null,
-	 hbar : null,
-	 vbar : null,
 	 bgbar : null,
 	 pager: null,
 	 pageObj: null,
@@ -51,10 +49,10 @@ $.fn.datagrid= function (options){
     $(this).data("options",opts);
 
 	    return this.each(function(i) {     
-			var sw=this.parentNode.scrollWidth-4;//$(this).width();
-			var sh=$(this).height()-4;
-			alert("id="+this.parentNode.tagName+";scrollWidth="+this.offsetHeight+";width="+$(this).height())
+			var sw=this.parentNode.scrollWidth-2;//$(this).width();
+			var sh=this.parentNode.clientHeight-2;
 			//init the size of the grad
+			//alert("scrollWidth="+this.parentNode.scrollWidth+";offsetWidth="+$(this).width())
 			if(opts.width==0)opts._width=sw;
             else if((""+opts.width).indexOf("%")>0)
 			{
@@ -73,7 +71,6 @@ $.fn.datagrid= function (options){
 			{
 				opts._height=opts.height;
 			}
-
 			$(this).css("width",opts._width);
 			$(this).css("height",opts._height);
 
@@ -249,42 +246,6 @@ $.fn.datagrid= function (options){
 		//dgdata.innerHTML=dgc+dgd;
 		*/
 
-		//datagrid hbar 水平滚动条
-		var dghbar = document.createElement("DIV");
-		dghbar.id = "hbar";
-		dghbar.style.position = "absolute";
-		dghbar.style.width = "100%";
-		dghbar.style.height = "17px";
-		dghbar.style.top = (opts._height-17)+"px";
-		dghbar.style.left = "0px";
-		dghbar.style.overflowX = "auto";
-		dghbar.style.zIndex = "10";
-		dghbar.onscroll = function(){scrh(opts);}
-		dghbar.innerHTML = "<div style=\"width:100%;height:1px;overflow-y:hidden;border:solid 1px red\">&nbsp;</div>";
-		//datagrid vbar 垂直滚动条
-		var dgvbar = document.createElement("DIV");
-		dgvbar.id = "vbar";
-		dgvbar.style.position = "absolute";
-		dgvbar.style.width = "17px";
-		dgvbar.style.height = "100%";
-		dgvbar.style.top = "0px";
-		dgvbar.style.left = (opts._width-17)+"px";
-		dgvbar.style.overflowY = "auto";
-		dgvbar.style.zIndex = "10";
-		dgvbar.onscroll = function(){scrv(opts);}
-		dgvbar.innerHTML = "<div style=\"width:1px;height:100%;overflow-x:hidden;border:solid 1px red\">&nbsp;</div>";
-		//datagrid bgbar 滚动条背景
-		var dgbgbar = document.createElement("DIV");
-		dgbgbar.id = "bgbar";
-		dgbgbar.style.background = "buttonface";
-		dgbgbar.style.position = "absolute";
-		dgbgbar.style.width = "100%";
-		dgbgbar.style.height = "17px";
-		dgbgbar.style.top = (opts._height-17)+"px";
-		dgbgbar.style.overflowX = "auto";
-		dgbgbar.style.zIndex = "9";
-		dgbgbar.style.display = "none";
-		dgbgbar.innerHTML = "&nbsp;";
 		//appendChild
 		//dgframe.append( dgzero,dgslide,dgcolumn);
 		if(toolbar!=null)dgframe.append( toolbar);
@@ -324,9 +285,6 @@ $.fn.datagrid= function (options){
 		opts.titleobj = dgcolumn.get(0);//document.getElementById("titlecolumn");
 		opts.dataobj = dgdata.get(0);//document.getElementById("datacolumn");
 		opts.toolObj=toolbar;
-		opts.hbar = dghbar;
-		opts.vbar = dgvbar;
-		opts.bgbar = dgbgbar;
 
 		var btt = mainframe.css("borderTopWidth");//getCurrentStyle(framediv,"borderTopWidth");
 		var btr = mainframe.css("borderRightWidth");//getCurrentStyle(framediv,"borderRightWidth");
@@ -339,28 +297,14 @@ $.fn.datagrid= function (options){
 
 
 		var toolbarHeight =0;
-		if(toolbar!=null)toolbarHeight=toolbar.outerHeight();
+		if(toolbar!=null)toolbarHeight=toolbar.height();
 
 		var pageBarHeight=0;
-		if(opts.pageObj!=null)pageBarHeight+=opts.pageObj.outerHeight();
+		if(opts.pageObj!=null)pageBarHeight+=opts.pageObj.height();
 		
 		dgframe.css("height", mainframe.height()-pageBarHeight-toolbarHeight);
 
-		//dgframe.css("top", toolbarHeight);
-		//dgframe.get(0).style.top=toolbarHeight;
 
-
-		//if(isMSIE){
-			//opts.vbar.style.left = (parseInt(opts.vbar.style.left)-parseInt(btr)-parseInt(btl))+"px";
-		//}else{
-			//framediv.height( parseInt(fh)-parseInt(btb)-parseInt(btt));
-			//dgzero.style.height = parseInt(zh)-parseInt(zbb)-parseInt(zbt);
-		//}
-
-		//opts.hbar.style.top = (parseInt(opts.hbar.style.top)-parseInt(btb)-parseInt(btt)-pageBarHeight-toolbarHeight)+"px";
-		opts.hbar.style.top = (parseInt(opts.hbar.style.top)-pageBarHeight-toolbarHeight)+"px";
-		//opts.bgbar.style.top = (parseInt(dgbgbar.style.top)-parseInt(btb)-parseInt(btt)-pageBarHeight-toolbarHeight)+"px";
-		opts.bgbar.style.top = (parseInt(dgbgbar.style.top)-pageBarHeight-toolbarHeight)+"px";
 
 
 		dgframe.bind("mousedown",function(e){e=e||window.event;getrow(e,opts);});
@@ -383,7 +327,6 @@ $.fn.datagrid= function (options){
 
 		});
 
-		$.fn.datagrid.setwh($this,opts);
 		//bind event
 			var column=$this.find('.datacolumn thead tr td.column');
 			column.bind("mouseover",function(){$.fn.datagrid.over(this);});
@@ -464,7 +407,7 @@ $.fn.datagrid= function (options){
 						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 					}
 					if(!winType)winType="dialog";
-					if(winType=="dialog")openDialog(src,text,width,height);
+					if(winType=="dialog")openDialog(src,text,true,width,height);
 					else openWorkWindow(src,text,width,height)
 
 				}
@@ -483,6 +426,8 @@ $.fn.datagrid= function (options){
 						{
 							src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 						}
+						if(src.indexOf("?")>0)src=src+ '&d='+ new Date().getTime()
+						else src=src+ '?d='+ new Date().getTime()
 						$.ajax({ 
 							url: src, 
 							//context: document.body, 
@@ -507,8 +452,8 @@ $.fn.datagrid= function (options){
 				}
 				else 
 				{
-					if(!type)type="dialog";
-					if(type=="dialog")openDialog(src,text,width,height);
+					if(!winType)winType="dialog";
+					if(winType=="dialog")openDialog(src,text,true,width,height);
 					else openWorkWindow(src,text,width,height)
 				}
 				
@@ -628,45 +573,6 @@ $.fn.datagrid= function (options){
 			return null;   
 		}   
 	}
-	//设置块滚动条
-	$.fn.datagrid.setwh = function($this,opts){
-		opts.hbar.style.display = "block";
-		opts.vbar.style.display = "block";
-		opts.hbar.childNodes[0].style.width = opts.dataobj.offsetWidth+"px";
-		opts.vbar.childNodes[0].style.height = opts.dataobj.offsetHeight+"px";
-		if(opts.hbar.childNodes[0].offsetWidth<=opts.hbar.offsetWidth){
-			opts.hbar.style.display = "none";
-		}else{
-			opts.hbar.style.display = "block";
-		}
-
-		if(opts.vbar.childNodes[0].offsetHeight<=opts.vbar.offsetHeight){
-			opts.vbar.style.display = "none";
-		}else{
-			opts.vbar.style.display = "block";
-		}
-		if(opts.hbar.childNodes[0].offsetWidth>opts.hbar.offsetWidth && opts.vbar.childNodes[0].offsetHeight>opts.vbar.offsetHeight && opts.changeposv){
-			opts.bgbar.style.display = "block";
-			opts.hbar.style.width = (opts.hbar.offsetWidth-17)+"px";
-			opts.vbar.style.height = (opts.vbar.offsetHeight-17)+"px";
-			opts.vbar.childNodes[0].style.height = (opts.vbar.childNodes[0].offsetHeight+17)+"px";
-			opts.changeposv = false;
-		}
-
-		if(opts.hbar.childNodes[0].offsetWidth<=opts.hbar.offsetWidth+17 && !opts.changeposv){
-			opts.bgbar.style.display = "none";
-			opts.hbar.childNodes[0].style.width = "0px";
-			opts.hbar.style.width = (opts.hbar.offsetWidth+17)+"px";
-			opts.vbar.style.height = (opts.vbar.offsetHeight+17)+"px";
-			opts.changeposv = true;
-			/*
-			if(opts.vbar.offsetHeight-opts.dataobj.offsetHeight>opts.dataobj.offsetTop){// && isMSIE){
-				//opts.leftobj.style.top = opts.leftobj.offsetTop+17;
-				opts.dataobj.style.top = opts.dataobj.offsetTop+17;
-			}\*/
-		}
-		//alert("opts.hbar.style.width:"+opts.hbar.style.width+";opts.vbar.style.height:"+opts.vbar.style.height )
-	}
 	//鼠标滚轮，列表滚动事件
 	function mwEvent(e,delta,opts){
 		
@@ -674,9 +580,9 @@ $.fn.datagrid= function (options){
 		e.preventDefault();
 		e=e.originalEvent;
 		if(e.wheelDelta<=0 || e.detail>0){
-			opts.vbar.scrollTop += 18;
+			//opts.vbar.scrollTop += 18;
 		}else {
-			opts.vbar.scrollTop = opts.vbar.scrollTop-18;
+			//opts.vbar.scrollTop = opts.vbar.scrollTop-18;
 		}
 	}
 	function ae(obj,opts){
@@ -690,19 +596,7 @@ $.fn.datagrid= function (options){
 		*/
 	}
 
-	//滚动条事件
-	function scrv(opts){
-		//opts.leftobj.style.top = -(opts.vbar.scrollTop);
-		opts.dataobj.style.top = (-opts.vbar.scrollTop)+"px";
-	}
 
-	function scrh(opts){
-		//alert("scrh")
-		//alert(parseInt($(opts.titleobj).css("left"))+":"+opts.hbar.scrollLeft)
-		opts.titleobj.style.left = (-opts.hbar.scrollLeft)+"px";
-		opts.dataobj.style.left = (-opts.hbar.scrollLeft)+"px";
-		//document.getElementById("text").value=document.getElementById("text").value+parseInt($(opts.titleobj).css("left"))+":"+$(opts.hbar).scrollLeft()+"\n";
-	}
 
 	//选择行
 	function getrow(e,opts){
@@ -815,8 +709,6 @@ $.fn.datagrid= function (options){
 			opts.ow = 0;
 			opts.tdobj = null;
 		}
-		$.fn.datagrid.setwh(this,opts);
-		scrh(opts);
 	}
 
 	$.fn.datagrid.cc = function(e,obj){
@@ -857,7 +749,6 @@ $.fn.datagrid= function (options){
 		switch(c){
 			case 38://Up;
 				if(nowrow!=null && nowrow>1){
-					vbar.scrollTop -= 18;
 					opts.dataobj.rows[nowrow].className = "";
 					nowrow -= 1;
 					opts.dataobj.rows[nowrow].className = "selectedrow";
@@ -868,7 +759,6 @@ $.fn.datagrid= function (options){
 				break;
 			case 40://Down;
 				if(nowrow!=null && nowrow<rl){
-					vbar.scrollTop += 18;
 					opts.dataobj.rows[nowrow].className = "";
 					nowrow += 1;
 					opts.dataobj.rows[nowrow].className = "selectedrow";

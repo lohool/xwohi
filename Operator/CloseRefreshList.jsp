@@ -1,0 +1,9 @@
+{
+	"code":"200",
+	"message":"Successful",
+	"forwardUrl":"Operator/OperatorList.action",
+	"navTabId":"operator_list_form",
+	"rel":"operator_list_form",
+	"callbackAction":"closeCurrent",
+	"confirmMsg":""
+}

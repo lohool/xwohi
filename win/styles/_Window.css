@@ -956,8 +956,9 @@
 
 .BLUE
 {
-	font-size: 1px;
 	border:1px #94DCFE solid;
+	background-color:#B4E1FA;
+	overflow:hidden;
 }
 
 
@@ -1071,11 +1072,11 @@
 {
 	/* 请不要定义padding/margin属性 */
 	/* 请定义left = -(border-left),top = -(border-top) */
-	font-size: 14px;
-	left: 0px;
+	font-size: 12px;
+	left: 1px;
 	top: 0px;
 	background-color:#ffffff;
-	border:solid 1px red;
+	border:solid 0px red;
 }
 .BLUE .CONTENT .FORM
 {

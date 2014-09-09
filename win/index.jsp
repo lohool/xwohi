@@ -117,6 +117,7 @@ div.panel .container
 	</div>
 
 	<div id="MainFrame" class="panel" >
+<TEXTAREA id="text" NAME="text" ROWS="15" COLS="70"></TEXTAREA>
 
 	<a  style="position:absolute; border:0;left:20px;top:20px;cursor:hand" ondblclick="openWorkWindow('/NotePad/NotePadList.action','Email')" onmousedown="dragStart(this)" ondragstart='return false' onselectstart='return false'><img src="images/icon/20071208160057107.png" width="60"></a>
 
@@ -139,7 +140,7 @@ div.panel .container
 <script>
 function openWorkWindow(url,title)
 {
-	openWindow('[url]'+url, title, 'move=yes,resize=yes,left=200,top=30,width=600px,height=400');
+	openWindow('[url]'+url, title, 'move=yes,resize=yes,left=200,top=30,width=500px,height=300');
 }
 function openDialog(url,title,isWinDialog,width,height)
 {

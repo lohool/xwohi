@@ -40,7 +40,7 @@
 	overflow:hidden;
 	border:solid 0px  #8EDEFD;
 	-moz-user-select:none;
-	top:-5px;
+	top:0px;
 }
 
 /*datagrid 表格全局样式 Download by http://down.liehuo.net */
@@ -214,7 +214,7 @@ color:#A19F92;
 }
 .toolbar .Separator{
 	float:left;
-	height:100%;
+	height:26px;
 	border-left:1px dotted #ccc;
 	border-right:1px dotted #fff;
 	margin:2px 1px;

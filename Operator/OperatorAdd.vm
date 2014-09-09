@@ -1,0 +1,36 @@
+<html>
+<head><title>Webwork Validation Example</title></head>
+<body>
+<p>
+#foreach ($error in $errors) 
+<br>$error 
+#end 
+<form name="myForm" action="/operator/OperatorAdd.action" method="POST">
+Action Properties:
+<br>
+<table>
+Account #tag( TextField "label='account" "name='account'" )
+</table>Account
+Bean Properties:
+#if( $stack.findValue("fieldErrors") )
+    #set( $beanErrors = $stack.findValue("fieldErrors.get('bean')") )
+    #if( $beanErrors.size() > 0 )
+    <br>
+    <font color="red">
+    <b>Bean Errors:</b><br>
+    <ul>
+    #foreach( $beanError in $beanErrors )
+    <li>$beanError</li>
+    #end
+    </ul>
+    </font>
+    #end
+#end
+<table>
+password #tag( TextField "label='password'" "name='password'" )<br>
+password2 #tag( TextField "label='password2'" "name='password2'"  )<br>
+ name #tag( TextField "label='name'" "name='name'" )<br>
+</table>
+<input type="submit" value="Test Validation"/>
+</form>
+</body>
