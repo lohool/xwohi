@@ -16,6 +16,7 @@
 <bean id="BasicInfo" class="com.xbreeze.framework.xwohi.common.action.BasicInfoAction" singleton="false"></bean>
 <bean id="BasicModify" class="com.xbreeze.framework.xwohi.common.action.BasicModifyAction" singleton="false"></bean>
 <bean id="BasicInput" class="com.xbreeze.framework.xwohi.common.action.BasicInputAction" singleton="false"></bean>
+<bean id="RoleDataPermissionModify" class="com.lohool.jproject.xwohi.operator.action.RoleDataPermissionSave" singleton="false"></bean>
 
 </beans>
 <!--

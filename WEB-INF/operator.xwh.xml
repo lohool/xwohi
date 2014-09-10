@@ -148,5 +148,35 @@
       </fields>
    </actions>
 
+   <actions>
+      <action name="CustomerList">
+	  <sql>select obj from Customer obj where obj.#group=?</sql>
+	  </action>
+      <action name="CustomerAdd" />
+      <action name="CustomerModify" />
+      <action name="CustomerDelete" />
+      <action name="CustomerInfo" />
+      <action name="CustomerInput" />
+      <wohi-name>Customer</wohi-name>
+      <class>com.lohool.sms.increment.po.Customer</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="tradeLog" relateClass="com.lohool.sms.increment.po.TradeLog" type="relation" />
+         <field name="group" type="relation" relateClass="com.lohool.sms.increment.po.CustomerGroup"/>
+      </fields>
+   </actions>
+   <actions>
+      <action name="CustomerGroupList" />
+      <action name="CustomerGroupAdd" />
+      <action name="CustomerGroupModify" />
+      <action name="CustomerGroupDelete" />
+      <action name="CustomerGroupInfo" />
+      <action name="CustomerGroupInput" />
+      <wohi-name>CustomerGroup</wohi-name>
+      <class>com.lohool.sms.increment.po.CustomerGroup</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
 
 </xwohi>

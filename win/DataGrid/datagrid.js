@@ -68,7 +68,6 @@ $.fn.datagrid= function (options){
 			{
 				opts._width=opts.width;
 			}
-			alert(opts.height)
 			if(opts.height==0)
 			{
 				opts._height=sh;
@@ -122,7 +121,7 @@ $.fn.datagrid= function (options){
 	 }
 	$.fn.datagrid.init = function($this,opts){
 		//var $this=$(this);
-			$this.css("width",opts._width);
+			//$this.css("width",opts._width);
 			$this.css("height",opts._height);
 		//init the data 初始数据
 		var dgc = "";
@@ -319,6 +318,7 @@ $.fn.datagrid= function (options){
 
 		dgframe.bind("mousedown",function(e){e=e||window.event;getrow(e,opts);});
 		dgframe.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
+		/*
 		dgframe.bind("scroll",function(e){
 			//alert($(this).scrollTop())
 			//e=e||window.event;
@@ -328,14 +328,15 @@ $.fn.datagrid= function (options){
 			if($(this).scrollTop()>=0){
 				$(opts.titleobj).css("top",$(this).scrollTop()-1);
 			}
-			/*
-			if($(this).scrollLeft()>=0)
-			{
-				toolbar.css("left",-$(this).scrollLeft());
-			}
-			*/
+			
+			//if($(this).scrollLeft()>=0)
+			//{
+			//	toolbar.css("left",-$(this).scrollLeft());
+			//}
+			
 
 		});
+		*/
 
 		//bind event
 			var column=$this.find('.datacolumn thead tr td.column');
@@ -375,20 +376,20 @@ $.fn.datagrid= function (options){
 				page=$(this).attr("page");
 				if(page)
 				{
+					var form=$("#"+opts.pager.form);
 					opts.pager.current_page=page;
-					//$.fn.datagrid.loadData($this,opts);
-					var win =_window.windows[_window.focusWindowId];
-					win.SetContent("[url]"+src);
+					form.find(":input[name=page]").val(opts.pager.current_page);
+					form.submit();
 				}
 			});
-
 			$this.find('.paginate .navigator_longstring').bind("click",function(){
-				alert(this.page)
-				if(this.page)
+				page=$(this).attr("page");
+				if(page)
 				{
-					var form=$(opts.pager.form);
-					opts.pager.current_page=this.page;
-					form.find(":input[@name=page]").val(opts.pager.current_page);
+					var form=$("#"+opts.pager.form);
+					opts.pager.current_page=page;
+					form.find("input[name=page]").val(opts.pager.current_page);
+					form.submit()
 					//var data=$(form).find(":input").serialize();
 					//$.fn.datagrid.loadData($this,opts);
 				}

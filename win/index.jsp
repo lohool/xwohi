@@ -26,18 +26,21 @@
 <script src="/js/fun.js" ></script>
 <script src="/js/sortabletable.js" ></script>
 <script src="/js/rowColorTable.js" ></script>
-	<link rel="stylesheet" href="/win/jqueryui/themes/cupertino/jquery-ui.min.css" />
-	<script src="/win/jqueryui/jquery-1.9.1.js"></script>
-	<script src="/win/jqueryui/ui/jquery.ui.core.js"></script>
-	<script src="/win/jqueryui/ui/jquery.ui.widget.js"></script>
-	<script src="/win/jqueryui/ui/jquery.ui.accordion.js"></script>
-	<script src="/win/jqueryui/ui/jquery.ui.mouse.js"></script>
-	<script src="/win/jqueryui/ui/jquery.ui.resizable.js"></script>
-	<link rel="stylesheet" href="/win/styles/ui.css">
+<link rel="stylesheet" href="/win/jqueryui/themes/cupertino/jquery-ui.min.css" />
+<script src="/win/jqueryui/jquery-1.9.1.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.core.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.widget.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.accordion.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.mouse.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.resizable.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.widget.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.tabs.js"></script>
 
+<link rel="stylesheet" href="/win/styles/ui.css">
 <link type="text/css" rel="stylesheet" href="/win/DataGrid/default/dhdatagrid.css"/>
 <link type="text/css" rel="stylesheet" href="/win/DataGrid/default/paginate.css"/>
 <script language="javascript" src="/win/DataGrid/datagrid.js"></script>
+<script src="/win/js/resize.js" type="text/javascript"></script>
 
 
 
@@ -49,40 +52,6 @@
 		height: 400px;
 		background:white;
 	}
-</style>
-<style>
-div.panel 
-{
-	BACKGROUND-COLOR:#E7F7FE;
-	border:outset 0px;
-	border:inset 1px;
-	border:1px solid #C4F9FD;	
-	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
-	empty-cells: show ;
-    border-collapse: collaps;
-	position:relative;
-	padding:5px;
-	border-spacing: 0;
-	vertical-align:middle;
-	white-space: nowrap;
-    height:100%;
-	width:100%;
-}
-div.panel .container 
-{
-	BACKGROUND-COLOR:#EDF9FE;
-	border:1px solid #C4F9FD;	
-	BORDER-COLOR: threedshadow threedshadow threedhighlight threedhighlight;
-	empty-cells: show ;
-    border-collapse: collaps;
-	position:relative;
-	padding:5px;
-	border-spacing: 0;
-	vertical-align:middle;
-	white-space: nowrap;
-    height:100%;
-	width:100%;
-}
 </style>
 
 
@@ -125,7 +94,7 @@ div.panel .container
 
 	<a  style="position:absolute; border:0;left:20px;top:220px;cursor:hand" ondblclick="openWorkWindow('http://www.google.com','Google')" onmousedown="dragStart(this)" ondragstart='return false' onselectstart='return false'><img src="images/icon/20071127133912736.png" width="60"></a>
 	<a  style="position:absolute; border:0;left:20px;top:320px;cursor:hand" ondblclick="openWorkWindow('http://www.google.com','Google')" onmousedown="dragStart(this)" ondragstart='return false' onselectstart='return false'><img src="images/icon/20071208013719337.png" width="60"></a>
-	<a  style="position:absolute; border:0;left:20px;top:420px;cursor:hand" ondblclick="openWorkWindow('http://www.jq-school.com/','Google')" onmousedown="dragStart(this)" ondragstart='return false' onselectstart='return false'><img src="images/icon/20071208160223428.png" width="60"></a>
+	<a  style="position:absolute; border:0;left:100px;top:20px;cursor:hand" ondblclick="openWorkWindow('http://www.jq-school.com/','Google')" onmousedown="dragStart(this)" ondragstart='return false' onselectstart='return false'><img src="images/icon/20071208160223428.png" width="60"></a>
 
 	</div>
 </div>
@@ -203,7 +172,7 @@ function resetMainFrameSize()
 		w-=parseInt(leftMenu.style.width);
 	}
 	$("#MainPanel").css("width",w);
-	$("#MainFrame").css("height",h-parseInt(Taskbar.style.height)-40);
+	$("#MainFrame").css("height",h-parseInt(Taskbar.style.height)-38);
 	$("#MainFrame").css("width",w);
 	$("#Taskbar").css("width",w);
 	$("#LeftMenu").css("height",h);

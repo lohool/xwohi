@@ -36,8 +36,6 @@ div.panel
 	border-spacing: 0;
 	vertical-align:middle;
 	white-space: nowrap;
-    height:100%;
-	width:100%;
 }
 div.panel .container 
 {
@@ -51,6 +49,4 @@ div.panel .container
 	border-spacing: 0;
 	vertical-align:middle;
 	white-space: nowrap;
-    height:100%;
-	width:100%;
 }

@@ -4,9 +4,8 @@
 <script type="text/javascript">
 function form_submit(form)
 {
-		alert(this.id)
 		var win =_window.windows[_window.focusWindowId];
-		win.SetContent("[url]"+src);
+		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
 
 			/*
 		$.ajax({ 
@@ -39,32 +38,30 @@ function form_submit(form)
 	return false;
 }
 </script>
-<style>
-.panelBar { display:block; overflow:hidden; height:25px; border-style:solid; border-width:1px red; background-repeat:repeat-x; }
-
-</style>
-<div class="panelBar" style="left:0;top:0; height:40px;">
+<div class="page" style="left:0;top:0;width:100%; height:100%;">
+<div class="panel" style="left:0;top:0; height:40px;">
 	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post" validate="true"  onsubmit="return form_submit(this);">
 	<ww:hidden name="page"></ww:hidden>
-	<ww:hidden name="pageSize"></ww:hidden> 
+	<ww:hidden name="pageSize"></ww:hidden>
 	<INPUT TYPE="text" NAME="vo.name">
-	<INPUT TYPE="submit">
+	<INPUT TYPE="submit" class="button">
 	</ww:form>
 </div>
-<div id="operator_list" class="datagrid" >Loading
+<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" minus_height="52px">
+<div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 <!--
 <TEXTAREA id="text" NAME="text" ROWS="15" COLS="70"></TEXTAREA>
 -->
-
+</div>
 <script>
 var i=0;
 	     $(document).ready(function() {
 	          $("#operator_list").datagrid({
 			  callname: 'operator_list',
 			  //width: 300,
-			  //height:400,
-				minus_height:40,
+			  //height:300,
+				//minus_height:40,
 			  //multiple:true,
 			  toolbar:[
 				  {"text":"Home","btnClass":"Home","src":"/Operator/OperatorList.action","width":500,"height":300},
@@ -89,9 +86,9 @@ var i=0;
 			  colwidth:[200,50,100,100],
 			  pager:
 				{
-					"total":201,
-					"current_page":3,
-					"pagesize":10,
+					"total":<ww:property value="resultSize"/>,
+					"current_page":<ww:property value="page"/>,
+					"pagesize":<ww:property value="pageSize"/>,
 					"form":"operator_list_form"
 				},
 			  data: [
