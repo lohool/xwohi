@@ -17,7 +17,7 @@
 
 
 
-	<include file="struts-default.xml" />
+	<include file="action-default.xml" />
 
 	<package extends="struts-default" name="action-default">
 	  <global-results>
@@ -36,7 +36,7 @@
 			<result name="success" type="dispatcher">/win/index.jsp</result>
 		</action>
 	  	<action name="Logout" class="Logout">
-			<result name="success" type="dispatcher">/index.jsp</result>
+			<result name="success" type="dispatcher">/win/index.jsp</result>
 		</action>
 		<action name="Upload" class="UpLoad" >
 		  	<result name="success">/Knowledge/UploadSuccess.jsp</result>
@@ -131,7 +131,7 @@
       </action>
       <action name="RoleDataPermissionModify" class="RoleDataPermissionModify">
          <result type="dispatcher" name="input">/Operator/RoleDataPermission.jsp</result>
-         <result type="redirect" name="success">/Operator/RoleList.action</result>
+         <result type="dispatcher" name="success">/Operator/CloseRefreshList.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="RoleModify" class="BasicModify">
@@ -144,19 +144,19 @@
    </package>
 
 
-   <package name="Resource" extends="struts-default" namespace="/Resource">
+   <package name="Resource" extends="action-default" namespace="/Resource">
       <default-interceptor-ref name="exceptionStack" />
       <action name="ResourceList" class="BasicList">
          <result type="dispatcher" name="success">/Operator/ResourceList.jsp</result>
       </action>
    </package>
-   <package name="Privilege" extends="struts-default" namespace="/Privilege">
+   <package name="Privilege" extends="action-default" namespace="/Privilege">
       <default-interceptor-ref name="exceptionStack" />
       <action name="PrivilegeList" class="BasicList">
          <result type="dispatcher" name="success">/Operator/PrivilegeList.jsp</result>
       </action>
    </package>
-   <package extends="struts-default" name="DataGroupPermission" namespace="/DataGroupPermission">
+   <package extends="action-default" name="DataGroupPermission" namespace="/DataGroupPermission">
       <default-interceptor-ref name="exceptionStack" />
       <action name="DataGroupPermissionList" class="BasicList">
          <result name="success" type="dispatcher">/Operator/DataGroupPermissionList.jsp</result>
@@ -167,57 +167,57 @@
          <interceptor-ref name="validationStack" />
       </action>
       <action name="DataGroupPermissionDelete" class="BasicDelete">
-         <result name="success" type="redirect">/Operator/DataGroupPermissionList.action</result>
+         <result name="success" type="redirect">/DataGroupPermission/DataGroupPermissionList.action</result>
       </action>
       <action name="DataGroupPermissionInfo" class="BasicInfo">
          <result name="success" type="dispatcher">/Operator/DataGroupPermissionInfo.jsp</result>
       </action>
       <action name="DataGroupPermissionModify" class="BasicModify">
          <result name="input" type="dispatcher">/Operator/DataGroupPermissionInfo.jsp</result>
-         <result name="success" type="redirect">/Operator/DataGroupPermissionList.action</result>
+         <result name="success" type="redirect">/DataGroupPermission/DataGroupPermissionList.action</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="DataGroupPermissionInput" class="BasicInput">
          <result name="success" type="dispatcher">/Operator/DataGroupPermissionAdd.jsp</result>
       </action>
    </package>
-   <package extends="struts-default" name="Permission" namespace="/Permission">
+   <package extends="action-default" name="Permission" namespace="/Permission">
       <default-interceptor-ref name="exceptionStack" />
       <action name="PermissionList" class="BasicList">
          <result name="success" type="dispatcher">/Operator/PermissionList.jsp</result>
       </action>
       <action name="PermissionAdd" class="BasicAdd">
          <result name="input" type="dispatcher">/Operator/PermissionAdd.jsp</result>
-         <result name="success" type="redirect">/Operator/PermissionList.action</result>
+         <result name="success" type="redirect">/Permission/PermissionList.action</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="PermissionDelete" class="BasicDelete">
-         <result name="success" type="redirect">/Operator/PermissionList.action</result>
+         <result name="success" type="redirect">/Permission/PermissionList.action</result>
       </action>
       <action name="PermissionInfo" class="BasicInfo">
          <result name="success" type="dispatcher">/Operator/PermissionInfo.jsp</result>
       </action>
       <action name="PermissionModify" class="BasicModify">
          <result name="input" type="dispatcher">/Operator/PermissionInfo.jsp</result>
-         <result name="success" type="redirect">/Operator/PermissionList.action</result>
+         <result name="success" type="redirect">/Permission/PermissionList.action</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="PermissionInput" class="BasicInput">
          <result name="success" type="dispatcher">/Operator/PermissionAdd.jsp</result>
       </action>
    </package>
-   <package extends="struts-default" name="DataGroup" namespace="/DataGroup">
+   <package extends="action-default" name="DataGroup" namespace="/DataGroup">
       <default-interceptor-ref name="exceptionStack" />
       <action name="DataGroupList" class="BasicList">
          <result name="success" type="dispatcher">/Operator/DataGroupList.jsp</result>
       </action>
       <action name="DataGroupAdd" class="BasicAdd">
          <result name="input" type="dispatcher">/Operator/DataGroupAdd.jsp</result>
-         <result name="success" type="redirect">/Operator/DataGroupList.action</result>
+         <result name="success" type="redirect">/DataGroup/DataGroupList.action</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="DataGroupDelete" class="BasicDelete">
-         <result name="success" type="dispatcher">/Operator/DataGroupList.action</result>
+         <result name="success" type="dispatcher">/DataGroup/DataGroupList.action</result>
       </action>
       <action name="DataGroupInfo" class="BasicInfo">
          <result name="success" type="dispatcher">/Operator/DataGroupInfo.jsp</result>
@@ -232,7 +232,7 @@
       </action>
    </package>
 
-   <package name="Department" extends="struts-default" namespace="/Department">
+   <package name="Department" extends="action-default" namespace="/Department">
       <default-interceptor-ref name="exceptionStack" />
       <action name="DepartmentList" class="BasicList">
          <result type="dispatcher" name="success">/Operator/DepartmentList.jsp</result>
@@ -260,7 +260,7 @@
    </package>
 
 
-   <package name="NotePad" extends="struts-default" namespace="/NotePad">
+   <package name="NotePad" extends="action-default" namespace="/NotePad">
       <default-interceptor-ref name="exceptionStack" />
       <action name="NotePadList" class="BasicList">
          <result type="dispatcher" name="error">/error.jsp</result>

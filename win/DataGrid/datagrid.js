@@ -288,7 +288,7 @@ $.fn.datagrid= function (options){
 			document.addEventListener("keydown",updown,false);
 		}
 */
-		framediv = dgframe;
+		opts.framediv = dgframe;
 		//zerobj = document.getElementById("zero");
 		opts.leftobj = dgslide.get(0);//document.getElementById("slidecolumn");
 		opts.titleobj = dgcolumn.get(0);//document.getElementById("titlecolumn");
@@ -299,7 +299,7 @@ $.fn.datagrid= function (options){
 		var btr = mainframe.css("borderRightWidth");//getCurrentStyle(framediv,"borderRightWidth");
 		var btb = mainframe.css("borderBottomWidth");//getCurrentStyle(framediv,"borderBottomWidth");
 		var btl = mainframe.css("borderLeftWidth");//getCurrentStyle(framediv,"borderLeftWidth");
-		var fh = framediv.css("height");//getCurrentStyle(framediv,"height");
+		var fh = opts.framediv.css("height");//getCurrentStyle(framediv,"height");
 		var zh =dgzero.style.height; //getCurrentStyle(dgzero,"height");
 		var zbt = getCurrentStyle(dgzero,"borderTopWidth");
 		var zbb = getCurrentStyle(dgzero,"borderBottomWidth");
@@ -481,13 +481,13 @@ $.fn.datagrid= function (options){
 		$.fn.datagrid.setSize = function($this,opts,w,h){
 			opts._width=w;
 			opts._height=h;
-				$this.css("width",opts._width);
+				$this.css("width",opts._width-1);
 				$this.css("height",opts._height);
 			
 			var dgc = "";
 			var avgw = opts._width-20
 			avgw = Math.floor(avgw/opts.columns.length);
-			framediv.css("width",w);
+			opts.framediv.css("width",w);
 			var toolbarHeight =0;
 			if(opts.toolObj!=null)toolbarHeight=opts.toolObj.outerHeight();
 
@@ -498,7 +498,7 @@ $.fn.datagrid= function (options){
 				pageBarHeight+=opts.pageObj.outerHeight();
 			}
 			
-			framediv.css("height", $this.height()-pageBarHeight-toolbarHeight);
+			opts.framediv.css("height", $this.height()-pageBarHeight-toolbarHeight);
 
 				for(var cc=0;cc<opts.columns.length;cc++){
 					if(opts.colwidth.length>cc){

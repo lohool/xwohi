@@ -5,7 +5,7 @@
 
 <struts>
 
-   <package extends="struts-default" name="Customer" namespace="/Customer">
+   <package extends="action-default" name="Customer" namespace="/Customer">
       <default-interceptor-ref name="exceptionStack" />
       <action class="BasicList" name="CustomerList">
          <result name="success" type="dispatcher">/Customer/CustomerList.jsp</result>
@@ -30,11 +30,14 @@
          <result name="success" type="dispatcher">/Customer/CustomerAdd.jsp</result>
       </action>
    </package>
-   <package extends="struts-default" name="CustomerGroup" namespace="/CustomerGroup">
-      <default-interceptor-ref name="exceptionStack" />
+   <package extends="action-default" name="CustomerGroup" namespace="/CustomerGroup">
       <action class="BasicList" name="CustomerGroupList">
-		<result type="dispatcher" name="error">/error.jsp</result>
-         <result name="success" type="dispatcher">/Customer/CustomerGroupList.jsp</result>
+		<result type="dispatcher" name="access_rejected">/notlimit.jsp</result>
+		 <result type="dispatcher" name="error">/error.jsp</result>
+		 <result type="dispatcher" name="input">/input.jsp</result>
+		 <result type="dispatcher" name="login">/login.jsp</result>
+		 <result type="dispatcher" name="none">/none.jsp</result>
+         <result type="dispatcher" name="success" >/Customer/CustomerGroupList.jsp</result>
       </action>
       <action class="BasicAdd" name="CustomerGroupAdd">
          <result name="input" type="dispatcher">/Customer/CustomerGroupAdd.jsp</result>

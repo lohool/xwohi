@@ -62,7 +62,7 @@
 <div id="TopBar" class="panel" style="z-index:1000;position:absolute; left:0;top:0; width:100%;height:40px;"> 
 				<div  class="panel" style="position:absolute; left:0;top:0px; width:100%;height:40px;"> 
 					<span style="float:right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>	
-					<a class="menuBarButton" href="#" style="float:right">Log Out</a> 
+					<a class="menuBarButton" href="/Logout.action" style="float:right">Log Out</a> 
 					<a class="menuBarButton" style="float:right">Help</a> 
 					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/crm/FAQList.html','发短信')" >FAQ</a>
 					<a class="separator" style="float:right"> </a>
@@ -70,17 +70,19 @@
 					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog',true)" >内部模式对话框</a>
 					<a href="#" class="menuBarButton" style="float:right" onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >我的任务</a>
 					<a href="#" class="menuBarButton" style="float:right" onclick="alert(_window.focusWindowId)" >Focus Win</a>
+					<a class="separator" style="float:right"> </a>
+					<a href="#" class="menuBarButton" style="float:right"  ><ww:property value="#session.operation_user.name"/></a>
 				</div>
 
 </div>
-<div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:53px; width:213px;height:100%;z-index:1001; " >
+<div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:53px; height:100%;z-index:1001; " >
 	<div id="accordion-resizer" class="container" style="background:transparent">
 		<div id="accordion" >
 		</div>
 	</div>
 </div>
 
-<div id="MainPanel" style="position:absolute; left:213px; top:53px;z-index:0;background:transparent;">
+<div id="MainPanel" style="position:absolute; left:200px; top:53px;z-index:0;background:transparent;">
 	<div id="Taskbar" class="panel"  style="width:100%;height:30px;"> 
 			<span class="menuBarButton">首页</span><a class="separator"> </a>
 	</div>
@@ -101,9 +103,11 @@
 <!--
 	<div style="float:left"><address><a href="#"><span onclick="openWindow('[url]/left.jsp', 'Menu', 'move=yes,resize=yes,left=0,top=0,width=168px,height=500');">Start</span> </a>| <span onclick="">Menu Demo</span>	Copyright ?2002 - 2005 </address></div>
 	-->
-<div id="Toolbars" class="panel" style="width:100%;height:50px;position:absolute;z-index:1002;">
+<div id="Toolbars" class="panel" style="width:100%;height:5px;position:absolute;z-index:1002;">
+<!--
 	<div   style="float:left;" ><a  onclick="openMenuWindow()" valign="middle" style="float:left;cursor:hand;text-align:center;vertical-align:middle;TEXT-DECORATION:none;width:100;height:28px;margin:0px;border:solid 0 blue;background-image:url(/images/10.gif);"><div style="text-align:center;vertical-align:middle;line-height:30px;height:30px;"><span style="vertical-align:middle"><img src="images/icon/20071208013751903.png" border=0 width="25"></span><font color="white" size="4"><I><B>Start</B></I></font></div></a><a class="separator"></a><a href="#" class="menuBarButton"><img src="images/largeicon/back.gif"  border="0" align="absmiddle" alt="用户管理" onclick="parent.mainFrame.history.go(-1)"></a><a href="#" class="menuBarButton"><img src="images/largeicon/forward.gif"  border="0" align="absmiddle" alt="用户管理" onclick="parent.mainFrame.history.go(1)"></a><a href="#" class="menuBarButton"><img src="images/largeicon/refresh.gif"  border="0" align="absmiddle" alt="刷新"onclick="parent.mainFrame.location.reload()"></a><a href="#" class="menuBarButton"><img src="images/largeicon/stop.gif"  border="0" align="absmiddle" alt="Stop" onclick="parent.mainFrame.stop()"></a><a class="separator"></a><a href="#" class="menuBarButton"><img src="images/largeicon/resource.gif"  border="0" align="absmiddle" alt="我的工作桌面" onclick="parent.mainFrame.location='/System/Desktop.action'"></a><a href="#" class="menuBarButton"><img src="images/largeicon/scheme.gif"  border="0" align="absmiddle" alt="我的工作计划" onclick="parent.mainFrame.location='/WeekScheme/WeekSchemeList.action'"></a><a href="#" class="menuBarButton"><img src="images/largeicon/paper.gif"  border="0" align="absmiddle" alt="收文" onclick="parent.mainFrame.location='/Document/ReceiveDocument.action'"></a><a href="#" class="menuBarButton"><img src="images/largeicon/doc.gif"  border="0" align="absmiddle" alt="我的记事本" onclick="parent.mainFrame.location='/NotePad/NotePadList.action'"></a><a href="" class="menuBarButton"><img src="images/largeicon/email.gif"  height="30" border="0" align="absmiddle" alt="收邮件" onclick="parent.mainFrame.location='/InBox/InBoxList.action'"></a><a class="separator"></a><a href="#" class="menuBarButton"><img src="images/largeicon/user.gif"  border="0" align="absmiddle" alt="个人资料查看/修改" onclick="parent.mainFrame.location='/Operator/MyselfInfo.action'"></a><a href="#" class="menuBarButton"><img src="images/largeicon/password.gif"  height="30" border="0" align="absmiddle" alt="修改密码" onclick="parent.mainFrame.location='/Operator/OperatorPwd.jsp'"></a><a href="" class="menuBarButton" target="_top"><img src="images/largeicon/exit.gif"  border="0" align="absmiddle" alt="退出系统" onclick="parent.location='/Logout.jsp'"></a><a class="separator"></a>
 	</div>
+	-->
 </div>
 <script type="text/javascript" src="win/js/ui.js?v=08.01.03"></script>
 <script>
@@ -165,7 +169,8 @@ function resetMainFrameSize()
 	var leftMenu=document.getElementById("LeftMenu");
 	var topBar=document.getElementById("TopBar");
 	var Taskbar=document.getElementById("Taskbar");
-	var h=document.documentElement.clientHeight-parseInt(toolbars.style.height)-parseInt(topBar.style.height) ;
+	//var h=document.documentElement.clientHeight-parseInt(toolbars.style.height)-parseInt(topBar.style.height) ;
+	var h=$(window).height()-$("#Toolbars").height()-$("#TopBar").height() ;
 	var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-10;
 	if(	leftMenu.style.display!="block")
 	{
@@ -190,6 +195,7 @@ function resetMainFrameSize()
 }
 $(document).ready(function(){
 	resetMainFrameSize();
+	resizeMenu();
 })
 
 
@@ -211,15 +217,12 @@ function resizeMenu()
 			resize: function() {
 				$( "#LeftMenu" ).css("width",$( "#accordion" ).width()+20);
 				//$( "#LeftMenu" ).css("height",height);
-				$( "#MainPanel" ).css("left",$( "#accordion" ).width()+20+13);
+				$( "#MainPanel" ).css("left",$( "#accordion" ).width()+20);
 				//$( "#accordion" ).css("height",height);
 				$( "#accordion" ).accordion( "refresh" );
 			}
 		});
 }
-$(function() {
-	resizeMenu();
-	});
 
 
 </script>

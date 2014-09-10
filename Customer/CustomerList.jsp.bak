@@ -1,18 +1,7 @@
 <%@ page session="true" %>
-<%@ page contentType="text/html;charset=gb2312" %> 
+<%@ page contentType="text/html;charset=utf-8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<html xmlns:ww="http://www.opensymphony.com/webwork/" xmlns:xwohi="http://www.lohool.com/wohi/">
-   <head><script src="/js/fun.js"> </script>
-<script src="/js/sortabletable.js"> </script>
-<script src="/js/rowColorTable.js"> </script>
-<script src="/js/hidden_show.js"></script>
-      <title>Customer</title>
-      <link href="/css/sortabletable.css" rel="StyleSheet" type="text/css" />
-      <link href="/css/rowColorTable.css" rel="StyleSheet" type="text/css" />
-      <link href="/css/style.css" rel="StyleSheet" type="text/css" />
-   </head>
-   <body leftmargin="0" topmargin="0">
       <div class="page">
          <div id="pageTitle">
             <TABLE cellpadding="0" cellspacing="0" height="30" id="title-table" width="100%">
@@ -115,14 +104,6 @@
                   </TR>
                   <TR>
                      <TD align="right" bgColor="#ffffff" width="40%">
-                        <xwohi:i18n text="Customer.accecptProductNews" />
-                     </TD>
-                     <TD>
-                        <ww:textfield name="vo.accecptProductNews" required="true" />
-                     </TD>
-                  </TR>
-                  <TR>
-                     <TD align="right" bgColor="#ffffff" width="40%">
                         <xwohi:i18n text="Customer.acceptInfoRemind" />
                      </TD>
                      <TD>
@@ -192,28 +173,3 @@
          </table>
          <ww:property value="paginateView" escape="false"/>
       </div>
-      <script type="text/javascript">function doDelete(n)
-{
-	var r=confirm("Are you sure to delete it?");
-	if(r)
-	{
-		form1.action="CustomerDelete.action";
-		form1["vo.id"].value=n;
-		form1.submit();
-	}
-}
-function doLoad(n)
-{
-		form1.action="CustomerInfo.action";
-		form1["vo.id"].value=n;
-		form1.submit();
-}
-
-
-var st = new SortableTable(document.getElementById("sort-table"),
-	["String", "CaseInsensitiveString", "Number", "Date", "None"]);
-
-sort(st);
-st.onsort =sort(st);</script>
-   </body>
-</html>

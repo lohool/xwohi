@@ -166,9 +166,7 @@
       </fields>
    </actions>
    <actions>
-      <action name="CustomerGroupList" >
-	  <sql>select obj from CustomerGroup obj where 1=1</sql>
-	  </action>
+      <action name="CustomerGroupList" />
       <action name="CustomerGroupAdd" />
       <action name="CustomerGroupModify" />
       <action name="CustomerGroupDelete" />

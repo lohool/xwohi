@@ -8,13 +8,14 @@
 function addConfirmer() 
 { 
 	myform = document.getElementById("operator_info_form"); 
+
 	var selectedList=myform["vo.roles.roleID"];
 	var selectableList=myform["allList"];
 	for (i = 0; i < selectableList.options.length; i++) 
 	{ 
-		//	alert(selectableList.options[i].text)
 		if (selectableList.options[i].selected == true) 
 		{ 
+			var memo= $("#id option:eq(1)").attr("Memo")
 			newOpt = new Option(selectableList.options[i].text, selectableList.options[i].value); 
 			selectedList.add(newOpt); 
 			selectableList.remove(i);
@@ -44,7 +45,6 @@ function onSubmit(myform)
 {                            
 	//myform = document.operator_info_form; 
 	
-	myform["vo.roles.roleID"].value="";
 
 	var selectedList=myform["vo.roles.roleID"];
 	var selectableList=myform["allList"];
@@ -62,12 +62,6 @@ function onSubmit(myform)
 } 
 
 </script> 
-<script>
-$(document).ready(function(){
-	operator_info_form['vo.password'].value="<ww:property value="vo.password" />";
-	operator_info_form['vo.password2'].value="<ww:property value="vo.password" />";
-})
-</script>
 <script type="text/javascript">
 function form_submit(form,type)
 {
@@ -107,10 +101,10 @@ function form_submit(form,type)
 </script>
 
 <ww:form id="operator_info_form" name="operator_info_form" namespace="/Operator"  action="OperatorModify" method="post" validate="true" theme="simple" onsubmit=" return onSubmit(this);">
+<ww:hidden  name="vo.id"/>
 
 <table width="100%" align="left" height="100%" cellspacing="0" cellpadding="0" id="input_table" class="sort-table" style="float:left;position:relative;top:0px;">
 
-<ww:hidden  name="vo.id"/>
 <TR>
 <TD  align="right" width="40%"><xwohi:i18n text="Operator.account" />:</TD><TD  width="60%">
              <ww:textfield  name="vo.account"/>     
@@ -193,3 +187,10 @@ function form_submit(form,type)
 </table>
 
 </ww:form>
+<script>
+$(document).ready(function(){
+	var	myform = document.getElementById("operator_info_form"); 
+	myform['vo.password'].value="<ww:property value="vo.password" />";
+	myform['vo.password2'].value="<ww:property value="vo.password" />";
+})
+</script>
