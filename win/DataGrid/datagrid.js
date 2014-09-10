@@ -7,6 +7,8 @@ $.fn.datagrid= function (options){
 	_width : 0,
 	height : 0,
 	_height : 0,
+	minus_width:0,
+	minus_height:0,
 	rid : "datagrid",
 	multiple : false,
 	toolbar:[],
@@ -53,7 +55,11 @@ $.fn.datagrid= function (options){
 			var sh=this.parentNode.clientHeight-2;
 			//init the size of the grad
 			//alert("scrollWidth="+this.parentNode.scrollWidth+";offsetWidth="+$(this).width())
-			if(opts.width==0)opts._width=sw;
+			if(opts.width==0)
+			{
+				opts._width=sw;
+				if(opts.minus_width>0)opts._width-=opts.minus_width;
+			}
             else if((""+opts.width).indexOf("%")>0)
 			{
 				opts._width=sw * opts.width.substring(0,(""+opts.width).indexOf('%'))/100;
@@ -62,7 +68,12 @@ $.fn.datagrid= function (options){
 			{
 				opts._width=opts.width;
 			}
-			if(opts.height==0)opts._height=sh;
+			alert(opts.height)
+			if(opts.height==0)
+			{
+				opts._height=sh;
+				if(opts.minus_height>0)opts._height-=opts.minus_height;
+			}
             else if((""+opts.height).indexOf("%")>0)
 			{
 				opts._height=sh * opts.height.substring(0,(""+opts.height).indexOf('%'))/100;
@@ -73,7 +84,6 @@ $.fn.datagrid= function (options){
 			}
 			$(this).css("width",opts._width);
 			$(this).css("height",opts._height);
-
 
 			if(opts.url)
 			{
@@ -366,15 +376,21 @@ $.fn.datagrid= function (options){
 				if(page)
 				{
 					opts.pager.current_page=page;
-					$.fn.datagrid.loadData($this,opts);
+					//$.fn.datagrid.loadData($this,opts);
+					var win =_window.windows[_window.focusWindowId];
+					win.SetContent("[url]"+src);
 				}
 			});
 
 			$this.find('.paginate .navigator_longstring').bind("click",function(){
+				alert(this.page)
 				if(this.page)
 				{
+					var form=$(opts.pager.form);
 					opts.pager.current_page=this.page;
-					$.fn.datagrid.loadData($this,opts);
+					form.find(":input[@name=page]").val(opts.pager.current_page);
+					//var data=$(form).find(":input").serialize();
+					//$.fn.datagrid.loadData($this,opts);
 				}
 			});
 			$this.find('.toolbar a').bind("click",function(){
@@ -390,6 +406,7 @@ $.fn.datagrid= function (options){
 				var winType=opts.toolbar[btnIndex].winType;
 				if(className=="Refresh")
 				{
+					
 					var win =_window.windows[_window.focusWindowId];
 					win.SetContent("[url]"+src);
 				}
@@ -506,9 +523,9 @@ $.fn.datagrid= function (options){
         if (pagesize <=0 )
             pagesize=10;
         var pages = Math.floor((totalRecords +pagesize -1 ) / pagesize) ;
-        pager+=("<table id=paginate class=paginate><tbody><tr><td >") ;
+        pager+=("<table id='paginate' class='paginate'><tbody><tr><td >") ;
         
-        pager+=("<a class=\"string\">共" + totalRecords + "条记录</a>");
+        pager+=("<span class=\"string\">共" + totalRecords + "条记录</span>");
 
         if (currentPage <= 0) {
             pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>首页</a>");
@@ -945,23 +962,31 @@ $.fn.datagrid= function (options){
 		var sw=w;//document.body.clientWidth-parseInt($(document.body).css("margin-left"))-parseInt($(document.body).css("margin-right"));
 		var sh=h;//$(this).height();
 		var opts=$(this).data("options");
-		if(opts.width==0)opts._width=sw;
+		if(opts.width==0)
+		{
+				opts._width=sw;
+				if(opts.minus_width>0)opts._width-=opts.minus_width;
+		}
         else if((""+opts.width).indexOf("%")>0)
 		{
 				opts._width=sw * opts.width.substring(0,(""+opts.width).indexOf('%'))/100;
 		}
 		else
+			{
+				opts._width=opts.width;
+			}
+		if(opts.height==0)
 		{
-			opts._width=opts.width;
+				opts._height=sh;
+				if(opts.minus_height>0)opts._height-=opts.minus_height;
 		}
-		if(opts.height==0)opts._height=sh;
         else if((""+opts.height).indexOf("%")>0)
 		{
-			opts._height=sh * opts.height.substring(0,(""+opts.height).indexOf('%'))/100;
+				opts._height=sh * opts.height.substring(0,(""+opts.height).indexOf('%'))/100;
 		}
 		else
 		{
-			opts._height=opts.height;
+				opts._height=opts.height;
 		}
 		$.fn.datagrid.setSize($(this),opts,opts._width,opts._height);
 	},

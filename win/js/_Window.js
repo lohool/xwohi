@@ -654,14 +654,14 @@ _window.prototype.ResizeBy=function(dx,dy)
 	var winWidth=this.contentCase.clientWidth;
 	//var winHeight=this.height-parseInt(this.titleCase.style.height);
 	$("#_F"+this.id+" .datagrid").each(function(i,ele){
-		if(ele.className=="datagrid")$(ele).resizeGrid(winWidth-2,winHeight-2);
+		//if(ele.className=="datagrid")$(ele).resizeGrid(winWidth-2,winHeight-2);
 		var winScrollWidth=contentCase.scrollWidth;
 		var winScrollHeight=contentCase.scrollHeight;
 		if(ele.offsetHeight+16 < winScrollHeight)winHeight=winHeight+17;
 
 		if(ele.offsetWidth<winScrollWidth )
 		{
-			$(ele).resizeGrid(winScrollWidth-2,winHeight-2);
+			//$(ele).resizeGrid(winScrollWidth-2,winHeight-2);
 		}
 	})
 

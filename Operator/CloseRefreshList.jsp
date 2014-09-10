@@ -1,7 +1,7 @@
 {
 	"code":"200",
 	"message":"Successful",
-	"forwardUrl":"Operator/OperatorList.action",
+	"forwardUrl":"Operator/OperatorList.action?vo.state=1",
 	"navTabId":"operator_list_form",
 	"rel":"operator_list_form",
 	"callbackAction":"closeCurrent",

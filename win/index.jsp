@@ -98,7 +98,7 @@ div.panel .container
 					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/crm/FAQList.html','发短信')" >FAQ</a>
 					<a class="separator" style="float:right"> </a>
 					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >全屏模式对话框</a>
-					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/jsp/dialog.htm','Modal Dialog',true)" >内部模式对话框</a>
+					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog',true)" >内部模式对话框</a>
 					<a href="#" class="menuBarButton" style="float:right" onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >我的任务</a>
 					<a href="#" class="menuBarButton" style="float:right" onclick="alert(_window.focusWindowId)" >Focus Win</a>
 				</div>

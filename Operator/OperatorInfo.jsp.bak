@@ -8,7 +8,7 @@
 function addConfirmer() 
 { 
 	myform = document.getElementById("operator_info_form"); 
-	var selectedList=myform["selectedList"];
+	var selectedList=myform["vo.roles.roleID"];
 	var selectableList=myform["allList"];
 	for (i = 0; i < selectableList.options.length; i++) 
 	{ 
@@ -26,7 +26,7 @@ function addConfirmer()
 function removeConfirmer() 
 { 
 	myform = document.getElementById("operator_info_form"); 
-	var selectedList=myform["selectedList"];
+	var selectedList=myform["vo.roles.roleID"];
 	var selectableList=myform["allList"];
 
 	for (i = 0;i < selectedList.options.length ;  i++)  
@@ -40,13 +40,13 @@ function removeConfirmer()
 		} 
     } 
 } 
-function onSubmit(form) 
+function onSubmit(myform) 
 {                            
 	//myform = document.operator_info_form; 
-
+	
 	myform["vo.roles.roleID"].value="";
 
-	var selectedList=myform["selectedList"];
+	var selectedList=myform["vo.roles.roleID"];
 	var selectableList=myform["allList"];
 
 	for (i = selectedList.options.length -1; i >= 0; i--)  
@@ -57,8 +57,8 @@ function onSubmit(form)
 
 	myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
 	//alert(myform["vo.roles.roleID"].value);
-	//return form_submit(form,'window');
-	return false;
+	return form_submit(myform,'window');
+	//return false;
 } 
 
 </script> 
@@ -163,8 +163,7 @@ function form_submit(form,type)
 <TR><TD><xwohi:i18n text="Operator.selectdRoles"/></TD><TD>&nbsp;</TD><TD><xwohi:i18n text="Operator.notSelectedRoles"/></TD></TR>
 <TR>
 	<TD>
-	<ww:select name="selectedList" listKey="roleID" listValue="name" list="vo.roles" value="vo.roles.roleID" size="7"  multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px"  />
-	    <INPUT TYPE="hidden" NAME="vo.roles.roleID">
+	<ww:select name="vo.roles.roleID" listKey="roleID" listValue="name" list="vo.roles" value="vo.roles.roleID" size="7"  multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px"  />
 
    </TD>
 	<TD>

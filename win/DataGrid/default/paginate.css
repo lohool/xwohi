@@ -8,7 +8,7 @@
     border-collapse: collaps;
 	position:relative;
 	padding:0px;
-	    border-spacing: 0;
+	border-spacing: 0;
 	vertical-align:middle;
 	white-space: nowrap;
 	width:100%;
@@ -22,7 +22,7 @@
 .paginate td {
 	cursor:			default;
 	padding:0px;
-	text-align: center;
+	text-align: right;
 }
 
 
@@ -33,7 +33,6 @@
 .paginate .string
 {
 	padding: 2 2 2 2;
-	width:22px;
 	height:22px;
 	TEXT-DECORATION: none;
 	text-align:center;
@@ -47,14 +46,22 @@
 	line-height:16px; 
 	CURSOR:hand;
 }
+.paginate a,
+.paginate a:visited,
+.paginate .navigator_current,
+.paginate .navigator_longstring,
+{
+	width:22px;
+}
 
 .paginate .navigator_longstring
 {
-	width:70px;
+	min-width:70px;
 }
 .paginate .string
 {
-	width:70px;
+	border:solid 0px #72C1F1;
+	min-width:50px;
 	CURSOR:default;
 }
 .paginate .navigator_longstring:visited
