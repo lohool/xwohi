@@ -4,27 +4,105 @@
 <html xmlns:xwohi="http://www.lohool.com/wohi/" xmlns:ww="http://www.opensymphony.com/webwork/">
 
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
+<script> 
 
-<body leftmargin="0" topmargin="0" >
+function addConfirmer() 
+{ 
+	myform = document.getElementById("role_info_form"); 
+
+	var selectedList=myform["vo.resources.resourceID"];
+	var selectableList=myform["allList"];
+	for (i = 0; i < selectableList.options.length; i++) 
+	{ 
+		if (selectableList.options[i].selected == true) 
+		{ 
+			var memo= $("#id option:eq(1)").attr("Memo")
+			newOpt = new Option(selectableList.options[i].text, selectableList.options[i].value); 
+			selectedList.add(newOpt); 
+			selectableList.remove(i);
+			i--;
+		} 
+	} 
+} 
+
+function removeConfirmer() 
+{ 
+	myform = document.getElementById("role_info_form"); 
+	var selectedList=myform["vo.resources.resourceID"];
+	var selectableList=myform["allList"];
+
+	for (i = 0;i < selectedList.options.length ;  i++)  
+    { 
+        if (selectedList.options[i].selected == true)  
+        { 
+			newOpt = new Option(selectedList.options[i].text, selectedList.options[i].value); 
+			selectableList.add(newOpt); 
+            selectedList.remove(i); 
+			i--;
+		} 
+    } 
+} 
+function onSubmit(myform) 
+{                            
+	//myform = document.operator_info_form; 
+	
+
+	var selectedList=myform["vo.resources.resourceID"];
+	var selectableList=myform["allList"];
+
+	for (i = selectedList.options.length -1; i >= 0; i--)  
+	{ 
+		//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value + ',' +selectedList.options[i].value; 
+		selectedList.options[i].selected = true; 
+	} 
+
+	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
+	//alert(myform["vo.roles.roleID"].value);
+	return form_submit(myform,'window');
+	//return false;
+} 
+
+</script> 
+<script type="text/javascript">
+function form_submit(form,type)
+{
+		alert(form.action )
+		alert(unescape($(form).find(":input").serialize() ))
+		$.ajax({ 
+			url: form.action, 
+			//context: document.body, 
+			data :   unescape($(form).find(":input").serialize()),
+			type:"POST",
+			dataType:"json",
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+                    },
+			success: function(data){
+				if(data.code=="200")
+				{
+					alert("current window id:"+_window.focusWindowId)
+					var win =_window.windows[_window.focusWindowId];
+					var parentWin=_window.windows[win.parentWindow];
+					if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
+					win.Close();
+				}
+				else
+				{
+					alert(data.message)
+					alert(data)
+				}
+
+			}
+	  });
+		
+	return false;
+}
+</script>
+
 <div class="page">
-<div id="pageTitle">
-<TABLE width="100%" height="30"  cellspacing="0" cellpadding="0" id="title-table">
-<thead>
-<TR>
-	<TD>
-	<span class="pageTitle-left">
-	<img height="13" width="13" src="/images/ico_arrow_title.gif">
-	<xwohi:i18n text="Role.info"/>
-	</span>
-	<span class="pageTitle-right" >
-	</span>
-	</TD>
-</TR>
-</thead>
-</TABLE>
-</div>
-<div align="center">
-<ww:form name="form1" namespace="/Role" action="RoleModify" method="post" validate="true">
+<ww:form id="role_info_form" name="role_info_form" namespace="/Role" action="RoleModify" method="post" validate="true">
 <ww:hidden  name="vo.roleID"/>
 
 <table width="500" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
@@ -50,8 +128,7 @@
 <TABLE>
 <TR>
 	<TD>
-	<ww:select name="selectedList" listKey="resourceID" listValue="name" list="vo.resources" value="vo.resource.resourceID" size="7"  multiple="multiple" cssStyle="width=100px;" />
-    <INPUT TYPE="hidden" NAME="vo.resources.resourceID">
+	<ww:select name="vo.resources.resourceID" listKey="resourceID" listValue="name" list="vo.resources" value="vo.resource.resourceID" size="7"  multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px"/>
    </TD>
 	<TD>
 		<input type="button" value=" --> " onClick="removeConfirmer(); return false;"> 
@@ -61,7 +138,7 @@
 
 	</TD>
 	<TD>
-<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7"  multiple="multiple" cssStyle="width=100px;" />
+<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7" multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px" />
 	
 	</TD>
 </TR>
@@ -79,4 +156,5 @@
 </table>
 </ww:form>
 </div>
-</html>
+
+

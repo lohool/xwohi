@@ -23,7 +23,6 @@ function form_submit(form)
 	</div>
 </div>
 <script>
-var i=0;
 	     $(document).ready(function() {
 	          $("#Role_list").datagrid({
 			  callname: 'Role_list',
@@ -36,7 +35,7 @@ var i=0;
 				  {"text":"Refresh","btnClass":"Refresh","src":"/Role/RoleList.action","width":500,"height":300},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Add User","btnClass":"Add","src":"/Role/RoleInput.action","width":550,"height":330},
-				  {"text":"Edit Role Info","btnClass":"Edit","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},
+				  {"text":"Edit Role Info","btnClass":"Edit","winType":"window","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},
 				  {"text":"Delete","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
 				  {"text":"Delete Test","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.id={0}&vo.name={1}&vo.state=1"},
 				  {"text":"Separator","btnClass":"Separator"},

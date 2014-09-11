@@ -84,7 +84,7 @@ _window.Open=function(content,title,features,parent,parentWindow)
 	{
 		var obj=new _window(features);
 		obj.parent=parent;
-		obj.parentWindow=parentWindow;
+		if(parentWindow)	obj.parentWindow=parentWindow;
 		obj.Creat(content,title);
 		return obj;
 	}

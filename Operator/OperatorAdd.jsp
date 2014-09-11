@@ -6,7 +6,6 @@
 <script type="text/javascript">
 function form_submit(form,type)
 {
-		
 		$.ajax({ 
 			url: form.action, 
 			//context: document.body, 
@@ -16,9 +15,7 @@ function form_submit(form,type)
 			success: function(data){
 				if(data.code=="200")
 				{
-					alert("current window id:"+_window.focusWindowId)
 					var win =_window.windows[_window.focusWindowId];
-					alert("parent window id:"+win.parentWindow)
 					var parentWin=_window.windows[win.parentWindow];
 					if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
 					win.Close();
@@ -33,6 +30,7 @@ function form_submit(form,type)
 
 <div align="center">
 <ww:form name="operator_add_form" namespace="/Operator" action="OperatorAdd" method="post" validate="true" onsubmit="return form_submit(this,'window')">
+<INPUT TYPE="hidden" NAME="vo.state" value="1">
 <table bgcolor="#E3E3E3" width="500" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
 <thead>
 <TR>

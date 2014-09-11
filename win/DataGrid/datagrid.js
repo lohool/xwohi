@@ -318,7 +318,7 @@ $.fn.datagrid= function (options){
 
 		dgframe.bind("mousedown",function(e){e=e||window.event;getrow(e,opts);});
 		dgframe.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
-		/*
+		
 		dgframe.bind("scroll",function(e){
 			//alert($(this).scrollTop())
 			//e=e||window.event;
@@ -336,7 +336,7 @@ $.fn.datagrid= function (options){
 			
 
 		});
-		*/
+		
 
 		//bind event
 			var column=$this.find('.datacolumn thead tr td.column');
