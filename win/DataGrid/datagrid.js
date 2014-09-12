@@ -202,7 +202,7 @@ $.fn.datagrid= function (options){
 		}
 		var pager=null;
 		//if(opts.pager!=null)opts.pageObj=$(paginate(opts.pager.current_page*opts.pager.pagesize,opts.pager.pagesize,opts.pager.total));
-		if(opts.pager!=null)opts.pageObj=$(paginate(opts.pager.current_page,opts.pager.pagesize,opts.pager.total));
+		if(opts.pager!=null && opts.pager.total>0)opts.pageObj=$(paginate(opts.pager.current_page,opts.pager.pagesize,opts.pager.total));
 		
 		var toolbar_html=gen_toolbar(opts);
 		var toolbar=null;
@@ -309,8 +309,7 @@ $.fn.datagrid= function (options){
 		if(toolbar!=null)toolbarHeight=toolbar.height();
 
 		var pageBarHeight=0;
-		if(opts.pageObj!=null)pageBarHeight+=opts.pageObj.height();
-		
+		if(opts.pageObj!=null && opts.pager.total>0)pageBarHeight+=opts.pageObj.height();
 		dgframe.css("height", mainframe.height()-pageBarHeight-toolbarHeight);
 
 
@@ -404,12 +403,23 @@ $.fn.datagrid= function (options){
 				var src=opts.toolbar[btnIndex].src;
 				var width=opts.toolbar[btnIndex].width;
 				var height=opts.toolbar[btnIndex].height;
-				var winType=opts.toolbar[btnIndex].winType;
+				var target=opts.toolbar[btnIndex].target;
 				if(className=="Refresh")
 				{
-					
-					var win =_window.windows[_window.focusWindowId];
-					win.SetContent("[url]"+src);
+					if(target)
+					{
+						//load into a named panel by ID
+						if(src.indexOf("?")>0)src=src+ '&d='+ new Date().getTime()
+						else src=src+ '?d='+ new Date().getTime()
+
+						$('#'+target).empty();
+						$('#'+target).load(src);
+					}
+					else
+					{
+						var win =_window.windows[_window.focusWindowId];
+						win.SetContent("[url]"+src);
+					}
 				}
 				else if(className=="Edit")
 				{
@@ -424,8 +434,8 @@ $.fn.datagrid= function (options){
 					{
 						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 					}
-					if(!winType)winType="dialog";
-					if(winType=="dialog")openDialog(src,text,true,width,height);
+					if(!target)target="dialog";
+					if(target=="dialog")openDialog(src,text,true,width,height);
 					else openWorkWindow(src,text,width,height)
 
 				}
@@ -470,9 +480,14 @@ $.fn.datagrid= function (options){
 				}
 				else 
 				{
-					if(!winType)winType="dialog";
-					if(winType=="dialog")openDialog(src,text,true,width,height);
-					else openWorkWindow(src,text,width,height)
+					if(!target)target="dialog";
+					if(target=="dialog")openDialog(src,text,true,width,height);
+					else if(target=="window")openWorkWindow(src,text,width,height)
+					else
+					{
+						//load into a named panel by ID
+						$('#'+target).load(src);
+					}
 				}
 				
 			});
@@ -492,7 +507,7 @@ $.fn.datagrid= function (options){
 			if(opts.toolObj!=null)toolbarHeight=opts.toolObj.outerHeight();
 
 			var pageBarHeight=0;
-			if(opts.pageObj!=null)
+			if(opts.pageObj!=null && opts.pager.total>0)
 			{
 				if(opts.pageObj.css("width")>w)opts.pageObj.css("width",w);
 				pageBarHeight+=opts.pageObj.outerHeight();

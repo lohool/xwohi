@@ -390,19 +390,24 @@ _window.prototype.SetContent=function(content,data)
 			//alert(data)
 			$('#'+id).load(tent,data,function(){
 				//set size for the elements of this window
-				$('#'+id+" .datagrid_wraper").resize(function(){
-					if(this.offsetWidth) $('#'+id+" .datagrid_wraper .datagrid").resizeGrid(this.offsetWidth-2,this.offsetHeight-2)
-				})
-				$('#'+id+" .page DIV").each(function(i,ele){
-					var minus_height=$(this).attr("minus_height");
-					if(minus_height)$(this).css("height",this.parentNode.offsetHeight-parseInt(minus_height));
+				$('#'+id+" .datagrid_wraper").each(function(i,ele){
+					$(this).resize(function(){
+						if(this.offsetWidth) $(this).find(".datagrid").resizeGrid(this.offsetWidth-2,this.offsetHeight-2)
+					})
 				})
 				$('#'+id+" .page").resize(function(){
 					$('#'+id+" .page DIV").each(function(i,ele){
-						//alert(this.id+":"+$(this).attr("minus_height"))
-						var minus_height=$(this).attr("minus_height");
-						if(minus_height)$(this).css("height",this.parentNode.offsetHeight-parseInt(minus_height));
+					var layoutHeight=$(this).attr("layoutHeight");
+					var layoutWidth=$(this).attr("layoutWidth");
+					if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+					if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
 					})
+				})
+				$('#'+id+" .page DIV").each(function(i,ele){
+					var layoutHeight=$(this).attr("layoutHeight");
+					var layoutWidth=$(this).attr("layoutWidth");
+					if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+					if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
 				})
 
 			});

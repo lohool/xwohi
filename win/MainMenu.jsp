@@ -77,7 +77,7 @@ subMenu4.addItem(new MenuItem("WeekScheme","/images/open.gif","公文归档","/D
 <a href="#" onclick="openWorkWindow('/Operator/MyselfInfo.action','个人资料')">个人资料</a><br />
 <a href="#" onclick="openWorkWindow('/Operator/OperatorPwd.action','修改密码')">修改密码</a><br />
 
-<a href="#" onclick="openWorkWindow('/CustomerGroup/CustomerGroupList.action','客户组管理')">客户组管理</a><br />
+<a href="#" onclick="openWorkWindow('/Customer/Customer.jsp','客户组管理')">客户组管理</a><br />
 <ul>
 		<ww:action id="cl" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="false" />
 		<ww:property value="#attr.c1" />

@@ -18,7 +18,7 @@ function form_submit(form)
 		<INPUT TYPE="submit" class="button">
 		</ww:form>
 	</div>
-	<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" minus_height="52px">
+	<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="52px">
 		<div id="Role_list" class="datagrid" >Loading...</div>
 	</div>
 </div>
@@ -35,12 +35,12 @@ function form_submit(form)
 				  {"text":"Refresh","btnClass":"Refresh","src":"/Role/RoleList.action","width":500,"height":300},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Add User","btnClass":"Add","src":"/Role/RoleInput.action","width":550,"height":330},
-				  {"text":"Edit Role Info","btnClass":"Edit","winType":"window","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},
+				  {"text":"Edit Role Info","btnClass":"Edit","target":"window","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},
 				  {"text":"Delete","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
 				  {"text":"Delete Test","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.id={0}&vo.name={1}&vo.state=1"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Printer","btnClass":"Printer","src":"/Role/RoleInput.action","width":500,"height":300},
-				  {"text":"Help","btnClass":"Help","winType":"window","src":"/Role/RoleInfo.action?vo.id=1","width":300,"height":200}
+				  {"text":"Help","btnClass":"Help","target":"window","src":"/Role/RoleInfo.action?vo.id=1","width":300,"height":200}
 				  ],
 			  columns:[
 				  "<xwohi:i18n text="ID" />",

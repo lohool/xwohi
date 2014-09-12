@@ -47,7 +47,7 @@ function form_submit(form)
 	<INPUT TYPE="submit" class="button">
 	</ww:form>
 </div>
-<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" minus_height="52px">
+<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="52px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 <!--
@@ -73,7 +73,7 @@ var i=0;
 				  {"text":"Delete Test","btnClass":"Delete","src":"/Operator/OperatorDelete.action?vo.id={0}&vo.name={1}&vo.state=1"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Printer","btnClass":"Printer","src":"/Operator/OperatorInput.action","width":500,"height":300},
-				  {"text":"Help","btnClass":"Help","winType":"window","src":"/Operator/OperatorInfo.action?vo.id=1","width":300,"height":200}
+				  {"text":"Help","btnClass":"Help","target":"window","src":"/Operator/OperatorInfo.action?vo.id=1","width":300,"height":200}
 				  ],
 			  columns:[
 				  "<xwohi:i18n text="id" />",
