@@ -1,7 +1,7 @@
 <xwohi>
   <actions>
       <action name="OperatorList">
-		<sql>select obj from Operator obj where obj.#state=?</sql>
+		<sql>select obj from Operator obj where obj.#name like ? and obj.#state=?</sql>
 	  </action>
       <action name="JobWorkerList" >
 		<sql>select obj from Operator obj where obj.#job=?</sql>
@@ -161,7 +161,6 @@
       <class>com.lohool.sms.increment.po.Customer</class>
       <fields>
          <field name="id" type="primaryKey" />
-         <field name="tradeLog" relateClass="com.lohool.sms.increment.po.TradeLog" type="relation" />
          <field name="group" type="relation" relateClass="com.lohool.sms.increment.po.CustomerGroup"/>
       </fields>
    </actions>

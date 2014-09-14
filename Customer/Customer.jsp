@@ -1,5 +1,5 @@
 <%@ page session="true" %>
-<%@ page contentType="text/html;charset=gb2312" %> 
+<%@ page contentType="text/html;charset=utf-8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page" style="height:100%">
@@ -9,5 +9,7 @@
 		</ww:action>
 	</div>
 	<div id="customer_panel" class="panel" style="position:absolute;left:211px;top:0px;width:100%;height:100%;border:solid 0px red" layoutWidth="222" layoutHeight="10"> 
+	<div  style="top:0px;width:100%;height:100%;border:solid 1px #CAE4FF;background-color:#FFFFFF" > 
+	</div>
 	</div>
 </div>

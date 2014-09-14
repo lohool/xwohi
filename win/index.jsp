@@ -59,30 +59,30 @@
 
 <body style="padding:0px;margin:0px;overflow-x:hidden;overflow-y:hidden" SCROLL=NO >
 <div style="z-index:-100;position:absolute; left:0;top:0; width:100%;height:100%"><!--<img src="win/2.jpg" border=0 width="100%" height="100%">--></div>
-<div id="TopBar" class="panel" style="z-index:1000;position:absolute; left:0;top:0; width:100%;height:40px;"> 
-				<div  class="panel" style="position:absolute; left:0;top:0px; width:100%;height:40px;"> 
-					<span style="float:right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>	
-					<a class="menuBarButton" href="/Logout.action" style="float:right">Log Out</a> 
-					<a class="menuBarButton" style="float:right">Help</a> 
-					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/crm/FAQList.html','发短信')" >FAQ</a>
-					<a class="separator" style="float:right"> </a>
-					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >全屏模式对话框</a>
-					<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog',true)" >内部模式对话框</a>
-					<a href="#" class="menuBarButton" style="float:right" onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >我的任务</a>
-					<a href="#" class="menuBarButton" style="float:right" onclick="alert(_window.focusWindowId)" >Focus Win</a>
-					<a class="separator" style="float:right"> </a>
-					<a href="#" class="menuBarButton" style="float:right"  ><ww:property value="#session.operation_user.name"/></a>
-				</div>
+<div id="TopBar" class="panel" style="z-index:1000;position:absolute; left:0;top:0; width:100%;height:30px;"> 
+	<div  class="panel" style="position:absolute; left:0;top:0px; width:100%;height:px;"> 
+		<span style="float:right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>	
+		<a class="menuBarButton" href="/Logout.action" style="float:right">Log Out</a> 
+		<a class="menuBarButton" style="float:right">Help</a> 
+		<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/crm/FAQList.html','发短信')" >FAQ</a>
+		<a class="separator" style="float:right"> </a>
+		<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >全屏模式对话框</a>
+		<a href="#" class="menuBarButton" style="float:right" onclick="openDialog('/Operator/OperatorList.action','Modal Dialog',true)" >内部模式对话框</a>
+		<a href="#" class="menuBarButton" style="float:right" onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >我的任务</a>
+		<a href="#" class="menuBarButton" style="float:right" onclick="alert(_window.focusWindowId)" >Focus Win</a>
+		<a class="separator" style="float:right"> </a>
+		<a href="#" class="menuBarButton" style="float:right"  ><ww:property value="#session.operation_user.name"/></a>
+	</div>
 
 </div>
-<div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:53px; height:100%;z-index:1001; " >
+<div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:45px; height:100%;z-index:1001; " >
 	<div id="accordion-resizer" class="container" style="background:transparent">
 		<div id="accordion" >
 		</div>
 	</div>
 </div>
 
-<div id="MainPanel" style="position:absolute; left:200px; top:53px;z-index:0;background:transparent;">
+<div id="MainPanel"  class="panel" style="position:absolute; left:200px;padding:0px; top:43px;z-index:0;background:transparent;">
 	<div id="Taskbar" class="panel"  style="width:100%;height:30px;"> 
 			<span class="menuBarButton">首页</span><a class="separator"> </a>
 	</div>
@@ -142,25 +142,6 @@ $(function() {
 
     });
 	});
-	/*
-function resetMainFrameSize()
-{
-	var frame=document.getElementById("MainFrame");
-	var toolbars=document.getElementById("Toolbars");
-	var h=document.documentElement.offsetHeight - parseInt(toolbars.style.height);
-	var w=document.documentElement.offsetWidth-5;
-	if(	menu.container.style.display=="block")
-	{
-		w-=parseInt(menu.container.style.width);
-	}
-	//alert(h);
-	frame.style.height=h;
-	frame.style.width=w;
-	toolbars.style.top=h;
-	toolbars.style.left=0;
-	toolbars.style.width=w;
-}
-*/
 function resetMainFrameSize()
 {
 	
@@ -227,7 +208,7 @@ function resizeMenu()
 
 </script>
 
-	<script>
+<script>
 
 	$(function() {
 		$( "#accordion" ).accordion({
@@ -235,9 +216,11 @@ function resizeMenu()
 		});
 	});
 
-//resetMainFrameSize();
-
-	</script>
+$(document).ready(function(){
+	$.ajaxSetup({cache:false}); 
+	reDefineHTMLActions();
+})
+</script>
 
 </body>
 

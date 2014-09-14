@@ -33,12 +33,13 @@
 			  data: [
 			  <ww:iterator value="objList">
 				  [
-				  "<a href='/Customer/CustomerList.action' rel=''><ww:property value="name"/></a>"
+				  "<a href='/Customer/CustomerList.action?vo.group.id=<ww:property value="id" />&vo.group.name=<ww:property value="name" />' target='customer_panel' ><ww:property value="name"/></a>"
 				  ],
 			   </ww:iterator>
 			  ]
 			  }
 			  );
 	     });
+
 
 </script>

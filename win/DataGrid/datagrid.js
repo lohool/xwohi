@@ -111,7 +111,8 @@ $.fn.datagrid= function (options){
 		var bar = "<div class='toolbar'>";
 		for(i in opts.toolbar)
 		 {
-			if(opts.toolbar[i].btnClass=="Separator")bar+="<span  class=\""+opts.toolbar[i].btnClass+"\" />";
+			if(opts.toolbar[i].btnClass=="text")bar+="<span  class='paginate.string' style='float:right'>"+opts.toolbar[i].text+"</span>";
+			else if(opts.toolbar[i].btnClass=="Separator")bar+="<span  class=\""+opts.toolbar[i].btnClass+"\" />";
 			else bar+="<a  class=\""+opts.toolbar[i].btnClass+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+"</a>";
 		 }
 
@@ -315,7 +316,7 @@ $.fn.datagrid= function (options){
 
 
 
-		dgframe.bind("mousedown",function(e){e=e||window.event;getrow(e,opts);});
+		dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
 		dgframe.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
 		
 		dgframe.bind("scroll",function(e){
@@ -404,13 +405,22 @@ $.fn.datagrid= function (options){
 				var width=opts.toolbar[btnIndex].width;
 				var height=opts.toolbar[btnIndex].height;
 				var target=opts.toolbar[btnIndex].target;
+				var rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
+				var row=opts.data[rowid];
+				if(rowid && rowid!="")
+				{
+					for( var i=0;i<opts.data[rowid].length; i++)
+					{
+						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+					}
+				}
 				if(className=="Refresh")
 				{
 					if(target)
 					{
 						//load into a named panel by ID
-						if(src.indexOf("?")>0)src=src+ '&d='+ new Date().getTime()
-						else src=src+ '?d='+ new Date().getTime()
+						//if(src.indexOf("?")>0)src=src+ '&d='+ new Date().getTime()
+						//else src=src+ '?d='+ new Date().getTime()
 
 						$('#'+target).empty();
 						$('#'+target).load(src);
@@ -428,12 +438,6 @@ $.fn.datagrid= function (options){
 						alert("Please select one row.");
 						return false;
 					}
-					var rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
-					var row=opts.data[rowid];
-					for( var i=0;i<opts.data[rowid].length; i++)
-					{
-						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
-					}
 					if(!target)target="dialog";
 					if(target=="dialog")openDialog(src,text,true,width,height);
 					else openWorkWindow(src,text,width,height)
@@ -448,14 +452,6 @@ $.fn.datagrid= function (options){
 					}
 					if(confirm("Please sure that the selected row will be deleted."))
 					{
-						var rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
-						var row=opts.data[rowid];
-						for( var i=0;i<opts.data[rowid].length; i++)
-						{
-							src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
-						}
-						if(src.indexOf("?")>0)src=src+ '&d='+ new Date().getTime()
-						else src=src+ '?d='+ new Date().getTime()
 						$.ajax({ 
 							url: src, 
 							//context: document.body, 
@@ -466,10 +462,35 @@ $.fn.datagrid= function (options){
 								if(data.code=="200")
 								{
 									var win =_window.windows[_window.focusWindowId];
-									if(data.forwardUrl && data.forwardUrl!="")win.SetContent("[url]"+data.forwardUrl);
+									var target=data.target;
+									if(target && target!="")
+									{
+										loadContentToPanel(target,data.forwardUrl,null);
+									}
+									else
+									{
+										var parentWin=_window.windows[win.parentWindow];
+										if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
+									}
+									//if(data.action=="close")win.Close();
+								}
+								else
+								{
+									 alert(data.message);
 								}
 
-							}
+							},
+						error: function(XMLHttpRequest, textStatus, errorThrown) 
+						{
+							//$('#'+id).html(xhr.responseText);
+							//var win =_window.windows[_window.focusWindowId];
+							//win.SetContent(XMLHttpRequest.responseText)
+									//alert(XMLHttpRequest.status);
+									//alert(XMLHttpRequest.readyState);
+									//alert(textStatus);
+									alert(XMLHttpRequest.responseText)
+						}
+
 					  });
 					}
 
@@ -486,7 +507,9 @@ $.fn.datagrid= function (options){
 					else
 					{
 						//load into a named panel by ID
-						$('#'+target).load(src);
+						$('#'+target).load(src,null,function(response,status,xhr){
+							alert(xhr.responseText);
+						});
 					}
 				}
 				

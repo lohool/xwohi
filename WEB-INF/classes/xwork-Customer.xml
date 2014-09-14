@@ -11,19 +11,19 @@
          <result name="success" type="dispatcher">/Customer/CustomerList.jsp</result>
       </action>
       <action class="BasicAdd" name="CustomerAdd">
-         <result name="input" type="dispatcher">/Customer/CustomerAdd.jsp</result>
-         <result name="success" type="redirect">/Customer/CustomerList.action</result>
+         <result name="input" >/Customer/CustomerAdd.jsp</result>
+         <result name="success" type="dispatcher">/Customer/CloseRefreshList.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
-      <action class="BasicDelete" name="CustomerDelete">
-         <result name="success" type="redirect">/Customer/CustomerList.action</result>
+      <action class="BasicModify" name="CustomerDelete">
+         <result name="success" type="dispatcher">/Customer/CloseRefreshList.jsp</result>
       </action>
       <action class="BasicInfo" name="CustomerInfo">
          <result name="success" type="dispatcher">/Customer/CustomerInfo.jsp</result>
       </action>
       <action class="BasicModify" name="CustomerModify">
          <result name="input" type="dispatcher">/Customer/CustomerInfo.jsp</result>
-         <result name="success" type="redirect">/Customer/CustomerList.action</result>
+         <result name="success" type="dispatcher">/Customer/CloseRefreshList.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action class="BasicInput" name="CustomerInput">
@@ -32,11 +32,6 @@
    </package>
    <package extends="action-default" name="CustomerGroup" namespace="/CustomerGroup">
       <action class="BasicList" name="CustomerGroupList">
-		<result type="dispatcher" name="access_rejected">/notlimit.jsp</result>
-		 <result type="dispatcher" name="error">/error.jsp</result>
-		 <result type="dispatcher" name="input">/input.jsp</result>
-		 <result type="dispatcher" name="login">/login.jsp</result>
-		 <result type="dispatcher" name="none">/none.jsp</result>
          <result type="dispatcher" name="success" >/Customer/CustomerGroupList.jsp</result>
       </action>
       <action class="BasicAdd" name="CustomerGroupAdd">

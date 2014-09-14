@@ -384,33 +384,21 @@ _window.prototype.SetContent=function(content,data)
 		{
 			var id="_F"+this.id;
 			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
-			if(tent.indexOf("?")>0)tent=tent+ '&d='+ new Date().getTime()
-				else tent=tent+ '?d='+ new Date().getTime()
-				//alert("setContent:"+tent)
-			//alert(data)
-			$('#'+id).load(tent,data,function(){
-				//set size for the elements of this window
-				$('#'+id+" .datagrid_wraper").each(function(i,ele){
-					$(this).resize(function(){
-						if(this.offsetWidth) $(this).find(".datagrid").resizeGrid(this.offsetWidth-2,this.offsetHeight-2)
-					})
-				})
-				$('#'+id+" .page").resize(function(){
-					$('#'+id+" .page DIV").each(function(i,ele){
-					var layoutHeight=$(this).attr("layoutHeight");
-					var layoutWidth=$(this).attr("layoutWidth");
-					if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
-					if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
-					})
-				})
-				$('#'+id+" .page DIV").each(function(i,ele){
-					var layoutHeight=$(this).attr("layoutHeight");
-					var layoutWidth=$(this).attr("layoutWidth");
-					if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
-					if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
-				})
-
+			loadContentToPanel(id,tent,null);
+/*
+			$('#'+id).load(tent,data,function(response,status,xhr){
+				if(xhr.status!=200)
+				{
+				//alert("Error code:"+xhr.status);
+				$('#'+id).html(xhr.responseText);
+				}
+				else
+				{
+					//set size for the elements of this window
+					
+				}
 			});
+			*/
 				/*
 			var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
 			var xmlhttp;
@@ -476,12 +464,17 @@ _window.prototype.SetContent=function(content,data)
 		}
 		else
 		{
-			this.form.innerHTML=content;
+			//this.form.innerHTML=content;
+			var id="_F"+this.id;
+			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
+			$('#'+id).html(content);
+			reDefineHTMLActions();
 		}
 		if(this.bodyHeight<0) this.bodyHeight=this.contentCase.offsetHeight+1;
 		this.contentCase.style.overflow="auto";
 	}
 	this.content=content;
+	
 };
 
 _window.prototype.SetTitle=function(title)
@@ -683,9 +676,12 @@ _window.prototype.ResizeBy=function(dx,dy)
 	this.bodyHeight+=dy;
 	this.contentCase.style.height=(this.bodyHeight)+"px";
 	}
+
+	/*
 	
 	//when the window is resized, resize the DataGrid in the window
 	var contentCase=this.contentCase;
+
 	//var winWidth=this.contentCase.scrollWidth;
 	var winHeight=this.contentCase.clientHeight;
 	var winWidth=this.contentCase.clientWidth;
@@ -701,6 +697,7 @@ _window.prototype.ResizeBy=function(dx,dy)
 			//$(ele).resizeGrid(winScrollWidth-2,winHeight-2);
 		}
 	})
+	*/
 
 
 };
@@ -979,3 +976,88 @@ function isExist(title)
 	}
 	return null;
 };
+
+function loadContentToPanel(panelId,url,data)
+{
+	/*
+			$('#'+id).load(tent,data,function(response,status,xhr){
+				if(xhr.status!=200)
+				{
+				//alert("Error code:"+xhr.status);
+				$('#'+id).html(xhr.responseText);
+				}
+				else
+				{
+					//set size for the elements of this window
+					loadContentToPanel(id+" .page",null);
+					$('#'+id+" .page .datagrid_wraper").each(function(i,ele){
+						$(this).resize(function(){
+							if(this.offsetWidth) $(this).find(".datagrid").resizeGrid(this.offsetWidth-2,this.offsetHeight-2)
+						})
+					})
+					$('#'+id+" .page").resize(function(){
+						$('#'+id+" .page DIV").each(function(i,ele){
+						var layoutHeight=$(this).attr("layoutHeight");
+						var layoutWidth=$(this).attr("layoutWidth");
+						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+						})
+					})
+					$('#'+id+" .page DIV").each(function(i,ele){
+						var layoutHeight=$(this).attr("layoutHeight");
+						var layoutWidth=$(this).attr("layoutWidth");
+						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+					})
+					reDefineHTMLActions();
+				}
+			});
+			*/
+
+			$("#"+panelId).empty();
+			$("#"+panelId).load(url,null,function(response,status,xhr){
+				if(xhr.status!=200)
+				{
+				$('#'+panelId).html(xhr.responseText);
+				}
+				else
+				{
+					//set size for the elements of this window
+					$('#'+panelId+" .datagrid_wraper").each(function(i,ele){
+						$(this).resize(function(){
+							if(this.offsetWidth) $(this).find(".datagrid").resizeGrid(this.offsetWidth-2,this.offsetHeight-2)
+						})
+					})
+					$('#'+panelId).resize(function(){
+						$('#'+panelId+" DIV").each(function(i,ele){
+						var layoutHeight=$(this).attr("layoutHeight");
+						var layoutWidth=$(this).attr("layoutWidth");
+						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+						})
+					})
+					$('#'+panelId+" DIV").each(function(i,ele){
+						var layoutHeight=$(this).attr("layoutHeight");
+						var layoutWidth=$(this).attr("layoutWidth");
+						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+					})
+					reDefineHTMLActions();
+				}
+			});
+}
+function reDefineHTMLActions()
+{
+		$("A").click(function(){
+		//attribute "target" is redefined to a panel's id.
+		if(this.target && this.target!="")
+		{
+			//if <A> is in a data grid table
+			if(this.parentNode && this.parentNode.tagName=="TD")this.parentNode.click()
+			//$("#"+this.target).load(this.href);
+			loadContentToPanel(this.target ,this.href,null)
+			return false;
+		}
+	})
+
+}

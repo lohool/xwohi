@@ -10,9 +10,6 @@
 </div>
 
 	<script>
-	$(document).ready(function(){
-		$.ajaxSetup({cache:false}); 
-	})
 	$(function() {
 		$( "#tabs" ).tabs({
 			cache: false,
