@@ -5,9 +5,9 @@
 	"code":"200",
 	"message":"Successful",
 	"forwardUrl":"Customer/CustomerList.action?vo.group.id=<ww:property value="vo.group.id"/>&vo.group.name=<ww:property value="vo.group.name"/>",
-	"navWinId":"customer_panel",
+	"targetType":"self",
 	"target":"customer_panel",
-	"callbackAction":"closeCurrent",
+	"callback":"",
 	"confirmMsg":"",
 	"action":"close"
 }

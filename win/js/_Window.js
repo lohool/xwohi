@@ -384,7 +384,7 @@ _window.prototype.SetContent=function(content,data)
 		{
 			var id="_F"+this.id;
 			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
-			loadContentToPanel(id,tent,null);
+			loadContentToPanel(id,tent,data);
 /*
 			$('#'+id).load(tent,data,function(response,status,xhr){
 				if(xhr.status!=200)
@@ -468,7 +468,7 @@ _window.prototype.SetContent=function(content,data)
 			var id="_F"+this.id;
 			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
 			$('#'+id).html(content);
-			reDefineHTMLActions();
+			reDefineHTMLActions(id);
 		}
 		if(this.bodyHeight<0) this.bodyHeight=this.contentCase.offsetHeight+1;
 		this.contentCase.style.overflow="auto";
@@ -1015,7 +1015,7 @@ function loadContentToPanel(panelId,url,data)
 			*/
 
 			$("#"+panelId).empty();
-			$("#"+panelId).load(url,null,function(response,status,xhr){
+			$("#"+panelId).load(url,data,function(response,status,xhr){
 				if(xhr.status!=200)
 				{
 				$('#'+panelId).html(xhr.responseText);
@@ -1042,13 +1042,13 @@ function loadContentToPanel(panelId,url,data)
 						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
 						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
 					})
-					reDefineHTMLActions();
+					reDefineHTMLActions(panelId);
 				}
 			});
 }
-function reDefineHTMLActions()
+function reDefineHTMLActions(parentId)
 {
-		$("A").click(function(){
+		$("#"+parentId+" A").on("click",function(){
 		//attribute "target" is redefined to a panel's id.
 		if(this.target && this.target!="")
 		{

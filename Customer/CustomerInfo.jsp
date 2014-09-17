@@ -1,9 +1,9 @@
 <%@ page session="true" %>
-<%@ page contentType="text/html;charset=utf-8" %> 
+<%@ page contentType="text/html;charset=UTF8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
       <div class="page">
-           <ww:form id="CustomerModify" action="CustomerModify" method="post" name="form1" namespace="/Customer" validate="true" theme="simple" onsubmit="" >
+            <ww:form action="CustomerModify" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return sumbitAjaxForm(this)" theme="simple">
 			<ww:hidden name="vo.id" />
                <table align="center" bgcolor="#E3E3E3" cellpadding="0" cellspacing="0" class="sort-table" id="input_table" width="500">
                   <TR>
@@ -30,6 +30,7 @@
                         <ww:textfield name="vo.birthday" required="true" />
                      </TD>
                   </TR>
+				  <!--
                   <TR>
                      <TD align="right" bgColor="#ffffff" width="40%">
                         <xwohi:i18n text="Customer.idCardNo" />
@@ -118,6 +119,7 @@
                         <ww:textfield name="vo.acceptInfoRemind" required="true" />
                      </TD>
                   </TR>
+				  -->
                   <TR>
                      <TD align="right" bgColor="#ffffff" width="40%">
                         <xwohi:i18n text="Customer.group" />
@@ -132,6 +134,14 @@
                      </TD>
                      <TD bgColor="#ffffff" width="60%">
                         <ww:textfield name="vo.vipCard" required="true" />
+                     </TD>
+                  </TR>
+                  <TR>
+                     <TD align="right" bgColor="#ffffff" width="40%">
+                        <xwohi:i18n text="Customer.sex" />
+                     </TD>
+                     <TD bgColor="#ffffff" width="60%">
+                        <ww:textfield name="vo.sex" required="true"  />
                      </TD>
                   </TR>
                   <TR>

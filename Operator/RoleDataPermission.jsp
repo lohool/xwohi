@@ -42,7 +42,7 @@ function form_submit(form)
 <div class="page">
 <div class="panel">Grant data group permissions to the current role.</div>
 <div class="panel">
-<ww:form name="form1" namespace="/Role" action="RoleDataPermissionModify" method="post" validate="true" onsubmit="return form_submit(this)">
+<ww:form name="form1" namespace="/Role" action="RoleDataPermissionModify" method="post" validate="true" onsubmit="return sumbitAjaxForm(this)">
 <ww:hidden  name="vo.roleID"/>
 <table width="100%" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
 <ww:action id="dgl" name="DataGroupList" namespace="/DataGroup" executeResult="false" />

@@ -1,4 +1,4 @@
-﻿function GetIeVersion()
+function GetIeVersion()
 {
     var reg = new RegExp("MSIE ([^;]*);", "i");
     if (reg.test(navigator.appVersion)) return parseInt(RegExp.$1);
@@ -217,3 +217,77 @@ function _openWindowDialog(content, title, parent,feature)
 
 Init();
 //openNamedWindows("Welcome");
+
+function sumbitAjaxForm(form)
+{
+		$.ajax({ 
+			url: form.action, 
+			//context: document.body, 
+			data :   $(form).find(":input").serialize()  ,
+			type:"post",
+			dataType:"json",
+			success: function(data){
+				if(data.code=="200")
+				{
+					if(data.message && data.message!="") alert(data.message);
+					var win =_window.windows[_window.focusWindowId];
+					var target=data.target;
+					if(target && target!="")
+					{
+						$("#"+target).empty();
+						//$("#"+target).load(data.forwardUrl,null,function(){reDefineHTMLActions(target)});
+						loadContentToPanel(target,data.forwardUrl,null);
+					}
+					else
+					{
+						if(data.targetType=="parent")
+						{
+							var parentWin=_window.windows[win.parentWindow];
+							if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
+						}
+						else //if(targetType=="self")
+						{
+							if(data.forwardUrl && data.forwardUrl!="")win.SetContent("[url]"+data.forwardUrl);
+						}
+					}
+					if(data.callback && data.callback!="") eval(data.callback);
+					if(data.action=="close")win.Close();
+				}
+				else
+				{
+					 alert(data.message);
+				}
+
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{
+				//$('#'+id).html(xhr.responseText);
+				var win =_window.windows[_window.focusWindowId];
+				win.SetContent(XMLHttpRequest.responseText)
+					/*
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+						alert(XMLHttpRequest.responseText)
+						*/
+            }
+	  });
+		
+	return false;
+}
+
+function submitForm(form,target)
+{
+	if(target)
+	{
+		$("#"+target).empty();
+		//$("#"+target).load(form.action,$(form).find(":input").serialize(),function(){reDefineHTMLActions(target)});
+		loadContentToPanel(target,form.action,$(form).find(":input").serialize());
+	}
+	else
+	{
+		var win =_window.windows[_window.focusWindowId];
+		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
+	}
+		return false;
+}

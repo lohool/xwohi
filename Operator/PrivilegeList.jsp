@@ -63,32 +63,5 @@
 	<ww:hidden name="vo.privilegeID" /> 
 </form>
 
-<script type="text/javascript">
-
-function doDelete(n)
-{
-	var r=confirm("<xwohi:i18n text="Are you realy to delete it?" />");
-	if(r)
-	{
-		form1.action="PrivilegeDelete.action";
-		form1["vo.privilegeID"].value=n;
-		form1.submit();
-	}
-}
-function doLoad(n)
-{
-		form1.action="PrivilegeInfo.action";
-		form1["vo.privilegeID"].value=n;
-		form1.submit();
-}
-
-
-var st = new SortableTable(document.getElementById("sort-table"),
-	["String", "CaseInsensitiveString", "Number", "Date", "None"]);
-
-sort(st);
-st.onsort =sort(st);
-
-</script>
 </body>
 </html>

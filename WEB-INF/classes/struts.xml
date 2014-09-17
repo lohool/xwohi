@@ -23,6 +23,9 @@
 	  <global-results>
 		<result type="dispatcher" name="access_rejected">/notlimit.jsp</result>
 		<result type="dispatcher" name="error">/error.jsp</result>
+		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
+		<result type="dispatcher" name="HibernateException">/exception/HibernateException.jsp</result>
+		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
          <result type="dispatcher" name="input">/uniqueError.jsp</result>
       </global-results>
    </package>
@@ -85,17 +88,17 @@
          <result name="success">/Operator/OperatorSelector/OperatorList.jsp</result>
       </action>
 	  <action name="OperatorAdd" class="BasicAdd">
-         <result type="redirect" name="success">/Operator/CloseRefreshList.jsp</result>
+         <result type="redirect" name="success">/Operator/ActionResultDialog.jsp?url=Operator/OperatorList.action?vo.state=1</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="OperatorDelete" class="BasicModify">
-         <result type="dispatcher" name="success">/Operator/CloseRefreshList.jsp</result>
+         <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp?url=Operator/OperatorList.action?vo.state=1</result>
       </action>
       <action name="OperatorInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/Operator/OperatorInfo.jsp</result>
       </action>
 	  <action name="OperatorModify" class="BasicModify">
-         <result type="redirect" name="success">/Operator/CloseRefreshList.jsp</result>
+         <result type="redirect" name="success">/Operator/ActionResultDialog.jsp?url=Operator/OperatorList.action?vo.state=1</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="OperatorInput" class="BasicInput">
@@ -117,7 +120,7 @@
          <result type="dispatcher" name="success">/Operator/RoleList.jsp</result>
       </action>
       <action name="RoleAdd" class="BasicAdd">
-         <result type="dispatcher" name="success">/Operator/CloseRoleDialog.jsp</result>
+         <result type="dispatcher" name="success">/Operator/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="RoleDelete" class="BasicDelete">
@@ -131,11 +134,11 @@
       </action>
       <action name="RoleDataPermissionModify" class="RoleDataPermissionModify">
          <result type="dispatcher" name="input">/Operator/RoleDataPermission.jsp</result>
-         <result type="dispatcher" name="success">/Operator/CloseRefreshList.jsp</result>
+         <result type="dispatcher" name="success">/Operator/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="RoleModify" class="BasicModify">
-         <result type="dispatcher" name="success">/Operator/CloseRoleDialog.jsp</result>
+         <result type="dispatcher" name="success">/Operator/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="RoleInput" class="BasicInput">

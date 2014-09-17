@@ -1,12 +1,4 @@
-﻿body {
-	background-image: url('../../images//bg/bg1.jpg');
-	background-attachment:fixed;
-	background-repeat:no-repeat;
-
-
-	font-size:13px;
-}
-sup {
+﻿sup {
 	color:#ff0000;
 }
 h1

@@ -57,49 +57,11 @@ function onSubmit(myform)
 
 	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
 	//alert(myform["vo.roles.roleID"].value);
-	return form_submit(myform,'window');
+	return sumbitAjaxForm(myform);
 	//return false;
 } 
 
 </script> 
-<script type="text/javascript">
-function form_submit(form,type)
-{
-		alert(form.action )
-		alert(unescape($(form).find(":input").serialize() ))
-		$.ajax({ 
-			url: form.action, 
-			//context: document.body, 
-			data :   unescape($(form).find(":input").serialize()),
-			type:"POST",
-			dataType:"json",
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-                    },
-			success: function(data){
-				if(data.code=="200")
-				{
-					alert("current window id:"+_window.focusWindowId)
-					var win =_window.windows[_window.focusWindowId];
-					alert("parent window id:"+win.parentWindow)
-					var parentWin=_window.windows[win.parentWindow];
-					if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-					win.Close();
-				}
-				else
-				{
-					alert(data)
-				}
-
-			}
-	  });
-		
-	return false;
-}
-</script>
-
 <ww:form id="operator_info_form" name="operator_info_form" namespace="/Operator"  action="OperatorModify" method="post" validate="true" theme="simple" onsubmit=" return onSubmit(this);">
 <ww:hidden  name="vo.id"/>
 

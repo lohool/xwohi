@@ -58,47 +58,11 @@ function onSubmit(myform)
 
 	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
 	//alert(myform["vo.roles.roleID"].value);
-	return form_submit(myform,'window');
+	return sumbitAjaxForm(myform);
 	//return false;
 } 
 
 </script> 
-<script type="text/javascript">
-function form_submit(form,type)
-{
-		alert(form.action )
-		alert(unescape($(form).find(":input").serialize() ))
-		$.ajax({ 
-			url: form.action, 
-			//context: document.body, 
-			data :   unescape($(form).find(":input").serialize()),
-			type:"POST",
-			dataType:"json",
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-                    },
-			success: function(data){
-				if(data.code=="200")
-				{
-					alert("current window id:"+_window.focusWindowId)
-					var win =_window.windows[_window.focusWindowId];
-					var parentWin=_window.windows[win.parentWindow];
-					if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-					win.Close();
-				}
-				else
-				{
-					alert(data.message)
-				}
-
-			}
-	  });
-		
-	return false;
-}
-</script>
 
 <div class="page">
 <ww:form id="role_info_form" name="role_info_form" namespace="/Role" action="RoleModify" method="post" validate="true">

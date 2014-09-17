@@ -40,7 +40,7 @@ function form_submit(form)
 </script>
 <div class="page" style="left:0;top:0;width:100%; height:100%;">
 <div class="panel" style="left:0;top:0; height:40px;">
-	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post" validate="true"  onsubmit="return form_submit(this);">
+	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post" validate="true"  onsubmit="return submitForm(this);">
 	<ww:hidden name="page"></ww:hidden>
 	<ww:hidden name="pageSize"></ww:hidden>
 	<INPUT TYPE="text" NAME="vo.name">

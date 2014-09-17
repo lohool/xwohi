@@ -45,13 +45,13 @@
 {
 	BORDER:1px solid;
 	BORDER-COLOR:threedshadow threedhighlight threedhighlight threedshadow ;
-	width:3px;
-	height:30px;
+	width:1px;
+	height:20px;
 	BACKGROUND-COLOR:#CCEEEE;
 	empty-cells: show ;
 	margin-left:2px;
 	margin-right:2px;
 	display:inline-block; 
-
+	line-height: 20px;
 	vertical-align:middle;
 }

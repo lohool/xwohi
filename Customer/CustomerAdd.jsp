@@ -1,12 +1,12 @@
 <%@ page session="true" %>
-<%@ page contentType="text/html;charset=gb2312" %> 
+<%@ page contentType="text/html;charset=UTF8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
 
       <div class="page">
          <div align="center"><ww:fielderror cssStyle="color:red;"/>
-            <ww:form action="CustomerAdd" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return sumbitDialodForm(this)" theme="simple">
+            <ww:form action="CustomerAdd" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return sumbitAjaxForm(this)" theme="simple">
                <table align="center" bgcolor="#E3E3E3" cellpadding="0" cellspacing="0" class="sort-table" id="input_table" width="500">
                   <thead>
                      <TR>
@@ -166,53 +166,3 @@
             </ww:form>
          </div>
       </div>
-<script type="text/javascript">
-function sumbitDialodForm(form)
-{
-		$.ajax({ 
-			url: form.action, 
-			//context: document.body, 
-			data :   $(form).find(":input").serialize()  ,
-			type:"post",
-			dataType:"json",
-			success: function(data){
-				if(data.code=="200")
-				{
-					var win =_window.windows[_window.focusWindowId];
-					var target=data.target;
-					alert(data.forwardUrl)
-					if(target && target!="")
-					{
-						$("#"+target).empty();
-						$("#"+target).load(data.forwardUrl,null,function(){reDefineHTMLActions()});
-					}
-					else
-					{
-						var parentWin=_window.windows[win.parentWindow];
-						if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-					}
-					if(data.action=="close")win.Close();
-				}
-				else
-				{
-					 alert(data.message);
-				}
-
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) 
-			{
-				//$('#'+id).html(xhr.responseText);
-				var win =_window.windows[_window.focusWindowId];
-				win.SetContent(XMLHttpRequest.responseText)
-					/*
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-						alert(XMLHttpRequest.responseText)
-						*/
-            }
-	  });
-		
-	return false;
-}
-</script>

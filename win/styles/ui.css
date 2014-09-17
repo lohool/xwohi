@@ -3,9 +3,6 @@ body {
 	font-family: "ËÎÌו", "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
 }
 
-html{ 
-overflow:hidden; 
-} 
 
 table {
 	font-size: 1em;
@@ -49,4 +46,5 @@ div.panel .container
 	border-spacing: 0;
 	vertical-align:middle;
 	white-space: nowrap;
+	
 }

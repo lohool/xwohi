@@ -150,7 +150,7 @@
 
    <actions>
       <action name="CustomerList">
-	  <sql>select obj from Customer obj where obj.#group=?</sql>
+	  <sql>select obj from Customer obj where obj.#group=$groupId and obj.#name like ?</sql>
 	  </action>
       <action name="CustomerAdd" />
       <action name="CustomerModify" />
