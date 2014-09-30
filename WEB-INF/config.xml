@@ -16,7 +16,7 @@
 		<record-server>http://10.10.10.110:8090/Record/</record-server>
 	</icrm>
 	<upload-file>
-		<temp-path>D:/apache-tomcat-7.0.42/webapps/iCRM/temp_file/</temp-path>
+		<temp-path>D:/apache-tomcat-7.0.42/webapps/ROOT/temp_file/</temp-path>
 		<url>/temp_file</url>
 	</upload-file>
 	

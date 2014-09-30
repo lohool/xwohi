@@ -2,11 +2,14 @@
 <%
 String url=request.getParameter("url");
 if(url==null || url.trim().equals(""))url="";
+String targetPanel=request.getParameter("targetPanel");
+if(targetPanel==null || targetPanel.trim().equals(""))targetPanel="";
 %>
 {
 	"code":"200",
 	"message":"保存成功！",
-	"forwardUrl":"<%=url%>",
+	"forwardUrl":"",
+	"refresh":"<%=targetPanel%>",
 	"targetType":"parent",
 	"target":"",
 	"callback":"",

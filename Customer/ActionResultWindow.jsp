@@ -4,9 +4,9 @@
 {
 	"code":"200",
 	"message":"Successful",
-	"forwardUrl":"Customer/CustomerList.action?vo.group.id=<ww:property value="vo.group.id"/>&vo.group.name=<ww:property value="vo.group.name"/>",
+	"forwardUrl":"",
 	"targetType":"self",
-	"target":"customer_panel",
+	"target":"",
 	"callback":"",
 	"confirmMsg":"",
 	"action":""

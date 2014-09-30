@@ -82,3 +82,11 @@
 	text-align:center;
 
 }
+/* extra rules for even and odd rows */
+.sort-table .even {
+	background:	#eee;
+}
+
+.sort-table .odd {
+
+}

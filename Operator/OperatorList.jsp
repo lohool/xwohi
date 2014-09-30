@@ -1,53 +1,18 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<script type="text/javascript">
-function form_submit(form)
-{
-		var win =_window.windows[_window.focusWindowId];
-		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
-
-			/*
-		$.ajax({ 
-			url: form.action, 
-			//context: document.body, 
-			data :   unescape($(form).find(":input").serialize()),
-			type:"POST",
-			dataType:"json",
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-                    },
-			success: function(data){
-				if(data.code=="200")
-				{
-					var win =_window.windows[_window.focusWindowId];
-					alert("parent window id:"+win.parentWindow)
-					var parentWin=_window.windows[win.parentWindow];
-					if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-				}
-				else
-				{
-					alert(data)
-				}
-
-			}
-	  });
-		*/
-	return false;
-}
-</script>
 <div class="page" style="left:0;top:0;width:100%; height:100%;">
-<div class="panel" style="left:0;top:0; height:40px;">
-	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post" validate="true"  onsubmit="return submitForm(this);">
-	<ww:hidden name="page"></ww:hidden>
-	<ww:hidden name="pageSize"></ww:hidden>
-	<INPUT TYPE="text" NAME="vo.name">
-	<INPUT TYPE="submit" class="button">
+<div class="panel" style="left:0;top:0; height:25px;">
+	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post" validate="true"  onsubmit="return submitGridForm(this,'operator_list');">
+		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
+		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
+		Name:<INPUT TYPE="text" NAME="vo.name">
+		<INPUT TYPE="submit" value="search" class="button biground">
+		<INPUT TYPE="reset" value="reset" class="button biground">
+		<INPUT TYPE="button" value="Refresh" class="button biground" onclick='$("#operator_list").datagrid("refresh")'>
 	</ww:form>
 </div>
-<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="52px">
+<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="37px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 <!--
@@ -64,17 +29,19 @@ var i=0;
 				//minus_height:40,
 			  //multiple:true,
 			  toolbar:[
-				  {"text":"Home","btnClass":"Home","src":"/Operator/OperatorList.action","width":500,"height":300},
-				  {"text":"Refresh","btnClass":"Refresh","src":"/Operator/OperatorList.action","width":500,"height":300},
+				  {"text":"Home","btnClass":"Home","target":"self","src":"/Operator/OperatorList.jsp"},
+				  {"text":"Refresh","btnClass":"Refresh"},
 				  {"text":"Separator","btnClass":"Separator"},
-				  {"text":"Add User","btnClass":"Add","src":"/Operator/OperatorInput.action","width":550,"height":330},
-				  {"text":"Edit","btnClass":"Edit","src":"/Operator/OperatorInfo.action?vo.id={0}","width":600,"height":400},
+				  {"text":"添加用户","btnClass":"Add","src":"/Operator/OperatorInput.action","width":550,"height":330},
+				  {"text":"Edit Operator","btnClass":"Edit","src":"/Operator/OperatorInfo.action?vo.id={0}","width":600,"height":400},
 				  {"text":"Delete","btnClass":"Delete","src":"/Operator/OperatorDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
 				  {"text":"Delete Test","btnClass":"Delete","src":"/Operator/OperatorDelete.action?vo.id={0}&vo.name={1}&vo.state=1"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Printer","btnClass":"Printer","src":"/Operator/OperatorInput.action","width":500,"height":300},
-				  {"text":"Help","btnClass":"Help","target":"window","src":"/Operator/OperatorInfo.action?vo.id=1","width":300,"height":200}
+				  {"text":"Help","btnClass":"Help","target":"window","src":"/Operator/OperatorInfo.action?vo.id=1","width":300,"height":200},
+				  {"text":"Test1","display":"text","btnClass":"test1","target":"window","src":"/Operator/OperatorInfo.action?vo.id=1"}
 				  ],
+			  colwidth:[40,80,100,100],
 			  columns:[
 				  "<xwohi:i18n text="id" />",
 				  "<xwohi:i18n text="Operator.account" />",
@@ -83,27 +50,9 @@ var i=0;
 				  "<xwohi:i18n text="Job" />",
 				  "<xwohi:i18n text="State" />"
 			  ],
-			  colwidth:[200,50,100,100],
-			  pager:
-				{
-					"total":<ww:property value="resultSize"/>,
-					"current_page":<ww:property value="page"/>,
-					"pagesize":<ww:property value="pageSize"/>,
-					"form":"operator_list_form"
-				},
-			  data: [
-			  <ww:iterator value="objList">
-				  [
-
-				  "<ww:property value="id"/>",
-				  "<ww:property value="account"/>",
-				  "<ww:property value="name"/>",
-				  "<ww:property value="department.name"/>",
-				  "<ww:property value="job.name"/>",
-				  "<ww:property value="state"/>"
-				  ],
-			   </ww:iterator>
-			  ]
+			  linkedForm:"operator_list_form",
+			  params:"vo.name=<ww:property value="vo.name" />",
+			  url:"/Operator/OperatorList.action?vo.state=1"
 			  }
 			  );
 	     });

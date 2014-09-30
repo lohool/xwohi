@@ -1,12 +1,19 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
+<%
+Object currentPage=request.getParameter("page");
+if(currentPage==null)currentPage="";
+Object pageSize=request.getParameter("pageSize");
+if(pageSize==null)pageSize="";
+
+%>
 {
 	"code":"200",
 	"message":"Successful",
-	"forwardUrl":"Customer/CustomerList.action?vo.group.id=<ww:property value="vo.group.id"/>&vo.group.name=<ww:property value="vo.group.name"/>",
-	"targetType":"self",
-	"target":"customer_panel",
+	"forwardUrl":"",
+	"targetType":"parent",
+	"target":"",
 	"callback":"",
 	"confirmMsg":"",
 	"action":"close"

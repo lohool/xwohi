@@ -6,7 +6,6 @@
 	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
 	empty-cells: show ;
     border-collapse: collaps;
-	position:relative;
 	padding:0px;
 	border-spacing: 0;
 	vertical-align:middle;
@@ -24,36 +23,46 @@
 	padding:0px;
 	text-align: right;
 }
+.paginate .navigator_panel
+{
+	float:right;
+}
 
 
-.paginate a,
-.paginate a:visited,
+.paginate .navigator,
+.paginate .navigator:hover,
+.paginate .navigator:visited,
 .paginate .navigator_current,
 .paginate .navigator_longstring,
 .paginate .string
 {
-	padding: 2 2 2 2;
-	height:22px;
+	padding: 2px;
+	height:20px;
 	TEXT-DECORATION: none;
 	text-align:center;
 	background-color: #DAF1FE;
 	color: #1D67C2;
-	font-weight-: bold;
 	border: solid 1px #72C1F1;
 	margin:2px;
-	float:left;
+	min-Width:20px;
+	min-height:20px;
 	font-size:12px;
-	line-height:16px; 
-	CURSOR:hand;
+	line-height:20px; 
+	float:left;
 }
-.paginate a,
-.paginate a:visited,
+.paginate .navigator,
+.paginate .navigator:hover,
+.paginate .navigator:visited,
 .paginate .navigator_current,
-.paginate .navigator_longstring,
+.paginate .navigator_longstring
 {
-	width:22px;
+	width:20px;
 }
-
+.paginate .navigator:hover,
+.paginate .navigator_longstring:hover
+{
+	color: #FF0000;
+}
 .paginate .navigator_longstring
 {
 	min-width:70px;
@@ -61,14 +70,13 @@
 .paginate .string
 {
 	border:solid 0px #72C1F1;
-	min-width:50px;
 	CURSOR:default;
 }
 .paginate .navigator_longstring:visited
 {
 	padding: 2 2 2 2;
 	width:70px;
-	height:22px;
+	height:20px;
 	TEXT-DECORATION: none;
 	text-align:center;
 	background-color: #DAF1FE;
@@ -79,7 +87,7 @@
 }
 .paginate .navigator_current
 {
-	TEXT-DECORATION: underline;
+	#TEXT-DECORATION: underline;
 	color: red;
 }
 .paginate .ico
@@ -87,4 +95,5 @@
 	font-family:webdings;
 	font-size:16px;;
 }
+
 

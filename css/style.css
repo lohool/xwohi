@@ -58,41 +58,6 @@ table {
 }
 
 
-/* for unvisited links */
-A:link
-{
-    FONT-FAMILY:     Arial, Helvetica;
-    FONT-SIZE:       12px;
-    TEXT-DECORATION: none;
-}
-
-/* for visited links */
-A:visited
-{
-    COLOR:           #213992;
-    FONT-FAMILY:     Arial, Helvetica;
-    FONT-SIZE:       12px;
-    TEXT-DECORATION: none;
-}
-
-/* when link is clicked */
-A:active
-{
-    COLOR:           #213992;
-    FONT-FAMILY:     Arial, Helvetica;
-    FONT-SIZE:       12px;
-    TEXT-DECORATION: none;
-}
-
-/* when mouse is over link */
-A:hover
-{
-    COLOR:           #3D65F8;
-    FONT-FAMILY:     Arial, Helvetica;
-    FONT-SIZE:       12px;
-    TEXT-DECORATION: underline;
-}
-
 button
 {
 background-color: #E6E6E6; 
@@ -106,7 +71,8 @@ input
 {
 font-size: 9pt; 
 background-color: #FFFFFF; 
-border: 1 solid #9E9E9E
+border: 1 solid #9E9E9E;
+min-width:60px;
 }
 
 input.checkbox
@@ -125,109 +91,4 @@ input.checkbox
 
 }
 
-
-
-.paginate {
-	BACKGROUND-COLOR: #DAF1FE;
-	border:outset 1px;
-	border:inset 1px;
-	border:solid #F1C5A0 1px;	
-	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
-	empty-cells: show ;
-    border-collapse: collaps;
-	position:relative;
-	padding:0px;
-	    border-spacing: 0;
-	vertical-align:middle;
-	white-space: nowrap;
-	width:100%;
-	height:30px;
-}
-
-.paginate tr {
-	background:	#DAF1FE;
-}
-
-.paginate td {
-	cursor:			default;
-	padding:0px;
-	text-align: center;
-}
-
-
-.paginate a
-{
-	padding: 2 2 2 2;
-	width:22px;
-	height:22px;
-	TEXT-DECORATION: none;
-	text-align:center;
-	background-color: #DAF1FE;
-	color: #1D67C2;
-	font-weight: bold;
-	border: solid 1px #72C1F1;
-	margin:2px;
-		float:left;
-line-height:22px; 
-}
-.paginate a:visited
-{
-	padding: 2 2 2 2;
-	TEXT-DECORATION: none;
-	text-align:center;
-	background-color: #DAF1FE;
-	color: #1D67C2;
-	font-weight: bold;
-	border: solid 1px #72C1F1;
-	margin:2px;
-}
-
-.paginate .navigator_longstring
-{
-	padding: 2 2 2 2;
-	width:70px;
-	height:22px;
-	TEXT-DECORATION: none;
-	text-align:center;
-	background-color: #DAF1FE;
-	color: #1D67C2;
-	font-weight: bold;
-	border: solid 1px #72C1F1;
-	margin:2px;
-		float:left;
-line-height:22px; 
-}
-.paginate .navigator_longstring:visited
-{
-	padding: 2 2 2 2;
-	width:70px;
-	height:22px;
-	TEXT-DECORATION: none;
-	text-align:center;
-	background-color: #DAF1FE;
-	color: #1D67C2;
-	font-weight: bold;
-	border: solid 1px #72C1F1;
-	margin:2px;
-}
-.paginate .navigator_current
-{
-	padding: 2 2 2 2;
-	width:24px;
-	height:24px;
-	TEXT-DECORATION: underline;
-	text-align:center;
-	background-color: #DAF1FE;
-	color: red;
-	font-weight: bold;
-	border: solid 1px #72C1F1;
-	margin:2px;
-		float:left;
-line-height:22px; 
-}
-.paginate .ico
-{
-	font-family:webdings;
-	font-size:16px;;
-}
 

@@ -32,9 +32,11 @@
 				},
 			  data: [
 			  <ww:iterator value="objList">
+				  <ww:if test="#session.operation_user.isPermitted(\"CustomerGroup\",id,1)==true">
 				  [
 				  "<a href='/Customer/CustomerList.action?groupId=<ww:property value="id" />&vo.group.name=<ww:property value="name" />' target='customer_panel' ><ww:property value="name"/></a>"
 				  ],
+				  </ww:if>
 			   </ww:iterator>
 			  ]
 			  }

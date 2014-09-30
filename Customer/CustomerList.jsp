@@ -5,15 +5,16 @@
 <%
 	String name=request.getParameter("vo.name");
 	if(name==null)name="";
+
 %>
-            <ww:form id="Customer_list_form" action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onSubmit="return submitForm(this,'customer_panel')">
-			   <INPUT TYPE="hidden" NAME="groupId" value="<%=request.getParameter("groupId")%>">
-			   <INPUT TYPE="hidden" NAME="vo.name" value="<%=name%>">
-               <ww:hidden name="page" />
-               <ww:hidden name="pageSize" />
-            </ww:form>
-	<div id="datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
-		<div id="Customer_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
+<ww:form id="Customer_list_form" action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onSubmit="return submitForm(this,'customer_panel')">
+   <INPUT TYPE="hidden" NAME="groupId" value="<%=request.getParameter("groupId")%>">
+   <INPUT TYPE="hidden" NAME="vo.name" value="<%=name%>">
+   <ww:hidden name="page" />
+   <ww:hidden name="pageSize" />
+</ww:form>
+<div id="datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
+	<div id="Customer_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
 	</div>
 <script>
 	     $(document).ready(function() {
@@ -24,10 +25,11 @@
 				//minus_height:40,
 			  //multiple:true,
 			  toolbar:[
-				  {"text":"Refresh","btnClass":"Refresh","target":"customer_panel","src":"/Customer/CustomerList.action?vo.group.id=<ww:property value="vo.group.id" />","width":500,"height":300},
-				  {"text":"Add Customer","btnClass":"Add","src":"/Customer/CustomerInput.action","width":550,"height":330},
-				  {"text":"Edit Customer Info","btnClass":"Edit","src":"/Customer/CustomerInfo.action?vo.id={0}","width":700,"height":450},
-				  {"text":"Delete","btnClass":"Delete","target":"customer_panel","src":"/Customer/CustomerDelete.action?vo.id={0}&vo.state=2&vo.group.id=<ww:property value="vo.group.id" />"},
+				  {"text":"Refresh","btnClass":"Refresh"},
+				  {"text":"Add Customer","btnClass":"Add","src":"/Customer/CustomerInput.action?targetGrid=Customer_list_<%=a%>","width":550,"height":330},
+				  {"text":"Edit Customer Info","btnClass":"Edit","src":"/Customer/CustomerInfo.action?vo.id={0}&targetGrid=Customer_list_<%=a%>","width":550,"height":330},
+				  {"text":"Delete","btnClass":"Delete","target":"customer_panel","src":"/Customer/CustomerDelete.action?vo.id={0}&vo.state=2&groupId=<%=request.getParameter("groupId")%>"},
+				  {"text":"Delete","btnClass":"Delete","target":"customer_panel","src":"/Customer/CustomerDelete.action?vo.id={0}&vo.state=1&groupId=<%=request.getParameter("groupId")%>"},
 				  {"text":"Customer Group:<ww:property value="vo.group.name"/>","btnClass":"text"},
 				  ],
 			  columns:[
@@ -42,6 +44,7 @@
 				  "<xwohi:i18n text="Customer.group" />",
 				  "<xwohi:i18n text="Customer.state" />"
 			  ],
+			  linkedForm:"Customer_list_form",
 			  //colwidth:[30,120,200],
 			  pager:
 				{

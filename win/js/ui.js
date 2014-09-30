@@ -186,39 +186,85 @@ function NewWindow()
 		dialog.OnOK = dialog.Close;
 	}	
 }
-function Init()
+function WindowInit()
 {
-	_window.ClassName = getCookie("FonshenStyle") || "BLUE";
-	_window.Timer = parseInt(getCookie("FonshenTimer") || 10);
+	_window.ClassName = getCookie("WindowStyle") || "BLUE";
+	_window.Timer = parseInt(getCookie("WindowTimer") || 10);
 	_window.parent=document.getElementById("MainFrame");
 	_window.Width = 600;
 }
+//openNamedWindows("Welcome");
 
 function openWindow(content, title, feature)
 {
-	var parent=document.getElementById("MainFrame");
-	_window.Open(content, title, feature,parent);
+	_window.Open(content, title, feature,_window.parent);
 }
-function openAlertWindow(content, title, feature)
+/**
+callback: example:function(btn){if(btn=="OK"){alert("OK");}}
+*/
+function openAlertWindow(content, title, feature,callback)
 {
-	var parent=document.getElementById("MainFrame");
-	_window.Alert(content, title, feature);
+	_window.Alert(content, title, feature,null,null,callback);
 }
-
-function _openDialog(content, title, parent,feature)
+function _openScreenDialog(content, title,feature)
 {
 	_window.Dialog(content, title, feature,null,_window.focusWindowId);
 }
-function _openWindowDialog(content, title, parent,feature)
+function _openWindowDialog(content, title,feature)
 {
-	var parent=document.getElementById("MainFrame");
+	 var parent=_window.parent;
 	_window.Dialog(content, title, feature,parent,_window.focusWindowId);
 }
 
-Init();
-//openNamedWindows("Welcome");
+function openWorkWindow(url,title,icon)
+{
+	if(!icon)icon="";
+	openWindow('[url]'+url, title, 'move=yes,resize=yes,width=500px,height=300,icon='+icon);
+}
+function openDialog(url,title,isFullScreenDialog,width,height)
+{
+	var w=width?width:470;
+	var h=height?height:350;
+	if(isFullScreenDialog==true)
+	{
+		_openWindowDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
+	}
+	else
+	{
+		_openScreenDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
+	}
+}
 
-function sumbitAjaxForm(form)
+/** 
+in an opened lookuping dialog, send back values for its parent window's Input elements
+feedback: return the selected values to the parent's Form
+data:JSON data
+formId:the data will be sent back to the named Form. If no form is defined, the data will be sent to the parent window
+*/
+function feedback(data,formId)
+{
+	var eleId="";
+	var win;
+	if(formId)eldId=formId;
+	else 
+	{
+		win =_window.windows[_window.focusWindowId];
+		eleId=win.parentWindowId;
+	}
+	$.each(data,function(n, v){
+		$("#"+eleId).find(":input[name="+n+"]").val(v);
+	});
+	if(win)win.Close();
+}
+
+
+function openAlert(content,title,callback)
+{
+	openAlertWindow(content, title, 'maximize=no,minimize=no,resize=no,width=400px,height=150px',callback);
+}
+
+
+function sumbitAjaxForm(form,targetGrid)
 {
 		$.ajax({ 
 			url: form.action, 
@@ -227,36 +273,7 @@ function sumbitAjaxForm(form)
 			type:"post",
 			dataType:"json",
 			success: function(data){
-				if(data.code=="200")
-				{
-					if(data.message && data.message!="") alert(data.message);
-					var win =_window.windows[_window.focusWindowId];
-					var target=data.target;
-					if(target && target!="")
-					{
-						$("#"+target).empty();
-						//$("#"+target).load(data.forwardUrl,null,function(){reDefineHTMLActions(target)});
-						loadContentToPanel(target,data.forwardUrl,null);
-					}
-					else
-					{
-						if(data.targetType=="parent")
-						{
-							var parentWin=_window.windows[win.parentWindow];
-							if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-						}
-						else //if(targetType=="self")
-						{
-							if(data.forwardUrl && data.forwardUrl!="")win.SetContent("[url]"+data.forwardUrl);
-						}
-					}
-					if(data.callback && data.callback!="") eval(data.callback);
-					if(data.action=="close")win.Close();
-				}
-				else
-				{
-					 alert(data.message);
-				}
+				parseJsonResponse(data,targetGrid)
 
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) 
@@ -276,13 +293,13 @@ function sumbitAjaxForm(form)
 	return false;
 }
 
-function submitForm(form,target)
+function submitForm(form,targetPanel)
 {
-	if(target)
+	if(targetPanel)
 	{
-		$("#"+target).empty();
+		$("#"+targetPanel).empty();
 		//$("#"+target).load(form.action,$(form).find(":input").serialize(),function(){reDefineHTMLActions(target)});
-		loadContentToPanel(target,form.action,$(form).find(":input").serialize());
+		loadContentToPanel(targetPanel,form.action,$(form).find(":input").serialize());
 	}
 	else
 	{
@@ -290,4 +307,128 @@ function submitForm(form,target)
 		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
 	}
 		return false;
+}
+function submitGridForm(form,gridId)
+{
+		$("#"+gridId).datagrid("search",form);
+		return false;
+}
+
+/**
+	"code":"200",
+	"message":"",
+	"forwardUrl":"",
+	"refresh":"<%=targetPanel%>",
+	"targetType":"self",
+	"target":"",
+	"callback":"",
+	"action":""
+*/
+
+function parseJsonResponse(data,targetGrid)
+{
+	if(data.code=="200")
+	{
+		var win =_window.windows[_window.focusWindowId];
+		if(data.message && data.message!=""){ openAlert(data.message,"Successful Message");}
+		if(data.refresh && data.refresh!="")targetGrid=data.refresh;
+		if(targetGrid)	{$("#"+targetGrid).datagrid("refresh")}
+		var target=data.target;
+		if(target && target!="")
+		{
+			$("#"+target).empty();
+			loadContentToPanel(target,data.forwardUrl,null);
+		}
+		else
+		{
+			if(data.targetType=="parent")
+			{
+				var parentWin=_window.windows[win.parentWindowId];
+				if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
+			}
+			else //if(targetType=="self")
+			{
+				if(data.forwardUrl && data.forwardUrl!="")win.SetContent("[url]"+data.forwardUrl);
+			}
+		}
+		if(data.callback && data.callback!="") eval(data.callback);
+		if(data.action=="close")win.Close();
+	}
+	else
+	{
+		 openAlert(data.message, "Error");
+	}
+
+}
+
+function iframeCallback(form, targetGrid,callback){
+	var $form = $(form), $iframe = $("#callbackframe");
+	//if(!$form.valid()) {return false;}
+
+	if ($iframe.size() == 0) {
+		$iframe = $("<iframe id='callbackframe' name='callbackframe' src='about:blank' style='display:none'></iframe>").appendTo("body");
+	}
+	if(!form.ajax) {
+		$form.append('<input type="hidden" name="ajax" value="1" />');
+	}
+	form.target = "callbackframe";
+	
+	_iframeResponse($iframe[0], targetGrid, callback );
+}
+function _iframeResponse(iframe,targetGrid, callback){
+	var $iframe = $(iframe), $document = $(document);
+	
+	$document.trigger("ajaxStart");
+	
+	$iframe.bind("load", function(event){
+		$iframe.unbind("load");
+		$document.trigger("ajaxStop");
+		
+		if (iframe.src == "javascript:'%3Chtml%3E%3C/html%3E';" || // For Safari
+			iframe.src == "javascript:'<html></html>';") { // For FF, IE
+			return;
+		}
+
+		var doc = iframe.contentDocument || iframe.document;
+
+		// fixing Opera 9.26,10.00
+		if (doc.readyState && doc.readyState != 'complete') return; 
+		// fixing Opera 9.64
+		if (doc.body && doc.body.innerHTML == "false") return;
+	   
+		var response;
+		
+		if (doc.XMLDocument) {
+			// response is a xml document Internet Explorer property
+			response = doc.XMLDocument;
+		} 
+		else if (doc.body)
+		{
+			try
+			{
+				response = $iframe.contents().find("body").text();
+				response = jQuery.parseJSON(response);
+				if(callback)callback(response);
+				else
+				{
+					parseJsonResponse(response,targetGrid);
+					return true;
+				}
+			} catch (e){ // response is html document or plain text
+				response = doc.body.innerHTML;
+			}
+		} else {
+			// response is a xml document
+			response = doc;
+		}
+		if(callback)callback(response);
+		else
+		{
+			var win =_window.windows[_window.focusWindowId];
+			win.SetContent(response)
+			//alert(response)
+			return true;
+		}
+		//document.body.removeChild(iframe);
+	});
 }

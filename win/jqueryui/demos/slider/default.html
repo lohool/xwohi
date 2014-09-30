@@ -12,7 +12,13 @@
 	<link rel="stylesheet" href="../demos.css">
 	<script>
 	$(function() {
-		$( "#slider" ).slider();
+		$( "#slider" ).slider(
+			{max: 255,
+			value: 127
+			}
+
+		);
+	alert($( "#slider" ).slider("value"));
 	});
 	</script>
 </head>

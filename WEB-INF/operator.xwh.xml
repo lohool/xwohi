@@ -75,6 +75,7 @@
    </actions>
    <actions>
       <action name="DepartmentList" />
+      <action name="DepartmentSelect" />
       <action name="DepartmentAdd" />
       <action name="DepartmentModify" />
       <action name="DepartmentDelete" />

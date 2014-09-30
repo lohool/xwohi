@@ -3,7 +3,7 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
       <div class="page">
-            <ww:form action="CustomerModify" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return sumbitAjaxForm(this)" theme="simple">
+            <ww:form action="CustomerModify" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return sumbitAjaxForm(this,'%{#parameters.targetGrid}')" theme="simple">
 			<ww:hidden name="vo.id" />
                <table align="center" bgcolor="#E3E3E3" cellpadding="0" cellspacing="0" class="sort-table" id="input_table" width="500">
                   <TR>
@@ -125,7 +125,7 @@
                         <xwohi:i18n text="Customer.group" />
                      </TD>
                      <TD bgColor="#ffffff" width="60%">
-                        <ww:select list="select.group" listKey="id" listValue="name" name="vo.group.id" value="vo.group.group.id" />
+                        <ww:select list="select.group" listKey="id" listValue="name" name="vo.group.id" value="vo.group.id" />
                      </TD>
                   </TR>
                   <TR>

@@ -3,10 +3,9 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
-
       <div class="page">
          <div align="center"><ww:fielderror cssStyle="color:red;"/>
-            <ww:form action="CustomerAdd" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return sumbitAjaxForm(this)" theme="simple">
+            <ww:form action="CustomerAdd" method="post" name="form1" namespace="/Customer" validate="true" onsubmit="return iframeCallback(this,'%{#parameters.targetGrid}')" theme="simple" enctype="multipart/form-data">
                <table align="center" bgcolor="#E3E3E3" cellpadding="0" cellspacing="0" class="sort-table" id="input_table" width="500">
                   <thead>
                      <TR>
@@ -156,6 +155,7 @@
                      </TD>
                      <TD bgColor="#ffffff" width="60%">
                         <ww:textfield name="vo.sex" required="true"  />
+			<INPUT TYPE="file" NAME="file1">
                      </TD>
                   </TR>
                   <TR>

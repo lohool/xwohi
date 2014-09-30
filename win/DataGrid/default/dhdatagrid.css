@@ -62,6 +62,7 @@ margin:0px;
 	overflow: hidden;
 	-o-text-overflow: ellipsis; 
 	text-overflow: ellipsis; 
+	height:20px;
 }
 .datagrid table td .arrow 
 {
@@ -218,7 +219,7 @@ color:#A19F92;
 	border-left:1px dotted #ccc;
 	border-right:1px dotted #fff;
 	margin:2px 1px;
-	width:2px;
+	width:1px;
 	margin:0 2 0 2;
 }
 .toolbar .Home,
@@ -233,22 +234,21 @@ color:#A19F92;
 .toolbar .Find,
 .toolbar .Printer,
 .toolbar .Help
-
 {
-	BACKGROUND-COLOR:#E0F8FE;
-	padding:2 2 2 2;
+	padding:0px;
+	BACKGROUND-COLOR: #EBF3FD;
 	border:solid 1px #E0F8FE;
 	COLOR:buttontext;
 	CURSOR:hand;
 	BORDER:1px 1px solid #E0F8FE;
 	TEXT-DECORATION:none;
 	MARGIN:1px;
-	width:25px;
-	height:25px;
+	min-width:24px;
+	height:24px;
 	text-align:center;
 	vertical-align:middle;
 	float:left;
-	line-height:18px;
+	line-height:22px;
 }
 
 .toolbar .Home:hover,
@@ -262,11 +262,31 @@ color:#A19F92;
 .toolbar .Reset:hover,
 .toolbar .Find:hover,
 .toolbar .Printer:hover,
-.toolbar .Help:hover
+.toolbar .Help:hover,
+.toolbar span:hover
 {
 	BORDER:1px  solid;
 	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
 }
+.toolbar span
+{
+	BACKGROUND-COLOR: #EBF3FD;
+	padding:0px 2px;
+	border:solid 1px #E0F8FE;
+	COLOR:buttontext;
+	CURSOR:hand;
+	BORDER:1px 1px solid #E0F8FE;
+	TEXT-DECORATION:none;
+	MARGIN:1px;
+	height:24px;
+	text-align:center;
+	vertical-align:middle;
+	float:left;
+	line-height:24px;
+	cursor:default;
+}
+
+
 .toolbar .Refresh
 {
 	background:url('../../../images/blue_round/refresh.png') no-repeat;

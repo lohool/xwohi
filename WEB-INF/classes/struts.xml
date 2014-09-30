@@ -26,7 +26,6 @@
 		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
 		<result type="dispatcher" name="HibernateException">/exception/HibernateException.jsp</result>
 		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
-         <result type="dispatcher" name="input">/uniqueError.jsp</result>
       </global-results>
    </package>
 
@@ -82,23 +81,23 @@
    <package name="Operator" extends="action-default" namespace="/Operator">
       <default-interceptor-ref name="exceptionStack" />
       <action name="OperatorList" class="BasicList">
-         <result name="success">/Operator/OperatorList.jsp</result>
+         <result name="success">/Operator/OperatorListData.jsp</result>
       </action>
       <action name="OperatorSelectList" class="BasicList">
          <result name="success">/Operator/OperatorSelector/OperatorList.jsp</result>
       </action>
 	  <action name="OperatorAdd" class="BasicAdd">
-         <result type="redirect" name="success">/Operator/ActionResultDialog.jsp?url=Operator/OperatorList.action?vo.state=1</result>
+         <result type="redirect" name="success">/Operator/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="OperatorDelete" class="BasicModify">
-         <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp?url=Operator/OperatorList.action?vo.state=1</result>
+         <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp</result>
       </action>
       <action name="OperatorInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/Operator/OperatorInfo.jsp</result>
       </action>
 	  <action name="OperatorModify" class="BasicModify">
-         <result type="redirect" name="success">/Operator/ActionResultDialog.jsp?url=Operator/OperatorList.action?vo.state=1</result>
+         <result type="redirect" name="success">/Operator/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="OperatorInput" class="BasicInput">
@@ -238,27 +237,30 @@
    <package name="Department" extends="action-default" namespace="/Department">
       <default-interceptor-ref name="exceptionStack" />
       <action name="DepartmentList" class="BasicList">
-         <result type="dispatcher" name="success">/Operator/DepartmentList.jsp</result>
+         <result type="dispatcher" name="success">/Department/DepartmentList.jsp</result>
+      </action>
+      <action name="DepartmentSelect" class="BasicList">
+         <result type="dispatcher" name="success">/Department/DepartmentSelect.jsp</result>
       </action>
       <action name="OperatorSelDepartmentList" class="BasicList">
-         <result type="dispatcher" name="success">/Operator/OperatorSelector/DepartmentList.jsp</result>
+         <result type="dispatcher" name="success">/Department/OperatorSelector/DepartmentList.jsp</result>
       </action>
       <action name="DepartmentAdd" class="BasicAdd">
-         <result type="redirect" name="success">/Operator/CloseDepartmentDialog.jsp</result>
+         <result type="redirect" name="success">/Department/CloseDepartmentDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="DepartmentDelete" class="BasicDelete">
          <result type="redirect" name="success">/Department/DepartmentList.action</result>
       </action>
       <action name="DepartmentInfo" class="BasicInfo">
-         <result type="dispatcher" name="success">/Operator/DepartmentInfo.jsp</result>
+         <result type="dispatcher" name="success">/Department/DepartmentInfo.jsp</result>
       </action>
       <action name="DepartmentModify" class="BasicModify">
-         <result type="redirect" name="success">/Operator/CloseDepartmentDialog.jsp</result>
+         <result type="redirect" name="success">/Department/CloseDepartmentDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action name="DepartmentInput" class="BasicInfo">
-         <result type="dispatcher" name="success">/Operator/DepartmentAdd.jsp</result>
+         <result type="dispatcher" name="success">/Department/DepartmentAdd.jsp</result>
       </action>
    </package>
 

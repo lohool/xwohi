@@ -1,6 +1,6 @@
  (function($) { 
 $.fn.datagrid= function (options){
-	var defaults=
+		var defaults=
 	{
 	callname : "dhdg",
 	width : 0,
@@ -46,10 +46,12 @@ $.fn.datagrid= function (options){
 	defaults.rid=$(this).attr("id");
 
 	defaults.isMSIE =navigator.appName == "Microsoft Internet Explorer";
-    var opts = $.extend({}, defaults, options); 
-	$.fn.datagrid.config =opts;
-    $(this).data("options",opts);
 
+		var methods={
+		init:function(){
+		var opts = $.extend({}, defaults, options); 
+		$.fn.datagrid.config =opts;
+		$(this).data("options",opts);
 	    return this.each(function(i) {     
 			var sw=this.parentNode.scrollWidth-2;//$(this).width();
 			var sh=this.parentNode.clientHeight-2;
@@ -90,11 +92,94 @@ $.fn.datagrid= function (options){
 			}
 			else 
 				$.fn.datagrid.init($(this),opts);
-			
-
-
 		});
-		
+		},
+		select: function() {
+			if($(this).attr("class")!="datagrid" && $(this).attr("class")!="treegrid")return;
+			var selected=[];
+			var dg=$(this);
+			var j=0;
+			$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+				if(row.selected=="true")
+				{
+					//selected[j++]=row;
+					var rowid=row.rowid;
+					selected[j++]=dg.data("options").data[rowid];
+				}
+			});    
+			//if(selected.length>0)selected=selected.substring(0,selected.length-1);
+			return selected;
+		  },
+		refresh :function()
+		 {
+			$this=$(this);
+			//$.fn.datagrid.loadData($this,$this.data("options"));
+			//$.fn.datagrid.loadData($this);
+				var opts=$this.data("options");
+				var form=document.getElementById(opts.linkedForm);
+				if(opts.url)$.fn.datagrid.loadData($this);
+				else
+				{
+					form.onsubmit();
+				}
+		 },
+		search:function(form)
+		{
+			$this=$(this);
+			form.page.value=0;
+			$.fn.datagrid.loadData($this,null,form);
+		},
+		jumpTo:function(page)
+		{
+			$this=$(this);
+			$.fn.datagrid.jumpToPage($this,page,$this.data("options"));
+		},
+		resize : function(w,h){
+			var sw=w;//document.body.clientWidth-parseInt($(document.body).css("margin-left"))-parseInt($(document.body).css("margin-right"));
+			var sh=h;//$(this).height();
+			var opts=$(this).data("options");
+			if(opts.width==0)
+			{
+					opts._width=sw;
+					if(opts.minus_width>0)opts._width-=opts.minus_width;
+			}
+			else if((""+opts.width).indexOf("%")>0)
+			{
+					opts._width=sw * opts.width.substring(0,(""+opts.width).indexOf('%'))/100;
+			}
+			else
+				{
+					opts._width=opts.width;
+				}
+			if(opts.height==0)
+			{
+					opts._height=sh;
+					if(opts.minus_height>0)opts._height-=opts.minus_height;
+			}
+			else if((""+opts.height).indexOf("%")>0)
+			{
+					opts._height=sh * opts.height.substring(0,(""+opts.height).indexOf('%'))/100;
+			}
+			else
+			{
+					opts._height=opts.height;
+			}
+			$.fn.datagrid.setSize($(this),opts,opts._width,opts._height);
+		}
+
+
+	}
+
+
+	if (methods[options]) {
+            return methods[options].apply(this, Array.prototype.slice.call(arguments, 1));
+    } else if (typeof options === 'object' || !options) {
+            return methods.init.apply(this, arguments);
+    } else {
+            $.error('Method ' + options + ' does not exist on jQuery.DataGrid');
+    }
+
+
 
 }
 	//全选
@@ -111,9 +196,11 @@ $.fn.datagrid= function (options){
 		var bar = "<div class='toolbar'>";
 		for(i in opts.toolbar)
 		 {
+			var value="";
+			if(opts.toolbar[i].display=="text")value=opts.toolbar[i].text;
 			if(opts.toolbar[i].btnClass=="text")bar+="<span  class='paginate.string' style='float:right'>"+opts.toolbar[i].text+"</span>";
-			else if(opts.toolbar[i].btnClass=="Separator")bar+="<span  class=\""+opts.toolbar[i].btnClass+"\" />";
-			else bar+="<a  class=\""+opts.toolbar[i].btnClass+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+"</a>";
+			else if(opts.toolbar[i].btnClass=="Separator")bar+="<div  class=\""+opts.toolbar[i].btnClass+"\" />";
+			else bar+="<span  class=\""+opts.toolbar[i].btnClass+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+value+"</span>";
 		 }
 
 		bar+="</div>";
@@ -124,7 +211,7 @@ $.fn.datagrid= function (options){
 		//var $this=$(this);
 			//$this.css("width",opts._width);
 			$this.css("height",opts._height);
-		//init the data 初始数据
+		//init the data 
 		var dgc = "";
 		var avgw = opts._width-20
 		avgw = Math.floor(avgw/opts.columns.length);
@@ -192,9 +279,9 @@ $.fn.datagrid= function (options){
 				*/
 				for(var dc=0;dc<opts.columns.length;dc++){
 					if(opts.colwidth.length>dc){
-						dgc += '<td class="column title" width="'+opts.colwidth[dc]+'" onmouseover="'+opts.callname+'.over(opts);" onmouseout="'+opts.callname+'.out(opts);" onmousemove="'+opts.callname+'.cc(event,opts);" onmousedown="'+opts.callname+'.rsc_d(event,opts);" onmouseup="'+opts.callname+'.mouseup(opts);">Expr'+(dc+1)+'<span class="arrow"></span></td>';
+						dgc += '<td class="column title" width="'+opts.colwidth[dc]+'">Expr'+(dc+1)+'<span class="arrow"></span></td>';
 					}else{
-						dgc += '<td class="column title" width="'+avgw+'" onmouseover="'+opts.callname+'.over(opts);" onmouseout="'+opts.callname+'.out(opts);" onmousemove="'+opts.callname+'.cc(event,opts);" onmousedown="'+opts.callname+'.rsc_d(event,opts);" onmouseup="'+opts.callname+'.mouseup(opts);">Expr'+(dc+1)+'<span class="arrow"></span></td>';
+						dgc += '<td class="column title" width="'+avgw+'" >Expr'+(dc+1)+'<span class="arrow"></span></td>';
 						//dgc += '<td class="column title" onmouseover="'+opts.callname+'.over(opts);" onmouseout="'+opts.callname+'.out(opts);" onmousemove="'+opts.callname+'.cc(event,opts);" onmousedown="'+opts.callname+'.rsc_d(event,opts);" onmouseup="'+opts.callname+'.mouseup(opts);">Expr'+(dc+1)+'<span class="arrow"></span></td>';
 					}
 				}
@@ -209,7 +296,7 @@ $.fn.datagrid= function (options){
 		var toolbar=null;
 		if(toolbar_html!=null)toolbar=$(gen_toolbar(opts));
 
-		//datagrid frame 框架
+		//datagrid frame 
 		var mainframe=$this;
 		mainframe.empty();
 		var dgframe = $("<div class='datapanel' style='padding:0px;margin:0px;overflow-x:auto;overflow-y:auto;overflow:auto;'></div>")//document.createElement("DIV");
@@ -243,28 +330,10 @@ $.fn.datagrid= function (options){
 
 		//datagrid data 数据
 		var dgdata = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"datacolumn\" class=\"datacolumn\">"+dgc+dgd+"</table>");
-		//var dgdata=document.createElement("<table cellpadding=\"0\" cellspacing=\"0\" id=\"datacolumn\"><tr><td>aaaaaaaaa</td></tr></table>");
-		/*
-		dgdata.id="datacolumn";
-		dgdata.style.cellpadding="0";
-		dgdata.style.cellspacing="0";
-		alert(document.createElement(dgc).tagName);
-		document.getElementById("text").appendChild(document.createElement(dgd));
-		alert(dgc);
-		//dgdata.appendChild(document.createElement(dgc));
-		dgdata.appendChild(document.createElement("<tbody>"+dgd+"</body>"));
-		//dgdata.innerHTML=dgc+dgd;
-		*/
-
-		//appendChild
 		//dgframe.append( dgzero,dgslide,dgcolumn);
 		if(toolbar!=null)dgframe.append( toolbar);
-		//dgframe.append( dgzero);
 		dgframe.append( dgcolumn);
 		dgframe.append( dgdata);
-		//dgframe.append(dghbar);
-		//dgframe.append(dgvbar);
-		//dgframe.append(dgbgbar);
 
 
 		mainframe.append(toolbar);
@@ -279,9 +348,6 @@ $.fn.datagrid= function (options){
 		$("document").keydown(function(){
 			 updown();
 		});
-
-
-
 /*
 		if(document.attachEvent){
 			document.attachEvent("onkeydown",updown);
@@ -372,29 +438,26 @@ $.fn.datagrid= function (options){
 				else this.className="";
 			});
 
-			$this.find('.paginate .navigator').bind("click",function(){
-				page=$(this).attr("page");
-				if(page)
+			$this.find('.paginate .paginate_pagesize').bind("change",function(){
+				var pagesize=$(this).val();
+				//$.fn.datagrid.jumpToPage($this,page,opts);
+				var form=document.getElementById(opts.linkedForm);
+				form["pageSize"].value=pagesize;
+				if(opts.url)$.fn.datagrid.loadData($this);
+				else
 				{
-					var form=$("#"+opts.pager.form);
-					opts.pager.current_page=page;
-					form.find(":input[name=page]").val(opts.pager.current_page);
-					form.submit();
+					form.onsubmit();
 				}
+			});
+			$this.find('.paginate .navigator').bind("click",function(){
+				var page=$(this).attr("page");
+				$.fn.datagrid.jumpToPage($this,page,opts);
 			});
 			$this.find('.paginate .navigator_longstring').bind("click",function(){
-				page=$(this).attr("page");
-				if(page)
-				{
-					var form=$("#"+opts.pager.form);
-					opts.pager.current_page=page;
-					form.find("input[name=page]").val(opts.pager.current_page);
-					form.submit()
-					//var data=$(form).find(":input").serialize();
-					//$.fn.datagrid.loadData($this,opts);
-				}
+				var page=$(this).attr("page");
+				$.fn.datagrid.jumpToPage ($this,page,opts);
 			});
-			$this.find('.toolbar a').bind("click",function(){
+			$this.find('.toolbar span').bind("click",function(){
 				var btnIndex=$(this).attr("btnIndex");
 				var bn=this.className;
 				//if(bn=="Refresh")$.fn.datagrid.loadData($this,opts);
@@ -407,28 +470,46 @@ $.fn.datagrid= function (options){
 				var target=opts.toolbar[btnIndex].target;
 				var rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
 				var row=opts.data[rowid];
-				if(rowid && rowid!="")
+				if(rowid && rowid!="" && src)
 				{
 					for( var i=0;i<opts.data[rowid].length; i++)
 					{
 						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 					}
 				}
-				if(className=="Refresh")
+				if(className=="Home")
+				{
+					var win =_window.windows[_window.focusWindowId];
+					win.SetContent("[url]"+src);
+
+				}
+				else if(className=="Refresh")
 				{
 					if(target)
 					{
 						//load into a named panel by ID
-						//if(src.indexOf("?")>0)src=src+ '&d='+ new Date().getTime()
-						//else src=src+ '?d='+ new Date().getTime()
-
 						$('#'+target).empty();
 						$('#'+target).load(src);
 					}
 					else
 					{
-						var win =_window.windows[_window.focusWindowId];
-						win.SetContent("[url]"+src);
+						if(opts.url)
+						{
+							$.fn.datagrid.loadData($this);
+						}
+						else
+						{
+							//var win =_window.windows[_window.focusWindowId];
+							//win.SetContent("[url]"+src);
+							var form=document.getElementById(opts.linkedForm);
+							if(opts.url)$.fn.datagrid.loadData($this);
+							else
+							{
+								//alert($(form).find(":input").serialize())
+								form.onsubmit();
+							}
+
+						}
 					}
 				}
 				else if(className=="Edit")
@@ -459,35 +540,11 @@ $.fn.datagrid= function (options){
 							type:"GET",
 							dataType:"json",
 							success: function(data){
-								if(data.code=="200")
-								{
-									var win =_window.windows[_window.focusWindowId];
-									var target=data.target;
-									if(target && target!="")
-									{
-										loadContentToPanel(target,data.forwardUrl,null);
-									}
-									else
-									{
-										var parentWin=_window.windows[win.parentWindow];
-										if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-									}
-									//if(data.action=="close")win.Close();
-								}
-								else
-								{
-									 alert(data.message);
-								}
-
+								parseJsonResponse(data,opts.rid);
+								
 							},
 						error: function(XMLHttpRequest, textStatus, errorThrown) 
 						{
-							//$('#'+id).html(xhr.responseText);
-							//var win =_window.windows[_window.focusWindowId];
-							//win.SetContent(XMLHttpRequest.responseText)
-									//alert(XMLHttpRequest.status);
-									//alert(XMLHttpRequest.readyState);
-									//alert(textStatus);
 									alert(XMLHttpRequest.responseText)
 						}
 
@@ -497,13 +554,19 @@ $.fn.datagrid= function (options){
 				}
 				else if(className=="Help")
 				{
-					$.fn.datagrid.setSize($this,opts,400,300);
+					//$.fn.datagrid.setSize($this,opts,400,300);
+					openDialog(src,text,true);
 				}
 				else 
 				{
 					if(!target)target="dialog";
 					if(target=="dialog")openDialog(src,text,true,width,height);
-					else if(target=="window")openWorkWindow(src,text,width,height)
+					else if(target=="window")openWorkWindow(src,text);
+					else if(target=="self")
+					{
+						var win =_window.windows[_window.focusWindowId];
+						win.SetContent("[url]"+src);
+					}
 					else
 					{
 						//load into a named panel by ID
@@ -549,7 +612,7 @@ $.fn.datagrid= function (options){
 						opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
 					}
 				}
-	//document.getElementById("text").value=framediv.parent().html();
+document.getElementById("text").value=opts.framediv.parent().html();
 		}
 
 	 function paginate(currentPage,pagesize, totalRecords)
@@ -562,9 +625,18 @@ $.fn.datagrid= function (options){
         if (pagesize <=0 )
             pagesize=10;
         var pages = Math.floor((totalRecords +pagesize -1 ) / pagesize) ;
-        pager+=("<table id='paginate' class='paginate'><tbody><tr><td >") ;
-        
-        pager+=("<span class=\"string\">共" + totalRecords + "条记录</span>");
+        pager+=("<table id='paginate' class='paginate'><tbody><tr><td>") ;
+        var pageSel="<select id='paginate_pagesize' class='paginate_pagesize'>";
+		var sizes=[2, 5, 10, 20, 50, 100];
+        for(var i in sizes)
+		{
+			var selected="";
+			if(sizes[i]==pagesize)selected="selected";
+			pageSel+="<option value='"+sizes[i]+"' "+selected+">"+sizes[i]+"</option>";
+		}
+		pageSel+="</select>";
+
+		pager+=("<span class=\"string\">共 " + totalRecords + " 条记录 / "+Math.ceil(totalRecords/pagesize)+" 页 / 每页显示 "+pageSel+" 条记录</span><span class='navigator_panel'>");
 
         if (currentPage <= 0) {
             pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>首页</a>");
@@ -583,13 +655,13 @@ $.fn.datagrid= function (options){
 
         for(var i=currentPage-5>=0?currentPage-5:0;i<currentPage;i++)
         {
-            pager+="<a class=\"navigator\"page=\""+i+"\">"+(i+1)+"</a>";
+            pager+="<a class=\"navigator\" page=\""+i+"\">"+(i+1)+"</a>";
         }
         pager+="<a class=\"navigator_current\">"+(currentPage+1)+"</a>";
             
         for(var i=Number(currentPage)+1;i<currentPage+6 && i<pages;i++)
         {
-            pager+="<a class=\"navigator\"page=\""+i+"\">"+(i+1)+"</a>";
+            pager+="<a class=\"navigator\" page=\""+i+"\">"+(i+1)+"</a>";
         }
 
         if (currentPage >= pages - 1) 
@@ -605,12 +677,12 @@ $.fn.datagrid= function (options){
             }
            else
            {
-                pager+=("<a class=\"navigator\"\"><span class=\"ico\">4</span></a>");
+                pager+=("<a class=\"navigator\"><span class=\"ico\">4</span></a>");
            }
             pager+=("<a class=\"navigator_longstring\" page=\"" + (pages - 1) +  "\">末页<span class=\"ico\">:</span></a>");
         }
         
-        pager+=("</td></tr></tbody></table>") ;
+        pager+=("</span></td></tr></tbody></table>") ;
 
 		return pager;
 
@@ -736,9 +808,11 @@ $.fn.datagrid= function (options){
 			if(newwidth>5){
 				opts.tdobj.style.width = newwidth+"px";
 				opts.dataobj.rows[0].cells[opts.tdobj.cellIndex].style.width = newwidth+"px";
+				opts.colwidth[opts.tdobj.cellIndex]=newwidth;
 			}else{
 				opts.tdobj.style.width = 5+"px";
 				opts.dataobj.rows[0].cells[opts.tdobj.cellIndex].style.width = 5+"px";
+				opts.colwidth[opts.tdobj.cellIndex]=5;
 			}
 			//alert(opts.tdobj.style.width )
 			//alert(opts.dataobj.rows[0].cells[opts.tdobj.cellIndex].style.width )
@@ -926,33 +1000,117 @@ $.fn.datagrid= function (options){
 	//加载数据
 	$.fn.datagrid.setdata = function($this,opts,arrdata){
 		if(arrdata && arrdata.length>0){
-			$this.html("");
+			$this.empty();
 			opts.data = arrdata;
 			changeposv = true;
 			nowrow = null;
-			this.init($this,opts);
+			$.fn.datagrid.init($this,opts);
 		}
 	}
+	$.fn.datagrid.jumpToPage = function($this,page,opts){
+				if(page)
+				{
+					opts.pager.current_page=page;
+					if(opts.url)
+					{
+						//refresh data from a From
+						if(opts.linkedForm)
+						{
+							var form=document.getElementById(opts.linkedForm);
+							form["page"].value=opts.pager.current_page;
+							$.fn.datagrid.loadData($this,null,form);
+						}
+						else
+						{
+							$.fn.datagrid.loadData($this,opts);
+						}
+					}
+					else
+					{
+						var form=$("#"+opts.linkedForm);
+						form.find(":input[name=page]").val(opts.pager.current_page);
+						form.submit();
+					}
+				}
+	}
 
-	$.fn.datagrid.loadData = function($this,opts) {
+	$.fn.datagrid.loadData = function($this,options,form) {
+		var param="";
+		var opts=options;
+		if(!opts && !form) form=document.getElementById($this.data("options").linkedForm);
+		if(opts && opts.pager)param="page="+(opts.pager.current_page)+"&pagesize="+opts.pager.pagesize;
+		if(opts && opts.params)param= param +"&"+opts.params; 
+
+		var url=""
+		if(opts)url=opts.url;
+		else if(form)
+		{
+			url=form.action;
+			param=$(form).find(":input").serialize();
+		}
+		if(!opts)opts=$this.data("options");
+		//alert(url)
+		//alert(param)
+		jQuery.ajax({
+            type: "post",
+            async: false,
+            url: url,
+            data: param,
+            //contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            cache: false,
+            success: function (data) {
+				if(data.pager)
+					opts.pager = {
+						current_page: data.pager.current_page,
+						pagesize: 	  data.pager.pagesize,
+						total:		  data.pager.total,
+						form:		  data.pager.form
+					};
+				if(data.colwidth)
+				$.each(data.colwidth, function(i, width) {
+					opts.colwidth[i]=width;
+				});
+				opts.data=[];
+				$.each(data.data, function(i, row) {
+					if(i==0)
+					{
+						var index=0;
+						for(j in row)
+						{
+						   opts.columns[index++]=j;
+						}
+					}
+					var rowData=[];
+					for (a=0; a < opts.columns.length; a++) {
+						rowData[a]=row[opts.columns[a]];
+					}	
+					opts.data[i]=rowData;
+				});
+				opts.nowrow=null;
+				$.fn.datagrid.setdata($this,opts,opts.data);
+            },
+            error: function (err) {
+                alert("Error:"+err);
+            }
+        });
+/*
 		var param={};
-		//if(opts.url.indexOf('?')<=0)param+="?";
-
 		if(opts.pager)param={page:opts.pager.current_page,pagesize:opts.pager.pagesize};
 		if(opts.params)param= $.extend(param, opts.params); 
 		$.getJSON(opts.url,param,function(data) {		
 				if(data.pager)
 					opts.pager = {
-						current_page: data.pager.current,
+						current_page: data.pager.current_page,
 						pagesize: 	  data.pager.pagesize,
 						total:		  data.pager.total
 					};
-				if(data.rowwidth)
-				$.each(data.rowwidth, function(i, width) {
+				if(data.colwidth)
+				$.each(data.colwidth, function(i, width) {
 					opts.colwidth[i]=width;
 				});
 
-				$.each(data.rows, function(i, row) {
+				$.each(data.data, function(i, row) {
 					if(i==0)
 					{
 						var index=0;
@@ -970,88 +1128,12 @@ $.fn.datagrid= function (options){
 				$.fn.datagrid.setdata($this,opts,opts.data);
 			}
 		);
-
-	}
-	$.fn.datagrid.getSelected = function(datagrid) {
-		alert($(this).attr("id"));
-
-		//var datarows=$.fn.datagrid.config.dataobj.rows;
-		//var datarows=$(this).find(".datacolumn");
-		$.each(datagrid.find(".datacolumn tbody tr"), function(i, row){
-			alert("AA:"+row.selected);
-		});
-		/*
-		$.each($.fn.datagrid.config.dataobj.rows, function(i, row) 
-		{
-					//row[opts.columns[a]]
-					//alert(row.selected);
-		});
 		*/
+
 	}
 
 	$.fn.extend({         
-   	refresh :function()
-	 {
-		$this=$(this);
-		alert($this.data("options"));
-		$.fn.datagrid.loadData($this,$this.data("options"));
-
-	 },
-	resizeGrid : function(w,h){
-		var sw=w;//document.body.clientWidth-parseInt($(document.body).css("margin-left"))-parseInt($(document.body).css("margin-right"));
-		var sh=h;//$(this).height();
-		var opts=$(this).data("options");
-		if(opts.width==0)
-		{
-				opts._width=sw;
-				if(opts.minus_width>0)opts._width-=opts.minus_width;
-		}
-        else if((""+opts.width).indexOf("%")>0)
-		{
-				opts._width=sw * opts.width.substring(0,(""+opts.width).indexOf('%'))/100;
-		}
-		else
-			{
-				opts._width=opts.width;
-			}
-		if(opts.height==0)
-		{
-				opts._height=sh;
-				if(opts.minus_height>0)opts._height-=opts.minus_height;
-		}
-        else if((""+opts.height).indexOf("%")>0)
-		{
-				opts._height=sh * opts.height.substring(0,(""+opts.height).indexOf('%'))/100;
-		}
-		else
-		{
-				opts._height=opts.height;
-		}
-		$.fn.datagrid.setSize($(this),opts,opts._width,opts._height);
-	},
-
-    getSelected:function(){        
-		if($(this).attr("class")!="datagrid" && $(this).attr("class")!="treegrid")return;
-		var selected=[];
-         //$(this).click(function(){       
-		var dg=$(this);
-		var j=0;
-		//alert($this.data("options").pager.current_page);
-        $.each(dg.find(".datacolumn tbody tr"), function(i, row){
-			if(row.selected=="true")
-			{
-				//selected[j++]=row;
-				var rowid=row.rowid;
-				selected[j++]=dg.data("options").data[rowid];
-			}
-		});    
-		//if(selected.length>0)selected=selected.substring(0,selected.length-1);
-		return selected;
-         // });        
-
-      }        
-
-}); 
+	}); 
 /*
 $(document).ready(function(){ 
 	var resize_num=0

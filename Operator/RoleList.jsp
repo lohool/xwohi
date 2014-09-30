@@ -11,7 +11,7 @@ function form_submit(form)
 </script>
 <div class="page" style="left:0;top:0;width:100%; height:100%;">
 	<div class="panel" style="left:0;top:0; height:40px;">
-		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post" validate="true"  onsubmit="return form_submit(this);">
+		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post" validate="true"  onsubmit="return submitForm(this,'Role_list');">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
 		<INPUT TYPE="text" NAME="vo.name">
@@ -47,13 +47,14 @@ function form_submit(form)
 				  "<xwohi:i18n text="name" />",
 				  "<xwohi:i18n text="description" />"
 			  ],
+			  linkedForm:"Role_list_form",
 			  //colwidth:[30,120,200],
 			  pager:
 				{
 					"total":<ww:property value="resultSize"/>,
 					"current_page":<ww:property value="page"/>,
 					"pagesize":<ww:property value="pageSize"/>,
-					"form":"Role_list_form"
+					"form":""
 				},
 			  data: [
 			  <ww:iterator value="objList">

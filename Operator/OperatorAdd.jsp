@@ -5,7 +5,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
 <div align="center">
-<ww:form name="operator_add_form" namespace="/Operator" action="OperatorAdd" method="post" validate="true" onsubmit="return sumbitAjaxForm(this,'window')">
+<ww:form name="operator_add_form" namespace="/Operator" action="OperatorAdd" method="post" validate="true" onsubmit="return iframeCallback(this,'operator_list')" enctype="multipart/form-data">
 <INPUT TYPE="hidden" NAME="vo.state" value="1">
 <table bgcolor="#E3E3E3" width="500" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
 <thead>
@@ -16,7 +16,8 @@
 </thead>
 <TR>
 <TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Operator.account" />:</TD><TD bgColor="#ffffff" width="60%">
-             <ww:textfield  name="vo.account" required="true"/>     
+             <ww:textfield  name="vo.account" required="true"/>     			<INPUT TYPE="file" NAME="file1">
+
 	  </TD>
 </TR>
 <TR>

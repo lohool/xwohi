@@ -60,8 +60,8 @@ subMenu4.addItem(new MenuItem("WeekScheme","/images/open.gif","公文归档","/D
 <h3>系统管理</h3>
 <div>
 
-<a href="#" onclick="openWorkWindow('/Operator/OperatorList.action?vo.state=1','用户管理')">用户管理</a><br />
-<a href="#" onclick="openWorkWindow('/Role/RoleList.action','角色管理')">角色管理</a><br />
+<a href="#" onclick="openWorkWindow('/Operator/OperatorList.jsp','用户管理','/images/png/user.png')"><img src="/images/png/user.png" border=0>用户管理</a><br />
+<a href="#" onclick="openWorkWindow('/Role/RoleList.action','角色管理','/images/png/user_business.png')"><img src="/images/png/user_business.png" border=0>角色管理</a><br />
 <a href="#" onclick="openWorkWindow('/Resource/ResourceList.action','资源管理')">资源管理</a><br />
 <a href="#" onclick="openWorkWindow('/Privilege/PrivilegeList.action','资源权管理')">资源权管理</a><br />
 <a href="#" onclick="openWorkWindow('/SysParam/SysParamList.action','系统参数')">系统参数</a><br />
@@ -77,14 +77,14 @@ subMenu4.addItem(new MenuItem("WeekScheme","/images/open.gif","公文归档","/D
 <a href="#" onclick="openWorkWindow('/Operator/MyselfInfo.action','个人资料')">个人资料</a><br />
 <a href="#" onclick="openWorkWindow('/Operator/OperatorPwd.action','修改密码')">修改密码</a><br />
 
-<a href="#" onclick="openWorkWindow('/Customer/Customer.jsp','客户组管理')">客户组管理</a><br />
+<a href="#" onclick="openWorkWindow('/Customer/Customer.jsp','客户组管理ASADASDASD')">客户组管理</a><br />
 <ul>
 		<ww:action id="cl" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="false" />
 		<ww:property value="#attr.c1" />
 		<ww:iterator value="#attr.cl.objList">
 			<ww:if test="#session.operation_user.isPermitted(\"CustomerGroup\",id,1)==true">
 			<li>
-	         <a href="#" onclick="openWorkWindow('/Customer/CustomerList.action?vo.group.id=<ww:property value="id"/>','<ww:property value="name"/>')"><ww:property value="name"/></a><br />
+	         <a href="#" onclick="openWorkWindow('/Customer/Customer.jsp?groupId=<ww:property value="id"/>','<ww:property value="name"/>')"><ww:property value="name"/></a><br />
 			 </li>
 			 </ww:if>
         </ww:iterator>

@@ -2,10 +2,10 @@
 "pager":
 {
 	"total":201,
-	"current":3,
+	"current_page":3,
 	"pagesize":10
 },
-"rowwidth":[120,40,50,50,150,80],
+"colwidth":[120,40,50,50,150,80],
 "rows":[
 	{"productid":"<a href='http://www.baidu.com'>FI-SW-01</a>","unitcost":10.00,"status":"P","listprice":36.50,"attr1":"测试","itemid":"EST-1"},
 	{"productid":"K9-DL-01","unitcost":12.00,"status":"P","listprice":18.50,"attr1":"Spotted Adult Female","itemid":"EST-10"},
