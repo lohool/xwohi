@@ -74,8 +74,10 @@
       </fields>
    </actions>
    <actions>
-      <action name="DepartmentList" />
-      <action name="DepartmentSelect" />
+      <action name="DepartmentList"/>
+      <action name="DepartmentSelect" >
+		<sql>select obj from Department obj where obj.#name like ?</sql>
+	  </action>
       <action name="DepartmentAdd" />
       <action name="DepartmentModify" />
       <action name="DepartmentDelete" />

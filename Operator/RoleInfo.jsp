@@ -58,7 +58,7 @@ function onSubmit(myform)
 
 	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
 	//alert(myform["vo.roles.roleID"].value);
-	return sumbitAjaxForm(myform);
+	return ajaxDataGridCallback(myform);
 	//return false;
 } 
 

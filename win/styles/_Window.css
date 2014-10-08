@@ -153,9 +153,9 @@
 	background-color:#F1C5A0 ;
 	*/
 }
-.BLUE .TITLE .FOCUS
+.BLUE .TITLE.FOCUS
 {
-	background-color:#82B4FF;
+	background-color:#86B7FF;
 }
 .BLUE .TITLE .ICON
 {
@@ -424,7 +424,7 @@
 	line-height: 20px;
 	color:#fff;
 	/*font-family:webdings;*/
-	cursor:pointer;
+	cursor:default;
 	float:left;
 }
 
@@ -441,7 +441,7 @@ position:relative;
 	font-size:10px;
 	color:blue;
 	/*font-family:webdings;*/
-	cursor:pointer;
+	cursor:default;
 	text-align:center;
 	float:right;
 	top:0px;

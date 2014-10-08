@@ -108,13 +108,15 @@ _window.Alert=function(content,title,features,parentPanel,parentWindowId,callbac
 	obj.buttons["OK"].focus();
 	return obj;
 };
-_window.Confirm=function(content,title,features,callback)
+_window.Confirm=function(content,title,features,parentPanel,parentWindowId,callback)
 {
 	var obj=new _window(features);
 	obj.button="OK|CANCEL";
+	obj.type=4;
 	obj.isModal = true;
 	if(callback)obj.callback=callback;
-	obj.type=4;
+	if(parentPanel)	obj.parent=parentPanel;
+	if(parentWindowId)	obj.parentWindowId=parentWindowId;
 	obj.Creat(content,title||"Confirm");
 	obj.buttons["OK"].focus();
 	return obj;
@@ -990,7 +992,7 @@ _window.prototype. shrink=function(changedWidth,changedHeight)
 
 _window.prototype. createTaskButton=function()
 {
-	if(this.type==1)
+	//if(this.type==1)
 	{
 		this.taskButton=document.createElement("div");
 		this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";
@@ -1047,42 +1049,9 @@ function isExist(title)
 
 function loadContentToPanel(panelId,url,data)
 {
-	/*
-			$('#'+id).load(tent,data,function(response,status,xhr){
-				if(xhr.status!=200)
-				{
-				//alert("Error code:"+xhr.status);
-				$('#'+id).html(xhr.responseText);
-				}
-				else
-				{
-					//set size for the elements of this window
-					loadContentToPanel(id+" .page",null);
-					$('#'+id+" .page .datagrid_wraper").each(function(i,ele){
-						$(this).resize(function(){
-							if(this.offsetWidth) $(this).find(".datagrid").resizeGrid(this.offsetWidth-2,this.offsetHeight-2)
-						})
-					})
-					$('#'+id+" .page").resize(function(){
-						$('#'+id+" .page DIV").each(function(i,ele){
-						var layoutHeight=$(this).attr("layoutHeight");
-						var layoutWidth=$(this).attr("layoutWidth");
-						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
-						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
-						})
-					})
-					$('#'+id+" .page DIV").each(function(i,ele){
-						var layoutHeight=$(this).attr("layoutHeight");
-						var layoutWidth=$(this).attr("layoutWidth");
-						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
-						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
-					})
-					reDefineHTMLActions();
-				}
-			});
-			*/
 
 			$("#"+panelId).empty();
+/*
 			$("#"+panelId).load(url,data,function(response,status,xhr){
 				if(xhr.status!=200)
 				{
@@ -1113,6 +1082,44 @@ function loadContentToPanel(panelId,url,data)
 					reDefineHTMLActions(panelId);
 				}
 			});
+*/
+			$.ajax({ 
+			url: url, 
+			//context: document.body, 
+			data :   data  ,
+			type:"post",
+			//dataType:"json",
+			success: function(data){
+					$('#'+panelId).html(data);
+					//set size for the elements of this window
+					$('#'+panelId+" .datagrid_wraper").each(function(i,ele){
+						$(this).resize(function(){
+							if(this.offsetWidth) $(this).find(".datagrid").datagrid("resize",this.offsetWidth-2,this.offsetHeight-2)
+						})
+					})
+					$('#'+panelId).resize(function(){
+						$('#'+panelId+" DIV").each(function(i,ele){
+						var layoutHeight=$(this).attr("layoutHeight");
+						var layoutWidth=$(this).attr("layoutWidth");
+						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+						})
+					})
+					$('#'+panelId+" DIV").each(function(i,ele){
+						var layoutHeight=$(this).attr("layoutHeight");
+						var layoutWidth=$(this).attr("layoutWidth");
+						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
+						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+					})
+					reDefineHTMLActions(panelId);
+
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{
+				$('#'+panelId).html(xhr.responseText);
+            }
+	  });
+
 }
 function reDefineHTMLActions(parentId)
 {
@@ -1123,7 +1130,7 @@ function reDefineHTMLActions(parentId)
 			//if <A> is in a data grid table
 			if(this.parentNode && this.parentNode.tagName=="TD")this.parentNode.click()
 			//$("#"+this.target).load(this.href);
-			loadContentToPanel(this.target ,this.href,null)
+			loadContentToPanel(this.target ,encodeURI (this.href),null)
 			return false;
 		}
 	})

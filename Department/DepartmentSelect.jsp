@@ -7,13 +7,15 @@
 	if(name==null)name="";
 
 %>
-            <ww:form id="Department_list_form" action="DepartmentList" method="post" name="Department_list_form" namespace="/Department" validate="true" theme="simple" onSubmit="return submitForm(this,'Department_panel')">
+            <ww:form id="Department_list_form" action="DepartmentSelect" method="post" name="Department_list_form" namespace="/Department" validate="true" theme="simple" onSubmit="return windowSearch(this)">
 			   <INPUT TYPE="hidden" NAME="groupId" value="<%=request.getParameter("groupId")%>">
-			   <INPUT TYPE="hidden" NAME="vo.name" value="<%=name%>">
+			   Name:<INPUT TYPE="text" NAME="vo.name" value="<%=name%>">
                <ww:hidden name="page" />
                <ww:hidden name="pageSize" />
+				<INPUT TYPE="submit" value="search" class="button biground">
+				<INPUT TYPE="reset" value="reset" class="button biground">
             </ww:form>
-	<div id="datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
+	<div id="datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" layoutHeight="21px">
 		<div id="Department_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
 	</div>
 <script>

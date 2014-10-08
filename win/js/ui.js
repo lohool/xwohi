@@ -7,11 +7,13 @@ function GetIeVersion()
 
 function setCookie(name, value, expires, path, domain, secure){
 	var strCookie = name + "=" + value;
-	if (expires){
+	if (!expires){
+		expires=7;
+	}
 		var dtmNow = new Date();
 		dtmNow.setTime(dtmNow.getTime() + expires*24*60*60*1000);
 		strCookie += "; expires=" + dtmNow.toGMTString();
-	}
+
 	strCookie +=  (path) ? "; path=" + path : "";
 	strCookie +=  (domain) ? "; domain=" + domain : "";
 	strCookie +=  (secure) ? "; secure" : "";
@@ -206,6 +208,27 @@ function openAlertWindow(content, title, feature,callback)
 {
 	_window.Alert(content, title, feature,null,null,callback);
 }
+function openAlert(content,title,callback)
+{
+	openAlertWindow(content, title, 'maximize=no,minimize=no,resize=no,width=500px,height=150px',callback);
+}
+function openConfirm(data)
+{
+	var feature='maximize=no,minimize=no,resize=no,width=500px,height=150px';
+	if(data.feature)feature=feature+","+data.feature;
+	_window.Confirm(data.content, data.title, feature,null,null,function(btn){
+		if(btn=="OK")
+		{
+			if(data.ok)data.ok();
+		}
+		else if(btn=="CANCEL")
+		{
+			if(data.cancel)data.cancel();
+		}
+
+	});
+}
+
 function _openScreenDialog(content, title,feature)
 {
 	_window.Dialog(content, title, feature,null,_window.focusWindowId);
@@ -258,13 +281,24 @@ function feedback(data,formId)
 }
 
 
-function openAlert(content,title,callback)
+function panelSearch(form,targetPanel,callback)
 {
-	openAlertWindow(content, title, 'maximize=no,minimize=no,resize=no,width=400px,height=150px',callback);
+		$("#"+targetPanel).empty();
+		//$("#"+target).load(form.action,$(form).find(":input").serialize(),function(){reDefineHTMLActions(target)});
+		loadContentToPanel(targetPanel,form.action,$(form).find(":input").serialize());
+	if(callback)callback();
+	return false;
 }
 
+function windowSearch(form,callback)
+{
+		var win =_window.windows[_window.focusWindowId];
+		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
+	if(callback)callback();
+	return false;
+}
 
-function sumbitAjaxForm(form,targetGrid)
+function ajaxDatagridSubmit(form,targetGrid,callback)
 {
 		$.ajax({ 
 			url: form.action, 
@@ -273,7 +307,8 @@ function sumbitAjaxForm(form,targetGrid)
 			type:"post",
 			dataType:"json",
 			success: function(data){
-				parseJsonResponse(data,targetGrid)
+				parseJsonResponse(data,targetGrid);
+				if(callback)callback();
 
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) 
@@ -293,74 +328,16 @@ function sumbitAjaxForm(form,targetGrid)
 	return false;
 }
 
-function submitForm(form,targetPanel)
-{
-	if(targetPanel)
-	{
-		$("#"+targetPanel).empty();
-		//$("#"+target).load(form.action,$(form).find(":input").serialize(),function(){reDefineHTMLActions(target)});
-		loadContentToPanel(targetPanel,form.action,$(form).find(":input").serialize());
-	}
-	else
-	{
-		var win =_window.windows[_window.focusWindowId];
-		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
-	}
-		return false;
-}
-function submitGridForm(form,gridId)
+function datagridSearch(form,gridId,callback)
 {
 		$("#"+gridId).datagrid("search",form);
+		if(callback)callback();
 		return false;
 }
 
 /**
-	"code":"200",
-	"message":"",
-	"forwardUrl":"",
-	"refresh":"<%=targetPanel%>",
-	"targetType":"self",
-	"target":"",
-	"callback":"",
-	"action":""
+	for "multipart/form-data" form,example:file upload
 */
-
-function parseJsonResponse(data,targetGrid)
-{
-	if(data.code=="200")
-	{
-		var win =_window.windows[_window.focusWindowId];
-		if(data.message && data.message!=""){ openAlert(data.message,"Successful Message");}
-		if(data.refresh && data.refresh!="")targetGrid=data.refresh;
-		if(targetGrid)	{$("#"+targetGrid).datagrid("refresh")}
-		var target=data.target;
-		if(target && target!="")
-		{
-			$("#"+target).empty();
-			loadContentToPanel(target,data.forwardUrl,null);
-		}
-		else
-		{
-			if(data.targetType=="parent")
-			{
-				var parentWin=_window.windows[win.parentWindowId];
-				if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
-			}
-			else //if(targetType=="self")
-			{
-				if(data.forwardUrl && data.forwardUrl!="")win.SetContent("[url]"+data.forwardUrl);
-			}
-		}
-		if(data.callback && data.callback!="") eval(data.callback);
-		if(data.action=="close")win.Close();
-	}
-	else
-	{
-		 openAlert(data.message, "Error");
-	}
-
-}
-
 function iframeCallback(form, targetGrid,callback){
 	var $form = $(form), $iframe = $("#callbackframe");
 	//if(!$form.valid()) {return false;}
@@ -431,4 +408,51 @@ function _iframeResponse(iframe,targetGrid, callback){
 		}
 		//document.body.removeChild(iframe);
 	});
+}
+
+/**
+	"code":"200",
+	"message":"",
+	"forwardUrl":"",
+	"refresh":"<%=targetPanel%>",
+	"targetType":"self",
+	"target":"",
+	"callback":"",
+	"action":""
+*/
+
+function parseJsonResponse(data,targetGrid)
+{
+	if(data.code=="200")
+	{
+		var win =_window.windows[_window.focusWindowId];
+		if(data.message && data.message!=""){ openAlert(data.message,"Successful Message");}
+		if(data.refresh && data.refresh!="")targetGrid=data.refresh;
+		if(targetGrid)	{$("#"+targetGrid).datagrid("refresh")}
+		var target=data.target;
+		if(target && target!="")
+		{
+			$("#"+target).empty();
+			loadContentToPanel(target,data.forwardUrl,null);
+		}
+		else
+		{
+			if(data.targetType=="parent")
+			{
+				var parentWin=_window.windows[win.parentWindowId];
+				if(data.forwardUrl && data.forwardUrl!="")parentWin.SetContent("[url]"+data.forwardUrl);
+			}
+			else //if(targetType=="self")
+			{
+				if(data.forwardUrl && data.forwardUrl!="")win.SetContent("[url]"+data.forwardUrl);
+			}
+		}
+		if(data.callback && data.callback!="") eval(data.callback);
+		if(data.action=="close")win.Close();
+	}
+	else
+	{
+		 openAlert(data.message, "Error");
+	}
+
 }

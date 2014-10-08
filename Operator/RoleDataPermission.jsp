@@ -45,7 +45,9 @@ function form_submit(form)
 <ww:form name="form1" namespace="/Role" action="RoleDataPermissionModify" method="post" validate="true" onsubmit="return form_submit(this)">
 <ww:hidden  name="vo.roleID"/>
 <table width="100%" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
-<ww:action id="dgl" name="DataGroupList" namespace="/DataGroup" executeResult="false" />
+<ww:action id="dgl" name="DataGroupList" namespace="/DataGroup" executeResult="false" >
+			<ww:param name="pageSize" value="100" />
+</ww:action>
 <TR>
 	<ww:iterator value="#attr.dgl.objList" status="dglList">
 		<ww:if test="#dglList.index % 2 = 1">AAAA
@@ -57,8 +59,9 @@ function form_submit(form)
 		<ww:property value="#dglList.index"/>: <ww:property value="name"/> (<ww:property value="%{URI}" /><ww:property value="%{nameSpace}" />)
 	  </div>
 	  <div class="panel" style="height:130px;text-align:left">
-		<ww:action id="cl" name="%{URI}"  namespace="%{nameSpace}" executeResult="false" />
-		<ww:property value="#attr.c1" />
+		<ww:action id="cl" name="%{URI}"  namespace="%{nameSpace}" executeResult="false" >
+			<ww:param name="pageSize" value="100" />
+		</ww:action>
 		<TABLE >
 		<TR>
 			<TD>Group</TD>

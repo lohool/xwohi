@@ -4,7 +4,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page" style="height:100%">
 	<div class="panel" style="height:30px">
-	        <ww:form action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onsubmit="return submitForm(this,'customer_panel');">
+	        <ww:form action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onsubmit="return panelSearch(this,'customer_panel');">
 			Name:<INPUT TYPE="text" NAME="vo.name">
 			Group:
 			<ww:action id="cg0" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="false">

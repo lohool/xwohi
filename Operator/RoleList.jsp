@@ -1,17 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<script type="text/javascript">
-function form_submit(form)
-{
-		var win =_window.windows[_window.focusWindowId];
-		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
-		return false;
-}
-</script>
 <div class="page" style="left:0;top:0;width:100%; height:100%;">
 	<div class="panel" style="left:0;top:0; height:40px;">
-		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post" validate="true"  onsubmit="return submitForm(this,'Role_list');">
+		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post" validate="true"  onsubmit="return windowSearch(this);">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
 		<INPUT TYPE="text" NAME="vo.name">
@@ -32,7 +24,7 @@ function form_submit(form)
 			  //multiple:true,
 			  toolbar:[
 				  {"text":"Home","btnClass":"Home","src":"/Role/RoleList.action","width":500,"height":300},
-				  {"text":"Refresh","btnClass":"Refresh","src":"/Role/RoleList.action","width":500,"height":300},
+				  {"text":"Refresh","btnClass":"Refresh"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Add User","btnClass":"Add","src":"/Role/RoleInput.action","width":550,"height":330},
 				  {"text":"Edit Role Info","btnClass":"Edit","target":"window","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},

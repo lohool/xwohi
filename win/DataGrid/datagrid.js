@@ -102,8 +102,8 @@ $.fn.datagrid= function (options){
 			$.each(dg.find(".datacolumn tbody tr"), function(i, row){
 				if(row.selected=="true")
 				{
-					//selected[j++]=row;
-					var rowid=row.rowid;
+					//var rowid=row.rowid;
+					var rowid=$(row).attr("rowid");
 					selected[j++]=dg.data("options").data[rowid];
 				}
 			});    
@@ -443,6 +443,7 @@ $.fn.datagrid= function (options){
 				//$.fn.datagrid.jumpToPage($this,page,opts);
 				var form=document.getElementById(opts.linkedForm);
 				form["pageSize"].value=pagesize;
+				setCookie("PageSize",pagesize);
 				if(opts.url)$.fn.datagrid.loadData($this);
 				else
 				{
@@ -460,15 +461,31 @@ $.fn.datagrid= function (options){
 			$this.find('.toolbar span').bind("click",function(){
 				var btnIndex=$(this).attr("btnIndex");
 				var bn=this.className;
-				//if(bn=="Refresh")$.fn.datagrid.loadData($this,opts);
-				//if(bn=="Add")openDialog(inputAction,"Add");
 				var text=opts.toolbar[btnIndex].text;
 				var className=opts.toolbar[btnIndex].btnClass;
 				var src=opts.toolbar[btnIndex].src;
 				var width=opts.toolbar[btnIndex].width;
 				var height=opts.toolbar[btnIndex].height;
 				var target=opts.toolbar[btnIndex].target;
-				var rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
+				var rowid=null;
+				if(opts.multiple==true)
+				{
+					var selected=[];
+					var dg=$this;
+					var j=0;
+					var nowrow=null;
+					$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+						if(row.selected=="true")
+						{
+							rowid=$(row).attr("rowid");
+							return false;
+						}
+					});    
+				}
+				else
+				{
+					rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
+				}
 				var row=opts.data[rowid];
 				if(rowid && rowid!="" && src)
 				{
@@ -477,6 +494,15 @@ $.fn.datagrid= function (options){
 						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 					}
 				}
+	
+
+				if((/^javascript *:/i).test(src))
+				{
+					var sc=src.replace(/^javascript *:/i,"");
+					eval(sc);
+					return false;
+				}
+
 				if(className=="Home")
 				{
 					var win =_window.windows[_window.focusWindowId];
@@ -493,62 +519,155 @@ $.fn.datagrid= function (options){
 					}
 					else
 					{
-						if(opts.url)
-						{
-							$.fn.datagrid.loadData($this);
-						}
+						if(opts.url)$.fn.datagrid.loadData($this);
 						else
 						{
-							//var win =_window.windows[_window.focusWindowId];
-							//win.SetContent("[url]"+src);
 							var form=document.getElementById(opts.linkedForm);
-							if(opts.url)$.fn.datagrid.loadData($this);
-							else
-							{
-								//alert($(form).find(":input").serialize())
-								form.onsubmit();
-							}
-
+							//alert($(form).find(":input").serialize())
+							form.onsubmit();
 						}
 					}
 				}
 				else if(className=="Edit")
 				{
-					if(opts.nowrow==null)
+					if(opts.multiple==true)
 					{
-						alert("Please select one row.");
-						return false;
+						var selected=[];
+						var dg=$this;
+						var j=0;
+						var nowrow=null;
+						$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+							if(row.selected=="true")
+							{
+								//var rowid=row.rowid;
+								var rowid=$(row).attr("rowid");
+								selected[j++]=opts.data[rowid];
+								nowrow=row;
+							}
+						});    
+						if(selected.length!=1)
+						{
+							openAlert(JSMsg_Datagrid.selectOneRow,"Edit",function(btn){return false;});
+						}
+						else
+						{
+							/*
+							var src=opts.toolbar[btnIndex].src;
+							var rowid=$(nowrow).attr("rowid");
+							var row=opts.data[rowid];
+							for( var i=0;i<opts.data[rowid].length; i++)
+							{
+								src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+							}
+							*/
+							if(!target)target="dialog";
+							if(target=="dialog")openDialog(src,text,true,width,height);
+							else openWorkWindow(src,text,width,height)
+						}
 					}
-					if(!target)target="dialog";
-					if(target=="dialog")openDialog(src,text,true,width,height);
-					else openWorkWindow(src,text,width,height)
+					else
+					{
+						if(opts.nowrow==null)
+						{
+							openAlert(JSMsg_Datagrid.selectOneRow,"Edit",function(btn){return false;});
+						}else
+						{
+							if(!target)target="dialog";
+							if(target=="dialog")openDialog(src,text,true,width,height);
+							else openWorkWindow(src,text,width,height)
+						}
+					}
 
 				}
 				else if(className=="Delete")
 				{
-					if(opts.nowrow==null)
+					if(opts.multiple==true)
 					{
-						alert("Please select one row.");
-						return false;
-					}
-					if(confirm("Please sure that the selected row will be deleted."))
-					{
-						$.ajax({ 
-							url: src, 
-							//context: document.body, 
-							//data :   $(form).find(":input").serialize()  ,
-							type:"GET",
-							dataType:"json",
-							success: function(data){
-								parseJsonResponse(data,opts.rid);
-								
-							},
-						error: function(XMLHttpRequest, textStatus, errorThrown) 
+						var selected=[];
+						var dg=$this;
+						var j=0;
+						$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+							if(row.selected=="true")
+							{
+								//var rowid=row.rowid;
+								var rowid=$(row).attr("rowid");
+								selected[j++]=opts.data[rowid];
+							}
+						});    
+						if(selected.length<=0)
 						{
-									alert(XMLHttpRequest.responseText)
+							openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
 						}
+						else
+						{
+							var ids="";
+							src=opts.toolbar[btnIndex].src;
+							//src=src.replace(new RegExp("\\{ids\\}","g"),ids);
+							for( var i=0;i<selected[0].length; i++)
+							{
+								var rowData="";
+								for( var j=0;j<selected.length; j++)rowData+=selected[j][i]+",";
+								src=src.replace(new RegExp("\\{"+i+"\\}","g"),rowData);
+							}
+							openConfirm({
+								content:JSMsg_Datagrid.confirmDelete,
+								title:'Confirm',
+								ok:function(){
+									$.ajax({ 
+										url: src, 
+										//context: document.body, 
+										//data :   $(form).find(":input").serialize()  ,
+										type:"POST",
+										dataType:"json",
+										success: function(data){
+											parseJsonResponse(data,opts.rid);
+											
+										},
+										error: function(XMLHttpRequest, textStatus, errorThrown) 
+										{
+											openAlert(XMLHttpRequest.responseText,"Error",function(btn){return false;});
+										}
 
-					  });
+								  });
+								},
+								cancel:function(){}
+							});
+						}
+						return false;
+
+					}
+					else
+					{
+						if(opts.nowrow==null)
+						{
+							openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
+						}
+						else
+						{
+							openConfirm({
+								content:JSMsg_Datagrid.confirmDelete,
+								title:'Confirm',
+								ok:function(){
+									$.ajax({ 
+										url: src, 
+										//context: document.body, 
+										//data :   $(form).find(":input").serialize()  ,
+										type:"POST",
+										dataType:"json",
+										success: function(data){
+											parseJsonResponse(data,opts.rid);
+											
+										},
+										error: function(XMLHttpRequest, textStatus, errorThrown) 
+										{
+											openAlert(XMLHttpRequest.responseText,"Error",function(btn){return false;});
+										}
+
+								  });
+								},
+								cancel:function(){}
+							});
+						}
 					}
 
 				}
@@ -624,7 +743,7 @@ document.getElementById("text").value=opts.framediv.parent().html();
             currentPage = 0;
         if (pagesize <=0 )
             pagesize=10;
-        var pages = Math.floor((totalRecords +pagesize -1 ) / pagesize) ;
+        var pages = Math.ceil(totalRecords / pagesize) ;
         pager+=("<table id='paginate' class='paginate'><tbody><tr><td>") ;
         var pageSel="<select id='paginate_pagesize' class='paginate_pagesize'>";
 		var sizes=[2, 5, 10, 20, 50, 100];
@@ -636,13 +755,13 @@ document.getElementById("text").value=opts.framediv.parent().html();
 		}
 		pageSel+="</select>";
 
-		pager+=("<span class=\"string\">共 " + totalRecords + " 条记录 / "+Math.ceil(totalRecords/pagesize)+" 页 / 每页显示 "+pageSel+" 条记录</span><span class='navigator_panel'>");
+		pager+=("<span class=\"string\">"+JSMsg_Paginate.total + totalRecords + JSMsg_Paginate.records+" / "+Math.ceil(totalRecords/pagesize)+ JSMsg_Paginate.page+" /  "+ JSMsg_Paginate.everyPage+JSMsg_Paginate.display+pageSel+ JSMsg_Paginate.records+"</span><span class='navigator_panel'>");
 
         if (currentPage <= 0) {
-            pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>首页</a>");
+            pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>"+JSMsg_Paginate.firstPage +"</a>");
             pager+=("<a class=\"navigator\" page=\"0\"><span class=\"ico\">3</span></a>");
         } else {
-            pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>首页</a>");
+            pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>"+JSMsg_Paginate.firstPage +"</a>");
             if(currentPage-4>=0)
             {
                 pager+=("<a class=\"navigator\" page=\""+(currentPage-6)+"\"><span class=\"ico\">3</span></a>");
@@ -667,7 +786,7 @@ document.getElementById("text").value=opts.framediv.parent().html();
         if (currentPage >= pages - 1) 
         {
             pager+=("<a class=\"navigator\"><span class=\"ico\">4</span></a>");
-            pager+=("<a class=\"navigator_longstring\">末页<span class=\"ico\">:</span></a>");
+            pager+=("<a class=\"navigator_longstring\">"+JSMsg_Paginate.lastPage +"<span class=\"ico\">:</span></a>");
         } 
         else 
         {
@@ -679,7 +798,7 @@ document.getElementById("text").value=opts.framediv.parent().html();
            {
                 pager+=("<a class=\"navigator\"><span class=\"ico\">4</span></a>");
            }
-            pager+=("<a class=\"navigator_longstring\" page=\"" + (pages - 1) +  "\">末页<span class=\"ico\">:</span></a>");
+            pager+=("<a class=\"navigator_longstring\" page=\"" + (pages - 1) +  "\">"+JSMsg_Paginate.lastPage +"<span class=\"ico\">:</span></a>");
         }
         
         pager+=("</span></td></tr></tbody></table>") ;
@@ -735,28 +854,41 @@ document.getElementById("text").value=opts.framediv.parent().html();
 			var eprowindex = epobj.rowIndex;
 			if(opts.multiple==true)
 			{
-			if(epobj.selected!="true")
-			{
-				epobj.selected="true";
-				opts.dataobj.rows[eprowindex].className = "selectedrow";
-			}
-			else 
-			{
-				epobj.selected="false";
-				opts.dataobj.rows[eprowindex].className = "";
-			}
+				if(epobj.selected!="true")
+				{
+					epobj.selected="true";
+					opts.dataobj.rows[eprowindex].className = "selectedrow";
+				}
+				else 
+				{
+					epobj.selected="false";
+					opts.dataobj.rows[eprowindex].className = "";
+				}
 			}
 			else
 			{
-			if(eprowindex!=0){
-				if(opts.nowrow!=null){
-					opts.dataobj.rows[opts.nowrow].selected="false";
-					opts.dataobj.rows[opts.nowrow].className = "";
+				if(eprowindex!=0)
+				{
+					if(opts.nowrow!=null)
+					{
+						opts.dataobj.rows[opts.nowrow].selected="false";
+						opts.dataobj.rows[opts.nowrow].className = "";
+					}
+					if(opts.nowrow==eprowindex)
+					{
+						//deselect the row
+						epobj.selected="false";
+						opts.dataobj.rows[eprowindex].className = "";
+						opts.nowrow = null;
+					}
+					else
+					{
+						//select the row
+						epobj.selected="true";
+						opts.dataobj.rows[eprowindex].className = "selectedrow";
+						opts.nowrow = eprowindex;
+					}
 				}
-				epobj.selected="true";
-				opts.dataobj.rows[eprowindex].className = "selectedrow";
-				opts.nowrow = eprowindex;
-			}
 			}
 			
 		}
@@ -1134,27 +1266,4 @@ document.getElementById("text").value=opts.framediv.parent().html();
 
 	$.fn.extend({         
 	}); 
-/*
-$(document).ready(function(){ 
-	var resize_num=0
-	$(window).resize(function(){
-		$("div.datagrid").each(function(i,ele){
-			//ele.resizeGrid();
-			if(resize_num%2==0)$(ele).resizeGrid();
-		})
-			resize_num++;
-	})
-});
-*/
 })(jQuery);  
-/*
-window.attachEvent("onresize",re); 
-function re()
-{
-	$(".datagrid").each(function(i,ele){
-			//ele.resizeGrid();
-			alert(ele.id);
-		})
-		
-}
-*/

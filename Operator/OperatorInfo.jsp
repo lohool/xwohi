@@ -57,7 +57,7 @@ function onSubmit(myform)
 
 	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
 	//alert(myform["vo.roles.roleID"].value);
-	return sumbitAjaxForm(myform,'operator_list');
+	return ajaxDatagridSubmit(myform,'operator_list');
 	//return false;
 } 
 
@@ -106,7 +106,7 @@ function onSubmit(myform)
 	<ww:select name="vo.department.id" listKey="id" listValue="name" list="select.department" value="vo.department.id"  multiple="multiple"/>
 	<INPUT id="departmentId" TYPE="text" NAME="departmentId">
 	<INPUT id="departmentName" TYPE="text" NAME="departmentName">
-	<INPUT TYPE="button" value="Sel" onclick="openDialog('/Department/DepartmentSelect.action','Select Department',true)">
+	<INPUT TYPE="button" value="Sel" onclick="openDialog('/Department/DepartmentSelect.action','Select Department',true,600,350)">
 </TD>
 </TR>
 
