@@ -340,7 +340,7 @@
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
 	vertical-align: baseline;
-	margin: 0 1px;
+	margin: 0 0px;
 	outline: none;
 	cursor: default;
 	text-align: left;
@@ -370,7 +370,7 @@
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
 	vertical-align: baseline;
-	margin: 0 1px;
+	margin: 0 0px;
 	outline: none;
 	cursor: default;
 	text-align: left;
@@ -396,6 +396,19 @@
 
 	min-width:100px;
 	float:left;
+}
+.BLUE_MIN_BAR:hover,
+.BLUE_MIN_BAR_FOCUS:hover
+{
+	color:#FF0000;
+	background: #71D0F9;
+	background: -webkit-gradient(linear, left top, left bottom, from(#CCFFFF), to(#3399FF));
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#CCFFFF', endColorstr='#3399FF');
+	background:-ms-linear-gradient(top, #CCFFFF, #3399FF);
+
+	#background:-moz-radial-gradient(red 5%,yellow 25%,#1E90FF 50%);
+	#background:-ms-linear-gradient(-30deg, #D6DAFE 5%, #869ED7,#9193F9);
 }
 .BLUE_MIN_BAR_FOCUS .ICON,
 .BLUE_MIN_BAR .ICON
@@ -427,7 +440,6 @@
 	cursor:default;
 	float:left;
 }
-
 .BLUE_MIN_BAR_FOCUS .CLOSE,
 .BLUE_MIN_BAR .CLOSE
 {

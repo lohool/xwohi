@@ -292,8 +292,8 @@ function panelSearch(form,targetPanel,callback)
 
 function windowSearch(form,callback)
 {
-		var win =_window.windows[_window.focusWindowId];
-		win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
+	var win =_window.windows[_window.focusWindowId];
+	win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
 	if(callback)callback();
 	return false;
 }
@@ -315,7 +315,7 @@ function ajaxDatagridSubmit(form,targetGrid,callback)
 			{
 				//$('#'+id).html(xhr.responseText);
 				var win =_window.windows[_window.focusWindowId];
-				win.SetContent(XMLHttpRequest.responseText)
+				win.SetContent("Error:<br>"+XMLHttpRequest.responseText)
 					/*
                         alert(XMLHttpRequest.status);
                         alert(XMLHttpRequest.readyState);

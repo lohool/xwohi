@@ -164,11 +164,13 @@
       <class>com.lohool.sms.increment.po.Customer</class>
       <fields>
          <field name="id" type="primaryKey" />
-         <field name="group" type="relation" relateClass="com.lohool.sms.increment.po.CustomerGroup"/>
+         <field name="group" type="relation" relateClass="com.lohool.sms.increment.po.CustomerGroup" />
       </fields>
    </actions>
    <actions>
-      <action name="CustomerGroupList" />
+      <action name="CustomerGroupList" >
+	  <sql>select obj from CustomerGroup obj where obj.#name like ?</sql>
+	  </action>
       <action name="CustomerGroupAdd" />
       <action name="CustomerGroupModify" />
       <action name="CustomerGroupDelete" />

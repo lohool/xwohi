@@ -57,27 +57,27 @@ subMenu4.addItem(new MenuItem("WeekScheme","/images/open.gif","公文归档","/D
 </div>
 
 
-<h3>系统管理</h3>
+<h3>System Management</h3>
 <div>
 
-<a href="#" onclick="openWorkWindow('/Operator/OperatorList.jsp','用户管理','/images/png/user.png')"><img src="/images/png/user.png" border=0>用户管理</a><br />
-<a href="#" onclick="openWorkWindow('/Role/RoleList.action','角色管理','/images/png/user_business.png')"><img src="/images/png/user_business.png" border=0>角色管理</a><br />
-<a href="#" onclick="openWorkWindow('/Resource/ResourceList.action','资源管理')">资源管理</a><br />
-<a href="#" onclick="openWorkWindow('/Privilege/PrivilegeList.action','资源权管理')">资源权管理</a><br />
-<a href="#" onclick="openWorkWindow('/SysParam/SysParamList.action','系统参数')">系统参数</a><br />
-<a href="#" onclick="openWorkWindow('/DataGroup/DataGroupList.action','数据组')">数据组</a><br />
-<a href="#" onclick="openWorkWindow('/Permission/PermissionList.action','数据组权限')">数据组权限</a><br />
+<a href="#" onclick="openWorkWindow('/Operator/OperatorList.jsp','Users','/images/png/user.png')"><img src="/images/png/user.png" border=0>Users</a><br />
+<a href="#" onclick="openWorkWindow('/Role/RoleList.action','Roles','/images/png/user_business.png')"><img src="/images/png/user_business.png" border=0>Roles</a><br />
+<a href="#" onclick="openWorkWindow('/Operator/ResourceList.jsp','资源管理')">Resource</a><br />
+<a href="#" onclick="openWorkWindow('/Privilege/PrivilegeList.action','资源权管理')">Privileges</a><br />
+<a href="#" onclick="openWorkWindow('/SysParam/SysParamList.action','系统参数')">Sys Parameters</a><br />
+<a href="#" onclick="openWorkWindow('/DataGroup/DataGroupList.action','数据组')">Data Group</a><br />
+<a href="#" onclick="openWorkWindow('/Permission/PermissionList.action','数据组权限')">Permissions</a><br />
 
 <ww:if test="#session.operation_user.isAccess(\"/Job/JobList.action\")==true">
 --------------<br>
-<a href="#" onclick="openWorkWindow('/Job/JobList.action','职务管理')">职务管理</a><br />
+<a href="#" onclick="openWorkWindow('/Job/JobList.action','职务管理')">Jobs</a><br />
 </ww:if>
 --------------<br>
 
-<a href="#" onclick="openWorkWindow('/Operator/MyselfInfo.action','个人资料')">个人资料</a><br />
-<a href="#" onclick="openWorkWindow('/Operator/OperatorPwd.action','修改密码')">修改密码</a><br />
+<a href="#" onclick="openWorkWindow('/Operator/MyselfInfo.action','个人资料')">My Profile</a><br />
+<a href="#" onclick="openWorkWindow('/Operator/OperatorPwd.action','修改密码')">Change Password</a><br />
 
-<a href="#" onclick="openWorkWindow('/Customer/Customer.jsp','客户组管理ASADASDASD')">客户组管理</a><br />
+<a href="#" onclick="openWorkWindow('/Customer/Customer.jsp','Customers')">Customers</a><br />
 <ul>
 		<ww:action id="cl" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="false" />
 		<ww:property value="#attr.c1" />

@@ -1049,7 +1049,6 @@ function isExist(title)
 
 function loadContentToPanel(panelId,url,data)
 {
-
 			$("#"+panelId).empty();
 /*
 			$("#"+panelId).load(url,data,function(response,status,xhr){
@@ -1130,7 +1129,7 @@ function reDefineHTMLActions(parentId)
 			//if <A> is in a data grid table
 			if(this.parentNode && this.parentNode.tagName=="TD")this.parentNode.click()
 			//$("#"+this.target).load(this.href);
-			loadContentToPanel(this.target ,encodeURI (this.href),null)
+			loadContentToPanel(this.target ,this.href,null)
 			return false;
 		}
 	})

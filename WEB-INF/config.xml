@@ -7,14 +7,8 @@
         <characterEncoding>utf-8</characterEncoding>
     </locale>
 	<site>
-		<name>iCRM</name>
+		<name>XWOHI</name>
 	</site>
-	<icrm>
-	<!--	
-		<record-server>http://192.168.1.134:8090/Record/</record-server>
-	-->
-		<record-server>http://10.10.10.110:8090/Record/</record-server>
-	</icrm>
 	<upload-file>
 		<temp-path>D:/apache-tomcat-7.0.42/webapps/ROOT/temp_file/</temp-path>
 		<url>/temp_file</url>

@@ -182,14 +182,6 @@ $.fn.datagrid= function (options){
 
 
 }
-	//全选
-	$.fn.datagrid.selectall = function(checked){
-		var objbox = document.getElementsByName("dhdgchkbox");
-		var objboxl = objbox.length;
-		for(var i=0;i<objboxl;i++){
-			objbox[i].checked = checked;
-		}
-	}
 	function gen_toolbar(opts)
 	 {
 		if(opts.toolbar.length==0)return null;
@@ -214,21 +206,23 @@ $.fn.datagrid= function (options){
 		//init the data 
 		var dgc = "";
 		var avgw = opts._width-20
+		if(opts.multiple){
+			avgw = avgw-30		
+		}
 		avgw = Math.floor(avgw/opts.columns.length);
 		if(opts.columns.length>0){
 			//dgc = '<thead><tr><td class="firstcolumn">&nbsp;</td>';
 			dgc = '<thead><tr class="title">';
-			/*
+			
 			if(opts.multiple){
 				dgc += '<td class="column" style="width:30px;text-align:center;padding:0;text-indent:0;text-align:center;"><input id="selectAll" type="checkbox" style="margin:0;" ></td>';
 			}
-			*/
+			
 			for(var cc=0;cc<opts.columns.length;cc++){
 				if(opts.colwidth.length>cc){
 					dgc += '<td class="column" width="'+opts.colwidth[cc]+'"  >'+opts.columns[cc]+'<span class="arrow"></span></td>';
 				}else{
 					dgc += '<td class="column" width="'+avgw+'" >'+opts.columns[cc]+'<span class="arrow"></span></td>';
-					//dgc += '<td class="column" >'+opts.columns[cc]+'<span class="arrow"></span></td>';
 				}
 			}
 			dgc += '<td class="lastcolumn" >&nbsp;</td></tr></thead>';
@@ -248,11 +242,11 @@ $.fn.datagrid= function (options){
 				//dgd += '<tr onmouseover="'+opts.callname+'.dataover(opts);" onmouseout="'+opts.callname+'.dataout(opts);" ondblclick="'+opts.callname+'.dblclick_fun(opts);" oncontextmenu="'+opts.callname+'.contextmenu_fun(opts,event);"><td class="firstcolumn">&nbsp;</td>';
 				//dgd += '<tr ><td class="firstcolumn">&nbsp;</td>';
 				dgd += '<tr rowid='+r+'>';
-				/*
+				
 				if(opts.multiple){
-					dgd += '<td style="width:30px;text-align:center;overflow:hidden;padding:0;text-align:center;"><input type="checkbox" style="margin:0;" name="dhdgchkbox"></td>';
+					dgd += '<td style="width:30px;text-align:center;overflow:hidden;padding:0;text-align:center;"><input type="checkbox" style="margin:0;" class="dhdgchkbox"></td>';
 				}
-				*/
+				
 				//only show the data with columns
 				//for(var c=0;c<opts.data[r].length;c++){
 				for(var c=0;c<opts.columns.length;c++){
@@ -269,24 +263,6 @@ $.fn.datagrid= function (options){
 				dgd += '<td class="lastdata" >&nbsp;</td></tr>';
 			}
 			dgd+="</tbody>";
-			if(dgc==""){
-				//dgc = '<thead>';
-				dgc = '<thead><tr><td class="firstcolumn">&nbsp;</td>';
-				/*
-				if(opts.multiple){
-					dgc += '<td class="column title" style="width:30px;text-align:center;padding:0;text-indent:0;text-align:center;"><input type="checkbox" style="margin:0;" onclick="'+opts.callname+'.selectall(opts.checked);"></td>';
-				}
-				*/
-				for(var dc=0;dc<opts.columns.length;dc++){
-					if(opts.colwidth.length>dc){
-						dgc += '<td class="column title" width="'+opts.colwidth[dc]+'">Expr'+(dc+1)+'<span class="arrow"></span></td>';
-					}else{
-						dgc += '<td class="column title" width="'+avgw+'" >Expr'+(dc+1)+'<span class="arrow"></span></td>';
-						//dgc += '<td class="column title" onmouseover="'+opts.callname+'.over(opts);" onmouseout="'+opts.callname+'.out(opts);" onmousemove="'+opts.callname+'.cc(event,opts);" onmousedown="'+opts.callname+'.rsc_d(event,opts);" onmouseup="'+opts.callname+'.mouseup(opts);">Expr'+(dc+1)+'<span class="arrow"></span></td>';
-					}
-				}
-				dgc += '<td class="lastcolumn">&nbsp;</td></tr></thead>';
-			}
 		}
 		var pager=null;
 		//if(opts.pager!=null)opts.pageObj=$(paginate(opts.pager.current_page*opts.pager.pagesize,opts.pager.pagesize,opts.pager.total));
@@ -301,7 +277,7 @@ $.fn.datagrid= function (options){
 		mainframe.empty();
 		var dgframe = $("<div class='datapanel' style='padding:0px;margin:0px;overflow-x:auto;overflow-y:auto;overflow:auto;'></div>")//document.createElement("DIV");
 		//dgframe.id = this.rid;
-		dgframe.css("width", mainframe.width());
+		dgframe.css("width", mainframe.width()-4);
 		//var barHight=0;
 		//if(pager)barHight+=pager.height();
 		//dgframe.css("height", mainframe.height()-barHight);
@@ -335,7 +311,6 @@ $.fn.datagrid= function (options){
 		dgframe.append( dgcolumn);
 		dgframe.append( dgdata);
 
-
 		mainframe.append(toolbar);
 		mainframe.append(dgframe);
 		if(opts.pageObj!=null)
@@ -343,7 +318,7 @@ $.fn.datagrid= function (options){
 			mainframe.append(opts.pageObj);
 		}
 		//opts.parentNode.appendChild(dgframe);
-		//document.getElementById("text").value=mainframe.html();
+		document.getElementById("text").value=mainframe.html();
 
 		$("document").keydown(function(){
 			 updown();
@@ -377,7 +352,7 @@ $.fn.datagrid= function (options){
 
 		var pageBarHeight=0;
 		if(opts.pageObj!=null && opts.pager.total>0)pageBarHeight+=opts.pageObj.height();
-		dgframe.css("height", mainframe.height()-pageBarHeight-toolbarHeight);
+		dgframe.css("height", mainframe.height()-pageBarHeight-toolbarHeight-4);
 
 
 
@@ -437,6 +412,15 @@ $.fn.datagrid= function (options){
 				if(this.selected=="true")this.className = "selectedrow";
 				else this.className="";
 			});
+			$this.find('#selectAll').bind("click",function(){
+				$.fn.datagrid.selectall(opts,this.checked)
+			});
+
+			$this.find('.dhdgchkbox').bind("click",function(e){
+				var row=this.parentNode;
+				row.click();
+					//e=e||window.event;getrow(e,opts);
+			});
 
 			$this.find('.paginate .paginate_pagesize').bind("change",function(){
 				var pagesize=$(this).val();
@@ -494,7 +478,6 @@ $.fn.datagrid= function (options){
 						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 					}
 				}
-	
 
 				if((/^javascript *:/i).test(src))
 				{
@@ -516,6 +499,7 @@ $.fn.datagrid= function (options){
 						//load into a named panel by ID
 						$('#'+target).empty();
 						$('#'+target).load(src);
+						reDefineHTMLActions(target);
 					}
 					else
 					{
@@ -562,7 +546,7 @@ $.fn.datagrid= function (options){
 							*/
 							if(!target)target="dialog";
 							if(target=="dialog")openDialog(src,text,true,width,height);
-							else openWorkWindow(src,text,width,height)
+							else openWorkWindow(src,text)
 						}
 					}
 					else
@@ -574,7 +558,7 @@ $.fn.datagrid= function (options){
 						{
 							if(!target)target="dialog";
 							if(target=="dialog")openDialog(src,text,true,width,height);
-							else openWorkWindow(src,text,width,height)
+							else openWorkWindow(src,text)
 						}
 					}
 
@@ -607,12 +591,14 @@ $.fn.datagrid= function (options){
 							{
 								var rowData="";
 								for( var j=0;j<selected.length; j++)rowData+=selected[j][i]+",";
+								if(rowData.length>0)rowData=rowData.substring(0,rowData.length-1);
 								src=src.replace(new RegExp("\\{"+i+"\\}","g"),rowData);
 							}
 							openConfirm({
 								content:JSMsg_Datagrid.confirmDelete,
 								title:'Confirm',
 								ok:function(){
+									alert(src)
 									$.ajax({ 
 										url: src, 
 										//context: document.body, 
@@ -648,6 +634,7 @@ $.fn.datagrid= function (options){
 								content:JSMsg_Datagrid.confirmDelete,
 								title:'Confirm',
 								ok:function(){
+							alert(src)
 									$.ajax({ 
 										url: src, 
 										//context: document.body, 
@@ -705,7 +692,8 @@ $.fn.datagrid= function (options){
 				$this.css("height",opts._height);
 			
 			var dgc = "";
-			var avgw = opts._width-20
+			var avgw = opts._width-20;
+			if(opts.multiple)avgw=avgw-30;
 			avgw = Math.floor(avgw/opts.columns.length);
 			opts.framediv.css("width",w);
 			var toolbarHeight =0;
@@ -719,11 +707,12 @@ $.fn.datagrid= function (options){
 			}
 			
 			opts.framediv.css("height", $this.height()-pageBarHeight-toolbarHeight);
-
-				for(var cc=0;cc<opts.columns.length;cc++){
-					if(opts.colwidth.length>cc){
-						opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc]+"px";
-						opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc]+"px";
+			var startIndex=0;
+			if(opts.multiple)startIndex=1;
+				for(var cc=startIndex;cc<opts.columns.length;cc++){
+					if(opts.colwidth.length>cc-startIndex){
+						opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+						opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
 						//dgc += '<td class="column" width="'+opts.colwidth[cc]+'"  >'+opts.columns[cc]+'<span class="arrow"></span></td>';
 					}else{
 						//dgc += '<td class="column" width="'+avgw+'" >'+opts.columns[cc]+'<span class="arrow"></span></td>';
@@ -731,7 +720,6 @@ $.fn.datagrid= function (options){
 						opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
 					}
 				}
-document.getElementById("text").value=opts.framediv.parent().html();
 		}
 
 	 function paginate(currentPage,pagesize, totalRecords)
@@ -755,7 +743,7 @@ document.getElementById("text").value=opts.framediv.parent().html();
 		}
 		pageSel+="</select>";
 
-		pager+=("<span class=\"string\">"+JSMsg_Paginate.total + totalRecords + JSMsg_Paginate.records+" / "+Math.ceil(totalRecords/pagesize)+ JSMsg_Paginate.page+" /  "+ JSMsg_Paginate.everyPage+JSMsg_Paginate.display+pageSel+ JSMsg_Paginate.records+"</span><span class='navigator_panel'>");
+		pager+=("<span class=\"string\">"+JSMsg_Paginate.total + totalRecords + JSMsg_Paginate.records+","+Math.ceil(totalRecords/pagesize)+ JSMsg_Paginate.page+" /  "+ JSMsg_Paginate.everyPage+JSMsg_Paginate.display+pageSel+ JSMsg_Paginate.records+"</span><span class='navigator_panel'>");
 
         if (currentPage <= 0) {
             pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>"+JSMsg_Paginate.firstPage +"</a>");
@@ -852,15 +840,21 @@ document.getElementById("text").value=opts.framediv.parent().html();
 		if(esrcobj.parentNode.tagName=="TR"){
 			var epobj = esrcobj.parentNode;
 			var eprowindex = epobj.rowIndex;
+
+			var checkbox=epobj.childNodes[0].childNodes[0];
+
+
 			if(opts.multiple==true)
 			{
 				if(epobj.selected!="true")
 				{
+					checkbox.checked = true;
 					epobj.selected="true";
 					opts.dataobj.rows[eprowindex].className = "selectedrow";
 				}
 				else 
 				{
+					checkbox.checked = false;
 					epobj.selected="false";
 					opts.dataobj.rows[eprowindex].className = "";
 				}
@@ -891,6 +885,32 @@ document.getElementById("text").value=opts.framediv.parent().html();
 				}
 			}
 			
+		}
+	}
+
+	//全选
+	$.fn.datagrid.selectall = function(opts,checked){
+			/*
+		var objbox = $(this).getElementsByName("dhdgchkbox");
+		var objboxl = objbox.length;
+		for(var i=0;i<objboxl;i++){
+			objbox[i].checked = checked;
+		}
+		*/
+		for(var i=0;i<opts.dataobj.childNodes[1].rows.length;i++){
+			var rowsobj = opts.dataobj.childNodes[1].rows[i];
+			var checkbox=rowsobj.childNodes[0].childNodes[0];
+			checkbox.checked = checked;
+			if(checked)
+			{
+				rowsobj.selected="true";
+				rowsobj.className = "selectedrow";
+			}
+			else 
+			{
+				rowsobj.selected="false";
+				rowsobj.className = "";
+			}
 		}
 	}
 
@@ -1128,17 +1148,6 @@ document.getElementById("text").value=opts.framediv.parent().html();
 			rowsobjB = null;
 		}
 	}
-
-	//加载数据
-	$.fn.datagrid.setdata = function($this,opts,arrdata){
-		if(arrdata && arrdata.length>0){
-			$this.empty();
-			opts.data = arrdata;
-			changeposv = true;
-			nowrow = null;
-			$.fn.datagrid.init($this,opts);
-		}
-	}
 	$.fn.datagrid.jumpToPage = function($this,page,opts){
 				if(page)
 				{
@@ -1166,6 +1175,18 @@ document.getElementById("text").value=opts.framediv.parent().html();
 				}
 	}
 
+
+	//加载数据
+	$.fn.datagrid.setdata = function($this,opts,arrdata){
+		if(arrdata){
+			$this.empty();
+			opts.data = arrdata;
+			changeposv = true;
+			nowrow = null;
+			$.fn.datagrid.init($this,opts);
+			reDefineHTMLActions($this.attr("id"));
+		}
+	}
 	$.fn.datagrid.loadData = function($this,options,form) {
 		var param="";
 		var opts=options;
@@ -1222,8 +1243,9 @@ document.getElementById("text").value=opts.framediv.parent().html();
 				opts.nowrow=null;
 				$.fn.datagrid.setdata($this,opts,opts.data);
             },
-            error: function (err) {
-                alert("Error:"+err);
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //alert("Error:"+err);
+				$this.html(XMLHttpRequest.responseText);
             }
         });
 /*

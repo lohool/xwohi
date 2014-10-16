@@ -44,13 +44,13 @@ function form_submit(form)
 <div class="panel">
 <ww:form name="form1" namespace="/Role" action="RoleDataPermissionModify" method="post" validate="true" onsubmit="return form_submit(this)">
 <ww:hidden  name="vo.roleID"/>
-<table width="100%" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
+<table width="100%" align="center" cellspacing="0" cellpadding="0" id="input_table" >
 <ww:action id="dgl" name="DataGroupList" namespace="/DataGroup" executeResult="false" >
 			<ww:param name="pageSize" value="100" />
 </ww:action>
 <TR>
 	<ww:iterator value="#attr.dgl.objList" status="dglList">
-		<ww:if test="#dglList.index % 2 = 1">AAAA
+		<ww:if test="#dglList.index % 2 == 0">
 </TR>
 <TR>
 		</ww:if>

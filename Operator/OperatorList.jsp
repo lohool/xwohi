@@ -17,9 +17,6 @@
 <div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="37px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
-<!--
-<TEXTAREA id="text" NAME="text" ROWS="15" COLS="70"></TEXTAREA>
--->
 </div>
 <script>
 var i=0;

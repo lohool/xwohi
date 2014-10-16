@@ -1,11 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html;charset=utf-8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%String a="A"+(int)(Math.random()*1000);%>
 <%
 	String name=request.getParameter("vo.name");
 	if(name==null)name="";
-
 %>
 <ww:form id="Customer_list_form" action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onSubmit="return panelSearch(this,'customer_panel')">
    <INPUT TYPE="hidden" NAME="groupId" value="<%=request.getParameter("groupId")%>">

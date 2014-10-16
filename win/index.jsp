@@ -6,8 +6,7 @@
 <html>
 
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-<title>JIMEÆ½Ì¨¹ÜÀíÏµÍ³</title>
+<title>JIME Framework</title>
 
 
 <link rel="stylesheet" href="/win/jqueryui/themes/cupertino/jquery-ui.min.css" />
@@ -47,14 +46,14 @@
 <body >
 <div id="TopBar" class="panel" style="z-index:10000;position:absolute; left:0;top:0; width:100%;height:30px;"> 
 	<div style=" height:30px;float:right"> 
-		<span   ><ww:property value="#session.operation_user.name"/></span>
+		<span ><ww:property value="#session.operation_user.name"/></span>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</a>
-		<a href="#" class="menuBarButton"  onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >我的任务</a>
+		<a href="#" class="menuBarButton"  onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >Window</a>
 		<a href="#" class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</a>
 		<a href="#" class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Ok')},cancel:function(){alert('Cancel')}})" >Confirm</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.jsp','Modal Dialog',true)" >内部模式对话框</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >外部模式对话框</a>
+		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</a>
+		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >Outer Dialog</a>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="openDialog('/crm/FAQList.html','·¢¶ÌÐÅ')" >FAQ</a>
 		<a class="menuBarButton" >Help</a> 
@@ -225,8 +224,6 @@ function resizeMenu()
 			}
 		});
 }
-
-
 </script>
 
 

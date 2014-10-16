@@ -1,67 +1,52 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
-<html>
-<head>
-<META http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title></title>
-</head>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-
-<body leftmargin="0" topmargin="0" >
-<div class="page">
-<div id="pageTitle">
-<TABLE width="100%" height="30"  cellspacing="0" cellpadding="0" id="title-table">
-<thead>
-<TR>
-	<TD>
-	<span class="pageTitle-left">
-	<img height="13" width="13" src="/images/ico_arrow_title.gif">
-	<xwohi:i18n text="Privilege.list"/>
-	</span>
-	<span class="pageTitle-right" >
-	<a href="/Privilege/PrivilegeInput.action"><xwohi:i18n text="new"/></a>
-	</span>
-	</TD>
-</TR>
-</thead>
-</TABLE>
-
+<%String a="A"+(int)(Math.random()*1000);%>
+<div class="page" style="left:0;top:0;width:100%; height:100%;">
+<div class="panel" style="left:0;top:0; height:25px;">
+	<ww:form id="Privilege_list_form" name="Privilege_list_form" namespace="/Privilege"  action="PrivilegeList" method="post" validate="true"  onsubmit="return windowSearch(this);">
+		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
+		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
+		Name:<ww:textfield name="vo.name" />
+		<INPUT TYPE="submit" value="search" class="button biground">
+		<INPUT TYPE="reset" value="reset" class="button biground">
+	</ww:form>
 </div>
-<table width="100%" cellspacing="0" id="sort-table" class="sort-table">
-<thead>
-<tr height="30px">
-<td><xwohi:i18n text="Privilege.name" /></td>
-<td><xwohi:i18n text="Privilege.resource" /></td>
-<td><xwohi:i18n text="Privilege.url" /></td>
-<TD width="30"><xwohi:i18n text="delete" /></TD>
-<TD width="30"><xwohi:i18n text="modify" /></TD>
-</tr>
-</thead>
-<tbody>
-<ww:iterator value="objList">
-<TR height="20" valign="middle">
-<td>
-			<ww:property value="name"/>
-			</td><td>
-			<ww:property value="resource.name"/>
-			</td><td>
-			<ww:property value="url"/>
-			</td><TD>
-			<a href="javascript:doDelete('<ww:property value="privilegeID"/>')"><img src="/images/delete.gif" border="0" alt="<xwohi:i18n text="delete" />"></a>
-			</TD><TD>
-			<a href="javascript:doLoad('<ww:property value="privilegeID"/>')"><img src="/images/detail.gif" border="0" alt="<xwohi:i18n text="modify" />"></a>
-			</TD>
-</TR>
-</ww:iterator>
-</tbody>
-</table>
-<ww:property value="paginateView" escape="false"></ww:property>
+	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" layoutHeight="37px">
+		<div id="Privilege_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
+	</div>
 </div>
-<form name="form1" action="/Privilege/PrivilegeList.action">
-<ww:hidden name="page"></ww:hidden>
-<ww:hidden name="pageSize"></ww:hidden> 
-	<ww:hidden name="vo.privilegeID" /> 
-</form>
+<script>
+	     $(document).ready(function() {
+	          $("#Privilege_list_<%=a%>").datagrid({
+			  callname: 'Privilege_list_<%=a%>',
+			  columns:[
+				  "<xwohi:i18n text="ID" />",
+				  "<xwohi:i18n text="Privilege.name" />",
+				  "<xwohi:i18n text="Privilege" />",
+				  "<xwohi:i18n text="URL" />"
+			  ],
+			  linkedForm:"Privilege_list_form",
+			  pager:
+				{
+					"total":<ww:property value="resultSize"/>,
+					"current_page":<ww:property value="page"/>,
+					"pagesize":<ww:property value="pageSize"/>
+				},
+			  colwidth:[40],
+			  data: [
+			  <ww:iterator value="objList">
+				  [
+				  "<ww:property value="PrivilegeID"/>",
+				  "<ww:property value="name"/>",
+				  "<ww:property value="getText(resource.name)"/>",
+				  "<ww:property value="url"/>"
+				  ],
+			   </ww:iterator>
+			  ]
+			  }
+			  );
+	     });
 
-</body>
-</html>
+
+</script>

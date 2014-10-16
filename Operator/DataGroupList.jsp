@@ -1,129 +1,61 @@
-<%@ page session="true" %>
-<%@ page contentType="text/html;charset=gb2312" %> 
+
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns:ww="http://www.opensymphony.com/webwork/" xmlns:xwohi="http://www.lohool.com/wohi/">
-   <head>   </head>
-   <body leftmargin="0" topmargin="0">
-      <div class="page">
-         <div id="pageTitle">
-            <TABLE cellpadding="0" cellspacing="0" height="30" id="title-table" width="100%">
-               <thead>
-                  <TR>
-                     <TD>
-                        <span class="pageTitle-left"><xwohi:i18n text="DataGroup.list" />
-                           <img height="13" src="/images/ico_arrow_title.gif" width="13" />
-                        </span>
-                        <span class="pageTitle-right">
-                           <a href="/DataGroup/DataGroupInput.action">
-                              <xwohi:i18n text="new" />
-                           </a>
-                        </span>
-                     </TD>
-                  </TR>
-               </thead>
-            </TABLE>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" width="98%">
-            <tr>
-               <td>
-                  <a href="#" onclick="OpenAndCloseSeach(document.all.seachdiv);return false;">
-                     <font color="red">>>>
-                        <xwohi:i18n text="search" />
-                     </font>
-                  </a>
-                  <hr color="red" style="height:1px;" />
-               </td>
-            </tr>
-         </table>
-         <div align="left" id="seachdiv" style="display:none">
-            <ww:form action="DataGroupList" method="post" name="form1" namespace="/DataGroup" validate="true"><ww:hidden name="vo.id" />
-               <ww:hidden name="page" />
-               <ww:hidden name="pageSize" />
-               <table>
-                  <TR>
-                     <TD align="right" bgColor="#ffffff" width="40%">
-                        <xwohi:i18n text="DataGroup.name" />
-                     </TD>
-                     <TD>
-                        <ww:textfield name="vo.name" required="true" />
-                     </TD>
-                  </TR>
-                  <TR>
-                     <TD align="right" bgColor="#ffffff" width="40%">
-                        <xwohi:i18n text="DataGroup.URI" />
-                     </TD>
-                     <TD>
-                        <ww:textfield name="vo.URI" required="true" />
-                     </TD>
-                  </TR>
-                  <TR>
-                     <TD align="right" bgColor="#ffffff" width="40%">
-                        <xwohi:i18n text="DataGroup.dataObjectName" />
-                     </TD>
-                     <TD>
-                        <ww:textfield name="vo.dataObjectName" required="true" />
-                     </TD>
-                  </TR>
-                  <TR>
-                     <TD align="right" bgColor="#ffffff" width="40%">
-                        <xwohi:i18n text="DataGroup.groupObjectName" />
-                     </TD>
-                     <TD>
-                        <ww:textfield name="vo.groupObjectName" required="true" />
-                     </TD>
-                  </TR>
-                  <TR>
-                     <TD align="right" bgColor="#ffffff" width="40%">
-                        <xwohi:i18n text="DataGroup.nameSpace" />
-                     </TD>
-                     <TD>
-                        <ww:textfield name="vo.nameSpace" required="true" />
-                     </TD>
-                  </TR>
-                  <TR>
-                     <TD align="center" colspan="2"><input type="submit" value="<xwohi:i18n text="search" />">
-      <input type="reset" value="<xwohi:i18n text="reset" />"></TD>
-                  </TR>
-               </table>
-            </ww:form>
-         </div>
-         <table cellspacing="0" class="sort-table" id="sort-table" width="100%">
-            <thead>
-               <tr>
-                  <td><xwohi:i18n text="DataGroup.name" /></td>
-                  <td><xwohi:i18n text="DataGroup.URI" /></td>
-                  <td><xwohi:i18n text="DataGroup.dataObjectKeyName" /></td>
-                  <td><xwohi:i18n text="DataGroup.dataObjectName" /></td>
-                  <td><xwohi:i18n text="DataGroup.groupObjectName" /></td>
-                  <td><xwohi:i18n text="DataGroup.groupObjectKeyName" /></td>
-                  <td><xwohi:i18n text="DataGroup.nameSpace" /></td>
-                  <TD width="30">
-                     <xwohi:i18n text="delete" />
-                  </TD>
-                  <TD width="30">
-                     <xwohi:i18n text="modify" />
-                  </TD>
-               </tr>
-            </thead>
-            <tbody>
-               <ww:iterator value="objList">
-                  <TR>
-                     <td><ww:property value="name"/></td>
-                     <td><ww:property value="URI"/></td>
-                     <td><ww:property value="dataObjectKeyName"/></td>
-                     <td><ww:property value="dataObjectName"/></td>
-                     <td><ww:property value="groupObjectName"/></td>
-                     <td><ww:property value="groupObjectKeyName"/></td>
-                     <td><ww:property value="nameSpace"/></td>
-                     <TD><a href="javascript:doDelete('<ww:property value="id"/>')"><img src="/images/delete.gif" border="0"/></a></TD>
-                     <TD><a href="javascript:doLoad('<ww:property value="id"/>')"><img src="/images/detail.gif" border="0" /></a></TD>
-                  </TR>
-               </ww:iterator>
-            </tbody>
-         </table>
-         <ww:property escape="false" value="paginateView" />
-      </div>
-   </body>
-</html>
+<%String a="A"+(int)(Math.random()*1000);%>
+<div class="page" style="left:0;top:0;width:100%; height:100%;">
+<div class="panel" style="left:0;top:0; height:25px;">
+	<ww:form id="DataGroup_list_form" name="DataGroup_list_form" namespace="/DataGroup"  action="DataGroupList" method="post" validate="true"  onsubmit="return windowSearch(this);">
+		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
+		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
+		Name:<ww:textfield name="vo.name" />
+		<INPUT TYPE="submit" value="search" class="button biground">
+		<INPUT TYPE="reset" value="reset" class="button biground">
+	</ww:form>
+</div>
+	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" layoutHeight="37px">
+		<div id="DataGroup_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
+	</div>
+</div>
+<script>
+	     $(document).ready(function() {
+	          $("#DataGroup_list_<%=a%>").datagrid({
+			  callname: 'DataGroup_list_<%=a%>',
+			  columns:[
+				  "<xwohi:i18n text="ID" />",
+				  "<xwohi:i18n text="DataGroup.name" />",
+				  "<xwohi:i18n text="DataGroup.URI" />",
+				  "<xwohi:i18n text="DataGroup.dataObjectKeyName" />",
+				  "<xwohi:i18n text="DataGroup.dataObjectName" />",
+				  "<xwohi:i18n text="DataGroup.groupObjectName" />",
+				  "<xwohi:i18n text="DataGroup.groupObjectKeyName" />",
+				  "<xwohi:i18n text="DataGroup.nameSpace" />"
+			  ],
+			  linkedForm:"DataGroup_list_form",
+			  pager:
+				{
+					"total":<ww:property value="resultSize"/>,
+					"current_page":<ww:property value="page"/>,
+					"pagesize":<ww:property value="pageSize"/>
+				},
+			  colwidth:[40],
+			  data: [
+			  <ww:iterator value="objList">
+				  [
+				  "<ww:property value="id"/>",
+				  "<ww:property value="name"/>",
+				  "<ww:property value="URI"/>",
+				  "<ww:property value="dataObjectKeyName"/>",
+				  "<ww:property value="dataObjectName"/>",
+				  "<ww:property value="groupObjectName"/>",
+				  "<ww:property value="groupObjectKeyName"/>",
+				  "<ww:property value="nameSpace"/>"
+				  ],
+			   </ww:iterator>
+			  ]
+			  }
+			  );
+	     });
+
+
+</script>

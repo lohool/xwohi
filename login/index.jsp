@@ -1,11 +1,10 @@
-<%@ page contentType="text/html; charset=utf8" %>
+<%@ page contentType="text/html; charset=UTF8" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
 <title>会员管理登录</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="login/css/login.css" rel="stylesheet" type="text/css" />
 </head>
 

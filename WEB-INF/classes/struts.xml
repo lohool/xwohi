@@ -19,8 +19,8 @@
 
 	<package extends="struts-default" name="action-default">
 	  <global-results>
-		<result type="dispatcher" name="access_rejected">/notlimit.jsp</result>
-		<result type="dispatcher" name="error">/error.jsp</result>
+		<result type="dispatcher" name="access_rejected">/exception/notlimit.jsp</result>
+		<result type="dispatcher" name="error">/exception/error.jsp</result>
 		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
 		<result type="dispatcher" name="HibernateException">/exception/HibernateException.jsp</result>
 		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
@@ -121,7 +121,7 @@
          <interceptor-ref name="validationStack" />
       </action>
       <action name="RoleDelete" class="BasicDelete">
-         <result type="redirect" name="success">/Operator/RoleRefreshList.jsp</result>
+         <result type="dispatcher" name="success">/Operator/RoleRefreshList.jsp</result>
       </action>
       <action name="RoleInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/Operator/RoleInfo.jsp</result>
@@ -147,7 +147,7 @@
    <package name="Resource" extends="action-default" namespace="/Resource">
       <default-interceptor-ref name="exceptionStack" />
       <action name="ResourceList" class="BasicList">
-         <result type="dispatcher" name="success">/Operator/ResourceList.jsp</result>
+         <result type="dispatcher" name="success">/Operator/ResourceListData.jsp</result>
       </action>
    </package>
    <package name="Privilege" extends="action-default" namespace="/Privilege">

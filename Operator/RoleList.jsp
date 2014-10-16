@@ -23,24 +23,24 @@
 				//minus_height:40,
 			  //multiple:true,
 			  toolbar:[
-				  {"text":"Home","btnClass":"Home","src":"/Role/RoleList.action","width":500,"height":300},
+				  {"text":"Home","btnClass":"Home","src":"/Role/RoleList.action"},
 				  {"text":"Refresh","btnClass":"Refresh"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Add User","btnClass":"Add","src":"/Role/RoleInput.action","width":550,"height":330},
 				  {"text":"Edit Role Info","btnClass":"Edit","target":"window","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},
-				  {"text":"Delete","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
-				  {"text":"Delete Test","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.id={0}&vo.name={1}&vo.state=1"},
+				  {"text":"Delete","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.roleID={0}&vo.name={1}&vo.state=2"},
+				  {"text":"Delete Test","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.roleID={0}"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Printer","btnClass":"Printer","src":"/Role/RoleInput.action","width":500,"height":300},
 				  {"text":"Help","btnClass":"Help","target":"window","src":"/Role/RoleInfo.action?vo.id=1","width":300,"height":200}
 				  ],
 			  columns:[
 				  "<xwohi:i18n text="ID" />",
-				  "<xwohi:i18n text="name" />",
+				  "<xwohi:i18n text="Role.name" />",
 				  "<xwohi:i18n text="description" />"
 			  ],
 			  linkedForm:"Role_list_form",
-			  //colwidth:[30,120,200],
+			  colwidth:[40,150],
 			  pager:
 				{
 					"total":<ww:property value="resultSize"/>,
