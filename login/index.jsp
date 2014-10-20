@@ -1,10 +1,11 @@
-<%@ page contentType="text/html; charset=UTF8" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
 <title>会员管理登录</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="login/css/login.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -20,20 +21,21 @@
                         <td height="40" align="center"><img src ="login/images/login_tit.png" alt="logo"/></td>
                     </tr>
                 </table>
-                <ww:form name="form1" action="/Login.action" method="POST" validate="true" theme="simple">
+                <ww:form name="form1"  action="/Login.action" method="POST"  theme="my_simple">
 				
-				<table>
+				<table >
 				    <tr>
 					 <td colspan=2>
-					 <!--
+					 <ww:property value="errors.class"/>
 						<ww:if test="errors!=null && errors.size()>0">
 						<FONT SIZE="2" COLOR="red">
 						<ww:iterator value="errors">
-						<br><ww:property/> 
+						<ww:property value="getText(value[0])" /> <br>
 						</ww:iterator> 
 						</FONT>
 						</ww:if>
-						<hr>
+					 <!--
+						<hr width="80%">
 						<ww:if test="actionErrors != null">
 						<ww:property value="actionErrors" />
 						</ww:if>
@@ -42,23 +44,23 @@
 				    </tr>
                     <tr>
                         <td width="80" height="35" align="right">帐 号：</td>
-                        <td align="left"><ww:textfield   name="account" required="true" maxlength="30" size="12"/></td>
+                        <td align="left"><ww:textfield   name="account"  style="width:120px;" /></td>
                     </tr>
                     <tr>
                         <td width="80" height="35" align="right">密 码：</td>
-                        <td align="left"><ww:password  name="password" id="flydate22"  size="12" required="true"/></td>
+                        <td align="left"><ww:password  name="password"  required="true" style="width:120px;"/></td>
                     </tr>
                     <tr>
                         <td width="80" height="35" align="right">验证码：</td>
-                        <td align="left">
-                            <table>
+                        <td align="left" valign="middle">
+                            <table >
                                 <tr>
-                                    <td width="100" align="left">
-                                        <input type="text" id="txtVerifyInput" maxlength="4" class="verify-input" runat="server">
+                                    <td  align="left" width="80px">
+                                        <input type="text" id="txtVerifyInput" maxlength="4" class="verify-input" runat="server" >
                                     </td>
                                     <td align="left" valign="middle">
                                         <a href="javascript:void(0);" onclick="window.refresh_verify_code()">
-                                            <img id="imgVerifyCode" src="login/images/VerifyCode.jpg" alt="验证码" width="60" height="25" title="验证码不区分大小写，点击刷新" />
+                                            <img id="imgVerifyCode" src="login/images/VerifyCode.jpg" alt="验证码" width="60" height="25" title="验证码不区分大小写，点击刷新" /><ww:token />
                                         </a>
                                     </td>
                                 </tr>

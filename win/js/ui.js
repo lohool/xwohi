@@ -242,11 +242,13 @@ function _openWindowDialog(content, title,feature)
 function openWorkWindow(url,title,icon)
 {
 	if(!icon)icon="";
-	openWindow('[url]'+url, title, 'move=yes,resize=yes,width=500px,height=300,icon='+icon);
+	var w=_window.parent.offsetWidth/2;
+	var h=_window.parent.offsetHeight/2;
+	openWindow('[url]'+url, title, 'move=yes,resize=yes,width='+w+'px,height='+h+'px,icon='+icon);
 }
 function openDialog(url,title,isFullScreenDialog,width,height)
 {
-	var w=width?width:470;
+	var w=width?width:570;
 	var h=height?height:350;
 	if(isFullScreenDialog==true)
 	{
@@ -283,21 +285,26 @@ function feedback(data,formId)
 
 function panelSearch(form,targetPanel,callback)
 {
-		$("#"+targetPanel).empty();
-		//$("#"+target).load(form.action,$(form).find(":input").serialize(),function(){reDefineHTMLActions(target)});
-		loadContentToPanel(targetPanel,form.action,$(form).find(":input").serialize());
+	$("#"+targetPanel).empty();
+	loadContentToPanel(targetPanel,form.action,$(form).find(":input").serialize());
 	if(callback)callback();
 	return false;
 }
 
+/**
+search result will be displayed in the same window
+*/
 function windowSearch(form,callback)
 {
-	var win =_window.windows[_window.focusWindowId];
+	var win =_window.windows[_window.getWindowId(form)];
 	win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
 	if(callback)callback();
 	return false;
 }
 
+/**
+	the result will be mapped to the target data grid
+*/
 function ajaxDatagridSubmit(form,targetGrid,callback)
 {
 		$.ajax({ 
@@ -307,15 +314,14 @@ function ajaxDatagridSubmit(form,targetGrid,callback)
 			type:"post",
 			dataType:"json",
 			success: function(data){
-				parseJsonResponse(data,targetGrid);
+				parseJsonResponse(data,targetGrid,form);
 				if(callback)callback();
 
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) 
 			{
-				//$('#'+id).html(xhr.responseText);
 				var win =_window.windows[_window.focusWindowId];
-				win.SetContent("Error:<br>"+XMLHttpRequest.responseText)
+				win.SetContent(XMLHttpRequest.responseText)
 					/*
                         alert(XMLHttpRequest.status);
                         alert(XMLHttpRequest.readyState);
@@ -421,7 +427,7 @@ function _iframeResponse(iframe,targetGrid, callback){
 	"action":""
 */
 
-function parseJsonResponse(data,targetGrid)
+function parseJsonResponse(data,targetGrid,form)
 {
 	if(data.code=="200")
 	{
@@ -449,6 +455,25 @@ function parseJsonResponse(data,targetGrid)
 		}
 		if(data.callback && data.callback!="") eval(data.callback);
 		if(data.action=="close")win.Close();
+	}
+	else if(data.code=="201")
+	{
+		//parse input error fields.
+		
+		var msg="";
+		$.each(data.fields, function(i, row) {
+			/*
+					msg+=row.keyText;
+					msg+=":";
+					msg+=row.value;
+					msg+="<br>";
+			*/
+					field = form.elements[row.key];
+					var error = row.value;
+					addError(field, error);
+
+				});
+		//openAlert(msg,"Input Error");
 	}
 	else
 	{

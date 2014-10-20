@@ -33,6 +33,7 @@
 <script src="/win/DataGrid/datagrid.js"></script>
 <script src="/win/js/resize.js"></script>
 <script src="/win/js/ui.js"></script>
+<script src="/template/css_xhtml/validation.js"></script>
 
 <style>
 	#accordion-resizer {
@@ -70,10 +71,11 @@
 </div>
 
 <div id="MainPanel"  class="panel" style="position:absolute; left:200px;padding:0px; top:42px;z-index:0;background:transparent;">
-	<div id="Taskbar" class="panel"  style="width:100%;height:20px;"> 
-			<span id="hidenMenuButton" class="hidenMenuButton" style="cursor:hand;float:left;" onclick="hideMenu()">&lt;&lt;</span><div class="separator" style="float:left;"> </div>
-			<span id="minAllWin" class="panel" style="float:right;width:210px;height:20px;border:solid 1px" onclick="_window.shrinkAll()"> </span>
-			<div class="separator" style="float:right;"> </div>
+	<div id="TaskbarPanel" class="panel"  style="width:100%;height:20px;"> 
+			<span id="hidenMenuButton" class="hidenMenuButton" style="position:absolute;cursor:hand;z-index:1;left:0px;" onclick="hideMenu()">&lt;&lt;</span><div class="separator" style="float:left;"> </div>
+			<div id="Taskbar"  style="position:absolute;background-color:#FFFFCC;z-index:0;height:25px;border:solid 1px red;left:40px"> </div>
+			<span id="minAllWin" class="panel" style="position:absolute;width:210px;height:20px;z-index:1;border:solid 1px;right:0px;" onclick="_window.shrinkAll()"> </span>
+			<div class="separator" style="float:right;z-index:1;"> </div>
 	</div>
 
 	<div id="MainFrame" class="panel" >
@@ -144,7 +146,7 @@ function resetMainFrameSize()
 	var toolbars=document.getElementById("Toolbars");
 	var leftMenu=document.getElementById("LeftMenu");
 	var topBar=document.getElementById("TopBar");
-	var Taskbar=document.getElementById("Taskbar");
+	var TaskbarPanel=document.getElementById("TaskbarPanel");
 	//var h=document.documentElement.clientHeight-parseInt(toolbars.style.height)-parseInt(topBar.style.height) ;
 	var h=$(window).height()-$("#Toolbars").height()-$("#TopBar").height() ;
 	var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-15;
@@ -160,9 +162,10 @@ function resetMainFrameSize()
 	$("#LeftMenu").css("height",h-15);
 	$("#MainPanel").css("width",w);
 	$( "#MainPanel" ).css("left",left+2);
-	$("#MainFrame").css("height",h-parseInt(Taskbar.style.height)-38);
+	$("#MainFrame").css("height",h-parseInt(TaskbarPanel.style.height)-38);
 	$("#MainFrame").css("width",w);
-	$("#Taskbar").css("width",w);
+	$("#TaskbarPanel").css("width",w);
+	$("#Taskbar").css("width",w-40-220);
 	$("#accordion-resizer").css("height",h-38);
 	//$("#accordion").css("height",h-30);
 	//leftMenu.style.height=h-4-parseInt($("#LeftMenu").css("padding"))*2-2;
@@ -216,7 +219,7 @@ function resizeMenu()
 				//$( "#LeftMenu" ).css("height",height);
 				var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-15;
 				$("#MainFrame").css("width",w);
-				$("#Taskbar").css("width",w);
+				$("#TaskbarPanel").css("width",w);
 				$("#MainPanel").css("width",w);
 				$( "#MainPanel" ).css("left",$( "#LeftMenu" ).width()+2);
 				//$( "#accordion" ).css("height",height);

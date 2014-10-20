@@ -7,7 +7,7 @@
 	String name=request.getParameter("vo.name");
 	if(name==null)name="";
 %>
-<ww:form id="Customer_list_form" action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onSubmit="return panelSearch(this,'customer_panel')">
+<ww:form id="Customer_list_form" action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" onSubmit="return panelSearch(this,'customer_panel')">
    <INPUT TYPE="hidden" NAME="groupId" value="<%=request.getParameter("groupId")%>">
    <INPUT TYPE="hidden" NAME="vo.name" value="<%=name%>">
    <ww:hidden name="page" />
@@ -17,6 +17,7 @@
 	<div id="Customer_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
 	</div>
 <script>
+
 	     $(document).ready(function() {
 	          $("#Customer_list_<%=a%>").datagrid({
 			  callname: 'Customer_list_<%=a%>',

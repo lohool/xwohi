@@ -9,10 +9,11 @@
  <constant name="struts.serve.static.browserCache" value="false" />    
  <constant name="struts.configuration.xml.reload" value="true" />    
  <constant name="struts.devMode" value="false" />    
- <constant name="struts.ui.theme" value="simple" />  
+ <!--<constant name="struts.ui.theme" value="simple" />  -->
+ <constant name="struts.ui.theme" value="css_xhtml" />  
  <constant name="struts.i18n.encoding" value="UTF-8" /> 
  <constant name="struts.multipart.maxSize" value="10701096"/>  
-
+<include file="struts-validation.xml"></include>
 
 
 	<include file="action-default.xml" />
@@ -24,6 +25,7 @@
 		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
 		<result type="dispatcher" name="HibernateException">/exception/HibernateException.jsp</result>
 		<result type="dispatcher" name="Exception">/exception/Exception.jsp</result>
+		 <result name="input" type="dispatcher">/exception/InputError.jsp</result>
       </global-results>
    </package>
 
@@ -31,15 +33,12 @@
       <default-interceptor-ref name="defaultStack" />
 
 	  	<action name="Login" class="Login">
-			<result name="error" type="dispatcher">/index.jsp</result>
-			<result name="input" type="dispatcher">/index.jsp</result>
+			<result name="error" type="dispatcher">/login/index.jsp</result>
+			<result name="input" type="dispatcher">/login/index.jsp</result>
 			<result name="success" type="dispatcher">/win/index.jsp</result>
 		</action>
 	  	<action name="Logout" class="Logout">
-			<result name="success" type="dispatcher">/win/index.jsp</result>
-		</action>
-		<action name="Upload" class="UpLoad" >
-		  	<result name="success">/Knowledge/UploadSuccess.jsp</result>
+			<result name="success" type="dispatcher">/login/index.jsp</result>
 		</action>
 <!--
 		<action name="CustomerLogin" class="CustomerLogin">
@@ -121,7 +120,7 @@
          <interceptor-ref name="validationStack" />
       </action>
       <action name="RoleDelete" class="BasicDelete">
-         <result type="dispatcher" name="success">/Operator/RoleRefreshList.jsp</result>
+         <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp</result>
       </action>
       <action name="RoleInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/Operator/RoleInfo.jsp</result>
@@ -244,20 +243,20 @@
          <result type="dispatcher" name="success">/Department/OperatorSelector/DepartmentList.jsp</result>
       </action>
       <action name="DepartmentAdd" class="BasicAdd">
-         <result type="redirect" name="success">/Department/CloseDepartmentDialog.jsp</result>
+         <result type="redirect" name="success">/jsp/common/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
-      <action name="DepartmentDelete" class="BasicDelete">
-         <result type="redirect" name="success">/Department/DepartmentList.action</result>
+      <action name="DepartmentDelete" class="BasicModify">
+         <result type="redirect" name="success">/jsp/common/ActionResultWindow.jsp</result>
       </action>
       <action name="DepartmentInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/Department/DepartmentInfo.jsp</result>
       </action>
       <action name="DepartmentModify" class="BasicModify">
-         <result type="redirect" name="success">/Department/CloseDepartmentDialog.jsp</result>
+         <result type="redirect" name="success">/jsp/common/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
-      <action name="DepartmentInput" class="BasicInfo">
+      <action name="DepartmentInput" class="BasicInput">
          <result type="dispatcher" name="success">/Department/DepartmentAdd.jsp</result>
       </action>
    </package>

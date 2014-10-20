@@ -6,9 +6,22 @@ html{
 overflow:hidden; 
 } 
 
-
 TABLE {
 CURSOR: default; FONT-SIZE: 12px; MARGIN: 0px
+}
+div.page
+{
+left:0;top:0;width:100%; height:100%;
+padding:0px;
+}
+div.page .container
+{
+overflow-x:auto;overflow-y:auto;overflow:auto;
+padding:0px;
+}
+div.page .content
+{
+padding:5px;
 }
 
 div.panel 
@@ -26,7 +39,7 @@ div.panel
 	vertical-align:middle;
 	white-space: nowrap;
 }
-div.panel .container 
+div.panel .container1 
 {
 	BACKGROUND-COLOR:#EDF9FE;
 	border:1px solid #C4F9FD;	
@@ -151,4 +164,73 @@ div.panel .container
 	display:inline-block; 
 	line-height: 20px;
 	vertical-align:middle;
+}
+
+
+input,
+select
+{
+	border: 1px solid #66CCFF; 
+	background: #FFFFFF;
+}
+input:hover,
+input:focus,
+select:hover,
+select:focus
+{
+	border: 1px solid #FF8000; 
+	background: #FFFFFF;
+}
+input[type=text],
+input[type=password],
+select
+{
+	width:140px;
+}
+input[type=checkbox],
+input[type=radio]
+{
+	border: 0px solid #66CCFF; 
+}
+
+p
+{
+	BACKGROUND-COLOR:#F7FFFF;
+	border:outset 0px;
+	border:inset 1px;
+	border:1px dashed #E0F4FE;	
+	#BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	empty-cells: show ;
+    border-collapse: collaps;
+	position:relative;
+	padding:2px;
+	margin:0px;
+	border-spacing: 0;
+	vertical-align:middle;
+	white-space: nowrap;
+}
+span.wwgrp
+{
+	border:solid 0px blue;
+}
+.label,
+span.wwlbl,
+span.wwctrl
+{
+	display:inline-block;
+	vertical-align:top;
+	border:solid 0px red;
+}
+.label,
+span.wwlbl
+{
+	width:200px;
+	text-align:right;
+}
+.errorMessage
+{
+	color:red;
+	font-size:12px;
+	font-style:italic;
+
 }

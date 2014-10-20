@@ -73,42 +73,6 @@
          <field type="relation" name="resources" related="resourceID" relateClass="com.lohool.jproject.xwohi.operator.po.Resource"/>
       </fields>
    </actions>
-   <actions>
-      <action name="DepartmentList"/>
-      <action name="DepartmentSelect" >
-		<sql>select obj from Department obj where obj.#name like ?</sql>
-	  </action>
-      <action name="DepartmentAdd" />
-      <action name="DepartmentModify" />
-      <action name="DepartmentDelete" />
-      <action name="DepartmentInfo" />
-      <action name="DepartmentInput" />
-      <wohi-name>Department</wohi-name>
-      <class>com.lohool.jproject.xwohi.po.Department</class>
-      <fields>
-         <field type="primaryKey" name="id" />
-      </fields>
-   </actions>
-   <actions>
-      <action name="JobList">
-		 <sql>select obj from Job obj where obj.parent is null</sql>
-	  </action>
-      <action name="UnderlingJobList" >
-		<sql>select obj from Job obj where obj.#id=? </sql>
-	  </action>
-      <action name="JobAdd" />
-      <action name="JobModify" />
-      <action name="JobDelete" />
-      <action name="JobInfo" />
-      <action name="JobInput" />
-      <wohi-name>Job</wohi-name>
-      <class>com.lohool.jproject.xwohi.po.Job</class>
-      <fields>
-         <field name="id" type="primaryKey" />
-         <field type="relation" name="parent" related="parentID" />
-         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.po.Job"/>
-      </fields>
-   </actions>
 
    <actions>
       <action name="DataGroupPermissionList" />
@@ -148,6 +112,43 @@
       <class>com.lohool.jproject.xwohi.operator.po.DataGroup</class>
       <fields>
          <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
+
+   <actions>
+      <action name="DepartmentList"/>
+      <action name="DepartmentSelect" >
+		<sql>select obj from Department obj where obj.#name like ?</sql>
+	  </action>
+      <action name="DepartmentAdd" />
+      <action name="DepartmentModify" />
+      <action name="DepartmentDelete" />
+      <action name="DepartmentInfo" />
+      <action name="DepartmentInput" />
+      <wohi-name>Department</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Department</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="JobList">
+		 <sql>select obj from Job obj where obj.parent is null</sql>
+	  </action>
+      <action name="UnderlingJobList" >
+		<sql>select obj from Job obj where obj.#id=? </sql>
+	  </action>
+      <action name="JobAdd" />
+      <action name="JobModify" />
+      <action name="JobDelete" />
+      <action name="JobInfo" />
+      <action name="JobInput" />
+      <wohi-name>Job</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Job</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field type="relation" name="parent" related="parentID" />
+         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.po.Job"/>
       </fields>
    </actions>
 

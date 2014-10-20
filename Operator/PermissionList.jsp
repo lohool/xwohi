@@ -45,6 +45,7 @@
 				  "<ww:property value="name"/>",
 				  "<ww:property value="value"/>",
 				  "<ww:property value="uri"/>",
+				  "<ww:property value="dataGroup.dataObjectName"/>",
 				  "<ww:property value="dataGroup.name"/>"
 				  ],
 			   </ww:iterator>

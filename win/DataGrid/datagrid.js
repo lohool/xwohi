@@ -318,7 +318,7 @@ $.fn.datagrid= function (options){
 			mainframe.append(opts.pageObj);
 		}
 		//opts.parentNode.appendChild(dgframe);
-		document.getElementById("text").value=mainframe.html();
+		//document.getElementById("text").value=mainframe.html();
 
 		$("document").keydown(function(){
 			 updown();
@@ -357,7 +357,7 @@ $.fn.datagrid= function (options){
 
 
 
-		dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
+		//dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
 		dgframe.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
 		
 		dgframe.bind("scroll",function(e){
@@ -374,84 +374,146 @@ $.fn.datagrid= function (options){
 			//{
 			//	toolbar.css("left",-$(this).scrollLeft());
 			//}
-			
-
 		});
 		
 
 		//bind event
-			var column=$this.find('.datacolumn thead tr td.column');
-			column.bind("mouseover",function(){$.fn.datagrid.over(this);});
-			column.bind("mouseout",function(){$.fn.datagrid.out(this);});
-			column.bind("mousemove",function(){$.fn.datagrid.cc(event,this);});
-			column.bind("mousedown",function(){$.fn.datagrid.rsc_d(event,this,opts);});
-			column.bind("mouseup",function(){$.fn.datagrid.mouseup(this);});
-			//$(this).find('#selectAll').bind("click",function(){$.fn.datagrid.selectall(this.checked);});
+		var column=$this.find('.datacolumn thead tr td.column');
+		column.bind("mouseover",function(){$.fn.datagrid.over(this);});
+		column.bind("mouseout",function(){$.fn.datagrid.out(this);});
+		column.bind("mousemove",function(){$.fn.datagrid.cc(event,this);});
+		column.bind("mousedown",function(){$.fn.datagrid.rsc_d(event,this,opts);});
+		column.bind("mouseup",function(){$.fn.datagrid.mouseup(this);});
+		//$(this).find('#selectAll').bind("click",function(){$.fn.datagrid.selectall(this.checked);});
 		//make the data in the grid can edited
 		if(opts.editable)
 		{
 			var dataColumn=$this.find('.datacolumn tbody tr td');
 			dataColumn.dblclick(function(){
-				  //alert(this.innerText);
-				  var td=$(this);
-				  var input=$("<input id='dynamicText' style='border:0;' value='"+this.innerText+"'>");
-				  input.css("width",td.width());
-				  td.empty();
-				  td.append(input);
-				  input.focus();
-				  input.blur(function(){td.html(this.value)});
-					
-				});
+			  //alert(this.innerText);
+			  var td=$(this);
+			  var input=$("<input id='dynamicText' style='border:0;' value='"+this.innerText+"'>");
+			  input.css("width",td.width());
+			  td.empty();
+			  td.append(input);
+			  input.focus();
+			  input.blur(function(){td.html(this.value)});
+				
+			});
 		}
 
-			var dataRow=$this.find('.datacolumn tbody tr');
-			dataRow.bind("mouseover",function(){
-				this.className="over";
-			});
-			dataRow.bind("mouseout",function(){
-				if(this.selected=="true")this.className = "selectedrow";
-				else this.className="";
-			});
-			$this.find('#selectAll').bind("click",function(){
-				$.fn.datagrid.selectall(opts,this.checked)
-			});
+		var dataRow=$this.find('.datacolumn tbody tr');
+		dataRow.bind("click",function(e){
+			e=e||window.event;getrow(e,opts);
+		});
+		dataRow.bind("mouseover",function(){
+			this.className="over";
+		});
+		dataRow.bind("mouseout",function(){
+			if(this.selected=="true")this.className = "selectedrow";
+			else this.className="";
+		});
+		$this.find('#selectAll').bind("click",function(){
+			$.fn.datagrid.selectall(opts,this.checked)
+		});
 
-			$this.find('.dhdgchkbox').bind("click",function(e){
-				var row=this.parentNode;
-				row.click();
-					//e=e||window.event;getrow(e,opts);
-			});
+		$this.find('.dhdgchkbox').bind("click",function(e){
+			var row=this.parentNode;
+			row.click();
+				//e=e||window.event;getrow(e,opts);
+		});
 
-			$this.find('.paginate .paginate_pagesize').bind("change",function(){
-				var pagesize=$(this).val();
-				//$.fn.datagrid.jumpToPage($this,page,opts);
-				var form=document.getElementById(opts.linkedForm);
-				form["pageSize"].value=pagesize;
-				setCookie("PageSize",pagesize);
-				if(opts.url)$.fn.datagrid.loadData($this);
+		$this.find('.paginate .paginate_pagesize').bind("change",function(){
+			var pagesize=$(this).val();
+			//$.fn.datagrid.jumpToPage($this,page,opts);
+			var form=document.getElementById(opts.linkedForm);
+			form["pageSize"].value=pagesize;
+			setCookie("PageSize",pagesize);
+			if(opts.url)$.fn.datagrid.loadData($this);
+			else
+			{
+				form.onsubmit();
+			}
+		});
+		$this.find('.paginate .navigator').bind("click",function(){
+			var page=$(this).attr("page");
+			$.fn.datagrid.jumpToPage($this,page,opts);
+		});
+		$this.find('.paginate .navigator_longstring').bind("click",function(){
+			var page=$(this).attr("page");
+			$.fn.datagrid.jumpToPage ($this,page,opts);
+		});
+		$this.find('.toolbar span').bind("click",function(){
+			var btnIndex=$(this).attr("btnIndex");
+			var bn=this.className;
+			var text=opts.toolbar[btnIndex].text;
+			var className=opts.toolbar[btnIndex].btnClass;
+			var src=opts.toolbar[btnIndex].src;
+			var width=opts.toolbar[btnIndex].width;
+			var height=opts.toolbar[btnIndex].height;
+			var target=opts.toolbar[btnIndex].target;
+			var rowid=null;
+			if(opts.multiple==true)
+			{
+				var selected=[];
+				var dg=$this;
+				var j=0;
+				var nowrow=null;
+				$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+					if(row.selected=="true")
+					{
+						rowid=$(row).attr("rowid");
+						return false;
+					}
+				});    
+			}
+			else
+			{
+				rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
+			}
+			var row=opts.data[rowid];
+			if(rowid && rowid!="" && src)
+			{
+				for( var i=0;i<opts.data[rowid].length; i++)
+				{
+					src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+				}
+			}
+
+			if((/^javascript *:/i).test(src))
+			{
+				var sc=src.replace(/^javascript *:/i,"");
+				eval(sc);
+				return false;
+			}
+			if(className=="Home")
+			{
+				var win =_window.windows[_window.focusWindowId];
+				win.SetContent("[url]"+src);
+
+			}
+			else if(className=="Refresh")
+			{
+				if(target)
+				{
+					//load into a named panel by ID
+					$('#'+target).empty();
+					$('#'+target).load(src);
+					reDefineHTMLActions(target);
+				}
 				else
 				{
-					form.onsubmit();
+					if(opts.url)$.fn.datagrid.loadData($this);
+					else
+					{
+						var form=document.getElementById(opts.linkedForm);
+						//alert($(form).find(":input").serialize())
+						form.onsubmit();
+					}
 				}
-			});
-			$this.find('.paginate .navigator').bind("click",function(){
-				var page=$(this).attr("page");
-				$.fn.datagrid.jumpToPage($this,page,opts);
-			});
-			$this.find('.paginate .navigator_longstring').bind("click",function(){
-				var page=$(this).attr("page");
-				$.fn.datagrid.jumpToPage ($this,page,opts);
-			});
-			$this.find('.toolbar span').bind("click",function(){
-				var btnIndex=$(this).attr("btnIndex");
-				var bn=this.className;
-				var text=opts.toolbar[btnIndex].text;
-				var className=opts.toolbar[btnIndex].btnClass;
-				var src=opts.toolbar[btnIndex].src;
-				var width=opts.toolbar[btnIndex].width;
-				var height=opts.toolbar[btnIndex].height;
-				var target=opts.toolbar[btnIndex].target;
-				var rowid=null;
+			}
+			else if(className=="Edit")
+			{
 				if(opts.multiple==true)
 				{
 					var selected=[];
@@ -461,228 +523,164 @@ $.fn.datagrid= function (options){
 					$.each(dg.find(".datacolumn tbody tr"), function(i, row){
 						if(row.selected=="true")
 						{
-							rowid=$(row).attr("rowid");
-							return false;
+							//var rowid=row.rowid;
+							var rowid=$(row).attr("rowid");
+							selected[j++]=opts.data[rowid];
+							nowrow=row;
 						}
 					});    
+					if(selected.length!=1)
+					{
+						openAlert(JSMsg_Datagrid.selectOneRow,"Edit",function(btn){return false;});
+					}
+					else
+					{
+						/*
+						var src=opts.toolbar[btnIndex].src;
+						var rowid=$(nowrow).attr("rowid");
+						var row=opts.data[rowid];
+						for( var i=0;i<opts.data[rowid].length; i++)
+						{
+							src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+						}
+						*/
+						if(!target)target="dialog";
+						if(target=="dialog")openDialog(src,text,true,width,height);
+						else openWorkWindow(src,text)
+					}
 				}
 				else
 				{
-					rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
-				}
-				var row=opts.data[rowid];
-				if(rowid && rowid!="" && src)
-				{
-					for( var i=0;i<opts.data[rowid].length; i++)
+					if(opts.nowrow==null)
 					{
-						src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+						openAlert(JSMsg_Datagrid.selectOneRow,"Edit",function(btn){return false;});
+					}else
+					{
+						if(!target)target="dialog";
+						if(target=="dialog")openDialog(src,text,true,width,height);
+						else openWorkWindow(src,text)
 					}
 				}
 
-				if((/^javascript *:/i).test(src))
+			}
+			else if(className=="Delete")
+			{
+				if(opts.multiple==true)
 				{
-					var sc=src.replace(/^javascript *:/i,"");
-					eval(sc);
+					var selected=[];
+					var dg=$this;
+					var j=0;
+					$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+						if(row.selected=="true")
+						{
+							//var rowid=row.rowid;
+							var rowid=$(row).attr("rowid");
+							selected[j++]=opts.data[rowid];
+						}
+					});    
+					if(selected.length<=0)
+					{
+						openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
+					}
+					else
+					{
+						var ids="";
+						src=opts.toolbar[btnIndex].src;
+						//src=src.replace(new RegExp("\\{ids\\}","g"),ids);
+						for( var i=0;i<selected[0].length; i++)
+						{
+							var rowData="";
+							for( var j=0;j<selected.length; j++)rowData+=selected[j][i]+",";
+							if(rowData.length>0)rowData=rowData.substring(0,rowData.length-1);
+							src=src.replace(new RegExp("\\{"+i+"\\}","g"),rowData);
+						}
+						openConfirm({
+							content:JSMsg_Datagrid.confirmDelete,
+							title:'Confirm',
+							ok:function(){
+								$.ajax({ 
+									url: src, 
+									//context: document.body, 
+									//data :   $(form).find(":input").serialize()  ,
+									type:"POST",
+									dataType:"json",
+									success: function(data){
+										parseJsonResponse(data,opts.rid);
+										
+									},
+									error: function(XMLHttpRequest, textStatus, errorThrown) 
+									{
+										openAlert(XMLHttpRequest.responseText,"Error",function(btn){return false;});
+									}
+
+							  });
+							},
+							cancel:function(){}
+						});
+					}
 					return false;
-				}
-
-				if(className=="Home")
-				{
-					var win =_window.windows[_window.focusWindowId];
-					win.SetContent("[url]"+src);
 
 				}
-				else if(className=="Refresh")
+				else
 				{
-					if(target)
+					if(opts.nowrow==null)
 					{
-						//load into a named panel by ID
-						$('#'+target).empty();
-						$('#'+target).load(src);
-						reDefineHTMLActions(target);
+						openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
 					}
 					else
 					{
-						if(opts.url)$.fn.datagrid.loadData($this);
-						else
-						{
-							var form=document.getElementById(opts.linkedForm);
-							//alert($(form).find(":input").serialize())
-							form.onsubmit();
-						}
-					}
-				}
-				else if(className=="Edit")
-				{
-					if(opts.multiple==true)
-					{
-						var selected=[];
-						var dg=$this;
-						var j=0;
-						var nowrow=null;
-						$.each(dg.find(".datacolumn tbody tr"), function(i, row){
-							if(row.selected=="true")
-							{
-								//var rowid=row.rowid;
-								var rowid=$(row).attr("rowid");
-								selected[j++]=opts.data[rowid];
-								nowrow=row;
-							}
-						});    
-						if(selected.length!=1)
-						{
-							openAlert(JSMsg_Datagrid.selectOneRow,"Edit",function(btn){return false;});
-						}
-						else
-						{
-							/*
-							var src=opts.toolbar[btnIndex].src;
-							var rowid=$(nowrow).attr("rowid");
-							var row=opts.data[rowid];
-							for( var i=0;i<opts.data[rowid].length; i++)
-							{
-								src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
-							}
-							*/
-							if(!target)target="dialog";
-							if(target=="dialog")openDialog(src,text,true,width,height);
-							else openWorkWindow(src,text)
-						}
-					}
-					else
-					{
-						if(opts.nowrow==null)
-						{
-							openAlert(JSMsg_Datagrid.selectOneRow,"Edit",function(btn){return false;});
-						}else
-						{
-							if(!target)target="dialog";
-							if(target=="dialog")openDialog(src,text,true,width,height);
-							else openWorkWindow(src,text)
-						}
-					}
+						openConfirm({
+							content:JSMsg_Datagrid.confirmDelete,
+							title:'Confirm',
+							ok:function(){
+								$.ajax({ 
+									url: src, 
+									//context: document.body, 
+									//data :   $(form).find(":input").serialize()  ,
+									type:"POST",
+									dataType:"json",
+									success: function(data){
+										parseJsonResponse(data,opts.rid);
+										
+									},
+									error: function(XMLHttpRequest, textStatus, errorThrown) 
+									{
+										openAlert(XMLHttpRequest.responseText,"Error",function(btn){return false;});
+									}
 
-				}
-				else if(className=="Delete")
-				{
-					if(opts.multiple==true)
-					{
-						var selected=[];
-						var dg=$this;
-						var j=0;
-						$.each(dg.find(".datacolumn tbody tr"), function(i, row){
-							if(row.selected=="true")
-							{
-								//var rowid=row.rowid;
-								var rowid=$(row).attr("rowid");
-								selected[j++]=opts.data[rowid];
-							}
-						});    
-						if(selected.length<=0)
-						{
-							openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
-						}
-						else
-						{
-							var ids="";
-							src=opts.toolbar[btnIndex].src;
-							//src=src.replace(new RegExp("\\{ids\\}","g"),ids);
-							for( var i=0;i<selected[0].length; i++)
-							{
-								var rowData="";
-								for( var j=0;j<selected.length; j++)rowData+=selected[j][i]+",";
-								if(rowData.length>0)rowData=rowData.substring(0,rowData.length-1);
-								src=src.replace(new RegExp("\\{"+i+"\\}","g"),rowData);
-							}
-							openConfirm({
-								content:JSMsg_Datagrid.confirmDelete,
-								title:'Confirm',
-								ok:function(){
-									alert(src)
-									$.ajax({ 
-										url: src, 
-										//context: document.body, 
-										//data :   $(form).find(":input").serialize()  ,
-										type:"POST",
-										dataType:"json",
-										success: function(data){
-											parseJsonResponse(data,opts.rid);
-											
-										},
-										error: function(XMLHttpRequest, textStatus, errorThrown) 
-										{
-											openAlert(XMLHttpRequest.responseText,"Error",function(btn){return false;});
-										}
-
-								  });
-								},
-								cancel:function(){}
-							});
-						}
-						return false;
-
-					}
-					else
-					{
-						if(opts.nowrow==null)
-						{
-							openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
-						}
-						else
-						{
-							openConfirm({
-								content:JSMsg_Datagrid.confirmDelete,
-								title:'Confirm',
-								ok:function(){
-							alert(src)
-									$.ajax({ 
-										url: src, 
-										//context: document.body, 
-										//data :   $(form).find(":input").serialize()  ,
-										type:"POST",
-										dataType:"json",
-										success: function(data){
-											parseJsonResponse(data,opts.rid);
-											
-										},
-										error: function(XMLHttpRequest, textStatus, errorThrown) 
-										{
-											openAlert(XMLHttpRequest.responseText,"Error",function(btn){return false;});
-										}
-
-								  });
-								},
-								cancel:function(){}
-							});
-						}
-					}
-
-				}
-				else if(className=="Help")
-				{
-					//$.fn.datagrid.setSize($this,opts,400,300);
-					openDialog(src,text,true);
-				}
-				else 
-				{
-					if(!target)target="dialog";
-					if(target=="dialog")openDialog(src,text,true,width,height);
-					else if(target=="window")openWorkWindow(src,text);
-					else if(target=="self")
-					{
-						var win =_window.windows[_window.focusWindowId];
-						win.SetContent("[url]"+src);
-					}
-					else
-					{
-						//load into a named panel by ID
-						$('#'+target).load(src,null,function(response,status,xhr){
-							alert(xhr.responseText);
+							  });
+							},
+							cancel:function(){}
 						});
 					}
 				}
-				
-			});
+
+			}
+			else if(className=="Help")
+			{
+				//$.fn.datagrid.setSize($this,opts,400,300);
+				openDialog(src,text,true);
+			}
+			else 
+			{
+				if(!target)target="dialog";
+				if(target=="dialog")openDialog(src,text,true,width,height);
+				else if(target=="window")openWorkWindow(src,text);
+				else if(target=="self")
+				{
+					var win =_window.windows[_window.focusWindowId];
+					win.SetContent("[url]"+src);
+				}
+				else
+				{
+					//load into a named panel by ID
+					$('#'+target).load(src,null,function(response,status,xhr){
+						alert(xhr.responseText);
+					});
+				}
+			}
+			
+		});
 	}
 
 		$.fn.datagrid.setSize = function($this,opts,w,h){

@@ -3,7 +3,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page" style="left:0;top:0;width:100%; height:100%;">
 	<div class="panel" style="left:0;top:0; height:40px;">
-		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post" validate="true"  onsubmit="return windowSearch(this);">
+		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post"   onsubmit="return windowSearch(this);">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
 		<INPUT TYPE="text" NAME="vo.name">

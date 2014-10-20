@@ -58,36 +58,59 @@ function onSubmit(myform)
 
 	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
 	//alert(myform["vo.roles.roleID"].value);
-	return ajaxDataGridCallback(myform);
+	return form_submit(myform,"Role_list");
 	//return false;
 } 
+function form_submit(form)
+{
+		$.ajax({ 
+			url: form.action, 
+			//context: document.body, 
+			data :   unescape($(form).find(":input").serialize()),
+			type:"POST",
+			dataType:"json",
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+                    },
+			success: function(data){
+				if(data.code=="200")
+				{
+					alert("saved");
+					//alert(self.id);
+				}
+				else
+				{
+					alert(data)
+				}
+
+			}
+	  });
+		
+	return false;
+}
 
 </script> 
 
 <div class="page">
-<ww:form id="role_info_form" name="role_info_form" namespace="/Role" action="RoleModify" method="post" validate="true">
+<ww:form id="role_info_form" name="role_info_form" namespace="/Role" action="RoleModify" method="post" validate="true" onsubmit="return onSubmit(this)">
 <ww:hidden  name="vo.roleID"/>
 
-<table width="500" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
+<table width="400" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
 <TR>
-<TD bgColor="#ffffff" align="right" width="40%">
-<xwohi:i18n text="Role.name"/></TD><TD bgColor="#ffffff" width="60%">
-<ww:textfield name="vo.name" required="true"/></TD>
+<TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Role.name"/></TD>
+<TD bgColor="#ffffff" width="60%"><ww:textfield name="vo.name" required="true"/></TD>
 </TR>
 <TR>
-<TD bgColor="#ffffff" align="right" width="40%">
-<xwohi:i18n text="Role.description"/></TD><TD bgColor="#ffffff" width="60%">
-<ww:textarea name="vo.description" cols="40" rows="6" required="true"/></TD>
+<TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Role.description"/></TD>
+<TD bgColor="#ffffff" width="60%"><ww:textarea name="vo.description" cols="40" rows="6" required="true"/></TD>
 </TR>
 
 
 <TR>
-<TD bgColor="#ffffff" align="right" width="40%">
-<xwohi:i18n text="Role.roleRes"/></TD>
+<TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Role.roleRes"/></TD>
 <TD bgColor="#ffffff" width="60%">
-
-
-
 <TABLE>
 <TR>
 	<TD>
@@ -101,7 +124,7 @@ function onSubmit(myform)
 
 	</TD>
 	<TD>
-<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7" multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px" />
+	<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7" multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px" />
 	
 	</TD>
 </TR>
@@ -112,7 +135,7 @@ function onSubmit(myform)
 
 <TR>
 <TD align="center" colspan="2"> 
-      <input type="button" onclick="getLists();" value="<xwohi:i18n text="submit" /> ">
+      <input type="submit"  value="<xwohi:i18n text="submit" /> ">
       <input type="reset" value="<xwohi:i18n text="reset" />">
        </TD>
 </TR>

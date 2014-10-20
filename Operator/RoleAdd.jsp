@@ -2,8 +2,6 @@
 <%@ page contentType="text/html;charset=gb2312" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <html xmlns:xwohi="http://www.lohool.com/wohi/" xmlns:ww="http://www.opensymphony.com/webwork/">
-<link href="/css/style.css" rel="stylesheet">
-<link href="/css/sortabletable.css" rel="StyleSheet" type="text/css">
 
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
@@ -26,7 +24,7 @@
 </TABLE>
 </div>
 <div align="center">
-<ww:form name="form1" namespace="/Role" action="RoleAdd" method="post" validate="true">
+<ww:form name="form1" namespace="/Role" action="RoleAdd" method="post" validate="true" onsubmit="return ajaxDatagridSubmit(this,'Role_list')">
 <table bgcolor="#E3E3E3" width="500" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
 <thead>
 <TR>

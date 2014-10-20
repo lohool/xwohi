@@ -68,6 +68,8 @@ subMenu4.addItem(new MenuItem("WeekScheme","/images/open.gif","公文归档","/D
 <a href="#" onclick="openWorkWindow('/DataGroup/DataGroupList.action','数据组')">Data Group</a><br />
 <a href="#" onclick="openWorkWindow('/Permission/PermissionList.action','数据组权限')">Permissions</a><br />
 
+<a href="#" onclick="openWorkWindow('/Department/DepartmentList.action','部门管理')">Department</a><br />
+
 <ww:if test="#session.operation_user.isAccess(\"/Job/JobList.action\")==true">
 --------------<br>
 <a href="#" onclick="openWorkWindow('/Job/JobList.action','职务管理')">Jobs</a><br />

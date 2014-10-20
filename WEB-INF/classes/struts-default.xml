@@ -92,8 +92,10 @@
     <bean type="com.opensymphony.xwork2.TextProvider" name="system" class="com.opensymphony.xwork2.DefaultTextProvider" />
     <bean type="com.opensymphony.xwork2.conversion.NullHandler" name="java.lang.Object" class="com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler" />
 
-    <!--<bean type="com.opensymphony.xwork2.validator.ActionValidatorManager" name="struts" class="com.lohool.jproject.crm.listener.MyValidator" />-->
-    <bean type="com.opensymphony.xwork2.validator.ActionValidatorManager" name="struts" class="com.opensymphony.xwork2.validator.AnnotationActionValidatorManager" />
+    <!--
+    <bean type="com.opensymphony.xwork2.validator.ActionValidatorManager" name="struts" class="com.xbreeze.framework.xwohi.common.interceptor.MyValidator" />
+	-->
+	<bean type="com.opensymphony.xwork2.validator.ActionValidatorManager" name="struts" class="com.opensymphony.xwork2.validator.AnnotationActionValidatorManager" />
     <bean type="com.opensymphony.xwork2.validator.ActionValidatorManager" name="no-annotations" class="com.opensymphony.xwork2.validator.DefaultActionValidatorManager" />
 
     <bean type="com.opensymphony.xwork2.validator.ValidatorFactory" class="com.opensymphony.xwork2.validator.DefaultValidatorFactory"/>

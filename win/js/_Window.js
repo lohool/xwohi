@@ -146,6 +146,7 @@ _window.prototype.Creat=function(content,title)
 	this.board.className=this.className;
 	this.board.style.position="absolute";
 	this.board.id=this.id;
+	this.board.setAttribute("rel","_Window_Board_Case");
 	this.board.style.zIndex=this.zIndex;
 	this.board.style.visibility="hidden";
 	this.parent.appendChild(this.board);
@@ -312,8 +313,9 @@ _window.prototype.Creat=function(content,title)
 	{
 					var close=document.createElement("Div");
 					close.className="MIN";
-					close.title="close";
+					close.title="Close";
 					close.align="center";
+					close.style.marginRight="4px";
 					
 					close.innerText="r";
 					var oimg = document.createElement("img");
@@ -398,7 +400,9 @@ _window.prototype.SetContent=function(content,data)
 		*/
 		{
 			var id="_F"+this.id;
-			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
+			this.contentCase.id=id;
+			this.contentCase.name="_Win_Content_Case";
+			//this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
 			loadContentToPanel(id,tent,data);
 /*
 			$('#'+id).load(tent,data,function(response,status,xhr){
@@ -508,14 +512,70 @@ _window.prototype.Focus=function()
 {
 	if(this.onTop!="true")
 	if(this.zIndex<_window.zIndex) this.board.style.zIndex=this.zIndex=++_window.zIndex;
+	var tskBtnWidth=0;
 	for(var id in _window.windows) 
 	{
 		win =_window.windows[id];
 		win.LostFocus();
 	}
+
 	_window.focusWindowId=this.id;
 	if(this.taskButton)this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";
 	this.titleCase.className="TITLE FOCUS";
+
+
+	var tskBtnWidth=0;
+	var currentWinIndex=0;
+	var winCount=0;
+	var findWin=false;
+	for(var id in _window.windows) 
+	{
+		var win =_window.windows[id];
+		if(!findWin)
+		{
+		currentWinIndex++;
+		}
+		winCount++;
+		if(id==this.id)findWin=true;;
+		if(!findWin)
+		{
+		tskBtnWidth+=parseInt(win.taskButton.offsetWidth);
+		}
+	}
+	var Taskbar=document.getElementById("Taskbar");
+	var TaskbarWidth=parseInt(Taskbar.offsetWidth);
+	var pos=0;
+	//alert(parseInt(this.taskButton.offsetLeft))
+	if(parseInt(this.taskButton.offsetLeft)+parseInt(this.taskButton.offsetWidth)>TaskbarWidth)
+	{
+		pos=TaskbarWidth-tskBtnWidth-parseInt(this.taskButton.offsetWidth);
+		if(currentWinIndex<winCount)pos-=40;
+	}
+	else if(parseInt(this.taskButton.offsetLeft)<0)
+	{
+		var ol=this.taskButton.offsetLeft;
+	    var left=parseInt(this.taskButton.style.left);
+		//if(left<ol)
+		{
+			pos=left-ol;
+		}
+		if(tskBtnWidth>0)pos+=30;
+		//else pos=parseInt(this.taskButton.offsetLeft)+tskBtnWidth;
+	}
+	else pos=1;
+	if(pos<=0)
+	{
+		//alert(pos)
+		var i=0;
+		for(var id in _window.windows) 
+		{
+			win =_window.windows[id];
+			if(i==0)win.taskButton.style.left=pos+"px";
+			else win.taskButton.style.left=pos+"px";
+			i++;
+		}
+	}
+
 
 };
 
@@ -1020,6 +1080,10 @@ _window.prototype. createTaskButton=function()
 		this.taskButton.appendChild(taskButtonTitle);
 		this.taskButton.appendChild(taskButtonCloseIcon);
 		document.getElementById("Taskbar").appendChild(this.taskButton);
+
+
+
+
 	}
 }
 
@@ -1098,17 +1162,23 @@ function loadContentToPanel(panelId,url,data)
 					})
 					$('#'+panelId).resize(function(){
 						$('#'+panelId+" DIV").each(function(i,ele){
-						var layoutHeight=$(this).attr("layoutHeight");
-						var layoutWidth=$(this).attr("layoutWidth");
-						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
-						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+						var $this=$(this);
+						var layoutHeight=$this.attr("layoutHeight");
+						var layoutWidth=$this.attr("layoutWidth");
+						var parentNode=this.parentNode;
+						if(parentNode.tagName=="FORM")parentNode=parentNode.parentNode;
+						if(layoutHeight)$this.css("height",parentNode.clientHeight-parseInt(layoutHeight));
+						if(layoutWidth)$this.css("width",parentNode.clientWidth-parseInt(layoutWidth));
 						})
 					})
 					$('#'+panelId+" DIV").each(function(i,ele){
-						var layoutHeight=$(this).attr("layoutHeight");
-						var layoutWidth=$(this).attr("layoutWidth");
-						if(layoutHeight)$(this).css("height",this.parentNode.offsetHeight-parseInt(layoutHeight));
-						if(layoutWidth)$(this).css("width",this.parentNode.offsetWidth-parseInt(layoutWidth));
+						var $this=$(this);
+						var layoutHeight=$this.attr("layoutHeight");
+						var layoutWidth=$this.attr("layoutWidth");
+						var parentNode=this.parentNode;
+						if(parentNode.tagName=="FORM")parentNode=parentNode.parentNode;
+						if(layoutHeight)$this.css("height",parentNode.clientHeight-parseInt(layoutHeight));
+						if(layoutWidth)$this.css("width",parentNode.clientWidth-parseInt(layoutWidth));
 					})
 					reDefineHTMLActions(panelId);
 
@@ -1135,7 +1205,20 @@ function reDefineHTMLActions(parentId)
 	})
 
 }
-function getWindowId()
+_window.getWindowId=function (element)
 {
-	alert(this)
+	var e=element;
+	while(e.parentNode)
+	{
+		e=e.parentNode;
+		
+		if(e.getAttribute("rel")=="_Window_Board_Case")
+			return e.id;
+	}
+	return "";
+}
+_window.closeCurrent=function ()
+{
+	var	win =_window.windows[_window.focusWindowId];
+	win.Close();
 }

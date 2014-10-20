@@ -3,7 +3,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page" style="left:0;top:0;width:100%; height:100%;">
 <div class="panel" style="left:0;top:0; height:25px;">
-	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post" validate="true"  onsubmit="return datagridSearch(this,'operator_list');">
+	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post"   onsubmit="return datagridSearch(this,'operator_list');">
 		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
 		<INPUT TYPE="hidden" name="vo.state" value="1">
@@ -18,14 +18,11 @@
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 </div>
-<script>
+<script type="text/javascript">
 var i=0;
 	     $(document).ready(function() {
 	          $("#operator_list").datagrid({
 			  callname: 'operator_list',
-			  //width: 300,
-			  //height:300,
-				//minus_height:40,
 			  multiple:true,
 			  toolbar:[
 				  {"text":"Home","btnClass":"Home","target":"self","src":"/Operator/OperatorList.jsp"},
