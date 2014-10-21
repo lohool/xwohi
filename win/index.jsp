@@ -16,6 +16,8 @@
 <link type="text/css" rel="stylesheet" href="/win/DataGrid/default/dhdatagrid.css"/>
 <link type="text/css" rel="stylesheet" href="/win/DataGrid/default/paginate.css"/>
 
+<link type="text/css" rel="stylesheet" href="/win/jquery-easyui/themes/default/menu.css"/>
+
 <script src="/win/jsMessage.jsp" type="text/javascript"></script>
 
 <script src="/win/jqueryui/jquery-1.9.1.js"></script>
@@ -27,6 +29,10 @@
 <script src="/win/jqueryui/ui/jquery.ui.widget.js"></script>
 <script src="/win/jqueryui/ui/jquery.ui.tabs.js"></script>
 <script src="/win/jqueryui/ui/jquery.ui.draggable.js"></script>
+<script src="/win/jqueryui/ui/jquery.ui.position.js"></script>
+
+<script src="/win/jquery-easyui/src/jquery.menu.js"></script>
+<script src="/win/jquery-easyui/src/jquery.parser.js"></script>
 
 <script src="/win/js/_Window.js" type="text/javascript"></script>
 
@@ -68,17 +74,25 @@
 		<div id="accordion" >
 		</div>
 	</div>
+	<div id="hidenMenuButton"  style="position:absolute;width:6px;height:100%;top:0px;right:0px;padding:0px;">
+	</div>
 </div>
 
-<div id="MainPanel"  class="panel" style="position:absolute; left:200px;padding:0px; top:42px;z-index:0;background:transparent;">
-	<div id="TaskbarPanel" class="panel"  style="width:100%;height:20px;"> 
+<div id="MainPanel"  class="MainPanel" style="position:absolute; left:200px;padding:0px; top:42px;z-index:0;background:transparent;">
+	<div id="TaskbarPanel" class="panel"  style="width:100%;height:25px;padding: 0px;"> 
+	<!--
 			<span id="hidenMenuButton" class="hidenMenuButton" style="position:absolute;cursor:hand;z-index:1;left:0px;" onclick="hideMenu()">&lt;&lt;</span><div class="separator" style="float:left;"> </div>
-			<div id="Taskbar"  style="position:absolute;background-color:#FFFFCC;z-index:0;height:25px;border:solid 1px red;left:40px"> </div>
-			<span id="minAllWin" class="panel" style="position:absolute;width:210px;height:20px;z-index:1;border:solid 1px;right:0px;" onclick="_window.shrinkAll()"> </span>
-			<div class="separator" style="float:right;z-index:1;"> </div>
+	-->
+		<div style="position:absolute;width:2px;height:25px;z-index:1;background-color:#E7F7FE;left:-2px;"></div>
+		<div id="Taskbar"  style="position:absolute;z-index:0;height:25px;border:solid 0px red;left:0px"> </div>
+		<div id="TaskbarFuncPanel" style="position:absolute;width:50px;height:25px;z-index:1;background-color:#E7F7FE;right:0px;">
+			<span class="panel" style="width:10px;height:20px;cursor:default;border:solid 1px;float:right;" onclick="_window.ShowMenu(event)">▼</span>
+			<span id="minAllWin" class="panel" style="width:10px;height:20px;border:solid 1px;float:right;cursor:default" onclick="_window.shrinkAll()"> </span>
+			<div class="separator" style="float:right"> </div>
+		</div>
 	</div>
 
-	<div id="MainFrame" class="panel" >
+	<div id="MainFrame" class="panel" style="padding:0px">
 <TEXTAREA id="text" NAME="text" ROWS="15" COLS="70" style="position:relative;left:200px;top:20px"></TEXTAREA>
 
 	<a class="draggable" style="position:absolute; border:0;left:20px;top:20px;cursor:hand" ondblclick="openWorkWindow('/NotePad/NotePadList.action','Email')"  ><img src="images/icon/20071208160057107.png" width="60"></a>
@@ -148,7 +162,11 @@ function resetMainFrameSize()
 	var topBar=document.getElementById("TopBar");
 	var TaskbarPanel=document.getElementById("TaskbarPanel");
 	//var h=document.documentElement.clientHeight-parseInt(toolbars.style.height)-parseInt(topBar.style.height) ;
-	var h=$(window).height()-$("#Toolbars").height()-$("#TopBar").height() ;
+	var h=$(window).height()-$("#TopBar").outerHeight();
+	if(	toolbars.style.display!="none")
+	{
+		h-=$("#Toolbars").outerHeight()
+	}
 	var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-15;
 	var left=$( "#LeftMenu" ).width();
 	if(	leftMenu.style.display!="block")
@@ -156,17 +174,16 @@ function resetMainFrameSize()
 		w+=parseInt($("#LeftMenu").css("width"));
 		left=0;
 	}
-	$("#TopBar").css("width",document.documentElement.clientWidth-2);
-	leftMenu.style.top=parseInt($("#TopBar").css("height"))+parseInt($("#TopBar").css("padding"))*2 +3;
-	$("#TopBar").css("width",document.documentElement.offsetWidth-12);
-	$("#LeftMenu").css("height",h-15);
+	$("#TopBar").css("width",document.documentElement.offsetWidth-12);//-padding*2-margin*2
+	$("#LeftMenu").css("top",$("#TopBar").outerHeight());
+	$("#LeftMenu").css("height",h-2);
+	$("#TaskbarPanel").css("width",w+10);
+	$("#Taskbar").css("width",w-$("#TaskbarFuncPanel").width());
 	$("#MainPanel").css("width",w);
-	$( "#MainPanel" ).css("left",left+2);
-	$("#MainFrame").css("height",h-parseInt(TaskbarPanel.style.height)-38);
-	$("#MainFrame").css("width",w);
-	$("#TaskbarPanel").css("width",w);
-	$("#Taskbar").css("width",w-40-220);
-	$("#accordion-resizer").css("height",h-38);
+	$("#MainPanel" ).css("left",left+2);
+	$("#MainFrame").css("height",h-$("#TaskbarPanel").outerHeight()-2);
+	$("#MainFrame").css("width",w+10);
+	$("#accordion-resizer").css("height",h-24);
 	//$("#accordion").css("height",h-30);
 	//leftMenu.style.height=h-4-parseInt($("#LeftMenu").css("padding"))*2-2;
 	//toolbars.style.top=document.documentElement.clientHeight-parseInt(toolbars.style.height);
@@ -205,8 +222,12 @@ $(window).resize(function(){
 function resizeMenu()
 {
 	//var height=$(window).height()-$("#Toolbars").height()-$("#TopBar").height()-parseInt($("#LeftMenu").css("padding"))*2-parseInt($("#TopBar").css("padding"))*2-parseInt($("#accordion-resizer").css("padding"))*2-10;
-	var height=$(window).height()-$("#Toolbars").height()-$("#TopBar").height()-40;
-  	//$("#accordion-resizer").css("height",height);
+	var height=$(window).height()-$("#TopBar").outerHeight()-24;
+	var toolbars=document.getElementById("Toolbars");
+	if(	toolbars.style.display!="none")
+	{
+		height-=$("#Toolbars").outerHeight()
+	}
 	
 	$( "#accordion-resizer" ).resizable({
 			minHeight: height,
@@ -217,10 +238,10 @@ function resizeMenu()
 
 				//$( "#LeftMenu" ).css("width",$( "#accordion" ).width()+20);
 				//$( "#LeftMenu" ).css("height",height);
-				var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-15;
-				$("#MainFrame").css("width",w);
-				$("#TaskbarPanel").css("width",w);
-				$("#MainPanel").css("width",w);
+				var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-14;
+				$("#MainFrame").css("width",w+10);
+				$("#TaskbarPanel").css("width",w+10);
+				//$("#MainPanel").css("width",w+10);
 				$( "#MainPanel" ).css("left",$( "#LeftMenu" ).width()+2);
 				//$( "#accordion" ).css("height",height);
 				$( "#accordion" ).accordion( "refresh" );

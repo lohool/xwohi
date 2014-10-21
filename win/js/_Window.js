@@ -362,6 +362,7 @@ _window.prototype.Creat=function(content,title)
 	//this.board.appendChild(obj);
 
 	this.createTaskButton();
+	_window.AddMenuItem("_M_"+this.id,this.title,this.string+".restore(this);",this.icon)
 	//this.maximize.onclick();
 	this.Focus();
 
@@ -523,11 +524,25 @@ _window.prototype.Focus=function()
 	if(this.taskButton)this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";
 	this.titleCase.className="TITLE FOCUS";
 
+	this.SetTaskBtnPosition(this.taskButton);
+	
 
+};
+
+/**
+  Auto place the window's task buttons on the task bar.
+  tskBtn: the focused task button
+*/
+_window.prototype.SetTaskBtnPosition=function(tskBtn)
+{
+	var Taskbar=document.getElementById("Taskbar");
+	var TaskbarWidth=parseInt(Taskbar.offsetWidth);
 	var tskBtnWidth=0;
+	var allTskBtnWidth=0;
 	var currentWinIndex=0;
 	var winCount=0;
 	var findWin=false;
+	var right=TaskbarWidth;
 	for(var id in _window.windows) 
 	{
 		var win =_window.windows[id];
@@ -536,49 +551,99 @@ _window.prototype.Focus=function()
 		currentWinIndex++;
 		}
 		winCount++;
+		allTskBtnWidth+=win.taskButton.offsetWidth;
+		right=parseInt(win.taskButton.style.left)+allTskBtnWidth;
 		if(id==this.id)findWin=true;;
 		if(!findWin)
 		{
 		tskBtnWidth+=parseInt(win.taskButton.offsetWidth);
 		}
 	}
-	var Taskbar=document.getElementById("Taskbar");
-	var TaskbarWidth=parseInt(Taskbar.offsetWidth);
 	var pos=0;
-	//alert(parseInt(this.taskButton.offsetLeft))
-	if(parseInt(this.taskButton.offsetLeft)+parseInt(this.taskButton.offsetWidth)>TaskbarWidth)
+	if(allTskBtnWidth<TaskbarWidth)
 	{
-		pos=TaskbarWidth-tskBtnWidth-parseInt(this.taskButton.offsetWidth);
+		//the task bak can display all the buttons
+		pos=0;
+	}
+	else if(right<TaskbarWidth)
+	{
+		//a win and its taskbar was removed
+		pos=parseInt(tskBtn.style.left)-(right-TaskbarWidth);
+	}
+	else if(parseInt(tskBtn.offsetLeft)+parseInt(tskBtn.offsetWidth)>TaskbarWidth)
+	{
+		//move a right to left so it can be fully viewed
+		pos=TaskbarWidth-tskBtnWidth-parseInt(tskBtn.offsetWidth);
 		if(currentWinIndex<winCount)pos-=40;
 	}
-	else if(parseInt(this.taskButton.offsetLeft)<0)
+	else if(parseInt(tskBtn.offsetLeft)<0)
 	{
-		var ol=this.taskButton.offsetLeft;
-	    var left=parseInt(this.taskButton.style.left);
+		//move a left task button to visable(right)
+		var ol=tskBtn.offsetLeft;
+	    var left=parseInt(tskBtn.style.left);
 		//if(left<ol)
 		{
 			pos=left-ol;
 		}
-		if(tskBtnWidth>0)pos+=30;
-		//else pos=parseInt(this.taskButton.offsetLeft)+tskBtnWidth;
+		if(tskBtnWidth>0)pos+=40;
 	}
 	else pos=1;
 	if(pos<=0)
 	{
-		//alert(pos)
-		var i=0;
 		for(var id in _window.windows) 
 		{
 			win =_window.windows[id];
-			if(i==0)win.taskButton.style.left=pos+"px";
-			else win.taskButton.style.left=pos+"px";
-			i++;
+			win.taskButton.style.left=pos+"px";
 		}
 	}
+}
+_window.ShowMenu=function(e)
+{
+		//e=e|window.event;
+		if(document.getElementById("window_dropdown_menu"))	
+	{
+		$("#window_dropdown_menu").menu('show',{
+			minWidth:120,
+			duration:100,
+			hideOnUnhover:true,
+			left: e.pageX,
+			top: e.pageY
 
+		});
+	}
 
-};
-
+}
+_window.AddMenuItem=function(id,text,onclick,icon)
+{
+			$("#window_dropdown_menu").menu('appendItem',{iconCls:'icon-save',id:id,icon:icon,text:text,onclick:onclick});
+}
+_window.CreateDopdownMenu=function()
+{
+	/** jquery easyui menu
+		<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="javascript:alert('new')">New</div>
+		<div data-options="iconCls:'icon-save',icon:'../../../images/cross.png'">Save</div>
+		<div data-options="iconCls:'icon-print',disabled:true">Print</div>
+		<div class="menu-sep"></div>
+		<div>Exit</div>
+	</div>
+	*/
+		if(!_window.dropdownMenu)
+		{
+			_window.dropdownMenu=document.createElement("div");
+			_window.dropdownMenu.className="easyui-menu";
+			_window.dropdownMenu.id="window_dropdown_menu";
+			//_window.dropdownMenu.style.zIndex=100000;
+			_window.dropdownMenu.style.width="120px";
+			$(_window.dropdownMenu).menu();
+		}
+		var item="";
+		for(var id in _window.windows) 
+		{
+			win =_window.windows[id];
+			$("#window_dropdown_menu").menu('appendItem',{iconCls:'icon-save',icon:'../../../images/cross.png',text:win.title});
+		}
+}
 _window.prototype.LostFocus=function()
 {
 	//alert(this.taskButtion.className);
@@ -604,13 +669,15 @@ _window.prototype.FindNextFocus=function()
 _window.prototype.Close=function()
 {
 	if(this.status==1)this.Hidden();
-	this.FindNextFocus();
 	if(this.taskButton)document.getElementById("Taskbar").removeChild(this.taskButton);
+	this.FindNextFocus();
 	if(this.isModal) 
 	{
 		this.parent.removeChild(this.modal);
 		this.isModal=null;
 	}
+	//$("#window_dropdown_menu").menu('removeItem',"_M_"+this.id);
+	$("#window_dropdown_menu").menu('removeItem',$("#_M_"+this.id)[0]);
 	delete _window.windows[this.id];
 	for(var key in this) delete this[key];
 };
@@ -965,8 +1032,8 @@ _window.prototype.OnMaximize=function (obj)
 			oimg.src="win/images/max.gif";
 			//obj.removeChild(obj.childNodes[0]);
 			//obj.appendChild(oimg);
-			var w=this.originWidth-parseInt(parent.style.width)+2;
-			var h=this.originHeight+parseInt(this.titleCase.offsetHeight)-parseInt(parent.style.height)+2;
+			var w=this.originWidth-parseInt(parent.style.width)-8;
+			var h=this.originHeight+parseInt(this.titleCase.offsetHeight)-parseInt(parent.style.height)-8;
 			this.ActResizeBy(w,h);
 			this.MoveTo(this.originLeft,this.originTop);
        }
@@ -985,8 +1052,8 @@ _window.prototype.OnMaximize=function (obj)
 			this.originHeight=this.bodyHeight;
 			this.originLeft=this.left;
 			this.originTop=this.top;
-			var w=parseInt(parent.style.width)-this.bodyWidth+2;
-			var h=parseInt(parent.style.height)-this.bodyHeight-parseInt(this.titleCase.offsetHeight)+2;
+			var w=parseInt(parent.style.width)-this.bodyWidth-8;
+			var h=parseInt(parent.style.height)-this.bodyHeight-parseInt(this.titleCase.offsetHeight)-8;
 			//alert(w+":"+h);
 			this.MoveTo(0,0);
 			this.ActResizeBy(w,h);
@@ -1157,7 +1224,7 @@ function loadContentToPanel(panelId,url,data)
 					//set size for the elements of this window
 					$('#'+panelId+" .datagrid_wraper").each(function(i,ele){
 						$(this).resize(function(){
-							if(this.offsetWidth) $(this).find(".datagrid").datagrid("resize",this.offsetWidth-2,this.offsetHeight-2)
+							if(this.offsetWidth) $(this).find(".datagrid").datagrid("resize",this.offsetWidth,this.offsetHeight)
 						})
 					})
 					$('#'+panelId).resize(function(){

@@ -14,7 +14,7 @@
 		<INPUT TYPE="button" value="select" class="button biground" onclick='alert($("#operator_list").datagrid("select"))'>
 	</ww:form>
 </div>
-<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="37px">
+<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="37px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 </div>
@@ -38,7 +38,7 @@ var i=0;
 				  {"text":"Win Test","display":"text","btnClass":"test1","target":"window","src":"/Operator/OperatorInfo.action?vo.id={0}"},
 				  {"text":"JS Test","display":"text","btnClass":"test1","target":"window","src":"javascript:alert('/Operator/OperatorInfo.action?vo.id={0}')"}
 				  ],
-			  colwidth:[40,80,100,100],
+			  colwidth:[40,80,100,100,400,400],
 			  columns:[
 				  "<xwohi:i18n text="id" />",
 				  "<xwohi:i18n text="Operator.account" />",

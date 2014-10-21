@@ -201,7 +201,7 @@ $.fn.datagrid= function (options){
 	 }
 	$.fn.datagrid.init = function($this,opts){
 		//var $this=$(this);
-			//$this.css("width",opts._width);
+			$this.css("width",opts._width);
 			$this.css("height",opts._height);
 		//init the data 
 		var dgc = "";
@@ -244,7 +244,7 @@ $.fn.datagrid= function (options){
 				dgd += '<tr rowid='+r+'>';
 				
 				if(opts.multiple){
-					dgd += '<td style="width:30px;text-align:center;overflow:hidden;padding:0;text-align:center;"><input type="checkbox" style="margin:0;" class="dhdgchkbox"></td>';
+					dgd += '<td class="checkboxColumn"><input type="checkbox" style="margin:0;" class="dhdgchkbox"></td>';
 				}
 				
 				//only show the data with columns
@@ -277,7 +277,6 @@ $.fn.datagrid= function (options){
 		mainframe.empty();
 		var dgframe = $("<div class='datapanel' style='padding:0px;margin:0px;overflow-x:auto;overflow-y:auto;overflow:auto;'></div>")//document.createElement("DIV");
 		//dgframe.id = this.rid;
-		dgframe.css("width", mainframe.width()-4);
 		//var barHight=0;
 		//if(pager)barHight+=pager.height();
 		//dgframe.css("height", mainframe.height()-barHight);
@@ -303,22 +302,23 @@ $.fn.datagrid= function (options){
 
 		//datagrid column 标题栏
 		var dgcolumn = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"titlecolumn\" class=\"titlecolumn datacolumn\">"+dgc+"</table>");
+		var titlebarMask = $("<div cellpadding=\"0\" cellspacing=\"0\" class=\"titlecolumn_mask\" > </div>");
 
 		//datagrid data 数据
-		var dgdata = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"datacolumn\" class=\"datacolumn\">"+dgc+dgd+"</table>");
+		var dgdata = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"datacolumn\" class=\"datacolumn\">"+dgd+"</table>");
 		//dgframe.append( dgzero,dgslide,dgcolumn);
 		if(toolbar!=null)dgframe.append( toolbar);
-		dgframe.append( dgcolumn);
+		mainframe.append(toolbar);
+		mainframe.append( dgcolumn);
+		mainframe.append( titlebarMask);
 		dgframe.append( dgdata);
 
-		mainframe.append(toolbar);
 		mainframe.append(dgframe);
 		if(opts.pageObj!=null)
 		{
 			mainframe.append(opts.pageObj);
 		}
 		//opts.parentNode.appendChild(dgframe);
-		//document.getElementById("text").value=mainframe.html();
 
 		$("document").keydown(function(){
 			 updown();
@@ -332,11 +332,13 @@ $.fn.datagrid= function (options){
 */
 		opts.framediv = dgframe;
 		//zerobj = document.getElementById("zero");
+		opts.titlebarMask=titlebarMask;
 		opts.leftobj = dgslide.get(0);//document.getElementById("slidecolumn");
 		opts.titleobj = dgcolumn.get(0);//document.getElementById("titlecolumn");
 		opts.dataobj = dgdata.get(0);//document.getElementById("datacolumn");
 		opts.toolObj=toolbar;
-
+		opts.titlebarMask.css("height",dgcolumn.height()+1);
+/*
 		var btt = mainframe.css("borderTopWidth");//getCurrentStyle(framediv,"borderTopWidth");
 		var btr = mainframe.css("borderRightWidth");//getCurrentStyle(framediv,"borderRightWidth");
 		var btb = mainframe.css("borderBottomWidth");//getCurrentStyle(framediv,"borderBottomWidth");
@@ -346,19 +348,13 @@ $.fn.datagrid= function (options){
 		var zbt = getCurrentStyle(dgzero,"borderTopWidth");
 		var zbb = getCurrentStyle(dgzero,"borderBottomWidth");
 
-
-		var toolbarHeight =0;
-		if(toolbar!=null)toolbarHeight=toolbar.height();
-
-		var pageBarHeight=0;
-		if(opts.pageObj!=null && opts.pager.total>0)pageBarHeight+=opts.pageObj.height();
-		dgframe.css("height", mainframe.height()-pageBarHeight-toolbarHeight-4);
-
-
+*/
+		$.fn.datagrid.setSize($this,opts,mainframe.outerWidth(),mainframe.outerHeight());
 
 
 		//dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
 		dgframe.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
+		dgcolumn.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
 		
 		dgframe.bind("scroll",function(e){
 			//alert($(this).scrollTop())
@@ -367,15 +363,15 @@ $.fn.datagrid= function (options){
 			//e=e.originalEvent;
 			//alert($(this).scrollTop())
 			if($(this).scrollTop()>=0){
-				$(opts.titleobj).css("top",$(this).scrollTop()-1);
+				//$(opts.titleobj).css("top",$(this).scrollTop()-1);
 			}
-			
-			//if($(this).scrollLeft()>=0)
-			//{
-			//	toolbar.css("left",-$(this).scrollLeft());
-			//}
+			if($(this).scrollLeft()>=0)
+			{
+				$(dgcolumn).css("left",-$(this).scrollLeft());
+			}
 		});
 		
+		document.getElementById("text").value=mainframe.prop("outerHTML");
 
 		//bind event
 		var column=$this.find('.datacolumn thead tr td.column');
@@ -684,9 +680,26 @@ $.fn.datagrid= function (options){
 	}
 
 		$.fn.datagrid.setSize = function($this,opts,w,h){
+			var toolbarHeight =0;
+			if(opts.toolObj!=null)
+			{
+				toolbarHeight=opts.toolObj.outerHeight();
+				//w=w-(parseInt(opts.toolObj.css("border-left-width"))+parseInt(opts.toolObj.css("border-right-width")));
+				//h=h-(parseInt(opts.toolObj.css("border-top-width"))+parseInt(opts.toolObj.css("border-bottom-width")));
+				opts.titleobj.style.top=toolbarHeight+"px";
+				opts.titlebarMask.css("top", $(opts.titleobj).outerHeight());
+			}
+			var pageBarHeight=0;
+			if(opts.pageObj!=null && opts.pager.total>0)
+			{
+				//w=w-(parseInt(opts.pageObj.css("border-left-width"))+parseInt(opts.pageObj.css("border-right-width")));
+				if(opts.pageObj.css("width")>w)opts.pageObj.css("width",w);
+				pageBarHeight+=opts.pageObj.outerHeight();
+			}
+
 			opts._width=w;
 			opts._height=h;
-				$this.css("width",opts._width-1);
+				$this.css("width",opts._width);
 				$this.css("height",opts._height);
 			
 			var dgc = "";
@@ -694,30 +707,23 @@ $.fn.datagrid= function (options){
 			if(opts.multiple)avgw=avgw-30;
 			avgw = Math.floor(avgw/opts.columns.length);
 			opts.framediv.css("width",w);
-			var toolbarHeight =0;
-			if(opts.toolObj!=null)toolbarHeight=opts.toolObj.outerHeight();
+			 
+			opts.framediv.css("top", $(opts.titleobj).outerHeight());
+			opts.framediv.css("height", h-pageBarHeight-toolbarHeight-$(opts.titleobj).outerHeight());
 
-			var pageBarHeight=0;
-			if(opts.pageObj!=null && opts.pager.total>0)
-			{
-				if(opts.pageObj.css("width")>w)opts.pageObj.css("width",w);
-				pageBarHeight+=opts.pageObj.outerHeight();
-			}
-			
-			opts.framediv.css("height", $this.height()-pageBarHeight-toolbarHeight);
 			var startIndex=0;
 			if(opts.multiple)startIndex=1;
-				for(var cc=startIndex;cc<opts.columns.length;cc++){
-					if(opts.colwidth.length>cc-startIndex){
-						opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-						opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-						//dgc += '<td class="column" width="'+opts.colwidth[cc]+'"  >'+opts.columns[cc]+'<span class="arrow"></span></td>';
-					}else{
-						//dgc += '<td class="column" width="'+avgw+'" >'+opts.columns[cc]+'<span class="arrow"></span></td>';
-						opts.titleobj.rows[0].children[cc].style.width=avgw+"px";
-						opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
-					}
+			for(var cc=startIndex;cc<=opts.columns.length+startIndex;cc++){
+				if(cc-startIndex<opts.colwidth.length){
+					opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+					opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+					//dgc += '<td class="column" width="'+opts.colwidth[cc]+'"  >'+opts.columns[cc]+'<span class="arrow"></span></td>';
+				}else{
+					//dgc += '<td class="column" width="'+avgw+'" >'+opts.columns[cc]+'<span class="arrow"></span></td>';
+					opts.titleobj.rows[0].children[cc].style.width=avgw+"px";
+					opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
 				}
+			}
 		}
 
 	 function paginate(currentPage,pagesize, totalRecords)
@@ -895,8 +901,8 @@ $.fn.datagrid= function (options){
 			objbox[i].checked = checked;
 		}
 		*/
-		for(var i=0;i<opts.dataobj.childNodes[1].rows.length;i++){
-			var rowsobj = opts.dataobj.childNodes[1].rows[i];
+		for(var i=0;i<opts.dataobj.childNodes[0].rows.length;i++){
+			var rowsobj = opts.dataobj.childNodes[0].rows[i];
 			var checkbox=rowsobj.childNodes[0].childNodes[0];
 			checkbox.checked = checked;
 			if(checked)
@@ -1177,7 +1183,7 @@ $.fn.datagrid= function (options){
 	//加载数据
 	$.fn.datagrid.setdata = function($this,opts,arrdata){
 		if(arrdata){
-			$this.empty();
+			//$this.empty();
 			opts.data = arrdata;
 			changeposv = true;
 			nowrow = null;

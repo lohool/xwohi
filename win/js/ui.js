@@ -193,6 +193,7 @@ function WindowInit()
 	_window.ClassName = getCookie("WindowStyle") || "BLUE";
 	_window.Timer = parseInt(getCookie("WindowTimer") || 10);
 	_window.parent=document.getElementById("MainFrame");
+	_window.CreateDopdownMenu();
 	_window.Width = 600;
 }
 //openNamedWindows("Welcome");

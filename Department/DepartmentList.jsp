@@ -6,7 +6,7 @@
 		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
 </ww:form>
-	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;">
+	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
 		<div id="Department_list" class="datagrid" style="border:solid 0px red;">Loading...</div>
 	</div>
 </div>
