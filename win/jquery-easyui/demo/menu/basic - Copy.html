@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Menu - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/menu.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../../jqueryui/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../../src/jquery.menu.js"></script>
+	<script type="text/javascript" src="../../src/jquery.parser.js"></script>
+</head>
+<body>
+	<h2>Basic Menu</h2>
+	<p>Right click on page to display menu.</p>
+	<div id="ccc" style="margin:20px 0;"></div>
+	
+	<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="javascript:alert('new')">New</div>
+		<div data-options="iconCls:'icon-save',icon:'../../../images/cross.png'">Save</div>
+		<div data-options="iconCls:'icon-print',disabled:true">Print</div>
+		<div class="menu-sep"></div>
+		<div>Exit</div>
+	</div>
+	<INPUT TYPE="button" onclick="a()" value="AAAA">
+	<INPUT TYPE="button" onclick="aa()" value="BBBB">
+	<script>
+function a()
+{
+	  		var item=document.createElement("div");
+			item.className="easyui-menu";
+			item.id="window_dropdown_menu1";
+			item.style.zIndex=100000;
+			item.style.width="120px";
+			var item1="<div data-options=\"iconCls:'icon-save',icon:'../../../images/cross.png'\">AAAA</div>";
+			item1+="<div data-options=\"iconCls:'icon-save',icon:'../../../images/cross.png'\">AAAA</div>";
+			item.innerHTML=(item1);
+			$("#ccc").append(item);
+}
+
+function aa()
+{
+
+			//alert($("#window_dropdown_menu1").html())
+			$("#window_dropdown_menu1").menu('show',{
+			minWidth:120,
+			duration:100,
+			left:120,
+			top:0,
+			hideOnUnhover:true
+			});
+		}
+	</script>
+</body>
+</html>
