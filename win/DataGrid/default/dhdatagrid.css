@@ -131,12 +131,12 @@ color:#808080;
 }
 .datagrid table .dataover 
 {
-background:#FAFAFA;
+	background:#FAFAFA;
 }
 /*datagrid 选定行样式*/
 .datagrid table .selectedrow 
 {
-	background:#FBEC88;
+	background:#AED7FF;
 	color:blue;
 }
 /*datagrid 表头样式*/
@@ -152,12 +152,15 @@ background:#FAFAFA;
 {
 	BACKGROUND-COLOR:#EBF3FD;
 	width:17px;
+	border:0px;
 	position:absolute;
 	top:0px;
 	right:0px;
 	z-index:3;
 	display:inline-block;
-	border-left:dotted 1px #ccc;
+	#border-left:dotted 1px #ccc;
+	border-bottom:solid 1px #ccc;
+	BORDER-COLOR:0 0 threedshadow 0;
 }
 /*datagrid 左边栏样式*/
 .datagrid .slidecolumn 

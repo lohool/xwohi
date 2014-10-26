@@ -2,7 +2,7 @@
 $.fn.datagrid= function (options){
 		var defaults=
 	{
-	callname : "dhdg",
+	callname : "datagrid",
 	width : 0,
 	_width : 0,
 	height : 0,
@@ -21,7 +21,6 @@ $.fn.datagrid= function (options){
 	 dh : this,
 	 framediv : null,
 	 zerobj : null,
-	 leftobj : null,
 	 titleobj : null,
 	 dataobj : null,
 	 bgbar : null,
@@ -46,14 +45,14 @@ $.fn.datagrid= function (options){
 	defaults.rid=$(this).attr("id");
 
 	defaults.isMSIE =navigator.appName == "Microsoft Internet Explorer";
-
+	var opts1;
 		var methods={
 		init:function(){
 		var opts = $.extend({}, defaults, options); 
-		$.fn.datagrid.config =opts;
+		opts1 =opts;
 		$(this).data("options",opts);
 	    return this.each(function(i) {     
-			var sw=this.parentNode.scrollWidth-2;//$(this).width();
+			var sw=this.parentNode.clientWidth-2;//$(this).width();
 			var sh=this.parentNode.clientHeight-2;
 			//init the size of the grad
 			//alert("scrollWidth="+this.parentNode.scrollWidth+";offsetWidth="+$(this).width())
@@ -135,7 +134,7 @@ $.fn.datagrid= function (options){
 			$.fn.datagrid.jumpToPage($this,page,$this.data("options"));
 		},
 		resize : function(w,h){
-			var sw=w;//document.body.clientWidth-parseInt($(document.body).css("margin-left"))-parseInt($(document.body).css("margin-right"));
+			var sw=w;
 			var sh=h;//$(this).height();
 			var opts=$(this).data("options");
 			if(opts.width==0)
@@ -194,15 +193,14 @@ $.fn.datagrid= function (options){
 			else if(opts.toolbar[i].btnClass=="Separator")bar+="<div  class=\""+opts.toolbar[i].btnClass+"\" />";
 			else bar+="<span  class=\""+opts.toolbar[i].btnClass+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+value+"</span>";
 		 }
-
 		bar+="</div>";
 		return bar;
 
 	 }
 	$.fn.datagrid.init = function($this,opts){
 		//var $this=$(this);
-			$this.css("width",opts._width);
-			$this.css("height",opts._height);
+		$this.css("width",opts._width);
+		$this.css("height",opts._height);
 		//init the data 
 		var dgc = "";
 		var avgw = opts._width-20
@@ -211,7 +209,6 @@ $.fn.datagrid= function (options){
 		}
 		avgw = Math.floor(avgw/opts.columns.length);
 		if(opts.columns.length>0){
-			//dgc = '<thead><tr><td class="firstcolumn">&nbsp;</td>';
 			dgc = '<thead><tr class="title">';
 			
 			if(opts.multiple){
@@ -228,31 +225,21 @@ $.fn.datagrid= function (options){
 			dgc += '<td class="lastcolumn" >&nbsp;</td></tr></thead>';
 		}
 
-		var dgs = "";
 		var dgd = "";
 		
 		if(opts.data.length>0){
-			//第一列
-			dgs = '<tr><td>&nbsp;</td></tr>';
 			dgd="<tbody>";
-			
 			for(var r=0;r<opts.data.length;r++){
 				if(!opts.data[r])continue;
-				dgs += '<tr rel='+r+'><td>'+(r+1)+'</td></tr>';
-				//dgd += '<tr onmouseover="'+opts.callname+'.dataover(opts);" onmouseout="'+opts.callname+'.dataout(opts);" ondblclick="'+opts.callname+'.dblclick_fun(opts);" oncontextmenu="'+opts.callname+'.contextmenu_fun(opts,event);"><td class="firstcolumn">&nbsp;</td>';
-				//dgd += '<tr ><td class="firstcolumn">&nbsp;</td>';
 				dgd += '<tr rowid='+r+'>';
 				
 				if(opts.multiple){
-					dgd += '<td class="checkboxColumn"><input type="checkbox" style="margin:0;" class="dhdgchkbox"></td>';
+					dgd += '<td class="checkboxColumn"><input type="checkbox" style="margin:0;" class="dgchkbox"></td>';
 				}
 				
 				//only show the data with columns
-				//for(var c=0;c<opts.data[r].length;c++){
 				for(var c=0;c<opts.columns.length;c++){
 					if(opts.colwidth.length>c){
-						//alert(opts.colwidth[c])
-						//alert(opts.data[r])
 						dgd += '<td >'+opts.data[r][c]+'</td>';
 						//dgd += '<td width="'+opts.colwidth[c]+'"><input value="'+opts.data[r][c]+'"></td>';
 					}else{
@@ -265,7 +252,6 @@ $.fn.datagrid= function (options){
 			dgd+="</tbody>";
 		}
 		var pager=null;
-		//if(opts.pager!=null)opts.pageObj=$(paginate(opts.pager.current_page*opts.pager.pagesize,opts.pager.pagesize,opts.pager.total));
 		if(opts.pager!=null && opts.pager.total>0)opts.pageObj=$(paginate(opts.pager.current_page,opts.pager.pagesize,opts.pager.total));
 		
 		var toolbar_html=gen_toolbar(opts);
@@ -276,29 +262,19 @@ $.fn.datagrid= function (options){
 		var mainframe=$this;
 		mainframe.empty();
 		var dgframe = $("<div class='datapanel' style='padding:0px;margin:0px;overflow-x:auto;overflow-y:auto;overflow:auto;'></div>")//document.createElement("DIV");
-		//dgframe.id = this.rid;
-		//var barHight=0;
-		//if(pager)barHight+=pager.height();
-		//dgframe.css("height", mainframe.height()-barHight);
-		//dgframe.onmousedown = function(e){e=e||window.event;getrow(e,opts);}
-		//dgframe.onmousemove = function(e){e=e||window.event;rsc_m(e,opts);}
 
 		if(document.attachEvent){
-			document.attachEvent("onmouseup",function(e){e=e||window.event;rsc_u(e,opts);});
+			document.attachEvent("onmouseup",function(e){e=e||window.event;setColumnWidth(e,opts);});
 		}else{
-			document.addEventListener("mouseup",rsc_u,false);
+			document.addEventListener("mouseup",setColumnWidth,false);
 		}
 		dgframe.oncontextmenu = function(){return false}
 		dgframe.onselectstart = function(){return false}
 		ae(dgframe,opts);
 
-		//datagrid zero point 零点
-		//var dgzero = "<div id=\"zero\"></div>"
 		var dgzero = document.createElement("div");
 		dgzero.id="zreo";
 		dgzero.className="zreo";
-		//datagrid slidecolumn 第一列
-		var dgslide = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"slidecolumn\" class=\"slidecolumn\">"+dgs+"</table>");
 
 		//datagrid column 标题栏
 		var dgcolumn = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"titlecolumn\" class=\"titlecolumn datacolumn\">"+dgc+"</table>");
@@ -306,7 +282,6 @@ $.fn.datagrid= function (options){
 
 		//datagrid data 数据
 		var dgdata = $("<table cellpadding=\"0\" cellspacing=\"0\" id=\"datacolumn\" class=\"datacolumn\">"+dgd+"</table>");
-		//dgframe.append( dgzero,dgslide,dgcolumn);
 		if(toolbar!=null)dgframe.append( toolbar);
 		mainframe.append(toolbar);
 		mainframe.append( dgcolumn);
@@ -318,53 +293,27 @@ $.fn.datagrid= function (options){
 		{
 			mainframe.append(opts.pageObj);
 		}
-		//opts.parentNode.appendChild(dgframe);
 
 		$("document").keydown(function(){
 			 updown();
 		});
-/*
-		if(document.attachEvent){
-			document.attachEvent("onkeydown",updown);
-		}else{
-			document.addEventListener("keydown",updown,false);
-		}
-*/
 		opts.framediv = dgframe;
-		//zerobj = document.getElementById("zero");
 		opts.titlebarMask=titlebarMask;
-		opts.leftobj = dgslide.get(0);//document.getElementById("slidecolumn");
 		opts.titleobj = dgcolumn.get(0);//document.getElementById("titlecolumn");
 		opts.dataobj = dgdata.get(0);//document.getElementById("datacolumn");
 		opts.toolObj=toolbar;
 		opts.titlebarMask.css("height",dgcolumn.height()+1);
-/*
-		var btt = mainframe.css("borderTopWidth");//getCurrentStyle(framediv,"borderTopWidth");
-		var btr = mainframe.css("borderRightWidth");//getCurrentStyle(framediv,"borderRightWidth");
-		var btb = mainframe.css("borderBottomWidth");//getCurrentStyle(framediv,"borderBottomWidth");
-		var btl = mainframe.css("borderLeftWidth");//getCurrentStyle(framediv,"borderLeftWidth");
-		var fh = opts.framediv.css("height");//getCurrentStyle(framediv,"height");
-		var zh =dgzero.style.height; //getCurrentStyle(dgzero,"height");
-		var zbt = getCurrentStyle(dgzero,"borderTopWidth");
-		var zbb = getCurrentStyle(dgzero,"borderBottomWidth");
-
-*/
 		$.fn.datagrid.setSize($this,opts,mainframe.outerWidth(),mainframe.outerHeight());
 
 
 		//dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
-		dgframe.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
-		dgcolumn.bind("mousemove",function(e){e=e||window.event;rsc_m(e,opts);});
+		dgframe.bind("mousemove",function(e){e=e||window.event;onMoveColumnWidth(e,opts);});
+		dgcolumn.bind("mousemove",function(e){e=e||window.event;onMoveColumnWidth(e,opts);});
 		
 		dgframe.bind("scroll",function(e){
-			//alert($(this).scrollTop())
-			//e=e||window.event;
-			//e.preventDefault();
-			//e=e.originalEvent;
-			//alert($(this).scrollTop())
-			if($(this).scrollTop()>=0){
-				//$(opts.titleobj).css("top",$(this).scrollTop()-1);
-			}
+			//if($(this).scrollTop()>=0){
+			//	$(opts.titleobj).css("top",$(this).scrollTop()-1);
+			//}
 			if($(this).scrollLeft()>=0)
 			{
 				$(dgcolumn).css("left",-$(this).scrollLeft());
@@ -377,16 +326,15 @@ $.fn.datagrid= function (options){
 		var column=$this.find('.datacolumn thead tr td.column');
 		column.bind("mouseover",function(){$.fn.datagrid.over(this);});
 		column.bind("mouseout",function(){$.fn.datagrid.out(this);});
-		column.bind("mousemove",function(){$.fn.datagrid.cc(event,this);});
-		column.bind("mousedown",function(){$.fn.datagrid.rsc_d(event,this,opts);});
-		column.bind("mouseup",function(){$.fn.datagrid.mouseup(this);});
-		//$(this).find('#selectAll').bind("click",function(){$.fn.datagrid.selectall(this.checked);});
+		column.bind("mousemove",function(){onTitlePanelMouseMove(event,this);});
+		column.bind("mousedown",function(){onTitlePanelMouseDown(event,this,opts);});
+		column.bind("mouseup",function(){onTitlePanelMouseUp(this);});
+		//$(this).find('#selectAll').bind("click",function(){selectAll(this.checked);});
 		//make the data in the grid can edited
 		if(opts.editable)
 		{
 			var dataColumn=$this.find('.datacolumn tbody tr td');
 			dataColumn.dblclick(function(){
-			  //alert(this.innerText);
 			  var td=$(this);
 			  var input=$("<input id='dynamicText' style='border:0;' value='"+this.innerText+"'>");
 			  input.css("width",td.width());
@@ -410,16 +358,16 @@ $.fn.datagrid= function (options){
 			else this.className="";
 		});
 		$this.find('#selectAll').bind("click",function(){
-			$.fn.datagrid.selectall(opts,this.checked)
+			selectAll(opts,this.checked)
 		});
 
-		$this.find('.dhdgchkbox').bind("click",function(e){
+		$this.find('.dgchkbox').bind("click",function(e){
 			var row=this.parentNode;
 			row.click();
 				//e=e||window.event;getrow(e,opts);
 		});
 
-		$this.find('.paginate .paginate_pagesize').bind("change",function(){
+		$this.find('.paginate .pagesize').bind("change",function(){
 			var pagesize=$(this).val();
 			//$.fn.datagrid.jumpToPage($this,page,opts);
 			var form=document.getElementById(opts.linkedForm);
@@ -531,15 +479,6 @@ $.fn.datagrid= function (options){
 					}
 					else
 					{
-						/*
-						var src=opts.toolbar[btnIndex].src;
-						var rowid=$(nowrow).attr("rowid");
-						var row=opts.data[rowid];
-						for( var i=0;i<opts.data[rowid].length; i++)
-						{
-							src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
-						}
-						*/
 						if(!target)target="dialog";
 						if(target=="dialog")openDialog(src,text,true,width,height);
 						else openWorkWindow(src,text)
@@ -654,25 +593,34 @@ $.fn.datagrid= function (options){
 			}
 			else if(className=="Help")
 			{
-				//$.fn.datagrid.setSize($this,opts,400,300);
 				openDialog(src,text,true);
 			}
 			else 
 			{
-				if(!target)target="dialog";
-				if(target=="dialog")openDialog(src,text,true,width,height);
-				else if(target=="window")openWorkWindow(src,text);
-				else if(target=="self")
+				//not a pre-defined button
+				var re =new RegExp("\{[0-9]{1,3}\}"); 
+				if(re.test(src))
 				{
-					var win =_window.windows[_window.focusWindowId];
-					win.SetContent("[url]"+src);
+					//if still has parameters:"{N}"
+					openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
 				}
 				else
 				{
-					//load into a named panel by ID
-					$('#'+target).load(src,null,function(response,status,xhr){
-						alert(xhr.responseText);
-					});
+					if(!target)target="dialog";
+					if(target=="dialog")openDialog(src,text,true,width,height);
+					else if(target=="window")openWorkWindow(src,text);
+					else if(target=="self")
+					{
+						var win =_window.windows[_window.focusWindowId];
+						win.SetContent("[url]"+src);
+					}
+					else
+					{
+						//load into a named panel by ID
+						$('#'+target).load(src,null,function(response,status,xhr){
+							alert(xhr.responseText);
+						});
+					}
 				}
 			}
 			
@@ -680,46 +628,45 @@ $.fn.datagrid= function (options){
 	}
 
 		$.fn.datagrid.setSize = function($this,opts,w,h){
+			opts._width=w;
+			opts._height=h;
+			$this.css("width",opts._width);
+			$this.css("height",opts._height);
 			var toolbarHeight =0;
 			if(opts.toolObj!=null)
 			{
 				toolbarHeight=opts.toolObj.outerHeight();
-				//w=w-(parseInt(opts.toolObj.css("border-left-width"))+parseInt(opts.toolObj.css("border-right-width")));
-				//h=h-(parseInt(opts.toolObj.css("border-top-width"))+parseInt(opts.toolObj.css("border-bottom-width")));
 				opts.titleobj.style.top=toolbarHeight+"px";
-				opts.titlebarMask.css("top", $(opts.titleobj).outerHeight());
+				opts.titlebarMask.css("top", $(opts.toolObj).outerHeight());
+				opts.titlebarMask.css("height", $(opts.titleobj).height()-1);
+			}
+			else
+			{
+				opts.titlebarMask.css("height", $(opts.titleobj).height()-1);
 			}
 			var pageBarHeight=0;
 			if(opts.pageObj!=null && opts.pager.total>0)
 			{
-				//w=w-(parseInt(opts.pageObj.css("border-left-width"))+parseInt(opts.pageObj.css("border-right-width")));
 				if(opts.pageObj.css("width")>w)opts.pageObj.css("width",w);
-				pageBarHeight+=opts.pageObj.outerHeight();
+				pageBarHeight=opts.pageObj.outerHeight();
 			}
 
-			opts._width=w;
-			opts._height=h;
-				$this.css("width",opts._width);
-				$this.css("height",opts._height);
 			
 			var dgc = "";
 			var avgw = opts._width-20;
 			if(opts.multiple)avgw=avgw-30;
 			avgw = Math.floor(avgw/opts.columns.length);
 			opts.framediv.css("width",w);
-			 
 			opts.framediv.css("top", $(opts.titleobj).outerHeight());
 			opts.framediv.css("height", h-pageBarHeight-toolbarHeight-$(opts.titleobj).outerHeight());
 
 			var startIndex=0;
 			if(opts.multiple)startIndex=1;
-			for(var cc=startIndex;cc<=opts.columns.length+startIndex;cc++){
+			for(var cc=startIndex;cc<=opts.columns.length+startIndex-1;cc++){
 				if(cc-startIndex<opts.colwidth.length){
 					opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
 					opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-					//dgc += '<td class="column" width="'+opts.colwidth[cc]+'"  >'+opts.columns[cc]+'<span class="arrow"></span></td>';
 				}else{
-					//dgc += '<td class="column" width="'+avgw+'" >'+opts.columns[cc]+'<span class="arrow"></span></td>';
 					opts.titleobj.rows[0].children[cc].style.width=avgw+"px";
 					opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
 				}
@@ -737,7 +684,7 @@ $.fn.datagrid= function (options){
             pagesize=10;
         var pages = Math.ceil(totalRecords / pagesize) ;
         pager+=("<table id='paginate' class='paginate'><tbody><tr><td>") ;
-        var pageSel="<select id='paginate_pagesize' class='paginate_pagesize'>";
+        var pageSel="<select id='paginate_pagesize' class='pagesize'>";
 		var sizes=[2, 5, 10, 20, 50, 100];
         for(var i in sizes)
 		{
@@ -749,32 +696,28 @@ $.fn.datagrid= function (options){
 
 		pager+=("<span class=\"string\">"+JSMsg_Paginate.total + totalRecords + JSMsg_Paginate.records+","+Math.ceil(totalRecords/pagesize)+ JSMsg_Paginate.page+" /  "+ JSMsg_Paginate.everyPage+JSMsg_Paginate.display+pageSel+ JSMsg_Paginate.records+"</span><span class='navigator_panel'>");
 
-        if (currentPage <= 0) {
-            pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>"+JSMsg_Paginate.firstPage +"</a>");
-            pager+=("<a class=\"navigator\" page=\"0\"><span class=\"ico\">3</span></a>");
-        } else {
-            pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>"+JSMsg_Paginate.firstPage +"</a>");
-            if(currentPage-4>=0)
-            {
-                pager+=("<a class=\"navigator\" page=\""+(currentPage-6)+"\"><span class=\"ico\">3</span></a>");
-            }
-            else
-            {
-                pager+=("<a class=\"navigator\" ><span class=\"ico\">3</span></a>");
-            }
+        pager+=("<a class=\"navigator_longstring\" page=\"0\"><span class=\"ico\">9</span>"+JSMsg_Paginate.firstPage +"</a>");
+        if(currentPage-4>=0)
+        {
+            pager+=("<a class=\"navigator\" page=\""+(currentPage-5)+"\"><span class=\"ico\">3</span></a>");
         }
-
-        for(var i=currentPage-5>=0?currentPage-5:0;i<currentPage;i++)
+        else
+        {
+            pager+=("<a class=\"navigator\" ><span class=\"ico\">3</span></a>");
+        }
+		//pages before current
+        for(var i=currentPage-4>=0?currentPage-4:0;i<currentPage;i++)
         {
             pager+="<a class=\"navigator\" page=\""+i+"\">"+(i+1)+"</a>";
         }
+		//current page
         pager+="<a class=\"navigator_current\">"+(currentPage+1)+"</a>";
-            
-        for(var i=Number(currentPage)+1;i<currentPage+6 && i<pages;i++)
+        //pages after current
+        for(var i=Number(currentPage)+1;i<currentPage+5 && i<pages;i++)
         {
             pager+="<a class=\"navigator\" page=\""+i+"\">"+(i+1)+"</a>";
         }
-
+		//the last page
         if (currentPage >= pages - 1) 
         {
             pager+=("<a class=\"navigator\"><span class=\"ico\">4</span></a>");
@@ -782,9 +725,9 @@ $.fn.datagrid= function (options){
         } 
         else 
         {
-           if(currentPage+4<=pages-1)
+           if(currentPage+3<=pages-1)
             {
-                pager+=("<a class=\"navigator\" page=\""+(currentPage+6)+"\"><span class=\"ico\">4</span></a>");
+                pager+=("<a class=\"navigator\" page=\""+(currentPage+5)+"\"><span class=\"ico\">4</span></a>");
             }
            else
            {
@@ -796,9 +739,6 @@ $.fn.datagrid= function (options){
         pager+=("</span></td></tr></tbody></table>") ;
 
 		return pager;
-
-
-
 	 }
 
 	//获得当前样式
@@ -820,8 +760,10 @@ $.fn.datagrid= function (options){
 		e=e.originalEvent;
 		if(e.wheelDelta<=0 || e.detail>0){
 			//opts.vbar.scrollTop += 18;
+			opts.framediv.scrollTop(opts.framediv.scrollTop()+17);
 		}else {
 			//opts.vbar.scrollTop = opts.vbar.scrollTop-18;
+			opts.framediv.scrollTop(opts.framediv.scrollTop()-17);
 		}
 	}
 	function ae(obj,opts){
@@ -844,7 +786,6 @@ $.fn.datagrid= function (options){
 		if(esrcobj.parentNode.tagName=="TR"){
 			var epobj = esrcobj.parentNode;
 			var eprowindex = epobj.rowIndex;
-
 			var checkbox=epobj.childNodes[0].childNodes[0];
 
 
@@ -865,7 +806,7 @@ $.fn.datagrid= function (options){
 			}
 			else
 			{
-				if(eprowindex!=0)
+				//if(eprowindex!=0)
 				{
 					if(opts.nowrow!=null)
 					{
@@ -892,15 +833,7 @@ $.fn.datagrid= function (options){
 		}
 	}
 
-	//全选
-	$.fn.datagrid.selectall = function(opts,checked){
-			/*
-		var objbox = $(this).getElementsByName("dhdgchkbox");
-		var objboxl = objbox.length;
-		for(var i=0;i<objboxl;i++){
-			objbox[i].checked = checked;
-		}
-		*/
+	function selectAll(opts,checked){
 		for(var i=0;i<opts.dataobj.childNodes[0].rows.length;i++){
 			var rowsobj = opts.dataobj.childNodes[0].rows[i];
 			var checkbox=rowsobj.childNodes[0].childNodes[0];
@@ -918,8 +851,8 @@ $.fn.datagrid= function (options){
 		}
 	}
 
-	//更改列宽
-	$.fn.datagrid.rsc_d = function(e,obj,opts){
+	//change the column's width
+	function onTitlePanelMouseDown  (e,obj,opts){
 		//var px = opts.isMSIE?e.offsetX:e.layerX-obj.offsetLeft;
 		var px = e.offsetX;
 		if(px>obj.offsetWidth-6 && px<obj.offsetWidth){
@@ -953,10 +886,10 @@ $.fn.datagrid= function (options){
 			obj.className = "sortdown";
 		}
 	}
-	$.fn.datagrid.mouseup = function(obj){
+	function onTitlePanelMouseUp  (obj){
 		obj.className = "over";
 	}
-	function rsc_m(e,opts){
+	function onMoveColumnWidth(e,opts){
 		if(opts.tdobj!=null){
 			e=e||window.event;
 			var newwidth = opts.ow-(opts.ml-e.clientX);
@@ -970,14 +903,9 @@ $.fn.datagrid= function (options){
 				opts.dataobj.rows[0].cells[opts.tdobj.cellIndex].style.width = 5+"px";
 				opts.colwidth[opts.tdobj.cellIndex]=5;
 			}
-			//alert(opts.tdobj.style.width )
-			//alert(opts.dataobj.rows[0].cells[opts.tdobj.cellIndex].style.width )
-			//$.fn.datagrid.setwh(this,opts);
-			//scrh(opts);
 		}
 	}
-	function rsc_u(e){
-		opts=$.fn.datagrid.config;
+	function setColumnWidth(e,opts){
 		if(opts!=null && opts.tdobj!=null){
 			e=e||window.event;
 			var newwidth = opts.ow-(opts.ml-e.clientX);
@@ -997,7 +925,7 @@ $.fn.datagrid= function (options){
 		}
 	}
 
-	$.fn.datagrid.cc = function(e,obj){
+	function onTitlePanelMouseMove(e,obj){
 		//var px = isMSIE?e.offsetX:e.layerX-obj.offsetLeft;
 		var px = e.offsetX;
 		if(px>obj.offsetWidth-6 && px<obj.offsetWidth){
@@ -1084,13 +1012,13 @@ $.fn.datagrid= function (options){
 		return n;
 	}
 
-	//排序
+	//sort the data grid
 	function dgsort(obj,asc,opts){
 		var rl = opts.data.length;
 		var ci = obj.cellIndex;
 		var rowsobj = [];
-		for(var i=0;i<opts.dataobj.childNodes[1].rows.length;i++){
-			rowsobj[i] = opts.dataobj.childNodes[1].rows[i];
+		for(var i=0;i<opts.dataobj.childNodes[0].rows.length;i++){
+			rowsobj[i] = opts.dataobj.childNodes[0].rows[i];
 		}
 		rowsobj.sort(function(trObj1,trObj2){
 				if(!isNaN(trObj1.cells[ci].innerHTML.charAt(0)) && !isNaN(trObj2.cells[ci].innerHTML.charAt(0))){
@@ -1108,8 +1036,8 @@ $.fn.datagrid= function (options){
 				}
 			});
 		for(var i=0;i<rowsobj.length;i++){
-			opts.dataobj.childNodes[1].appendChild(rowsobj[i]);
-			if(rowsobj[i].className == "selectedrow"){opts.nowrow=i+1;};
+			opts.dataobj.childNodes[0].appendChild(rowsobj[i]);
+			if(rowsobj[i].className == "selectedrow"){opts.nowrow=i;};
 		}
 		rowsobj = null;
 		for(var c=(opts.multiple)?2:1;c<obj.parentNode.cells.length-1;c++){
@@ -1120,8 +1048,20 @@ $.fn.datagrid= function (options){
 		}else{
 			obj.childNodes[1].innerHTML = "▼";
 		}
-		//alert(opts.dataobj.rows[opts.nowrow].innerHTML)
-		//opts.nowrow=null;
+		
+		//set the first row's width
+		var avgw = opts._width-20;
+		if(opts.multiple)avgw=avgw-30;
+		avgw = Math.floor(avgw/opts.columns.length);
+		var startIndex=0;
+		if(opts.multiple)startIndex=1;
+		for(var cc=startIndex;cc<=opts.columns.length+startIndex-1;cc++){
+			if(cc-startIndex<opts.colwidth.length){
+				opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+			}else{
+				opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
+			}
+		}
 	}
 
 	//查找
@@ -1153,30 +1093,30 @@ $.fn.datagrid= function (options){
 		}
 	}
 	$.fn.datagrid.jumpToPage = function($this,page,opts){
-				if(page)
+		if(page)
+		{
+			opts.pager.current_page=page;
+			if(opts.url)
+			{
+				//refresh data from a From
+				if(opts.linkedForm)
 				{
-					opts.pager.current_page=page;
-					if(opts.url)
-					{
-						//refresh data from a From
-						if(opts.linkedForm)
-						{
-							var form=document.getElementById(opts.linkedForm);
-							form["page"].value=opts.pager.current_page;
-							$.fn.datagrid.loadData($this,null,form);
-						}
-						else
-						{
-							$.fn.datagrid.loadData($this,opts);
-						}
-					}
-					else
-					{
-						var form=$("#"+opts.linkedForm);
-						form.find(":input[name=page]").val(opts.pager.current_page);
-						form.submit();
-					}
+					var form=document.getElementById(opts.linkedForm);
+					form["page"].value=opts.pager.current_page;
+					$.fn.datagrid.loadData($this,null,form);
 				}
+				else
+				{
+					$.fn.datagrid.loadData($this,opts);
+				}
+			}
+			else
+			{
+				var form=$("#"+opts.linkedForm);
+				form.find(":input[name=page]").val(opts.pager.current_page);
+				form.submit();
+			}
+		}
 	}
 
 
@@ -1206,8 +1146,6 @@ $.fn.datagrid= function (options){
 			param=$(form).find(":input").serialize();
 		}
 		if(!opts)opts=$this.data("options");
-		//alert(url)
-		//alert(param)
 		jQuery.ajax({
             type: "post",
             async: false,
@@ -1252,41 +1190,6 @@ $.fn.datagrid= function (options){
 				$this.html(XMLHttpRequest.responseText);
             }
         });
-/*
-		var param={};
-		if(opts.pager)param={page:opts.pager.current_page,pagesize:opts.pager.pagesize};
-		if(opts.params)param= $.extend(param, opts.params); 
-		$.getJSON(opts.url,param,function(data) {		
-				if(data.pager)
-					opts.pager = {
-						current_page: data.pager.current_page,
-						pagesize: 	  data.pager.pagesize,
-						total:		  data.pager.total
-					};
-				if(data.colwidth)
-				$.each(data.colwidth, function(i, width) {
-					opts.colwidth[i]=width;
-				});
-
-				$.each(data.data, function(i, row) {
-					if(i==0)
-					{
-						var index=0;
-						for(j in row)
-						{
-						   opts.columns[index++]=j;
-						}
-					}
-					var rowData=[];
-					for (a=0; a < opts.columns.length; a++) {
-						rowData[a]=row[opts.columns[a]];
-					}	
-					opts.data[i]=rowData;
-				});
-				$.fn.datagrid.setdata($this,opts,opts.data);
-			}
-		);
-		*/
 
 	}
 

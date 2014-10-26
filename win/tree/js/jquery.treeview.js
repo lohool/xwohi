@@ -185,9 +185,10 @@
 					});
 				}
 			}
-			
+
 			// add treeview class to activate styles
 			this.addClass("treeview");
+						alert('1');
 			
 			// prepare branches and find all tree items with child lists
 			var branches = this.find("li").prepareBranches(settings);
@@ -224,7 +225,17 @@
 			}
 			
 			branches.applyClasses(settings, toggler);
-				
+			var firstNode=this.find("li :first");
+			if(firstNode.filter(":has(>ul:hidden)"))
+			{
+				firstNode.addClass(CLASSES.firstExpandable);
+			}
+				// handle open ones
+			else if(	firstNode.not(":has(>ul:hidden)"))
+			{
+				firstNode.not(":has(>ul:hidden) :first").addClass(CLASSES.firstCollapsable);
+			}
+	
 			// if control option is set, create the treecontroller and show it
 			if ( settings.control ) {
 				treeController(this, settings.control);
@@ -247,7 +258,9 @@
 		collapsable: "collapsable",
 		collapsableHitarea: "collapsable-hitarea",
 		lastCollapsableHitarea: "lastCollapsable-hitarea",
+		firstCollapsable: "firstCollapsable",
 		lastCollapsable: "lastCollapsable",
+		firstExpandable: "firstExpandable",
 		lastExpandable: "lastExpandable",
 		last: "last",
 		hitarea: "hitarea"

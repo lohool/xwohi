@@ -58,6 +58,10 @@ position:absolute;
 {
 	width:20px;
 }
+.paginate .pagesize
+{
+	width:60px;
+}
 .paginate .navigator:hover,
 .paginate .navigator_longstring:hover
 {

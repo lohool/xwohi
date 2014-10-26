@@ -82,7 +82,7 @@ function onSubmit(myform)
 <p><label class="label"><xwohi:i18n text="Department"/>:</label>
 <ww:select name="vo.department.id" listKey="id" listValue="name" list="select.department" value="vo.department.id"  multiple="multiple"/>
 		<INPUT id="departmentId" TYPE="text" NAME="departmentId" style="width:50px">
-		<INPUT id="departmentName" TYPE="text" NAME="departmentName" >
+		<INPUT id="departmentName" TYPE="text" NAME="departmentName" style="width:100px">
 		<INPUT TYPE="button" value="Sel" onclick="openDialog('/Department/DepartmentSelect.action','Select Department',true,600,350)">
 </p>
 <p>

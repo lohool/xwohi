@@ -404,7 +404,23 @@ _window.prototype.SetContent=function(content,data)
 			this.contentCase.id=id;
 			this.contentCase.name="_Win_Content_Case";
 			//this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
-			loadContentToPanel(id,tent,data);
+			/*
+			if(new RegExp("^http:").test (tent))  
+			{
+				//load a external page to a iframe
+				var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
+				var id="_F"+this.id;
+				this.contentCase.innerHTML="<iframe id=\""+id+"\" name=\""+id+"\" "+str+" onfocus=\""+this.string+".Focus()\" src=\""+tent+"\" scrolling='auto' frameBorder='0' style='width:100%;height:100%;border:0px;padding:0px;margin:0px;'></iframe>";
+				if(this.bodyHeight<0) this.bodyHeight=1;
+				this.iframe=document.getElementById(id);
+				this.frame=eval(id);
+			}
+			else
+			*/
+			{
+				//open a page inside this site
+				loadContentToPanel(id,tent,data);
+			}
 /*
 			$('#'+id).load(tent,data,function(response,status,xhr){
 				if(xhr.status!=200)
@@ -1252,7 +1268,7 @@ function loadContentToPanel(panelId,url,data)
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) 
 			{
-				$('#'+panelId).html(xhr.responseText);
+				$('#'+panelId).html(XMLHttpRequest.responseText);
             }
 	  });
 
