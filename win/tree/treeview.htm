@@ -9,14 +9,33 @@
 
 <SCRIPT src="./js/jquery.treeview.js" type=text/javascript></SCRIPT>
 
-<SCRIPT src="./demo.js" type=text/javascript></SCRIPT>
 
 <META content="MSHTML 6.00.6000.17114" name=GENERATOR></HEAD>
 <BODY>
 
+<LI class=collapsable>
+<DIV class="hitarea collapsable-hitarea"></DIV><SPAN class=folder>Folder 1</SPAN> 
+<UL>
+<LI class=last><SPAN class=file>Item 1.1</SPAN> </LI></UL>
+<LI class=collapsable>
+<DIV class="hitarea collapsable-hitarea"></DIV><SPAN class=folder>Folder 2</SPAN> 
+<UL>
+<LI class=collapsable>
+<DIV class="hitarea collapsable-hitarea"></DIV><SPAN class=folder>Subfolder 2.1</SPAN> 
+<UL id=folder21>
+<LI><SPAN class=file>File 2.1.1</SPAN> 
+<LI><SPAN class=file>File 2.1.2</SPAN> 
+<LI class=last><SPAN class=file>File 2.1.3</SPAN> </LI></UL>
+<LI class=last><SPAN class=file>File 2.2</SPAN> </LI></UL>
+<LI class="closed expandable lastExpandable">
+<DIV class="hitarea closed-hitarea expandable-hitarea lastExpandable-hitarea"></DIV><SPAN class=folder>Folder 3 (closed at start)</SPAN> 
+<UL style="DISPLAY: none">
+<LI class=last><SPAN class=file>File 3.1</SPAN> </LI></UL></LI>
+
+
 <div><FONT SIZE="4" COLOR="">Sample 1 - default</FONT></div>
 <UL class=filetree id=browser>
-  <LI><SPAN class=folder>Folder 1</SPAN> 
+  <LI><SPAN class="folder">Folder 1</SPAN> 
   <UL>
     <LI><SPAN class=file>Item 1.1</SPAN> </LI></UL>
   <LI><SPAN class=folder>Folder 2</SPAN> 
@@ -24,12 +43,34 @@
     <LI><SPAN class=folder>Subfolder 2.1</SPAN> 
     <UL id=folder21>
       <LI><SPAN class=file>File 2.1.1</SPAN> 
-      <LI><SPAN class=file>File 2.1.2</SPAN> </LI></UL>
+      <LI><SPAN class=file>File 2.1.2</SPAN> </LI>
+      <LI><SPAN class=file>File 2.1.3</SPAN> </LI>
+	  </UL>
     <LI><SPAN class=file>File 2.2</SPAN> </LI></UL>
   <LI class=closed><SPAN class=folder>Folder 3 (closed at start)</SPAN> 
   <UL>
-    <LI><SPAN class=file>File 3.1</SPAN> </LI></UL>
-  <LI><SPAN class=file>File 4</SPAN> </LI></UL>
+    <LI><SPAN class=file>File 3.1</SPAN> </LI>
+  </UL>
+ </UL>
 
-
+<div class="treeview"><div class="last">aaa</div>
+</div>
+<script>
+$(document).ready(function(){
+	
+	// first example
+	$("#browser").treeview();
+	/*
+	// second example
+	$("#navigation").treeview({
+		persist: "location",
+		collapsed: true,
+		persist: "cookie",
+		unique: true
+	});
+	*/
+});
+</script>
+<TEXTAREA id='test' NAME="" ROWS="18" COLS="80"></TEXTAREA>
+<INPUT TYPE="button" onclick="document.getElementById('test').value=$('#browser').html()">
 </BODY></HTML>

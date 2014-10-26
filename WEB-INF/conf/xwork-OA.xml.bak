@@ -1,0 +1,58 @@
+<!DOCTYPE struts PUBLIC     
+ "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"  
+   "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<?xml-stylesheet type="text/xsl" href="xwork1.xsl"?>
+
+<struts>
+
+   <package extends="action-default" name="Customer" namespace="/Customer">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="CustomerList">
+         <result name="success" type="dispatcher">/Customer/CustomerList.jsp</result>
+      </action>
+      <action class="BasicAdd" name="CustomerAdd">
+         <result name="input" >/Customer/CustomerAdd.jsp</result>
+         <result name="success" type="dispatcher">/Customer/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicModify" name="CustomerDelete">
+         <result name="success" type="dispatcher">/Customer/ActionResultWindow.jsp</result>
+      </action>
+      <action class="BasicInfo" name="CustomerInfo">
+         <result name="success" type="dispatcher">/Customer/CustomerInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="CustomerModify">
+         <result name="input" type="dispatcher">/Customer/CustomerInfo.jsp</result>
+         <result name="success" type="dispatcher">/Customer/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="CustomerInput">
+         <result name="success" type="dispatcher">/Customer/CustomerAdd.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="CustomerGroup" namespace="/CustomerGroup">
+      <action class="BasicList" name="CustomerGroupList">
+         <result type="dispatcher" name="success" >/Customer/CustomerGroupList.jsp</result>
+      </action>
+      <action class="BasicAdd" name="CustomerGroupAdd">
+         <result name="input" type="dispatcher">/Customer/CustomerGroupAdd.jsp</result>
+         <result name="success" type="redirect">/Customer/CustomerGroupList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="CustomerGroupDelete">
+         <result name="success" type="redirect">/Customer/CustomerGroupList.action</result>
+      </action>
+      <action class="BasicInfo" name="CustomerGroupInfo">
+         <result name="success" type="dispatcher">/Customer/CustomerGroupInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="CustomerGroupModify">
+         <result name="input" type="dispatcher">/Customer/CustomerGroupInfo.jsp</result>
+         <result name="success" type="redirect">/Customer/CustomerGroupList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="CustomerGroupInput">
+         <result name="success" type="dispatcher">/Customer/CustomerGroupAdd.jsp</result>
+      </action>
+   </package>
+
+</struts>

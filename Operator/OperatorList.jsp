@@ -38,14 +38,13 @@ var i=0;
 				  {"text":"Win Test","display":"text","btnClass":"test1","target":"window","src":"/Operator/OperatorInfo.action?vo.id={0}"},
 				  {"text":"JS Test","display":"text","btnClass":"test1","target":"window","src":"javascript:alert('/Operator/OperatorInfo.action?vo.id={0}')"}
 				  ],
-			  colwidth:[40,80,100,100,400,400],
+			  colwidth:[40,80,100,100,400,300],
 			  columns:[
 				  "<xwohi:i18n text="id" />",
 				  "<xwohi:i18n text="Operator.account" />",
 				  "<xwohi:i18n text="Operator.name" />",
 				  "<xwohi:i18n text="Department" />",
-				  "<xwohi:i18n text="Job" />",
-				  "<xwohi:i18n text="State" />"
+				  "<xwohi:i18n text="Job" />"
 			  ],
 			  linkedForm:"operator_list_form",
 			  params:"vo.name=<ww:property value="vo.name" />",

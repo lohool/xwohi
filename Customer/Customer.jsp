@@ -12,15 +12,14 @@
 			</ww:action>
 			<select name="groupId">
 					<option value=""><xwohi:i18n text="All" /></option>
-			<ww:iterator value="#attr.cg0.objList">
+				<ww:iterator value="#attr.cg0.objList">
 				  <ww:if test="#session.operation_user.isPermitted(\"CustomerGroup\",id,1)==true">
 					<option value="<ww:property value="id"/>" <ww:if test="vo.group.id==id">selected</ww:if>><ww:property value="name"/></option>
 				  </ww:if>
-			</ww:iterator>
+				</ww:iterator>
 			</select>
 			<INPUT TYPE="submit" class="button biground">
             </ww:form>
-
 	</div>
 	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;top:30px;width:200px;height:100%;border:solid 0px red" layoutHeight="40"> 
 		<ww:action id="cg" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="true">

@@ -56,9 +56,9 @@
 		<span ><ww:property value="#session.operation_user.name"/></span>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</a>
-		<a href="#" class="menuBarButton"  onclick="openWorkWindow('/crm/MyAssignments.html','我的任务')" >Window</a>
+		<a href="#" class="menuBarButton"  onclick="openWorkWindow('http://www.baidu.com','我的任务')" >Window</a>
 		<a href="#" class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</a>
-		<a href="#" class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Ok')},cancel:function(){alert('Cancel')}})" >Confirm</a>
+		<a href="#" class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</a>
 		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</a>
 		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >Outer Dialog</a>
 		<a class="separator" ></a>
