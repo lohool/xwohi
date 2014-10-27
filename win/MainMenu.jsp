@@ -6,7 +6,7 @@
 <h3>工单</h3>
 <div>
 <a href="#" onclick="openWorkWindow('/NotePad/NotePadList.action','记事本')">记事本</a><br />
-<a href="#" onclick="openWorkWindow('/Knowledge/KnowledgeCatalogueList.action?vo.parent.id=0','个人资料库')">个人资料库</a><br />
+<a href="#" onclick="openWorkWindow('/Knowledge/KnowledgeCatalogueList.action?vo.parent.id=1','个人资料库')">个人资料库</a><br />
 <a href="#" onclick="openWorkWindow('/CalendarPlan/CalendarPlanList.action','个人日程')">个人日程</a><br />
 <a href="#" onclick="openWorkWindow('WeekScheme/WeekSchemeList.action','我的工作计划')">我的工作计划</a><br />
 <a href="#" onclick="openWorkWindow('/WorkLog/WorkLogList.action','工作日志')">工作日志</a><br />

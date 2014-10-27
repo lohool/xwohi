@@ -401,6 +401,7 @@
       <fields>
          <field type="primaryKey" name="id" />
          <field type="relation" name="catalogue" related="catalogueID" />
+		 <field type="field" name="createTime" autowire="ALL" />
       </fields>
    </actions>
    <actions>
@@ -420,6 +421,7 @@
          <field type="primaryKey" name="id" />
          <field type="relation" name="parent" related="parentID" />
          <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.po.KnowledgeCatalogue" />
+		 <field type="field" name="createTime" autowire="ALL" />
       </fields>
    </actions>
    <actions>

@@ -1275,9 +1275,18 @@ function loadContentToPanel(panelId,url,data)
 }
 function reDefineHTMLActions(parentId)
 {
-		$("#"+parentId+" A").on("click",function(){
+	$("#"+parentId+" A").on("click",function(){
 		//attribute "target" is redefined to a panel's id.
-		if(this.target && this.target!="")
+		if(this.target=="self")
+		{
+			loadContentToPanel(parentId ,this.href,null)
+			return false;
+		}
+		else if(new RegExp("^javsscript:","i").test(this.target))
+		{
+			return true;
+		}
+		else if(this.target && this.target!="")
 		{
 			//if <A> is in a data grid table
 			if(this.parentNode && this.parentNode.tagName=="TD")this.parentNode.click()

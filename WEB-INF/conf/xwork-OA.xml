@@ -70,7 +70,7 @@
       <action name="KnowledgeCatalogueInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/jsp/Knowledge/KnowledgeCatalogueInfo.jsp</result>
       </action>
-      <action name="ShowKnowledgePath" class="ShowKnowledgePath">
+      <action name="ShowKnowledgePath" class="BasicInfo">
          <result type="dispatcher" name="success">/jsp/Knowledge/ShowPath.jsp</result>
       </action>
       <action name="KnowledgeCatalogueModify" class="BasicModify">
