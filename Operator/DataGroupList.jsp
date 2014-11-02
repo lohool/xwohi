@@ -3,18 +3,18 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <%String a="A"+(int)(Math.random()*1000);%>
-<div class="page" style="left:0;top:0;width:100%; height:100%;">
-<div class="panel" style="left:0;top:0; height:25px;">
-	<ww:form id="DataGroup_list_form" name="DataGroup_list_form" namespace="/DataGroup"  action="DataGroupList" method="post" validate="true"  onsubmit="return windowSearch(this);">
-		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
-		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
-		Name:<ww:textfield name="vo.name" />
-		<INPUT TYPE="submit" value="search" class="button biground">
-		<INPUT TYPE="reset" value="reset" class="button biground">
-	</ww:form>
-</div>
-	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" layoutHeight="37px">
-		<div id="DataGroup_list_<%=a%>" class="datagrid" style="border:solid 0px red;">Loading...</div>
+<div class="page">
+	<div class="panel">
+		<ww:form id="DataGroup_list_form" name="DataGroup_list_form" namespace="/DataGroup"  action="DataGroupList" method="post"  onsubmit="return windowSearch(this);">
+			<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
+			<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
+			Name:<ww:textfield name="vo.name" />
+			<INPUT TYPE="submit" value="search" class="button biground">
+			<INPUT TYPE="reset" value="reset" class="button biground">
+		</ww:form>
+	</div>
+	<div class="datagrid_wraper" layoutHeight="32px">
+		<div id="DataGroup_list_<%=a%>" class="datagrid">Loading...</div>
 	</div>
 </div>
 <script>

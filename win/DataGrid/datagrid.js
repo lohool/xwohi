@@ -1,6 +1,6 @@
  (function($) { 
 $.fn.datagrid= function (options){
-		var defaults=
+	var defaults=
 	{
 	callname : "datagrid",
 	width : 0,
@@ -20,14 +20,12 @@ $.fn.datagrid= function (options){
 	parentNode : document.body,
 	 dh : this,
 	 framediv : null,
-	 zerobj : null,
 	 titleobj : null,
 	 dataobj : null,
-	 bgbar : null,
 	 pager: null,
 	 pageObj: null,
-	 //jquery obj
-	 toolObj:null,
+	 
+	 toolObj:null,//jquery obj
 	 editable:false,
 	 isMSIE : true,
 
@@ -38,18 +36,14 @@ $.fn.datagrid= function (options){
 	//改变列宽对象
 	 tdobj : null,
 	//当前选定行索引
-	 nowrow : null,
-	//是否更改垂直滚动条位置
-	 changeposv : true
+	 nowrow : null
 	}
 	defaults.rid=$(this).attr("id");
 
 	defaults.isMSIE =navigator.appName == "Microsoft Internet Explorer";
-	var opts1;
-		var methods={
+	var methods={
 		init:function(){
 		var opts = $.extend({}, defaults, options); 
-		opts1 =opts;
 		$(this).data("options",opts);
 	    return this.each(function(i) {     
 			var sw=this.parentNode.clientWidth-2;//$(this).width();
@@ -87,10 +81,10 @@ $.fn.datagrid= function (options){
 
 			if(opts.url)
 			{
-				$.fn.datagrid.loadData($(this),opts);
+				loadData($(this),opts);
 			}
 			else 
-				$.fn.datagrid.init($(this),opts);
+				init($(this),opts);
 		});
 		},
 		select: function() {
@@ -112,11 +106,9 @@ $.fn.datagrid= function (options){
 		refresh :function()
 		 {
 			$this=$(this);
-			//$.fn.datagrid.loadData($this,$this.data("options"));
-			//$.fn.datagrid.loadData($this);
 				var opts=$this.data("options");
 				var form=document.getElementById(opts.linkedForm);
-				if(opts.url)$.fn.datagrid.loadData($this);
+				if(opts.url)loadData($this);
 				else
 				{
 					form.onsubmit();
@@ -126,7 +118,7 @@ $.fn.datagrid= function (options){
 		{
 			$this=$(this);
 			form.page.value=0;
-			$.fn.datagrid.loadData($this,null,form);
+			loadData($this,null,form);
 		},
 		jumpTo:function(page)
 		{
@@ -137,31 +129,21 @@ $.fn.datagrid= function (options){
 			var sw=w;
 			var sh=h;//$(this).height();
 			var opts=$(this).data("options");
-			if(opts.width==0)
+			if((""+opts.width).indexOf("%")>0)
 			{
-					opts._width=sw;
-					if(opts.minus_width>0)opts._width-=opts.minus_width;
-			}
-			else if((""+opts.width).indexOf("%")>0)
-			{
-					opts._width=sw * opts.width.substring(0,(""+opts.width).indexOf('%'))/100;
+					opts._width=sw * opts._width.substring(0,(""+opts._width).indexOf('%'))/100;
 			}
 			else
 				{
-					opts._width=opts.width;
+					opts._width=sw;
 				}
-			if(opts.height==0)
+			if((""+opts.height).indexOf("%")>0)
 			{
-					opts._height=sh;
-					if(opts.minus_height>0)opts._height-=opts.minus_height;
-			}
-			else if((""+opts.height).indexOf("%")>0)
-			{
-					opts._height=sh * opts.height.substring(0,(""+opts.height).indexOf('%'))/100;
+					opts._height=sh * opts._height.substring(0,(""+opts._height).indexOf('%'))/100;
 			}
 			else
 			{
-					opts._height=opts.height;
+					opts._height=sh;
 			}
 			$.fn.datagrid.setSize($(this),opts,opts._width,opts._height);
 		}
@@ -187,17 +169,34 @@ $.fn.datagrid= function (options){
 		var bar = "<div class='toolbar'>";
 		for(i in opts.toolbar)
 		 {
-			var value="";
-			if(opts.toolbar[i].display=="text")value=opts.toolbar[i].text;
+			//show a message at the right of the toolbar
 			if(opts.toolbar[i].btnClass=="text")bar+="<span  class='paginate.string' style='float:right'>"+opts.toolbar[i].text+"</span>";
+			//separator
 			else if(opts.toolbar[i].btnClass=="Separator")bar+="<div  class=\""+opts.toolbar[i].btnClass+"\" />";
-			else bar+="<span  class=\""+opts.toolbar[i].btnClass+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+value+"</span>";
+			else 
+			{
+				var value="";
+				var className=opts.toolbar[i].btnClass;
+				//show button text
+				if(opts.toolbar[i].display=="text")
+				{
+					//only has button text, but no ico
+					value=opts.toolbar[i].text;
+				}
+				else if(opts.showToolbarText==true)
+				{
+					//show ico and text
+					value=opts.toolbar[i].text;
+					className+=" display_text";
+				}
+				bar+="<span  class=\""+className+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+value+"</span>";
+			}
 		 }
 		bar+="</div>";
 		return bar;
 
 	 }
-	$.fn.datagrid.init = function($this,opts){
+	init = function($this,opts){
 		//var $this=$(this);
 		$this.css("width",opts._width);
 		$this.css("height",opts._height);
@@ -225,7 +224,7 @@ $.fn.datagrid= function (options){
 			dgc += '<td class="lastcolumn" >&nbsp;</td></tr></thead>';
 		}
 
-		var dgd = "";
+		var dgd = "<tbody><tr></tr></tbody>";
 		
 		if(opts.data.length>0){
 			dgd="<tbody>";
@@ -263,11 +262,6 @@ $.fn.datagrid= function (options){
 		mainframe.empty();
 		var dgframe = $("<div class='datapanel' style='padding:0px;margin:0px;overflow-x:auto;overflow-y:auto;overflow:auto;'></div>")//document.createElement("DIV");
 
-		if(document.attachEvent){
-			document.attachEvent("onmouseup",function(e){e=e||window.event;setColumnWidth(e,opts);});
-		}else{
-			document.addEventListener("mouseup",setColumnWidth,false);
-		}
 		dgframe.oncontextmenu = function(){return false}
 		dgframe.onselectstart = function(){return false}
 		ae(dgframe,opts);
@@ -309,6 +303,7 @@ $.fn.datagrid= function (options){
 		//dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
 		dgframe.bind("mousemove",function(e){e=e||window.event;onMoveColumnWidth(e,opts);});
 		dgcolumn.bind("mousemove",function(e){e=e||window.event;onMoveColumnWidth(e,opts);});
+		$(document).bind("mouseup",function(e){e=e||window.event;setColumnWidth(e,opts);});
 		
 		dgframe.bind("scroll",function(e){
 			//if($(this).scrollTop()>=0){
@@ -373,7 +368,7 @@ $.fn.datagrid= function (options){
 			var form=document.getElementById(opts.linkedForm);
 			form["pageSize"].value=pagesize;
 			setCookie("PageSize",pagesize);
-			if(opts.url)$.fn.datagrid.loadData($this);
+			if(opts.url)loadData($this);
 			else
 			{
 				form.onsubmit();
@@ -447,7 +442,7 @@ $.fn.datagrid= function (options){
 				}
 				else
 				{
-					if(opts.url)$.fn.datagrid.loadData($this);
+					if(opts.url)loadData($this);
 					else
 					{
 						var form=document.getElementById(opts.linkedForm);
@@ -665,10 +660,10 @@ $.fn.datagrid= function (options){
 			for(var cc=startIndex;cc<=opts.columns.length+startIndex-1;cc++){
 				if(cc-startIndex<opts.colwidth.length){
 					opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-					opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+					if(opts.dataobj.rows[0].children[cc])opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
 				}else{
 					opts.titleobj.rows[0].children[cc].style.width=avgw+"px";
-					opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
+					if(opts.dataobj.rows[0].children[cc])opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
 				}
 			}
 		}
@@ -1016,6 +1011,14 @@ $.fn.datagrid= function (options){
 	function dgsort(obj,asc,opts){
 		var rl = opts.data.length;
 		var ci = obj.cellIndex;
+		
+		var colsWidths=[];
+		var cells=opts.dataobj.rows[0].cells;
+		for(var i=0;i<cells.length;i++)
+		{
+			colsWidths[i]=cells[i].style.width;
+		}
+
 		var rowsobj = [];
 		for(var i=0;i<opts.dataobj.childNodes[0].rows.length;i++){
 			rowsobj[i] = opts.dataobj.childNodes[0].rows[i];
@@ -1039,6 +1042,10 @@ $.fn.datagrid= function (options){
 			opts.dataobj.childNodes[0].appendChild(rowsobj[i]);
 			if(rowsobj[i].className == "selectedrow"){opts.nowrow=i;};
 		}
+		//set the first row's width
+		for(var cc=0;cc<colsWidths.length;cc++){
+				opts.dataobj.rows[0].children[cc].style.width=colsWidths[cc];
+		}
 		rowsobj = null;
 		for(var c=(opts.multiple)?2:1;c<obj.parentNode.cells.length-1;c++){
 			obj.parentNode.cells[c].childNodes[1].innerHTML = "";
@@ -1047,20 +1054,6 @@ $.fn.datagrid= function (options){
 			obj.childNodes[1].innerHTML = "▲";
 		}else{
 			obj.childNodes[1].innerHTML = "▼";
-		}
-		
-		//set the first row's width
-		var avgw = opts._width-20;
-		if(opts.multiple)avgw=avgw-30;
-		avgw = Math.floor(avgw/opts.columns.length);
-		var startIndex=0;
-		if(opts.multiple)startIndex=1;
-		for(var cc=startIndex;cc<=opts.columns.length+startIndex-1;cc++){
-			if(cc-startIndex<opts.colwidth.length){
-				opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-			}else{
-				opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
-			}
 		}
 	}
 
@@ -1103,11 +1096,11 @@ $.fn.datagrid= function (options){
 				{
 					var form=document.getElementById(opts.linkedForm);
 					form["page"].value=opts.pager.current_page;
-					$.fn.datagrid.loadData($this,null,form);
+					loadData($this,null,form);
 				}
 				else
 				{
-					$.fn.datagrid.loadData($this,opts);
+					loadData($this,opts);
 				}
 			}
 			else
@@ -1121,17 +1114,16 @@ $.fn.datagrid= function (options){
 
 
 	//加载数据
-	$.fn.datagrid.setdata = function($this,opts,arrdata){
+	setdata = function($this,opts,arrdata){
 		if(arrdata){
 			//$this.empty();
 			opts.data = arrdata;
-			changeposv = true;
 			nowrow = null;
-			$.fn.datagrid.init($this,opts);
+			init($this,opts);
 			reDefineHTMLActions($this.attr("id"));
 		}
 	}
-	$.fn.datagrid.loadData = function($this,options,form) {
+	loadData = function($this,options,form) {
 		var param="";
 		var opts=options;
 		if(!opts && !form) form=document.getElementById($this.data("options").linkedForm);
@@ -1183,7 +1175,7 @@ $.fn.datagrid= function (options){
 					opts.data[i]=rowData;
 				});
 				opts.nowrow=null;
-				$.fn.datagrid.setdata($this,opts,opts.data);
+				setdata($this,opts,opts.data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 //alert("Error:"+err);

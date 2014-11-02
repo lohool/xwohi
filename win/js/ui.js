@@ -32,31 +32,6 @@ function getCookie(name){
 	return strValue;
 }
 
-function UseVistaInIE6(obj)
-{
-	var s = obj.button ? "_BY_BUTTON" : "";
-	obj.sides[0].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/LEFT_TOP.png', sizingMethod='scale');background-image:url('images/vista/LEFT_TOP.png') !important;background-image:none;";
-	obj.sides[1].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/TOP.png', sizingMethod='scale');background-image:url('images/vista/TOP.png') !important;background-image:none;";
-	obj.sides[2].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/RIGHT_TOP.png', sizingMethod='scale');background-image:url('images/vista/RIGHT_TOP.png') !important;background-image:none;";
-	obj.sides[3].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/RIGHT.png', sizingMethod='scale');background-image:url('images/vista/RIGHT.png') !important;background-image:none;";
-	obj.sides[4].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/RIGHT_BOTTOM.png', sizingMethod='scale');background-image:url('images/vista/RIGHT_BOTTOM.png') !important;background-image:none;";
-	obj.sides[5].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/BOTTOM" + s + ".png', sizingMethod='scale');background-image:url('images/vista/BOTTOM.png') !important;background-image:none;";
-	obj.sides[6].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/LEFT_BOTTOM.png', sizingMethod='scale');background-image:url('images/vista/LEFT_BOTTOM.png') !important;background-image:none;";
-	obj.sides[7].style.cssText += ";filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/vista/LEFT.png', sizingMethod='scale');background-image:url('images/vista/LEFT.png') !important;background-image:none;";
-}
-
-var windows = new Array();
-windows["Works"]       = { object:null, type:0, title:"terrence作品", features:"move=no,resize=no,left=0,top=300,width=305,height=-1", x:0, y:0 };
-windows["UpLoadClass"] = { object:null, type:0, title:"terrence  无组件上传类", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["FonshenASP"]  = { object:null, type:0, title:"terrence 上传组件", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["ListPager"]   = { object:null, type:0, title:"terrence  列表分页类", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["MenuTree"]    = { object:null, type:0, title:"terrence JS 菜单树", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["FlcSelect"]   = { object:null, type:0, title:"terrence无限级联下拉列表/菜单", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["FbaFrameset"] = { object:null, type:0, title:"terrence后台管理框架集", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["Others"]      = { object:null, type:0, title:"terrence日期时间选择器及其它", features:"height=-1", x:335, y:parseInt(Math.random() * 300) };
-windows["Option"]      = { object:null, type:2, title:"选项", features:"isModal=yea,width=360,height=-1,button=OK|CANCEL", x:335, y:parseInt(Math.random() * 300) };
-windows["Welcome"]     = { object:null, type:2, title:"欢迎光临", features:"isModal=yes,width=380,height=-1,button=OK|CANCEL", x:335, y:parseInt(Math.random() * 300) };
-windows["url"]         = { object:null, type:0, title:"", features:"move=move-x,resize=resize-y,width=802,height=" + (document.documentElement.scrollHeight - 56), x:170, y:0 };
 var ieVersion = GetIeVersion();
 
 function openNamedWindows(id, url, name)
@@ -135,72 +110,18 @@ function openNamedWindows(id, url, name)
 	windows[id].object = win;
 }
 
-var dialog, contents, titles;
-function NewWindow()
-{
-	contents = new Array("[id]step1","[id]step2");
-	titles = new Array("测试步骤1", "测试步骤2", "完成");
-	dialog = _window.Open(contents[0], titles[0], "isModal=yes,button=HELP|BACK|NEXT|OK|CANCEL,class=NOKIA,width=420,height=200");
-	dialog.DisableButton("BACK","DISABLED2");
-	if(!dialog.form.agree.checked) dialog.DisableButton("NEXT");
-	dialog.DisableButton("OK");
-	
-	dialog.OnHELP = function()
-	{
-		_window.Alert("[id]AboutWindow", "关于terrence JS 窗口", "isModal=yes,width=360,height=180,right=100,top=100");
-	}
-
-	var yourname,yoursign;
-	var NextToStep02 = function()
-	{
-		yourname = dialog.form.yourname.value;
-		if(yourname == '')
-		{
-			alert("请先输入您的姓名！");
-			dialog.form.yourname.focus();
-			dialog.step--;
-			return false;
-		}
-		dialog.SetContent(contents[1]);
-		dialog.SetTitle(titles[1]);
-		dialog.DisableButton("NEXT");
-		dialog.EnableButton("BACK");
-		if(dialog.form.yoursign.value!='')dialog.EnableButton("OK");
-	}
-	var BackToStep01 = function()
-	{
-		dialog.SetContent(contents[0]);
-		dialog.SetTitle(titles[0]);
-		dialog.EnableButton("NEXT");
-		dialog.DisableButton("OK");
-		dialog.DisableButton("BACK");
-	}
-	dialog.OnNEXTS = new Array(NextToStep02);
-	dialog.OnBACKS = new Array(BackToStep01);
-	dialog.OnOK = function()
-	{
-		yoursign = dialog.form.yoursign.value;
-		dialog.SetContent("Your Name is:" + yourname + "<br />Your Sign is:" + yoursign + "<br /><p>简单测试结束</p>");
-		dialog.SetTitle(titles[2]);
-		dialog.DisableButton("BACK","DISABLED2");
-		dialog.DisableButton("NEXT","DISABLED2");
-		dialog.DisableButton("CANCEL");
-		dialog.OnOK = dialog.Close;
-	}	
-}
-function WindowInit()
-{
-	_window.ClassName = getCookie("WindowStyle") || "BLUE";
-	_window.Timer = parseInt(getCookie("WindowTimer") || 10);
-	_window.parent=document.getElementById("MainFrame");
-	_window.CreateDopdownMenu();
-	_window.Width = 600;
-}
 //openNamedWindows("Welcome");
 
 function openWindow(content, title, feature)
 {
-	_window.Open(content, title, feature,_window.parent);
+	_window.Open(content, title, feature,_window.parent,_window.focusWindowId);
+}
+function openWorkWindow(url,title,icon)
+{
+	if(!icon)icon="";
+	var w=_window.parent.offsetWidth/2;
+	var h=_window.parent.offsetHeight/2;
+	openWindow('[url]'+url, title, 'move=yes,resize=yes,width='+w+'px,height='+h+'px,icon='+icon);
 }
 /**
 callback: example:function(btn){if(btn=="OK"){alert("OK");}}
@@ -240,12 +161,8 @@ function _openWindowDialog(content, title,feature)
 	_window.Dialog(content, title, feature,parent,_window.focusWindowId);
 }
 
-function openWorkWindow(url,title,icon)
+function openDialog1(url,title,feature,data)
 {
-	if(!icon)icon="";
-	var w=_window.parent.offsetWidth/2;
-	var h=_window.parent.offsetHeight/2;
-	openWindow('[url]'+url, title, 'move=yes,resize=yes,width='+w+'px,height='+h+'px,icon='+icon);
 }
 function openDialog(url,title,isFullScreenDialog,width,height)
 {
@@ -271,14 +188,18 @@ function feedback(data,formId)
 {
 	var eleId="";
 	var win;
-	if(formId)eldId=formId;
+	if(formId)eleId=formId;
 	else 
 	{
 		win =_window.windows[_window.focusWindowId];
 		eleId=win.parentWindowId;
 	}
 	$.each(data,function(n, v){
-		$("#"+eleId).find(":input[name="+n+"]").val(v);
+		//JQuery does not work for OGNL names
+		var name=n.replace(/\./g,"\\.");
+		//if(win)	
+		$("#"+eleId).find(":input[name="+name+"]").val(v);
+		//else document.forms[eleId][n].value=v;
 	});
 	if(win)win.Close();
 }
@@ -300,6 +221,36 @@ function windowSearch(form,callback)
 	var win =_window.windows[_window.getWindowId(form)];
 	win.SetContent("[url]"+form.action,$(form).find(":input").serialize());
 	if(callback)callback();
+	return false;
+}
+
+
+function ajaxSubmit(form,callback)
+{
+		$.ajax({ 
+			url: form.action, 
+			//context: document.body, 
+			data :   $(form).find(":input").serialize()  ,
+			type:"post",
+			dataType:"json",
+			success: function(data){
+				parseJsonResponse(data,null,form);
+				if(callback)callback();
+
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{
+				var win =_window.windows[_window.focusWindowId];
+				win.SetContent(XMLHttpRequest.responseText)
+					/*
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+						alert(XMLHttpRequest.responseText)
+						*/
+            }
+	  });
+		
 	return false;
 }
 
@@ -410,10 +361,9 @@ function _iframeResponse(iframe,targetGrid, callback){
 		{
 			var win =_window.windows[_window.focusWindowId];
 			win.SetContent(response)
-			//alert(response)
 			return true;
 		}
-		//document.body.removeChild(iframe);
+		document.body.removeChild(iframe);
 	});
 }
 

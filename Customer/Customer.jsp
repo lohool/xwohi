@@ -2,9 +2,10 @@
 <%@ page contentType="text/html;charset=utf-8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
+
 <div class="page" style="height:100%">
-	<div class="panel" style="height:30px">
-	        <ww:form action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" validate="true" theme="simple" onsubmit="return panelSearch(this,'customer_panel');">
+	<div id="aa" class="panel" style="height:30px">
+	        <ww:form action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" theme="simple" onsubmit="return panelSearch(this,'customer_panel');">
 			Name:<INPUT TYPE="text" NAME="vo.name">
 			Group:
 			<ww:action id="cg0" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="false">
@@ -21,12 +22,12 @@
 			<INPUT TYPE="submit" class="button biground">
             </ww:form>
 	</div>
-	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;top:30px;width:200px;height:100%;border:solid 0px red" layoutHeight="40"> 
+	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;width:200px;height:100%;" layoutHeight="52"> 
 		<ww:action id="cg" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="true">
 			<ww:param name="pageSize" value="100" />
 		</ww:action>
 	</div>
-	<div id="customer_panel" class="panel" style="position:absolute;left:211px;top:30px;width:100%;height:100%;border:solid 0px red" layoutWidth="222" layoutHeight="40"> 
-		<div  style="top:0px;width:100%;height:100%;border:solid 1px #CAE4FF;background-color:#FFFFFF" > </div>
+	<div id="customer_panel" class="panel" style="position:absolute;left:211px;width:100%;height:100%;" layoutWidth="222" layoutHeight="52"> 
+		<div  style="width:100%;height:100%;border:solid 1px #CAE4FF;background-color:#FFFFFF" > </div>
 	</div>
 </div>

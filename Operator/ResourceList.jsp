@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<div class="page" style="left:0;top:0;width:100%; height:100%;">
-<div class="panel" style="left:0;top:0; height:25px;">
+<div class="page" >
+<div class="panel" >
 	<ww:form id="Resource_list_form" name="Resource_info_form" namespace="/Resource"  action="ResourceList" method="post" validate="true"  onsubmit="return datagridSearch(this,'Resource_list');">
 		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
@@ -11,7 +11,7 @@
 		<INPUT TYPE="reset" value="reset" class="button biground">
 	</ww:form>
 </div>
-<div id="Resource_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="37px">
+<div id="Resource_list_datagrid_wraper" class="datagrid_wraper" layoutHeight="32px">
 <div id="Resource_list" class="datagrid" >Loading...</div>
 </div>
 </div>
@@ -29,7 +29,7 @@ var i=0;
 				  "<xwohi:i18n text="Resource.description" />"
 			  ],
 			  linkedForm:"Resource_list_form",
-			  url:"/Resource/ResourceList.action"
+			  url:"Resource/ResourceList.action"
 			  }
 			  );
 	     });

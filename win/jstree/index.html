@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jstree basic demos</title>
+	<style>
+	html { margin:0; padding:0; font-size:62.5%; }
+	body { max-width:800px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
+	h1 { font-size:1.8em; }
+	.demo { overflow:auto; border:1px solid silver; min-height:100px; }
+	</style>
+	<link rel="stylesheet" href="./themes/default/style.min.css" />
+
+	<script src="../jQuery/jquery-1.9.1.js"></script>
+	<script src="../jQuery/jquery.json.js"></script>
+	<script src="jstree.js"></script>
+</head>
+<body>
+	<h1>HTML demo</h1>
+	<div id="html" class="demo">
+		<ul>
+			<li data-jstree='{ "opened" : true }'>Root node
+				<ul>
+					<li data-jstree='{ "selected" : true }'>Child node 1</li>
+					<li>Child node 2</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	
+	<script>
+	// html demo
+	$('#html').jstree({
+				"core" : 
+				{
+					"animation" : 0,
+					'check_callback' : function (operation, node, node_parent, node_position) 
+					{
+						// operation can be 'create_node', 'rename_node', 'delete_node', 'move_node' or 'copy_node'
+						// in case of 'rename_node' node_position is filled with the new node name     
+						return true;			
+					}
+				},
+			"plugins" : ["types", "contextmenu", "dnd", "search", "state",  "wholerow", "unique"],
+			"contextmenu": {items: customMenu}
+
+	});
+
+
+	function customMenu(node) {
+	 // The default set of all items
+	 var items = {
+		  openItem:
+		  {
+		    label: "Open",
+			"separator_after"	: true,
+			action:function(data){
+			}
+		  },
+		  createItem:{
+		    label: "Create",
+			action:function(data){
+				alert("create");
+				var inst = $.jstree.reference(data.reference),
+					obj = inst.get_node(data.reference);
+					inst.create_node(obj, {}, "last", function (new_node) {
+							setTimeout(function () { inst.edit(new_node); },0);
+					});
+			}
+		  },
+		  renameItem: { // The "rename" menu item
+		   label: "Rename",
+			action		: function (data) {
+						var inst = $.jstree.reference(data.reference),
+							obj = inst.get_node(data.reference);
+						inst.edit(obj);
+					}
+		  },
+		  deleteItem: { // The "delete" menu item
+		   label: "Delete",
+			action		: function (data) {
+					var inst = $.jstree.reference(data.reference),
+							obj = inst.get_node(data.reference);
+						if(inst.is_selected(obj)) {
+							inst.delete_node(inst.get_selected());
+						}
+						else {
+							inst.delete_node(obj);
+						}
+					}
+		  },
+		  infoItem:{
+		  "separator_before"	: true,
+		   label: "Properties",
+			action		: function (data) {
+			}
+		  }
+	 };
+
+	 if ($(node).hasClass("folder")) {
+	  // Delete the "delete" menu item
+	  //delete items.deleteItem;
+	 }
+
+	 return items;
+	}
+
+
+	$('#html').on('create_node.jstree', function (e, data) 
+    {
+			alert("请先修改父节点再添加");
+	})		
+	</script>
+
+							<script>
+						function demo_create() {
+							var ref = $('#jstree_demo').jstree(true),
+								sel = ref.get_selected();
+							if(!sel.length) { return false; }
+							sel = sel[0];
+							sel = ref.create_node(sel, {"type":"file"});
+							if(sel) {
+								ref.edit(sel);
+							}
+						};
+						function demo_rename() {
+							var ref = $('#jstree_demo').jstree(true),
+								sel = ref.get_selected();
+							if(!sel.length) { return false; }
+							sel = sel[0];
+							ref.edit(sel);
+						};
+						function demo_delete() {
+							var ref = $('#jstree_demo').jstree(true),
+								sel = ref.get_selected();
+							if(!sel.length) { return false; }
+							ref.delete_node(sel);
+						};
+						$(function () {
+							var to = false;
+							$('#demo_q').keyup(function () {
+								if(to) { clearTimeout(to); }
+								to = setTimeout(function () {
+									var v = $('#demo_q').val();
+									$('#jstree_demo').jstree(true).search(v);
+								}, 250);
+							});
+
+							$('#jstree_demo')
+								.jstree({
+									"core" : {
+										"animation" : 0,
+										"check_callback" : true,
+										"themes" : { "stripes" : true },
+										'data' : {
+											'url' : function (node) {
+												return node.id === '#' ? './assets/ajax_demo_roots.json' : './assets/ajax_demo_children.json';
+											},
+											'data' : function (node) {
+												return { 'id' : node.id };
+											}
+										}
+									},
+									"types" : {
+										"#" : { "max_children" : 1, "max_depth" : 4, "valid_children" : ["root"] },
+										"root" : { "icon" : "./assets/images/tree_icon.png", "valid_children" : ["default"] },
+										"default" : { "valid_children" : ["default","file"] },
+										"file" : { "icon" : "glyphicon glyphicon-file", "valid_children" : [] }
+									},
+									"plugins" : [ "contextmenu", "dnd", "search", "state", "types", "wholerow" ]
+								});
+						});
+
+</body>
+</html>

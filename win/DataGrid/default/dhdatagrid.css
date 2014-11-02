@@ -269,7 +269,7 @@ color:#A19F92;
 	text-align:center;
 	vertical-align:middle;
 	float:left;
-	line-height:22px;
+	line-height:24px;
 }
 
 .datagrid .toolbar .Home:hover,
@@ -306,7 +306,11 @@ color:#A19F92;
 	line-height:24px;
 	cursor:default;
 }
-
+.datagrid .toolbar .display_text
+{
+	padding-left:26px;
+	padding-right:2px;
+}
 
 .datagrid .toolbar .Refresh
 {

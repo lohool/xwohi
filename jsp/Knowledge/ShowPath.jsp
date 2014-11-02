@@ -16,7 +16,7 @@ String listChild2(KnowledgeCatalogue parent)
 	String htmlCode="";
 	if(parent!=null && parent.getId()!=0)
 	{
-		htmlCode="<a href='/Knowledge/KnowledgeCatalogueList.action?vo.parent.id="+parent.getId()+"' target='self'>"+parent.getName()+"</a>"+htmlCode+"/";
+		htmlCode="<a href='Knowledge/KnowledgeCatalogueList.action?vo.parent.id="+parent.getId()+"' target='self'>"+parent.getName()+"</a>"+htmlCode+"/";
 		htmlCode=listChild2(parent.getParent())+htmlCode;
 	}
 	return htmlCode;

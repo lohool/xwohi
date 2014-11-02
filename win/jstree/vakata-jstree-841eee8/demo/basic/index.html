@@ -10,10 +10,6 @@
 	.demo { overflow:auto; border:1px solid silver; min-height:100px; }
 	</style>
 	<link rel="stylesheet" href="./../../dist/themes/default/style.min.css" />
-
-	<script src="../../../../jQuery/jquery-1.9.1.js"></script>
-	<script src="../../../../jQuery/jquery.json.js"></script>
-	<script src="./../../dist/jstree.min.js"></script>
 </head>
 <body>
 	<h1>HTML demo</h1>
@@ -28,87 +24,123 @@
 		</ul>
 	</div>
 
+	<h1>Inline data demo</h1>
+	<div id="data" class="demo"></div>
+
+	<h1>Data format demo</h1>
+	<div id="frmt" class="demo"></div>
+
+	<h1>AJAX demo</h1>
+	<div id="ajax" class="demo"></div>
+
+	<h1>Lazy loading demo</h1>
+	<div id="lazy" class="demo"></div>
+
+	<h1>Callback function data demo</h1>
+	<div id="clbk" class="demo"></div>
+
+	<h1>Interaction and events demo</h1>
+	<button id="evts_button">select node with id 1</button> <em>either click the button or a node in the tree</em>
+	<div id="evts" class="demo"></div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="./../../dist/jstree.min.js"></script>
 	
 	<script>
 	// html demo
-	$('#html').jstree({
-				"core" : 
-				{
-					"animation" : 0,
-					'check_callback' : function (operation, node, node_parent, node_position) 
-					{
-						// operation can be 'create_node', 'rename_node', 'delete_node', 'move_node' or 'copy_node'
-						// in case of 'rename_node' node_position is filled with the new node name     
-						return true;			
-					}
-				},
-			"plugins" : ["types", "contextmenu", "dnd", "search", "state",  "wholerow", "unique"]
+	$('#html').jstree();
 
+	// inline data demo
+	$('#data').jstree({
+		'core' : {
+			'data' : [
+				{ "text" : "Root node", "children" : [
+						{ "text" : "Child node 1" },
+						{ "text" : "Child node 2" }
+				]}
+			]
+		}
 	});
-	$('#html').on('create_node.jstree', function (e, data) 
-    {
-			alert("请先修改父节点再添加");
-	})		
+
+	// data format demo
+	$('#frmt').jstree({
+		'core' : {
+			'data' : [
+				{ 
+					"text" : "Root node", 
+					"state" : { "opened" : true }, 
+					"children" : [
+						{ 
+							"text" : "Child node 1", 
+							"state" : { "selected" : true },
+							"icon" : "jstree-file"
+						},
+						{ "text" : "Child node 2", "state" : { "disabled" : true } }
+					]
+				}
+			]
+		}
+	});
+
+	// ajax demo
+	$('#ajax').jstree({
+		'core' : {
+			'data' : {
+				"url" : "./root.json",
+				"dataType" : "json" // needed only if you do not supply JSON headers
+			}
+		}
+	});
+
+	// lazy demo
+	$('#lazy').jstree({
+		'core' : {
+			'data' : {
+				"url" : "//www.jstree.com/fiddle/?lazy",
+				"data" : function (node) {
+					return { "id" : node.id };
+				}
+			}
+		}
+	});
+
+	// data from callback
+	$('#clbk').jstree({
+		'core' : {
+			'data' : function (node, cb) {
+				if(node.id === "#") {
+					cb([{"text" : "Root", "id" : "1", "children" : true}]);
+				}
+				else {
+					cb(["Child"]);
+				}
+			}
+		}
+	});
+
+	// interaction and events
+	$('#evts_button').on("click", function () {
+		var instance = $('#evts').jstree(true); 
+		instance.deselect_all();
+		instance.select_node('1');
+	});
+	$('#evts')
+		.on("changed.jstree", function (e, data) {
+			if(data.selected.length) {
+				alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+			}
+		})
+		.jstree({
+			'core' : {
+				'multiple' : false,
+				'data' : [
+					{ "text" : "Root node", "children" : [
+							{ "text" : "Child node 1", "id" : 1 },
+							{ "text" : "Child node 2" }
+					]}
+				]
+			}
+		});
 	</script>
-
-							<script>
-						function demo_create() {
-							var ref = $('#jstree_demo').jstree(true),
-								sel = ref.get_selected();
-							if(!sel.length) { return false; }
-							sel = sel[0];
-							sel = ref.create_node(sel, {"type":"file"});
-							if(sel) {
-								ref.edit(sel);
-							}
-						};
-						function demo_rename() {
-							var ref = $('#jstree_demo').jstree(true),
-								sel = ref.get_selected();
-							if(!sel.length) { return false; }
-							sel = sel[0];
-							ref.edit(sel);
-						};
-						function demo_delete() {
-							var ref = $('#jstree_demo').jstree(true),
-								sel = ref.get_selected();
-							if(!sel.length) { return false; }
-							ref.delete_node(sel);
-						};
-						$(function () {
-							var to = false;
-							$('#demo_q').keyup(function () {
-								if(to) { clearTimeout(to); }
-								to = setTimeout(function () {
-									var v = $('#demo_q').val();
-									$('#jstree_demo').jstree(true).search(v);
-								}, 250);
-							});
-
-							$('#jstree_demo')
-								.jstree({
-									"core" : {
-										"animation" : 0,
-										"check_callback" : true,
-										"themes" : { "stripes" : true },
-										'data' : {
-											'url' : function (node) {
-												return node.id === '#' ? './assets/ajax_demo_roots.json' : './assets/ajax_demo_children.json';
-											},
-											'data' : function (node) {
-												return { 'id' : node.id };
-											}
-										}
-									},
-									"types" : {
-										"#" : { "max_children" : 1, "max_depth" : 4, "valid_children" : ["root"] },
-										"root" : { "icon" : "./assets/images/tree_icon.png", "valid_children" : ["default"] },
-										"default" : { "valid_children" : ["default","file"] },
-										"file" : { "icon" : "glyphicon glyphicon-file", "valid_children" : [] }
-									},
-									"plugins" : [ "contextmenu", "dnd", "search", "state", "types", "wholerow" ]
-								});
-						});
-
 </body>
 </html>

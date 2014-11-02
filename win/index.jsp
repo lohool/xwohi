@@ -9,37 +9,41 @@
 <title>JIME Framework</title>
 
 
-<link rel="stylesheet" href="/win/jqueryui/themes/cupertino/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/sortabletable.css" />
-<link rel="stylesheet" type="text/css" href="/win/styles/_Window.css" />
-<link rel="stylesheet" href="/win/styles/ui.css">
-<link type="text/css" rel="stylesheet" href="/win/DataGrid/default/dhdatagrid.css"/>
-<link type="text/css" rel="stylesheet" href="/win/DataGrid/default/paginate.css"/>
+<link rel="stylesheet" href="win/styles/ui.css">
+<link rel="stylesheet" type="text/css" href="win/styles/_Window.css" />
+<link type="text/css" rel="stylesheet" href="win/DataGrid/default/dhdatagrid.css"/>
+<link type="text/css" rel="stylesheet" href="win/DataGrid/default/paginate.css"/>
+<link rel="stylesheet" href="win/jqueryui/themes/cupertino/jquery-ui.min.css" />
 
-<link type="text/css" rel="stylesheet" href="/win/jquery-easyui/themes/default/menu.css"/>
+<link type="text/css" rel="stylesheet" href="win/jquery-easyui/themes/default/menu.css"/>
+<link rel="stylesheet" media="all" type="text/css" href="win/styles/timepicker.css" />
 
-<script src="/win/jsMessage.jsp" type="text/javascript"></script>
+<script src="win/jsMessage.jsp" type="text/javascript"></script>
 
-<script src="/win/jqueryui/jquery-1.9.1.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.core.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.widget.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.accordion.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.mouse.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.resizable.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.widget.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.tabs.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.draggable.js"></script>
-<script src="/win/jqueryui/ui/jquery.ui.position.js"></script>
+<script src="win/jqueryui/jquery-1.9.1.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.core.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.widget.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.accordion.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.mouse.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.resizable.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.widget.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.tabs.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.draggable.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.position.js"></script>
+<script src="win/jqueryui/ui/jquery.ui.datepicker.js"></script>
 
-<script src="/win/jquery-easyui/src/jquery.menu.js"></script>
-<script src="/win/jquery-easyui/src/jquery.parser.js"></script>
+<script src="win/jquery-easyui/src/jquery.menu.js"></script>
+<script src="win/jquery-easyui/src/jquery.parser.js"></script>
 
-<script src="/win/js/_Window.js" type="text/javascript"></script>
+<script src="win/js/_Window.js" type="text/javascript"></script>
 
-<script src="/win/DataGrid/datagrid.js"></script>
-<script src="/win/js/resize.js"></script>
-<script src="/win/js/ui.js"></script>
-<script src="/template/css_xhtml/validation.js"></script>
+<script src="win/DataGrid/datagrid.js"></script>
+<script src="win/js/resize.js"></script>
+<script src="win/js/ui.js"></script>
+<script src="template/css_xhtml/validation.js"></script>
+
+<script src="win/jQuery/jquery-ui-timepicker-addon.js"></script>
+
 
 <style>
 	#accordion-resizer {
@@ -59,12 +63,12 @@
 		<a href="#" class="menuBarButton"  onclick="openWorkWindow('http://www.baidu.com','我的任务')" >Window</a>
 		<a href="#" class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</a>
 		<a href="#" class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('/Operator/OperatorList.action','Modal Dialog')" >Outer Dialog</a>
+		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</a>
+		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.action','Modal Dialog')" >Outer Dialog</a>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="openDialog('/crm/FAQList.html','·¢¶ÌÐÅ')" >FAQ</a>
 		<a class="menuBarButton" >Help</a> 
-		<a class="menuBarButton" href="/Logout.action" >Log Out</a> 
+		<a class="menuBarButton" href="Logout.action" >Log Out</a> 
 		<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>	
 	</div>
 
@@ -115,11 +119,24 @@
 	-->
 </div>
 <script>
+$(document).ready(function(){
+	$.ajaxSetup({cache:false}); 
+	/*
+	$( "#accordion" ).accordion({
+		heightStyle: "fill"
+	});
+	*/
+	resetMainFrameSize();
+	resizeMenu();
+	_window.init("MainFrame","Taskbar");
+})
 
 $(function() {
 	$.get("win/MainMenu.jsp?t="+Math.random(),function(data,status){
 			$( "#accordion" ).html(data);
-			$("#accordion").accordion("refresh");
+			$("#accordion").accordion({
+				heightStyle: "fill"
+			});
 
     });
 	$( ".draggable" ).draggable({
@@ -193,15 +210,6 @@ function resetMainFrameSize()
 	//resize the accordion menu
 
 }
-$(document).ready(function(){
-	$.ajaxSetup({cache:false}); 
-	$( "#accordion" ).accordion({
-		heightStyle: "fill"
-	});
-	resetMainFrameSize();
-	resizeMenu();
-	WindowInit();
-})
 
 //resolve the resize event is invoked multiple times
 var windowWidth=$(window).width() ;

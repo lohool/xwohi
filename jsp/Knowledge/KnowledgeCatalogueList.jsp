@@ -107,13 +107,13 @@ function http(url){
 	<thead>
 	<TR>
 	<TD>
-	<span class="pageTitle-left"><img src="/images/ico_arrow_title.gif" width="13" height="13">
-	<a href="/Knowledge/KnowledgeCatalogueList.action?vo.parent.id=1" target='self'>Root$</a>>
+	<span class="pageTitle-left"><img src="images/ico_arrow_title.gif" width="13" height="13">
+	<a href="Knowledge/KnowledgeCatalogueList.action?vo.parent.id=1" target='self'>Root$</a>>
 	<span id="path"></span>
 	</span>
 		<span class="pageTitle-right">
-		<a href="/Knowledge/KnowledgeCatalogueInput.action?vo.id=<ww:property value="vo.parent.id"/>"><xwohi:i18n text="new_catalogue"/></a>
-		<a href="/Knowledge/KnowledgeInput.action?vo.id=<ww:property value="vo.parent.id"/>"><xwohi:i18n text="new_file"/></a>
+		<a href="Knowledge/KnowledgeCatalogueInput.action?vo.id=<ww:property value="vo.parent.id"/>"><xwohi:i18n text="new_catalogue"/></a>
+		<a href="Knowledge/KnowledgeInput.action?vo.id=<ww:property value="vo.parent.id"/>"><xwohi:i18n text="new_file"/></a>
 		</span>
 
 	</TD>
@@ -125,8 +125,8 @@ function http(url){
 <div>
 <ww:iterator value="objList">
 <div class="Folder" >
-	<a  href="/Knowledge/KnowledgeCatalogueList.action?vo.parent.id=<ww:property value="id" />" target='self'>
-		<img src="/images/icon/Osx16.jpg" border=0 width="64px">
+	<a  href="Knowledge/KnowledgeCatalogueList.action?vo.parent.id=<ww:property value="id" />" target='self'>
+		<img src="images/icon/Osx16.jpg" border=0 width="64px">
 		<br><span class="Text"><ww:property value="name"/></span>
 	</a>
 </div>
@@ -134,7 +134,7 @@ function http(url){
 <div id="knowledgeList"></div>
 </div>
 </div>
-<form name="form1" action="/Knowledge/KnowledgeCatalogueDelete.action">
+<form name="form1" action="Knowledge/KnowledgeCatalogueDelete.action">
 <ww:hidden name="page"/>
 <ww:hidden name="pageSize"/> 
 <ww:hidden name="vo.id" /> 
@@ -142,8 +142,8 @@ function http(url){
 </form>
 <script>
 $(document).ready(function(){
-	$("#path").html(http("/Knowledge/ShowKnowledgePath.action?vo.id=<ww:property  value="vo.parent.id"/>"));
-	$("#knowledgeList").html(http("/Knowledge/KnowledgeList.action?vo.catalogue.id=<ww:property value="vo.parent.id"/>"));
+	$("#path").html(http("Knowledge/ShowKnowledgePath.action?vo.id=<ww:property  value="vo.parent.id"/>"));
+	$("#knowledgeList").html(http("Knowledge/KnowledgeList.action?vo.catalogue.id=<ww:property value="vo.parent.id"/>"));
 	//reDefineHTMLActions("path");
 	//reDefineHTMLActions("knowledgeList");
 })

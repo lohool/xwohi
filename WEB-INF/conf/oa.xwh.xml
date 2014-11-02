@@ -327,7 +327,7 @@
    </actions>
    <actions>
       <action name="ArchiveList">
-		<sql>select obj from Archive obj where obj.#catalogue=?</sql>
+		<sql><![CDATA[select obj from Archive obj where (obj.#catalogue=? or obj.#absolutePath like ?)  and obj.#editor=? and obj.#serialNumber=? and obj.#timeLimit=? and obj.#title like ? and obj.#content like ? and obj.#createTime>$beginTime and obj.#createTime<$endTime]]></sql>
 	  </action>
       <action name="ArchiveSearchInput" />
       <action name="ArchiveSearch" >
@@ -342,14 +342,15 @@
       <fields>
          <field type="primaryKey" name="id" />
          <field type="relation" name="catalogue" related="catalogueID"/>
+         <field type="field" name="createTime" autowire="ALL"/>
       </fields>
    </actions>
    <actions>
        <action name="ArchiveCatalogueList" >
-		 <sql>select obj from ArchiveCatalogue obj where obj.#parent=?</sql>
+		 <sql>select obj from ArchiveCatalogue obj where obj.id!=1 and obj.#parent=$parentId</sql>
 	  </action>      
       <action name="ArchiveCatalogueSelectDialog" >
- 		 <sql>select obj from ArchiveCatalogue obj where obj.#parent=?</sql>
+ 		 <sql>select obj from ArchiveCatalogue obj where obj.id!=1 and obj.#parent=?</sql>
 	  </action>      
 	  <action name="ArchiveCatalogueAdd" />
       <action name="ArchiveCatalogueModify" />

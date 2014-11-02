@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<div class="page" style="left:0;top:0;width:100%; height:100%;">
-	<div class="panel" style="left:0;top:0; height:40px;">
+<div class="page">
+	<div class="panel">
 		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post"   onsubmit="return windowSearch(this);">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
@@ -10,7 +10,7 @@
 		<INPUT TYPE="submit" class="button">
 		</ww:form>
 	</div>
-	<div class="datagrid_wraper" style="border:solid 0px red;width:100%;" layoutHeight="52px">
+	<div class="datagrid_wraper" layoutHeight="32px">
 		<div id="Role_list" class="datagrid" >Loading...</div>
 	</div>
 </div>

@@ -38,7 +38,7 @@
 			<result name="success" type="dispatcher">/win/index.jsp</result>
 		</action>
 	  	<action name="Logout" class="Logout">
-			<result name="success" type="dispatcher">/login/index.jsp</result>
+			<result name="success" type="dispatcher">login/index.jsp</result>
 		</action>
 <!--
 		<action name="CustomerLogin" class="CustomerLogin">

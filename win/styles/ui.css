@@ -36,8 +36,9 @@ div.panel
 	position:relative;
 	padding:5px;
 	border-spacing: 0;
-	vertical-align:middle;
 	white-space: nowrap;
+
+
 }
 div.panel .container1 
 {

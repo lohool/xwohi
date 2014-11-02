@@ -83,4 +83,62 @@
       </action>
    </package>
 
+
+   <package name="Basic" extends="action-default" namespace="/Archive">
+      <default-interceptor-ref name="exceptionStack" />
+      <action name="ArchiveSearchInput" class="BasicInfo">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveSearch.jsp</result>
+      </action>
+      <action name="ArchiveSearch" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveSearchList.jsp</result>
+      </action>
+      <action name="ArchiveCatalogueSelectDialog" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveCatalogueSelectDialog.jsp</result>
+      </action>
+      <action name="ArchiveList" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveList.jsp</result>
+      </action>
+      <action name="ArchiveAdd" class="BasicAdd">
+         <result type="redirect" name="success">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="ArchiveDelete" class="BasicDelete">
+         <result type="redirect" name="success">/jsp/common/ActionResultWindow.jsp</result>
+      </action>
+      <action name="ArchiveInfo" class="BasicInfo">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveInfo.jsp</result>
+      </action>
+      <action name="ArchiveModify" class="BasicModify">
+         <result type="redirect" name="success">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="ArchiveInput" class="BasicInput">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveAdd.jsp</result>
+      </action>
+      <action name="ArchiveCatalogueList" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveCatalogueList.jsp</result>
+      </action>
+      <action name="ArchiveCatalogueAdd" class="BasicAdd">
+         <result type="dispatcher" name="success">/jsp/Archive/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action name="ArchiveCatalogueDelete" class="BasicDelete">
+         <result type="redirect" name="success">/jsp/common/ActionResultWindowDialog.jsp</result>
+      </action>
+      <action name="ArchiveCatalogueInfo" class="BasicInfo">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveCatalogueInfo.jsp</result>
+      </action>
+      <action name="ShowPath" class="BasicInfo">
+         <result type="dispatcher" name="success">/jsp/Archive/ShowPath.jsp</result>
+      </action>
+      <action name="ArchiveCatalogueModify" class="BasicModify">
+         <result type="redirect" name="success">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+
+      <action name="ArchiveCatalogueInput" class="BasicInput">
+         <result type="dispatcher" name="success">/jsp/Archive/ArchiveCatalogueAdd.jsp</result>
+      </action>
+   </package>
+
 </struts>
