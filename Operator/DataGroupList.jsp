@@ -13,7 +13,7 @@
 			<INPUT TYPE="reset" value="reset" class="button biground">
 		</ww:form>
 	</div>
-	<div class="datagrid_wraper" layoutHeight="32px">
+	<div class="datagrid_wraper" layoutHeight="34px">
 		<div id="DataGroup_list_<%=a%>" class="datagrid">Loading...</div>
 	</div>
 </div>
@@ -31,6 +31,18 @@
 				  "<xwohi:i18n text="DataGroup.groupObjectKeyName" />",
 				  "<xwohi:i18n text="DataGroup.nameSpace" />"
 			  ],
+			  toolbar:[
+				  {"text":"Home","btnClass":"Home","src":"/Role/RoleList.action"},
+				  {"text":"Refresh","btnClass":"Refresh"},
+				  {"text":"Separator","btnClass":"Separator"},
+				  {"text":"Add User","btnClass":"Add","src":"/Role/RoleInput.action","width":550,"height":330},
+				  {"text":"Edit Role Info","btnClass":"Edit","target":"window","src":"/Operator/RoleInfoTab.jsp?vo.roleID={0}","width":700,"height":450},
+				  {"text":"Delete","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.roleID={0}&vo.name={1}&vo.state=2"},
+				  {"text":"Delete Test","btnClass":"Delete","src":"/Role/RoleDelete.action?vo.roleID={0}"},
+				  {"text":"Separator","btnClass":"Separator"},
+				  {"text":"Printer","btnClass":"Printer","src":"/Role/RoleInput.action","width":500,"height":300},
+				  {"text":"Help","btnClass":"Help","target":"window","src":"/Role/RoleInfo.action?vo.id=1","width":300,"height":200}
+				  ],
 			  linkedForm:"DataGroup_list_form",
 			  pager:
 				{

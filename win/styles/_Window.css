@@ -10,6 +10,7 @@
 	border:1px #94DCFE solid;
 	background-color:#B4E1FA;
 	overflow:hidden;
+	font-size:14px;
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
 	border-radius: .3em;
@@ -131,7 +132,6 @@
 {
 	/* 请不要定义padding/margin属性 */
 	/* 请定义left = -(border-left),top = -(border-top) */
-	font-size: 12px;
 	left: 0px;
 	top: 0px;
 	background-color:#ffffff;
@@ -147,7 +147,6 @@
 {
 	/* 请不要定义margin属性 */
 	padding: 0px 3px 2px 3px;
-	font-size:12px;
 	font-weight:bold;
 	text-align: left;
 	color: #ffffff;
@@ -206,7 +205,6 @@
 	padding:0px;
 	margin-left:2px;
 	background-repeat:no-repeat;
-	font-size: 12px;
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
 	border-radius: .3em;
@@ -262,7 +260,6 @@
 	height:12px;
 	/*background-image:url(../images/nokia/HELP.gif);*/
 	font-family:webdings;
-	font-size: 12px;
 	color:white;
 	text-align:middle;
 	border: solid 1px white;
@@ -344,6 +341,7 @@
 .BLUE_MIN_BAR
 {
 	position:relative;
+	font-size:14px;
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
@@ -353,7 +351,6 @@
 	cursor: default;
 	text-align: left;
 	text-decoration: none;
-	font: 12px/100% Arial, Helvetica, sans-serif;
 	padding: 2px 2px 0px 4px;
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	-webkit-border-radius: .3em; 
@@ -373,6 +370,7 @@
 .BLUE_MIN_BAR_FOCUS
 {
 	position:relative;
+	font-size:14px;
 	BACKGROUND-COLOR:#71D0F9;
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
@@ -383,7 +381,7 @@
 	cursor: default;
 	text-align: left;
 	text-decoration: none;
-	font: 12px/100% Arial, Helvetica, sans-serif;
+
 	padding: 2px 2px 0px 4px;
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	-webkit-border-radius: .3em; 
@@ -439,7 +437,6 @@
 	empty-cells: show ;
 	white-space: nowrap;
 	background-repeat: no-repeat;
-	font-size:12px;
 	display:inline-block; 
 	line-height: 20px;
 	color:#fff;
@@ -458,7 +455,7 @@ position:relative;
 	white-space: nowrap;
 	background-repeat: no-repeat;
 	font-size:10px;
-	color:blue;
+	color:#ccc;
 	/*font-family:webdings;*/
 	cursor:default;
 	text-align:center;

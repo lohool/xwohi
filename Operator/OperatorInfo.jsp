@@ -93,7 +93,7 @@ function onSubmit(myform)
 	<br>
 	<label class="label" > &nbsp;</label>
 	<span style="display:inline-block;width:120px;">		
-		<ww:select name="vo.roles.roleID" listKey="roleID" listValue="name" list="vo.roles" value="vo.roles.roleID" size="9"  multiple="true" cssStyle="width:120px"  />
+		<ww:select name="vo.roles.roleID" listKey="roleID" listValue="name" list="vo.roles" value="vo.roles.roleID" size="9"  multiple="true" cssStyle="width:120px;height:140px;"  />
 	</span>
 	<span style="display:inline-block;width:50px;vertical-align:top;"> 
 		<br>
@@ -104,7 +104,7 @@ function onSubmit(myform)
 		<input type="button" value=" <-- " onClick="addConfirmer(); return false;"/>
 	</span>
 	<span style="display:inline-block;width:120px;">		
-		<ww:select name="allList" listKey="roleID" listValue="name" list="select.roles" value="vo.roles.roleID" size="9"  multiple="true" cssStyle="width:120px" />
+		<ww:select name="allList" listKey="roleID" listValue="name" list="select.roles" value="vo.roles.roleID" size="9"  multiple="true" cssStyle="width:120px;height:140px;" />
 	</span>
 </p>
 </div>

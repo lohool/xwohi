@@ -4,7 +4,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
 <div class="page" style="height:100%">
-	<div id="aa" class="panel" style="height:30px">
+	<div id="aa" class="panel" >
 	        <ww:form action="CustomerList" method="post" name="Customer_list_form" namespace="/Customer" theme="simple" onsubmit="return panelSearch(this,'customer_panel');">
 			Name:<INPUT TYPE="text" NAME="vo.name">
 			Group:
@@ -22,12 +22,12 @@
 			<INPUT TYPE="submit" class="button biground">
             </ww:form>
 	</div>
-	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;width:200px;height:100%;" layoutHeight="52"> 
+	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;width:200px;height:100%;" layoutHeight="46"> 
 		<ww:action id="cg" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="true">
 			<ww:param name="pageSize" value="100" />
 		</ww:action>
 	</div>
-	<div id="customer_panel" class="panel" style="position:absolute;left:211px;width:100%;height:100%;" layoutWidth="222" layoutHeight="52"> 
+	<div id="customer_panel" class="panel" style="position:absolute;left:211px;width:100%;height:100%;" layoutWidth="223" layoutHeight="46"> 
 		<div  style="width:100%;height:100%;border:solid 1px #CAE4FF;background-color:#FFFFFF" > </div>
 	</div>
 </div>

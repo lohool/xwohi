@@ -2,15 +2,16 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page">
-	<div class="panel">
+	<div id="aa" class="panel" >
 		<ww:form id="Role_list_form" name="Role_list_form" namespace="/Role"  action="RoleList" method="post"   onsubmit="return windowSearch(this);">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
-		<INPUT TYPE="text" NAME="vo.name">
-		<INPUT TYPE="submit" class="button">
+<input  type="text" name="vo.name" value="" id="Role_list_form_vo_name"/>
+<INPUT TYPE="submit" value="search" class="button biground">
+			<INPUT TYPE="reset" value="reset" class="button biground">
 		</ww:form>
 	</div>
-	<div class="datagrid_wraper" layoutHeight="32px">
+	<div class="datagrid_wraper"layoutHeight="34px">
 		<div id="Role_list" class="datagrid" >Loading...</div>
 	</div>
 </div>

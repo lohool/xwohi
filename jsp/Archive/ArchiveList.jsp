@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<div class="page" style="left:0;top:0;width:100%; height:100%;">
+<div class="page">
 		<ww:form id="Archive_list_form" name="Archive_list_form" namespace="Archive"  action="ArchiveList" method="post"  onSubmit="return panelSearch(this,'Archive_panel')">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
 		<ww:hidden name="vo.catalogue.id"></ww:hidden>
 		</ww:form>
-	<div class="datagrid_wraper" style="border:solid 0px red;width:100%;height:100%;">
+	<div class="datagrid_wraper" >
 		<div id="Archive_list" class="datagrid" >Loading...</div>
 	</div>
 </div>

@@ -123,7 +123,7 @@
          <interceptor-ref name="validationStack" />
       </action>
       <action name="ArchiveCatalogueDelete" class="BasicDelete">
-         <result type="redirect" name="success">/jsp/common/ActionResultWindowDialog.jsp</result>
+         <result type="redirect" name="success">/jsp/common/ActionResultWindow.jsp</result>
       </action>
       <action name="ArchiveCatalogueInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/jsp/Archive/ArchiveCatalogueInfo.jsp</result>

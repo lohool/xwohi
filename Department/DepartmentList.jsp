@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
-<div class="page" style="left:0;top:0;width:100%; height:100%;">
+<div class="page">
 <ww:form id="Department_list_form" name="Department_list_form" namespace="/Department"  action="DepartmentList" method="post"  onsubmit="return windowSearch(this);">
 		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
 </ww:form>
-	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
-		<div id="Department_list" class="datagrid" style="border:solid 0px red;">Loading...</div>
+	<div class="datagrid_wraper"  >
+		<div id="Department_list" class="datagrid" >Loading...</div>
 	</div>
 </div>
 <script>

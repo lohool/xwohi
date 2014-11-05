@@ -2,12 +2,12 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page">
-<div class="panel">
+<div id="aa" class="panel">
 	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post"   onsubmit="return datagridSearch(this,'operator_list');">
 		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
 		<INPUT TYPE="hidden" name="vo.state" value="1">
-		Name:<INPUT TYPE="text" NAME="vo.name">
+		Name:<INPUT TYPE="text" NAME="vo.name" />
 		<INPUT TYPE="submit" value="search" class="button biground">
 		<INPUT TYPE="reset" value="reset" class="button biground">
 		<INPUT TYPE="button" value="Refresh" class="button biground" onclick='$("#operator_list").datagrid("refresh")'>
@@ -15,13 +15,12 @@
 		<INPUT TYPE="button" value="resize datagrid" class="button biground" onclick='$("#operator_list").datagrid("resize",500,300)'>
 	</ww:form>
 </div>
-<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="32px">
+<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="34px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 </div>
 <script type="text/javascript">
-var i=0;
-	     $(document).ready(function() {
+	$(document).ready(function() {
 	          $("#operator_list").datagrid({
 			  callname: 'operator_list',
 			  multiple:true,

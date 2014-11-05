@@ -35,12 +35,7 @@ function ArchiveSearch_form_submit(form)
 			<xwohi:i18n text="Archive.title"/>:<ww:textfield  name="vo.title" />
 			Catalogue:
 			<INPUT TYPE="text" NAME="cataPath" value="Root$>">
-			<INPUT TYPE="text" NAME="cataPath" value="Root$>">
-			<INPUT TYPE="text" NAME="cataPath" value="Root$>">
-			<INPUT TYPE="text" NAME="cataPath" value="Root$>">
-			<INPUT TYPE="text" NAME="cataPath" value="Root$>">
-			<INPUT TYPE="text" NAME="cataPath" value="Root$>">
-			<INPUT TYPE="button" value="Sel.." onclick="selectCatalogue('cataID');">
+			<INPUT TYPE="button" value="Sel.." class="biground" onclick="selectCatalogue('cataID');">
 			<INPUT TYPE="hidden" NAME="vo.catalogue.id" value="1">
 			<INPUT TYPE="hidden" NAME="vo.absolutePath">
 
@@ -93,7 +88,6 @@ function ArchiveSearch_form_submit(form)
 				"animation" : 0,
 				'data' : {
 					'url' : 'Archive/ArchiveCatalogueList.action',
-					//'url':'/jsp/Archive/root.jsp',
 					'data' : function (node) {
 						return { 'parentId' : node.id=="#"?1:node.id,"pageSize":"100"};
 					}
@@ -128,7 +122,7 @@ function ArchiveSearch_form_submit(form)
                 }               
             }           
     }).on('rename_node.jstree', function (e, data) {
-		$.get('Archive/ArchiveModify.action', { 'vo.id' : data.node.id, 'vo.name' : data.text })
+		$.get('Archive/ArchiveCatalogueModify.action', { 'vo.id' : data.node.id, 'vo.name' : data.text })
 		.fail(function () {
 				data.instance.refresh();
 		});

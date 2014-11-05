@@ -1,4 +1,10 @@
 /*datagrid*/
+.datagrid_wraper
+{
+	border:solid 0px red;
+	height:100%;
+	width:100%;
+}
 .datagrid 
 {
 	position:relative;/** must be relative*/
@@ -52,7 +58,6 @@ margin:0px;
 .datagrid table td 
 {
 	cursor:default;
-	font-size:12px;
 	font-family:verdana;
 	text-indent:2px;
 	border-right:1px dotted buttonface;
