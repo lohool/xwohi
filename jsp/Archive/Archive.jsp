@@ -9,7 +9,7 @@
  function selectCatalogue(selField)
   {
 	  //alert(getSelectedOption("ArchiveSearch_form",selField))
-	  openDialog("jsp/Archive/dialog.jsp?cataId="+ArchiveSearch_form["vo.catalogue.id"].value,true);
+	  openDialog("jsp/Archive/dialog.jsp?cataId="+ArchiveSearch_form["vo.catalogue.id"].value,"Select Catalogue",true);
   }
 
 function ArchiveSearch_form_submit(form)

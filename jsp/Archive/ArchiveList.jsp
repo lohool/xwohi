@@ -2,7 +2,7 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page">
-		<ww:form id="Archive_list_form" name="Archive_list_form" namespace="Archive"  action="ArchiveList" method="post"  onSubmit="return panelSearch(this,'Archive_panel')">
+		<ww:form id="Archive_list_form" name="Archive_list_form" namespace="/Archive"  action="ArchiveList" method="post"  onSubmit="return panelSearch(this,'Archive_panel')">
 		<ww:hidden name="page"></ww:hidden>
 		<ww:hidden name="pageSize"></ww:hidden>
 		<ww:hidden name="vo.catalogue.id"></ww:hidden>

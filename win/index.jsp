@@ -64,7 +64,7 @@
 		<a href="#" class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</a>
 		<a href="#" class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</a>
 		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.action','Modal Dialog')" >Outer Dialog</a>
+		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog')" >Outer Dialog</a>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="openDialog('/crm/FAQList.html','·¢¶ÌÐÅ')" >FAQ</a>
 		<a class="menuBarButton" >Help</a> 

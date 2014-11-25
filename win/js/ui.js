@@ -112,16 +112,16 @@ function openNamedWindows(id, url, name)
 
 //openNamedWindows("Welcome");
 
-function openWindow(content, title, feature)
+function openWindow(url, title, feature)
 {
-	_window.Open(content, title, feature,_window.parent,_window.focusWindowId);
+	_window.Open('[url]'+url, title, feature,_window.parent,_window.focusWindowId);
 }
 function openWorkWindow(url,title,icon)
 {
 	if(!icon)icon="";
 	var w=_window.parent.offsetWidth/2;
 	var h=_window.parent.offsetHeight/2;
-	openWindow('[url]'+url, title, 'move=yes,resize=yes,width='+w+'px,height='+h+'px,icon='+icon);
+	openWindow(url, title, 'move=yes,resize=yes,width='+w+'px,height='+h+'px,icon='+icon);
 }
 /**
 callback: example:function(btn){if(btn=="OK"){alert("OK");}}
@@ -161,9 +161,6 @@ function _openWindowDialog(content, title,feature)
 	_window.Dialog(content, title, feature,parent,_window.focusWindowId);
 }
 
-function openDialog1(url,title,feature,data)
-{
-}
 function openDialog(url,title,isFullScreenDialog,width,height)
 {
 	var w=width?width:570;
@@ -176,6 +173,13 @@ function openDialog(url,title,isFullScreenDialog,width,height)
 	{
 		_openScreenDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
 	}
+}
+function openOwneredDialog(url,title,owner,width,height)
+{
+	var w=width?width:570;
+	var h=height?height:350;
+	var win=_window.windows[_window.focusWindowId];
+	_window.InnerDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h,win.contentCase,_window.focusWindowId);
 }
 
 /** 

@@ -21,6 +21,8 @@ function _window(features)
 	this.maximize=_window.getFeature(features,"maximize").toLowerCase();
 	this.minimize=_window.getFeature(features,"minimize").toLowerCase();
 	this.closeButton=_window.getFeature(features,"close").toLowerCase();
+	this.taskbar=_window.getFeature(features,"taskbar").toLowerCase() || "yes";
+	this.taskButton=null;
 	this.buttons={};
 	this.isMinimized=false;
 	this.isMaximized=false;
@@ -32,7 +34,6 @@ function _window(features)
 	this.originTop=0;
 	this.singleton=_window.getFeature(features,"singleton").toLowerCase();
 	this.onTop=_window.getFeature(features,"ontop").toLowerCase();
-	this.taskButton=null;
 	this.parentWindowId=null;
 	this.icon=_window.getFeature(features,"icon")||null;
 	this.callback=null;
@@ -109,6 +110,17 @@ _window.Dialog=function(content,title,features,parentPanel,parentWindowId,callba
 	obj.Creat(content,title||"Dialog");
 	return obj;
 };
+_window.InnerDialog=function(content,title,features,parentPanel,parentWindowId,callback)
+{
+	var obj=new _window(features);
+	obj.isModal = true;
+	obj.type=4;
+	if(callback)obj.callback=callback;
+	if(parentPanel)	obj.parent=parentPanel;
+	if(parentWindowId)	obj.parentWindowId=parentWindowId;
+	obj.Creat(content,title||"Dialog");
+	return obj;
+};
 _window.Alert=function(content,title,features,parentPanel,parentWindowId,callback)
 {
 	var obj=new _window(features);
@@ -146,8 +158,8 @@ _window.prototype.Creat=function(content,title)
 		this.modal.className="MODAL";
 		this.modal.style.position="absolute";
 		this.modal.style.zIndex=100000+this.zIndex;
-		this.modal.style.width=document.documentElement.clientWidth+"px";
-		this.modal.style.height=document.documentElement.clientHeight+"px";
+		this.modal.style.width=this.parent.clientWidth+"px";
+		this.modal.style.height=this.parent.clientHeight+"px";
 		this.modal.style.left="0px";
 		this.modal.style.top="0px";
 		this.modal.style.backgroundColor="#3300CC";
@@ -159,6 +171,8 @@ _window.prototype.Creat=function(content,title)
 	this.board=document.createElement("div");
 	this.board.className=this.className;
 	this.board.style.position="absolute";
+	this.board.style.left="0px";
+	this.board.style.top="0px";
 	this.board.id=this.id;
 	this.board.setAttribute("rel","_Window_Board_Case");
 	this.board.style.zIndex=this.zIndex;
@@ -380,7 +394,7 @@ _window.prototype.Creat=function(content,title)
 	//this.maximize.onclick();
 	this.Focus();
 
-document.getElementById("text").value=this.board.outerHTML 
+	//document.getElementById("text").value=this.board.outerHTML 
 };
 
 
@@ -503,6 +517,7 @@ _window.prototype.SetContent=function(content,data)
 	
     else
 	{
+		/*
 		if(this.form)
 		{
 			if(this.contentCase.firstChild!=this.form) this.contentCase.replaceChild(this.form,this.contentCase.firstChild);
@@ -516,6 +531,7 @@ _window.prototype.SetContent=function(content,data)
 			if(this.contentCase.hasChildNodes())this.contentCase.replaceChild(this.form,this.contentCase.firstChild);
 			else this.contentCase.appendChild(this.form);
 		}
+		*/
 		if(content.slice(0,4)=="[id]")
 		{
 			this.oldcontent=document.getElementById(content.slice(4));
@@ -526,8 +542,8 @@ _window.prototype.SetContent=function(content,data)
 		{
 			//this.form.innerHTML=content;
 			var id="_F"+this.id;
-			this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
-			$('#'+id).html(content);
+			this.contentCase.id=id;
+			this.contentCase.innerHTML=content;
 			reDefineHTMLActions(id);
 		}
 		if(this.bodyHeight<0) this.bodyHeight=this.contentCase.offsetHeight+1;
@@ -551,21 +567,35 @@ _window.prototype.SetTitle=function(title)
 
 _window.prototype.Focus=function()
 {
-	if(this.onTop!="true")
-	if(this.zIndex<_window.zIndex) this.board.style.zIndex=this.zIndex=++_window.zIndex;
-	for(var id in _window.windows) 
+	/*
+	if(this.type==4)
 	{
-		win =_window.windows[id];
-		win.LostFocus();
+		//this is a inner window,set focus to its parent
+		var win=_window.windows[this.parentWindowId];
+		win.Focus();
 	}
-	this.titleCase.className="TITLE FOCUS";
-	if(_window.taskbar)
+	else
+	*/
 	{
-		_window.focusWindowId=this.id;
-		if(this.taskButton)this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";
-		this.SetTaskBtnPosition(this.taskButton);
+		//set focus on the current window
+		if(this.onTop!="true")
+		if(this.zIndex<_window.zIndex) this.board.style.zIndex=this.zIndex=++_window.zIndex;
+		for(var id in _window.windows) 
+		{
+			win =_window.windows[id];
+			win.LostFocus();
+		}
+		this.titleCase.className="TITLE FOCUS";
+		if(_window.taskbar && this.type!=4)
+		{
+			_window.focusWindowId=this.id;
+			if(this.taskButton && this.type!=4)
+			{
+				this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";
+				this.SetTaskBtnPosition(this.taskButton);
+			}
+		}
 	}
-	
 
 };
 
@@ -586,6 +616,7 @@ _window.prototype.SetTaskBtnPosition=function(tskBtn)
 	for(var id in _window.windows) 
 	{
 		var win =_window.windows[id];
+		if(win.type==4)continue;
 		if(!findWin)
 		{
 		currentWinIndex++;
@@ -632,7 +663,8 @@ _window.prototype.SetTaskBtnPosition=function(tskBtn)
 	{
 		for(var id in _window.windows) 
 		{
-			win =_window.windows[id];
+			var win =_window.windows[id];
+			if(win.type==4)continue;
 			win.taskButton.style.left=pos+"px";
 		}
 	}
@@ -693,7 +725,7 @@ _window.CreateDopdownMenu=function()
 _window.prototype.LostFocus=function()
 {
 	//alert(this.taskButtion.className);
-	if(this.taskButton)this.taskButton.className=_window.ClassName+"_MIN_BAR";
+	if(this.taskButton && this.type!=4)this.taskButton.className=_window.ClassName+"_MIN_BAR";
 	this.titleCase.className="TITLE";
 
 };
@@ -715,7 +747,7 @@ _window.prototype.FindNextFocus=function()
 _window.prototype.Close=function()
 {
 	if(this.status==1)this.Hidden();
-	if(this.taskButton)_window.taskbar.removeChild(this.taskButton);
+	if(this.taskButton && this.type!=4)_window.taskbar.removeChild(this.taskButton);
 	_window.focusWindowId=null;
 	this.FindNextFocus();
 	if(this.isModal) 
@@ -1166,8 +1198,7 @@ _window.prototype. shrink=function(changedWidth,changedHeight)
 
 _window.prototype. createTaskButton=function()
 {
-	//if(this.type==1)
-	if(_window.taskbar)
+	if(_window.taskbar && this.type!=4)
 	{
 		this.taskButton=document.createElement("div");
 		this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";

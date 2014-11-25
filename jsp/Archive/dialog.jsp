@@ -4,19 +4,12 @@
 
 <div class="page">
 <FORM METHOD=POST name="selForm" >
+<INPUT TYPE="hidden" NAME="selField" readonly size="80" value="Root" style="width:99%"><INPUT TYPE="hidden" NAME="selValue" value="1">
 <table width="100%" cellspacing="0" id="sort-table" >
 <tbody>
-<TR>
-<td align="right">Directory:</td>
-<td>
-<INPUT TYPE="text" NAME="selField" readonly size="80" value="Root" style="width:99%"><INPUT TYPE="hidden" NAME="selValue" value="1">
-</td>
-</TR>
-<TR>
-</tr>
 <tr>
 <td width="70" rowspan="2" style="background-color:#999999;border:	1px solid;border-color: ButtonShadow	ButtonHighlight ButtonHighlight ButtonShadow;">
-<img src="images/pic-1.gif" width="70" height="220">
+<img src="images/pic-1.gif" width="70" height="320">
 </td>
 <td width="100%" height="300" valign="top">
 <iframe width="99%" height="99%" id="myFrame"  name="myFrame"  src=""  scrolling='auto' frameBorder='0' style="border:solid 1px #ccc"></iframe>

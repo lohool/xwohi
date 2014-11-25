@@ -13,9 +13,10 @@
 		<INPUT TYPE="button" value="Refresh" class="button biground" onclick='$("#operator_list").datagrid("refresh")'>
 		<INPUT TYPE="button" value="selected rows" class="button biground" onclick='alert($("#operator_list").datagrid("select"))'>
 		<INPUT TYPE="button" value="resize datagrid" class="button biground" onclick='$("#operator_list").datagrid("resize",500,300)'>
+		<INPUT TYPE="button" value="Owner Win" class="button biground" onclick='openOwneredDialog("help")'>
 	</ww:form>
 </div>
-<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="34px">
+<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="32px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 </div>

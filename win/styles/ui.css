@@ -1,10 +1,9 @@
-body {
-	font-size: 0.8em;
+body ,html
+{
+	font-size: 12px;
 	font-family: "ËÎÌו", "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+	overflow:hidden; 
 }
-html{ 
-overflow:hidden; 
-} 
 
 TABLE {
 CURSOR: default; FONT-SIZE: 12px; MARGIN: 0px
@@ -150,12 +149,12 @@ select
 input[type=text],
 input[type=password]
 {
-	height:18px;
+	#height:16px;
 	width:140px;
 }
 select
 {
-	height:20px;
+	#height:20px;
 	width:140px;
 }
 input:hover,
@@ -232,7 +231,6 @@ span.wwlbl,
 span.wwctrl
 {
 	display:inline-block;
-	vertical-align:top;
 	border:solid 0px red;
 }
 .label,

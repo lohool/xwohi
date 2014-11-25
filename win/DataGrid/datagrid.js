@@ -49,7 +49,6 @@ $.fn.datagrid= function (options){
 			var sw=this.parentNode.clientWidth-2;//$(this).width();
 			var sh=this.parentNode.clientHeight-2;
 			//init the size of the grad
-			//alert("scrollWidth="+this.parentNode.scrollWidth+";offsetWidth="+$(this).width())
 			if(opts.width==0)
 			{
 				opts._width=sw;
@@ -90,17 +89,16 @@ $.fn.datagrid= function (options){
 		select: function() {
 			if($(this).attr("class")!="datagrid" && $(this).attr("class")!="treegrid")return;
 			var selected=[];
-			var dg=$(this);
+			var $this=$(this);
 			var j=0;
-			$.each(dg.find(".datacolumn tbody tr"), function(i, row){
+			$.each($this.find(".datacolumn tbody tr"), function(i, row){
 				if(row.selected=="true")
 				{
 					//var rowid=row.rowid;
 					var rowid=$(row).attr("rowid");
-					selected[j++]=dg.data("options").data[rowid];
+					selected[j++]=$this.data("options").data[rowid];
 				}
 			});    
-			//if(selected.length>0)selected=selected.substring(0,selected.length-1);
 			return selected;
 		  },
 		refresh :function()
@@ -123,7 +121,7 @@ $.fn.datagrid= function (options){
 		jumpTo:function(page)
 		{
 			$this=$(this);
-			$.fn.datagrid.jumpToPage($this,page,$this.data("options"));
+			jumpToPage($this,page,$this.data("options"));
 		},
 		resize : function(w,h){
 			var sw=w;
@@ -145,7 +143,7 @@ $.fn.datagrid= function (options){
 			{
 					opts._height=sh;
 			}
-			$.fn.datagrid.setSize($(this),opts,opts._width,opts._height);
+			setSize($(this),opts,opts._width,opts._height);
 		}
 
 
@@ -297,7 +295,7 @@ $.fn.datagrid= function (options){
 		opts.dataobj = dgdata.get(0);//document.getElementById("datacolumn");
 		opts.toolObj=toolbar;
 		opts.titlebarMask.css("height",dgcolumn.height()+1);
-		$.fn.datagrid.setSize($this,opts,mainframe.outerWidth(),mainframe.outerHeight());
+		setSize($this,opts,mainframe.outerWidth(),mainframe.outerHeight());
 
 
 		//dgframe.bind("click",function(e){e=e||window.event;getrow(e,opts);});
@@ -315,12 +313,12 @@ $.fn.datagrid= function (options){
 			}
 		});
 		
-		document.getElementById("text").value=mainframe.prop("outerHTML");
+		//document.getElementById("text").value=mainframe.prop("outerHTML");
 
 		//bind event
 		var column=$this.find('.datacolumn thead tr td.column');
-		column.bind("mouseover",function(){$.fn.datagrid.over(this);});
-		column.bind("mouseout",function(){$.fn.datagrid.out(this);});
+		column.bind("mouseover",function(){onTitleMouseOver(this);});
+		column.bind("mouseout",function(){onTitleMouseOut(this);});
 		column.bind("mousemove",function(){onTitlePanelMouseMove(event,this);});
 		column.bind("mousedown",function(){onTitlePanelMouseDown(event,this,opts);});
 		column.bind("mouseup",function(){onTitlePanelMouseUp(this);});
@@ -364,7 +362,7 @@ $.fn.datagrid= function (options){
 
 		$this.find('.paginate .pagesize').bind("change",function(){
 			var pagesize=$(this).val();
-			//$.fn.datagrid.jumpToPage($this,page,opts);
+			//jumpToPage($this,page,opts);
 			var form=document.getElementById(opts.linkedForm);
 			form["pageSize"].value=pagesize;
 			setCookie("PageSize",pagesize);
@@ -376,11 +374,11 @@ $.fn.datagrid= function (options){
 		});
 		$this.find('.paginate .navigator').bind("click",function(){
 			var page=$(this).attr("page");
-			$.fn.datagrid.jumpToPage($this,page,opts);
+			jumpToPage($this,page,opts);
 		});
 		$this.find('.paginate .navigator_longstring').bind("click",function(){
 			var page=$(this).attr("page");
-			$.fn.datagrid.jumpToPage ($this,page,opts);
+			jumpToPage ($this,page,opts);
 		});
 		$this.find('.toolbar span').bind("click",function(){
 			var btnIndex=$(this).attr("btnIndex");
@@ -622,7 +620,7 @@ $.fn.datagrid= function (options){
 		});
 	}
 
-		$.fn.datagrid.setSize = function($this,opts,w,h){
+		setSize = function($this,opts,w,h){
 			opts._width=w;
 			opts._height=h;
 			$this.css("width",opts._width);
@@ -930,21 +928,21 @@ $.fn.datagrid= function (options){
 		}
 	}
 
-	$.fn.datagrid.over = function(obj){
+	onTitleMouseOver = function(obj){
 		obj.className = "over";
 	}
 
-	$.fn.datagrid.out = function(obj){
+	onTitleMouseOut = function(obj){
 		obj.className = "column";
 	}
 
-	$.fn.datagrid.dataover = function(obj){
+	onDataCellsMouseOver = function(obj){
 		if(obj.rowIndex!=nowrow){
 			obj.className = "dataover";
 		}
 	}
 
-	$.fn.datagrid.dataout = function(obj){
+	onDataCellsMouseOut = function(obj){
 		if(obj.rowIndex!=nowrow){
 			obj.className = "";
 		}
@@ -1058,7 +1056,7 @@ $.fn.datagrid= function (options){
 	}
 
 	//查找
-	$.fn.datagrid.findkey = function(keys,opts){
+	findKey = function(keys,opts){
 		//e=e || window.event; e=e.which || e.keyCode;
 		keys = keys.toLowerCase();
 		if(keys.replace(/\s/g,"").length>0){
@@ -1085,7 +1083,7 @@ $.fn.datagrid= function (options){
 			rowsobjB = null;
 		}
 	}
-	$.fn.datagrid.jumpToPage = function($this,page,opts){
+	jumpToPage = function($this,page,opts){
 		if(page)
 		{
 			opts.pager.current_page=page;
