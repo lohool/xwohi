@@ -1,12 +1,13 @@
 body ,html
 {
-	font-size: 12px;
+	font-size: 1.1em;
+	font-size: 90%;
 	font-family: "ËÎÌו", "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
 	overflow:hidden; 
 }
 
 TABLE {
-CURSOR: default; FONT-SIZE: 12px; MARGIN: 0px
+CURSOR: default;  MARGIN: 0px
 }
 div.page
 {
@@ -140,6 +141,7 @@ input[type=password],
 select
 {
 	BORDER:1px solid;
+	padding:1px 4px;
 	border-color: #66CCFF; 
 	background: #FFFFFF;
 	-webkit-border-radius: .3em; 
@@ -162,7 +164,6 @@ input:focus,
 select:hover,
 select:focus
 {
-	border-color: #FF8000; 
 	background: #FFFFFF;
 }
 input[type=checkbox],

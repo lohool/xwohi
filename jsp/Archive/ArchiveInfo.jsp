@@ -3,18 +3,7 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
-<body topmargin="0" leftmargin="0">
 <div class="page">
-<div id="pageTitle">
-<TABLE id="title-table" cellpadding="0" cellspacing="0" height="30" width="100%">
-<thead>
-<TR>
-<TD><span class="pageTitle-left"><img src="/images/ico_arrow_title.gif" width="13" height="13">
-<xwohi:i18n text="Archive.info"/></span><span class="pageTitle-right"></span></TD>
-</TR>
-</thead>
-</TABLE>
-</div>
 <br>
 <div align="center">
 <ww:form name="form1" namespace="/Archive" action="ArchiveModify" method="post" validate="true">
@@ -22,12 +11,6 @@
 <ww:hidden name="vo.id" />
 
 <table class="sort-table" id="input_table" cellpadding="0" cellspacing="0" align="center"  bgcolor="#E3E3E3">
-<thead>
-<TR>
-<TD colspan="2">
-<xwohi:i18n text="Archive.info"/></TD>
-</TR>
-</thead>
 <TR>
 <TD bgColor="#ffffff" align="right" width="40%">
 <xwohi:i18n text="Archive.title"/></TD><TD bgColor="#ffffff" width="60%">
@@ -64,9 +47,8 @@
 <xwohi:i18n text="Archive.content"/></TD>
 <tr>
 <TD bgColor="#ffffff" width="100%" colspan="2">
-<div id="editor_tab_two" style="display:none;"> 
-<textarea class="wpHtmlEditArea" style="height:268px;" id="editor" name="vo.content" wrap="off"><ww:property value="vo.content"/></textarea>
-</div>
+
+<textarea class="editor" style="height:368px;width:100%" id="content" name="vo.content" wrap="off"><ww:property value="vo.content"/></textarea>
 
 </TD>
 </TR>
@@ -91,3 +73,37 @@
 </ww:form>
 </div>
 </div>
+
+<script type="text/javascript" src="win/editor/tinymce4/js/tinymce/jquery.tinymce.min.js"></script>
+<script type="text/javascript" src="win/editor/tinymce4/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+	$('textarea.editor').tinymce({
+		theme: "modern",
+		plugins: [
+						"advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+						"table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+				 ],
+		toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+		toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+
+		menubar: false,
+		toolbar_items_size: 'small',
+		font_formats:"黑体=黑体;宋体=宋体",
+
+		style_formats: [
+				{title: 'Bold text', inline: 'b'},
+				{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+				{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+				{title: 'Example 1', inline: 'span', classes: 'example1'},
+				{title: 'Example 2', inline: 'span', classes: 'example2'},
+				{title: 'Table styles'},
+				{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+		],
+		templates: [
+			{title: 'Test template 1', content: 'Test 1'},
+			{title: 'Test template 2', content: 'Test 2'}
+		]
+	});
+</script>

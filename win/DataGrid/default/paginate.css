@@ -1,7 +1,7 @@
 .paginate {
-position:absolute;
+	position:absolute;
 	BACKGROUND-COLOR: #DAF1FE;
-	border:solid #00CCFF 1px;	
+	border:solid #99CCFF 1px;	
 	#BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
 	empty-cells: show ;
     border-collapse: collaps;
