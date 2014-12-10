@@ -8,6 +8,7 @@
 <a href="#" onclick="openWorkWindow('Document/DocumentWaitingForPigeonhole.action','公文归档')">公文归档</a><br />
 <a href="#" onclick="openWorkWindow('Knowledge/KnowledgeCatalogueList.action?vo.parent.id=1','个人资料库')">个人资料库</a><br />
 
+<a href="#" onclick="openWorkWindow('jsp/Album/Album.jsp','Album')">Album</a><br />
 
 </div>
 
@@ -50,7 +51,7 @@ subMenu3.addItem(new MenuItem("WeekScheme","/images/open.gif","收文","/Documen
 
 
 
-<h3>System Management</h3>
+<h3>Maintenance</h3>
 <div>
 
 <a href="#" onclick="openWorkWindow('Operator/OperatorList.jsp','Users','images/png/user.png')"><img src="images/png/user.png" border=0>Users</a><br />

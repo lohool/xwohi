@@ -141,4 +141,50 @@
       </action>
    </package>
 
+
+   <package extends="action-default" name="Album" namespace="/Album">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="FileList">
+         <result name="success" type="dispatcher">/jsp/Album/FileListData.jsp</result>
+      </action>
+      <action class="BasicAdd" name="FileAdd">
+         <result name="success" type="dispatcher">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicModify" name="FileDelete">
+         <result name="success" type="dispatcher">/jsp/Album/ActionResultWindow.jsp</result>
+      </action>
+      <action class="BasicInfo" name="FileInfo">
+         <result name="success" type="dispatcher">/jsp/Album/FileInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="FileModify">
+         <result name="success" type="dispatcher">/jsp/Album/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="FileInput">
+         <result name="success" type="dispatcher">/jsp/Album/FileAdd.jsp</result>
+      </action>
+      <action class="BasicList" name="AlbumList">
+         <result type="dispatcher" name="success" >/jsp/Album/AlbumList.jsp</result>
+      </action>
+      <action class="BasicAdd" name="AlbumAdd">
+         <result name="success" type="redirect">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="AlbumDelete">
+         <result name="success" type="redirect">/jsp/Album/AlbumList.action</result>
+      </action>
+      <action class="BasicInfo" name="AlbumInfo">
+         <result name="success" type="dispatcher">/jsp/Album/AlbumInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="AlbumModify">
+         <result name="success" type="redirect">/jsp/Album/AlbumList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="AlbumInput">
+         <result name="success" type="dispatcher">/jsp/Album/AlbumAdd.jsp</result>
+      </action>
+   </package>
+
+
 </struts>

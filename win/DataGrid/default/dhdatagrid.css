@@ -364,4 +364,7 @@ color:#A19F92;
 .datagrid .toolbar .Help
 {
 	background:url('../../../images/blue_round/help.png') no-repeat;
+}.datagrid .toolbar .Help
+{
+	background:url('../../../images/blue_round/help.png') no-repeat;
 }

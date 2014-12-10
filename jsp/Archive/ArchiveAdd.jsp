@@ -37,7 +37,7 @@ String listChild2(ArchiveCatalogue parent)
 <INPUT TYPE="hidden" NAME="vo.absolutePath" value="<%=abPath%>">
 <div class="container" layoutHeight="38">
 
-<table class="sort-table" id="input_table" cellpadding="0" cellspacing="0" align="center" >
+<table class="sort-table" style="width:100%" id="input_table" cellpadding="0" cellspacing="0" align="center" >
 <TR>
 <TD align="right" >
 <xwohi:i18n text="Archive.serialNumber"/></TD><TD >
@@ -163,12 +163,14 @@ String listChild2(ArchiveCatalogue parent)
 				 ],
 		toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
 		toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
-		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
 
 		menubar: false,
 		toolbar_items_size: 'small',
 		font_formats:"黑体=黑体;宋体=宋体",
-
+		//image_list:"jsp/Archive/image.json",//function(){alert("aaa")},//"/Album/AlbumList.action",
+		image_advtab:true,
+		image_list_src:"Album/FileList.action",
 		style_formats: [
 				{title: 'Bold text', inline: 'b'},
 				{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},

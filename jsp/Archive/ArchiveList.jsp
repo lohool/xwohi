@@ -24,6 +24,7 @@
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Add Archive","btnClass":"Add","target":"window","src":"Archive/ArchiveInput.action?vo.id=<ww:property value="vo.catalogue.id"/>","width":550,"height":330},
 				  {"text":"Edit Archive Info","btnClass":"Edit","src":"Archive/ArchiveInfo.action?vo.id={0}","width":700,"height":450},
+				  {"text":"View Archive Info","btnClass":"Full_page","src":"Archive/ArchiveInfo.action?vo.id={0}","width":700,"height":450},
 				  {"text":"Delete","btnClass":"Delete","src":"Archive/ArchiveDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
 				  {"text":"Delete Test","btnClass":"Delete","src":"Archive/ArchiveDelete.action?vo.id={0}"},
 				  {"text":"Separator","btnClass":"Separator"},

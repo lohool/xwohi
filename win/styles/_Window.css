@@ -445,7 +445,7 @@
 .BLUE_MIN_BAR_FOCUS .CLOSE,
 .BLUE_MIN_BAR .CLOSE
 {
-position:relative;
+	position:relative;
 	width:12px;
 	height:12px;
 	padding:0px;

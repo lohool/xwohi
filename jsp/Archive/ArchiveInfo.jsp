@@ -91,6 +91,8 @@
 		menubar: false,
 		toolbar_items_size: 'small',
 		font_formats:"黑体=黑体;宋体=宋体",
+		image_advtab:true,
+		image_list_src:"Album/FileList.action",
 
 		style_formats: [
 				{title: 'Bold text', inline: 'b'},

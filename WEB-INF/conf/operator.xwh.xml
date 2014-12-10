@@ -184,4 +184,39 @@
       </fields>
    </actions>
 
+
+
+   <actions>
+      <action name="FileList">
+	  <sql>select obj from File obj where obj.#album=$albumId and obj.#name like ?</sql>
+	  </action>
+      <action name="FileAdd" />
+      <action name="FileModify" />
+      <action name="FileDelete" />
+      <action name="FileInfo" />
+      <action name="FileInput" />
+      <wohi-name>File</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.File</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="album" type="relation" />
+      </fields>
+   </actions>
+   <actions>
+
+      <action name="AlbumList" >
+	  <sql>select obj from Album obj where obj.#name like ?</sql>
+	  </action>
+      <action name="AlbumAdd" />
+      <action name="AlbumModify" />
+      <action name="AlbumDelete" />
+      <action name="AlbumInfo" />
+      <action name="AlbumInput" />
+      <wohi-name>Album</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Album</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
+
 </xwohi>

@@ -342,13 +342,31 @@ $.fn.datagrid= function (options){
 		var dataRow=$this.find('.datacolumn tbody tr');
 		dataRow.bind("click",function(e){
 			e=e||window.event;getrow(e,opts);
+			if(opts.onclick)
+			{
+				var rowid=$(this).attr("rowid");
+				var data=opts.data[rowid];
+				opts.onclick(this,data);
+			}
 		});
 		dataRow.bind("mouseover",function(){
 			this.className="over";
+			if(opts.onmouseover)
+			{
+				var rowid=$(this).attr("rowid");
+				var data=opts.data[rowid];
+				opts.onmouseover(this,data);
+			}
 		});
 		dataRow.bind("mouseout",function(){
 			if(this.selected=="true")this.className = "selectedrow";
 			else this.className="";
+			if(opts.onmouseout)
+			{
+				var rowid=$(this).attr("rowid");
+				var data=opts.data[rowid];
+				opts.onmouseout(this,data);
+			}
 		});
 		$this.find('#selectAll').bind("click",function(){
 			selectAll(opts,this.checked)
@@ -633,7 +651,7 @@ $.fn.datagrid= function (options){
 				opts.titlebarMask.css("top", $(opts.toolObj).outerHeight());
 				opts.titlebarMask.css("height", $(opts.titleobj).height()-1);
 			}
-			else
+			else if(opts.titlebarMask!=null)
 			{
 				opts.titlebarMask.css("height", $(opts.titleobj).height()-1);
 			}
@@ -644,24 +662,26 @@ $.fn.datagrid= function (options){
 				pageBarHeight=opts.pageObj.outerHeight();
 			}
 
-			
-			var dgc = "";
-			var avgw = opts._width-20;
-			if(opts.multiple)avgw=avgw-30;
-			avgw = Math.floor(avgw/opts.columns.length);
-			opts.framediv.css("width",w);
-			opts.framediv.css("top", $(opts.titleobj).outerHeight());
-			opts.framediv.css("height", h-pageBarHeight-toolbarHeight-$(opts.titleobj).outerHeight());
+			if(opts.titleobj!=null && opts.dataobj!=null)
+			{
+				var dgc = "";
+				var avgw = opts._width-20;
+				if(opts.multiple)avgw=avgw-30;
+				avgw = Math.floor(avgw/opts.columns.length);
+				opts.framediv.css("width",w);
+				opts.framediv.css("top", $(opts.titleobj).outerHeight());
+				opts.framediv.css("height", h-pageBarHeight-toolbarHeight-$(opts.titleobj).outerHeight());
 
-			var startIndex=0;
-			if(opts.multiple)startIndex=1;
-			for(var cc=startIndex;cc<=opts.columns.length+startIndex-1;cc++){
-				if(cc-startIndex<opts.colwidth.length){
-					opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-					if(opts.dataobj.rows[0].children[cc])opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
-				}else{
-					opts.titleobj.rows[0].children[cc].style.width=avgw+"px";
-					if(opts.dataobj.rows[0].children[cc])opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
+				var startIndex=0;
+				if(opts.multiple)startIndex=1;
+				for(var cc=startIndex;cc<=opts.columns.length+startIndex-1;cc++){
+					if(cc-startIndex<opts.colwidth.length){
+						opts.titleobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+						if(opts.dataobj.rows[0].children[cc])opts.dataobj.rows[0].children[cc].style.width=opts.colwidth[cc-startIndex]+"px";
+					}else{
+						opts.titleobj.rows[0].children[cc].style.width=avgw+"px";
+						if(opts.dataobj.rows[0].children[cc])opts.dataobj.rows[0].children[cc].style.width=avgw+"px";
+					}
 				}
 			}
 		}

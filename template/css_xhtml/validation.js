@@ -192,6 +192,7 @@ function addError(e, errorText) {
     addErrorCSS(e, errorText);
 }
 
+/*
 //focus first element
 var StrutsUtils_showValidationErrors = StrutsUtils.showValidationErrors;
 StrutsUtils.showValidationErrors = function(form, errors) {
@@ -200,3 +201,4 @@ StrutsUtils.showValidationErrors = function(form, errors) {
         form.elements[firstFieldErrorPosition].focus();
     }
 };
+*/

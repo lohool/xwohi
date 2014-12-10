@@ -24,7 +24,8 @@ div.page .content
 padding:5px;
 }
 
-div.panel 
+div.panel,
+div.floatpanel 
 {
 	BACKGROUND-COLOR:#E7F7FE;
 	border:outset 0px;
@@ -39,6 +40,10 @@ div.panel
 	white-space: nowrap;
 
 
+}
+div.floatpanel 
+{
+	text-align:center;
 }
 div.panel .container1 
 {
@@ -138,6 +143,8 @@ div.panel .container1
 
 input[type=text],
 input[type=password],
+input[type=file],
+input[type=file]:hover,
 select
 {
 	BORDER:1px solid;
@@ -164,13 +171,14 @@ input:focus,
 select:hover,
 select:focus
 {
+	border: 1px solid #66CCFF; 
 	background: #FFFFFF;
 }
 input[type=checkbox],
 input[type=radio]
 {
 	#height:12px;
-	#border: 1px solid #66CCFF; 
+	border: 1px solid white; 
 	background:transparent;
 }
 
@@ -237,7 +245,7 @@ span.wwctrl
 .label,
 span.wwlbl
 {
-	width:200px;
+	width:150px;
 	text-align:right;
 }
 .errorMessage

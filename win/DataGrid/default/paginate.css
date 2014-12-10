@@ -49,6 +49,7 @@
 	font-size:12px;
 	line-height:20px; 
 	float:left;
+	cursor:default;
 }
 .paginate .navigator,
 .paginate .navigator:hover,
