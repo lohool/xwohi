@@ -209,7 +209,7 @@ $.fn.datagrid= function (options){
 			dgc = '<thead><tr class="title">';
 			
 			if(opts.multiple){
-				dgc += '<td class="column" style="width:30px;text-align:center;padding:0;text-indent:0;text-align:center;"><input id="selectAll" type="checkbox" style="margin:0;" ></td>';
+				dgc += '<td class="checkbox-column" style="width:30px;text-align:center;padding:0;text-indent:0;text-align:center;"><input id="selectAll" type="checkbox" style="margin:0;" ></td>';
 			}
 			
 			for(var cc=0;cc<opts.columns.length;cc++){
@@ -341,7 +341,8 @@ $.fn.datagrid= function (options){
 
 		var dataRow=$this.find('.datacolumn tbody tr');
 		dataRow.bind("click",function(e){
-			e=e||window.event;getrow(e,opts);
+			e=e||window.event;
+			getrow(e,opts);
 			if(opts.onclick)
 			{
 				var rowid=$(this).attr("rowid");

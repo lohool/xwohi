@@ -417,18 +417,22 @@ function parseJsonResponse(data,targetGrid,form)
 		
 		var msg="";
 		$.each(data.fields, function(i, row) {
-			/*
+			if(form)
+			{
+					field = form.elements[row.key];
+					var error = row.value;
+					addError(field, error);
+			}
+			else
+			{
 					msg+=row.keyText;
 					msg+=":";
 					msg+=row.value;
 					msg+="<br>";
-			*/
-					field = form.elements[row.key];
-					var error = row.value;
-					addError(field, error);
+			}
 
-				});
-		//openAlert(msg,"Input Error");
+		});
+		if(msg!="")openAlert(msg,"Input Error");
 	}
 	else
 	{

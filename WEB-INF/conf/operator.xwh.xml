@@ -9,6 +9,7 @@
       <action name="OperatorAdd" />
       <action name="OperatorModify" />
       <action name="OperatorDelete" />
+      <action name="OperatorDeleteAll" />
       <action name="OperatorInfo" />
       <action name="OperatorShow" />
       <action name="MyselfInfo" />

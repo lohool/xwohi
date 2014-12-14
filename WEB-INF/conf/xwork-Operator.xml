@@ -20,6 +20,9 @@
       <action name="OperatorDelete" class="BasicModify">
          <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp</result>
       </action>
+      <action name="OperatorDeleteAll" class="BasicDelete">
+         <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp</result>
+      </action>
       <action name="OperatorInfo" class="BasicInfo">
          <result type="dispatcher" name="success">/Operator/OperatorInfo.jsp</result>
       </action>
