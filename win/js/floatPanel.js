@@ -23,8 +23,6 @@ function FloatPanel(id,w,h,l,t,tit,msg)
        this.title   = tit;
        this.message = msg;
        this.obj     = null;
-       this.bulid   = bulid;
-       this.bulid();
 }
 
 //开始拖动;
@@ -126,7 +124,7 @@ function cls(obj)
        sha.style.visibility = "hidden";
 }
 //初始化;
- bulid=function()
+ FloatPanel.prototype.build=function()
 {
        var str = ""
                + "<div id=xMsg" + this.id + " "
@@ -187,8 +185,8 @@ function cls(obj)
 }
  FloatPanel.open=function(title,content)
 {
-    return new FloatPanel("1",500,200,300,300,title,content);
-
-
+    var panel= new FloatPanel("1",500,200,300,300,title,content);
+	panel.build();
+	return panel;
 }
 

@@ -151,7 +151,7 @@
          <result name="success" type="dispatcher">/jsp/common/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
-      <action class="BasicModify" name="FileDelete">
+      <action class="BasicDelete" name="FileDelete">
          <result name="success" type="dispatcher">/jsp/Album/ActionResultWindow.jsp</result>
       </action>
       <action class="BasicInfo" name="FileInfo">

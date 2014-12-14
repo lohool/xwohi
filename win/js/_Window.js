@@ -47,7 +47,7 @@ _window.Height=300;
 _window.Timer=5;
 _window.windows={};
 _window.wIndex=0;
-_window.zIndex=1000;
+_window.zIndex=0;
 _window.clientWidth=0;
 _window.clientHeight=0;
 _window.onmousemove=null;
@@ -178,7 +178,7 @@ _window.prototype.Creat=function(content,title)
 	this.board.style.zIndex=this.zIndex;
 	this.board.style.visibility="hidden";
 	this.parent.appendChild(this.board);
-alert(this.board.style.zIndex)
+
 	if(!_window.clientHeight)
 	{
 		this.board.style.left = "100%";

@@ -16,10 +16,10 @@
 			  callname: 'Department_list',
 			  toolbar:[
 				  {"text":"Refresh","btnClass":"Refresh"},
-				  {"text":"添加部门","btnClass":"Add","src":"/Department/DepartmentInput.action","width":550,"height":150},
-				  {"text":"编辑部门信息","btnClass":"Edit","src":"/Department/DepartmentInfo.action?vo.id={0}&targetGrid=Department_list","width":550,"height":150},
-				  {"text":"Delete","btnClass":"Delete","src":"/Department/DepartmentDelete.action?vo.id={0}&vo.state=2"},
-				  {"text":"Delete","btnClass":"Delete","src":"/Department/DepartmentDelete.action?vo.id={0}&vo.state=1"},
+				  {"text":"添加部门","btnClass":"Add","src":"Department/DepartmentInput.action","width":550,"height":150},
+				  {"text":"编辑部门信息","btnClass":"Edit","src":"Department/DepartmentInfo.action?vo.id={0}&targetGrid=Department_list","width":550,"height":150},
+				  {"text":"Delete","btnClass":"Delete","src":"Department/DepartmentDelete.action?vo.id={0}&vo.state=2"},
+				  {"text":"Delete","btnClass":"Delete","src":"Department/DepartmentDelete.action?vo.id={0}&vo.state=1"},
 				  ],
 			  columns:[
 				  "<xwohi:i18n text="ID" />",

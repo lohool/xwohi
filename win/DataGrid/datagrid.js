@@ -540,6 +540,7 @@ $.fn.datagrid= function (options){
 							for( var j=0;j<selected.length; j++)rowData+=selected[j][i]+",";
 							if(rowData.length>0)rowData=rowData.substring(0,rowData.length-1);
 							src=src.replace(new RegExp("\\{"+i+"\\}","g"),rowData);
+						alert(src);
 						}
 						openConfirm({
 							content:JSMsg_Datagrid.confirmDelete,
