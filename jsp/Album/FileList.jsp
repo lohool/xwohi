@@ -38,7 +38,7 @@
 				  "<xwohi:i18n text="File.url" />"
 			  ],
 			  linkedForm:"File_list_form",
-			  colwidth:[30,120,200,400],
+			  colwidth:[30,120,100,400],
 			  url:"Album/FileList.action?albumId=<%=request.getParameter("albumId")%>",
 			  onmouseover:function(row,data){showImage(data[3])}
 			  }

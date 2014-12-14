@@ -41,7 +41,6 @@
 <script src="win/js/resize.js"></script>
 <script src="win/js/ui.js"></script>
 <script src="win/js/util.js"></script>
-<script src="win/js/floatPanel.js"></script>
 <script src="template/css_xhtml/validation.js"></script>
 
 <script src="win/jQuery/jquery-ui-timepicker-addon.js"></script>
@@ -130,10 +129,6 @@ $(document).ready(function(){
 	*/
 	resetMainFrameSize();
 	resizeMenu();
-	var panel1=FloatPanel.open("Hello","Hello World!");
-	var panel1=FloatPanel.open("Hello","Hello World!");
-	var panel1=FloatPanel.open("Hello","Hello World!");
-	var panel1=FloatPanel.open("Hello","Hello World!");
 	_window.init("MainFrame","Taskbar");
 })
 

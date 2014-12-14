@@ -8,7 +8,7 @@
 				<TABLE>
 				<TR>
 					<TD><label class="label"><xwohi:i18n text="Album.name"/>:</label></TD>
-					<TD><ww:password  name="vo.name"  /></TD>
+					<TD><ww:textfield  name="vo.name" required="true" /></TD>
 				</TR>
 				<TR>
 					<TD><label class="label"><xwohi:i18n text="Album.Type"/>:</label></TD>

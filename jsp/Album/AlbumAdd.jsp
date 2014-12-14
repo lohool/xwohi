@@ -8,13 +8,13 @@
 				<TABLE>
 				<TR>
 					<TD><label class="label"><xwohi:i18n text="Album.name"/>:</label></TD>
-					<TD><ww:password  name="vo.name"  /></TD>
+					<TD><ww:textfield  name="vo.name" required="true" /></TD>
 				</TR>
 				<TR>
 					<TD><label class="label"><xwohi:i18n text="Album.Type"/>:</label></TD>
 					<TD style="text-align:left">
-						<INPUT TYPE="radio" NAME="vo.type" value="0" checked><xwohi:i18n text="Album.others" /><br>
-                        <INPUT TYPE="radio" NAME="vo.type" value="1"><xwohi:i18n text="Album.images" /><br>
+						<INPUT TYPE="radio" NAME="vo.type" value="0"><xwohi:i18n text="Album.others" /><br>
+                        <INPUT TYPE="radio" NAME="vo.type" value="1" checked><xwohi:i18n text="Album.images" /><br>
                         <INPUT TYPE="radio" NAME="vo.type" value="2"><xwohi:i18n text="Album.audios" /><br>
                         <INPUT TYPE="radio" NAME="vo.type" value="3"><xwohi:i18n text="Album.videos" /><br>
                         <INPUT TYPE="radio" NAME="vo.type" value="4"><xwohi:i18n text="Album.document" /><br>

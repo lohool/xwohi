@@ -33,7 +33,7 @@
 				  {"text":"添加用户","btnClass":"Add","src":"Operator/OperatorInput.action","width":550,"height":330},
 				  {"text":"Edit Operator","btnClass":"Edit","src":"Operator/OperatorInfo.action?vo.id={0}","width":600,"height":400},
 				  {"text":"Delete","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
-				  {"text":"Delete Test","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&ids={0}&vo.state=1"},
+				  {"text":"Delete Test","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&ids={1}&vo.state=1"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Printer","btnClass":"Printer","src":"Operator/OperatorInput.action","width":500,"height":300},
 				  {"text":"Help","btnClass":"Help","target":"window","src":"Operator/OperatorInfo.action?vo.id=1","width":300,"height":200},

@@ -26,7 +26,7 @@
 			  //multiple:true,
 			  toolbar:[
 				  {"text":"Refresh","btnClass":"Refresh"},
-				  {"text":"Add File","btnClass":"Add","src":"Album/FileInput.action?targetGrid=File_list&vo.album.id=<%=request.getParameter("albumId")%>","width":550,"height":330},
+				  {"text":"Add File","btnClass":"Add","src":"Album/FileInput.action?targetGrid=File_list&vo.album.id=<%=request.getParameter("albumId")%>","width":600,"height":330},
 				  {"text":"Edit File Info","btnClass":"Edit","src":"Album/FileInfo.action?vo.id={0}&targetGrid=File_list","width":550,"height":330},
 				  {"text":"Delete","btnClass":"Delete","target":"File_panel","src":"Album/FileDelete.action?vo.id={0}&vo.state=2&albumId=<%=request.getParameter("albumId")%>"},
 				  {"text":"Delete","btnClass":"Delete","target":"File_panel","src":"Album/FileDelete.action?vo.id={0}&vo.state=1&albumId=<%=request.getParameter("albumId")%>"},
