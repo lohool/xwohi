@@ -46,10 +46,11 @@ function onSubmit(myform)
 {                            
 	//myform = document.operator_info_form; 
 	
+alert("gg" )
 
 	var selectedList=myform["vo.resources.resourceID"];
+alert(selectedList.options.length )
 	var selectableList=myform["allList"];
-
 	for (i = selectedList.options.length -1; i >= 0; i--)  
 	{ 
 		//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value + ',' +selectedList.options[i].value; 
@@ -92,29 +93,29 @@ function form_submit(form)
 }
 
 </script> 
-
-<div class="page">
 <ww:form id="role_info_form" name="role_info_form" namespace="/Role" action="RoleModify" method="post" validate="true" onsubmit="return onSubmit(this)">
 <ww:hidden  name="vo.roleID"/>
 
-<table width="400" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
+<div class="page" layoutHeight="38">
+
+<table >
 <TR>
-<TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Role.name"/></TD>
-<TD bgColor="#ffffff" width="60%"><ww:textfield name="vo.name" required="true"/></TD>
+<TD align="right" width="40%"><xwohi:i18n text="Role.name"/></TD>
+<TD width="60%"><ww:textfield name="vo.name" required="true"/></TD>
 </TR>
 <TR>
-<TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Role.description"/></TD>
-<TD bgColor="#ffffff" width="60%"><ww:textarea name="vo.description" cols="40" rows="6" required="true"/></TD>
+<TD align="right" width="40%"><xwohi:i18n text="Role.description"/></TD>
+<TD width="60%"><ww:textarea name="vo.description" cols="40" rows="6" required="true"/></TD>
 </TR>
 
 
 <TR>
-<TD bgColor="#ffffff" align="right" width="40%"><xwohi:i18n text="Role.roleRes"/></TD>
-<TD bgColor="#ffffff" width="60%">
+<TD align="right" width="40%"><xwohi:i18n text="Role.roleRes"/></TD>
+<TD width="60%">
 <TABLE>
 <TR>
 	<TD>
-	<ww:select name="vo.resources.resourceID" listKey="resourceID" listValue="name" list="vo.resources" value="vo.resource.resourceID" size="7"  multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px"/>
+	<ww:select name="vo.resources.resourceID" listKey="resourceID" listValue="name" list="vo.resources" value="vo.resource.resourceID" size="7"  multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:120px"/>
    </TD>
 	<TD>
 		<input type="button" value=" --> " onClick="removeConfirmer(); return false;"> 
@@ -124,23 +125,20 @@ function form_submit(form)
 
 	</TD>
 	<TD>
-	<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7" multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:100px" />
+	<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7" multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:120px" />
 	
 	</TD>
 </TR>
 </TABLE>
 </TD>
 </TR>
-
-
-<TR>
-<TD align="center" colspan="2"> 
-      <input type="submit"  value="<xwohi:i18n text="submit" /> ">
-      <input type="reset" value="<xwohi:i18n text="reset" />">
-       </TD>
-</TR>
 </table>
-</ww:form>
 </div>
+				<div  style="height:25px;text-align:center;">
+					  <input type="submit"  value="<xwohi:i18n text="submit" /> ">
+					  <input type="reset" value="<xwohi:i18n text="reset" />">
+					  <input type="button" value="<xwohi:i18n text="close" />" onclick="_window.closeCurrent()">
+				</div>
+</ww:form>
 
 

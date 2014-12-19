@@ -161,9 +161,9 @@ String listChild2(ArchiveCatalogue parent)
 						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 						"table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
 				 ],
-		toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-		toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
-		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+		toolbar1: "newdocument fullpage | code preview | undo redo restoredraft | cut copy paste | searchreplace | ",
+		toolbar2: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect | bullist numlist | outdent indent blockquote | link unlink anchor image media  | insertdatetime  | forecolor backcolor",
+		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak ",
 
 		menubar: false,
 		toolbar_items_size: 'small',

@@ -140,7 +140,7 @@ div.panel .container1
 	vertical-align:middle;
 }
 
-
+input,
 input[type=text],
 input[type=password],
 input[type=file],
@@ -171,7 +171,7 @@ input:focus,
 select:hover,
 select:focus
 {
-	border: 1px solid #66CCFF; 
+	border:solid 1px  #FF6666; 
 	background: #FFFFFF;
 }
 input[type=checkbox],
@@ -200,7 +200,7 @@ input[type=radio]
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	border: solid 1px #0076a3;
+	border: solid 1px #66CCFF;
 	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
 	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');

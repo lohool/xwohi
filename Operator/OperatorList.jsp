@@ -30,7 +30,7 @@
 				  {"text":"Home","btnClass":"Home","target":"self","src":"Operator/OperatorList.jsp"},
 				  {"text":"Refresh","btnClass":"Refresh"},
 				  {"text":"Separator","btnClass":"Separator"},
-				  {"text":"添加用户","btnClass":"Add","src":"Operator/OperatorInput.action","width":550,"height":330},
+				  {"text":"添加用户","btnClass":"Add","src":"Operator/OperatorInput.action","width":600,"height":400},
 				  {"text":"Edit Operator","btnClass":"Edit","src":"Operator/OperatorInfo.action?vo.id={0}","width":600,"height":400},
 				  {"text":"Delete","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
 				  {"text":"Delete Test","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&ids={1}&vo.state=1"},

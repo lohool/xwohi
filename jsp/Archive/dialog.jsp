@@ -9,9 +9,9 @@
 <tbody>
 <tr>
 <td width="70" rowspan="2" style="background-color:#999999;border:	1px solid;border-color: ButtonShadow	ButtonHighlight ButtonHighlight ButtonShadow;">
-<img src="images/pic-1.gif" width="70" height="320">
+<img src="images/pic-1.gif" width="90" height="340">
 </td>
-<td width="100%" height="300" valign="top">
+<td width="100%" height="320" valign="top">
 <iframe width="99%" height="99%" id="myFrame"  name="myFrame"  src=""  scrolling='auto' frameBorder='0' style="border:solid 1px #ccc"></iframe>
 </td>
 </TR>

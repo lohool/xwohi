@@ -11,7 +11,6 @@
          <result name="success" type="dispatcher">/Customer/CustomerList.jsp</result>
       </action>
       <action class="BasicAdd" name="CustomerAdd">
-         <result name="input" >/Customer/CustomerAdd.jsp</result>
          <result name="success" type="dispatcher">/Customer/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
@@ -22,7 +21,6 @@
          <result name="success" type="dispatcher">/Customer/CustomerInfo.jsp</result>
       </action>
       <action class="BasicModify" name="CustomerModify">
-         <result name="input" type="dispatcher">/Customer/CustomerInfo.jsp</result>
          <result name="success" type="dispatcher">/Customer/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
@@ -35,8 +33,7 @@
          <result type="dispatcher" name="success" >/Customer/CustomerGroupList.jsp</result>
       </action>
       <action class="BasicAdd" name="CustomerGroupAdd">
-         <result name="input" type="dispatcher">/Customer/CustomerGroupAdd.jsp</result>
-         <result name="success" type="redirect">/Customer/CustomerGroupList.action</result>
+         <result name="success" type="redirect">/jsp/common/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action class="BasicDelete" name="CustomerGroupDelete">
@@ -46,8 +43,7 @@
          <result name="success" type="dispatcher">/Customer/CustomerGroupInfo.jsp</result>
       </action>
       <action class="BasicModify" name="CustomerGroupModify">
-         <result name="input" type="dispatcher">/Customer/CustomerGroupInfo.jsp</result>
-         <result name="success" type="redirect">/Customer/CustomerGroupList.action</result>
+         <result name="success" type="redirect">/jsp/common/ActionResultDialog.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action class="BasicInput" name="CustomerGroupInput">

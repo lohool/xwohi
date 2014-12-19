@@ -1,61 +1,110 @@
 <%@ page session="true" %>
 <%@ page contentType="text/html;charset=gb2312" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
-<html xmlns:xwohi="http://www.lohool.com/wohi/" xmlns:ww="http://www.opensymphony.com/webwork/">
 
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
+<script> 
 
-<body leftmargin="0" topmargin="0" >
+function addConfirmer() 
+{ 
+	myform = document.getElementById("role_add_form"); 
+
+	var selectedList=myform["vo.resources.resourceID"];
+	var selectableList=myform["allList"];
+	for (i = 0; i < selectableList.options.length; i++) 
+	{ 
+		if (selectableList.options[i].selected == true) 
+		{ 
+			var memo= $("#id option:eq(1)").attr("Memo")
+			newOpt = new Option(selectableList.options[i].text, selectableList.options[i].value); 
+			selectedList.add(newOpt); 
+			selectableList.remove(i);
+			i--;
+		} 
+	} 
+} 
+
+function removeConfirmer() 
+{ 
+	myform = document.getElementById("role_add_form"); 
+	var selectedList=myform["vo.resources.resourceID"];
+	var selectableList=myform["allList"];
+
+	for (i = 0;i < selectedList.options.length ;  i++)  
+    { 
+        if (selectedList.options[i].selected == true)  
+        { 
+			newOpt = new Option(selectedList.options[i].text, selectedList.options[i].value); 
+			selectableList.add(newOpt); 
+            selectedList.remove(i); 
+			i--;
+		} 
+    } 
+} 
+function onSubmit(myform) 
+{                            
+	//myform = document.operator_info_form; 
+	var selectedList=myform["vo.resources.resourceID"];
+	var selectableList=myform["allList"];
+
+	for (i = selectedList.options.length -1; i >= 0; i--)  
+	{ 
+		//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value + ',' +selectedList.options[i].value; 
+		selectedList.options[i].selected = true; 
+	} 
+
+	//myform["vo.roles.roleID"].value = myform["vo.roles.roleID"].value.substring(1);
+	//alert(myform["vo.roles.roleID"].value);
+	return ajaxDatagridSubmit(myform,"Role_list");
+	//return false;
+} 
+
+</script> 
+
 <div class="page">
-<div id="pageTitle">
-<TABLE width="100%" height="30"  cellspacing="0" cellpadding="0" id="title-table">
-<thead>
+<ww:form id="role_add_form" name="role_add_form" namespace="/Role" action="RoleAdd" method="post" validate="true" onsubmit="return onSubmit(this)">
+<div align="center" layoutHeight="38">
+<table  align="center" >
+<TR>
+<TD>
+<xwohi:i18n text="Role.name"/></TD><TD>
+<ww:textfield name="vo.name" cssStyle="width:300px" required="true"/></TD>
+</TR>
+<TR>
+<TD>
+<xwohi:i18n text="Role.resource"/></TD>
+<TD>
+<TABLE>
 <TR>
 	<TD>
-	<span class="pageTitle-left">
-	<img height="13" width="13" src="/images/ico_arrow_title.gif">
-	<xwohi:i18n text="Role.info"/>
-	</span>
-	<span class="pageTitle-right" >
-	</span>
+	<select name="vo.resources.resourceID" size="7"  multiple="true" style="border:1pt solid #636563;font-size:9pt;width:120px"/>
+   </TD>
+	<TD>
+		<input type="button" value=" --> " onClick="removeConfirmer(); return false;"> 
+	<br>
+	<br>
+    <input type="button" value=" <-- " onClick="addConfirmer(); return false;">
+
+	</TD>
+	<TD>
+	<ww:select name="allList" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7" multiple="true" cssStyle="border:1pt solid #636563;font-size:9pt;width:120px" />
+	
 	</TD>
 </TR>
-</thead>
 </TABLE>
-</div>
-<div align="center">
-<ww:form name="form1" namespace="/Role" action="RoleAdd" method="post" validate="true" onsubmit="return ajaxDatagridSubmit(this,'Role_list')">
-<table bgcolor="#E3E3E3" width="500" align="center" cellspacing="0" cellpadding="0" id="input_table" class="sort-table">
-<thead>
-<TR>
-<TD colspan="2">
-<xwohi:i18n text="CalendarPlan.info"/>
-</TR>
-</thead>
-<TR>
-<TD bgColor="#ffffff" align="right" width="40%">
-<xwohi:i18n text="Role.name"/></TD><TD bgColor="#ffffff" width="60%">
-<ww:textfield name="vo.name" required="true"/></TD>
-</TR>
-<TR>
-<TD bgColor="#ffffff" align="right" width="40%">
-<xwohi:i18n text="Role.description"/></TD><TD bgColor="#ffffff" width="60%">
-<ww:textarea name="vo.description" cols="40" rows="6" required="true"/></TD>
-</TR>
-<TR>
-<TD bgColor="#ffffff" align="right" width="40%">
-<xwohi:i18n text="Role.resource"/></TD>
-<TD bgColor="#ffffff" width="60%">
-<ww:select name="vo.resourceID" listKey="resourceID" listValue="name" list="select.resources" value="vo.resource.resourceID" size="7"  multiple="multiple" cssStyle="border:1px solid #636563;width=200px" />
 </TD>
 </TR>
 <TR>
-<TD align="center" colspan="2"> 
-      <input type="submit" value="<xwohi:i18n text="submit" />">
-      <input type="reset" value="<xwohi:i18n text="reset" />">
-       </TD>
+<TD>
+<xwohi:i18n text="Role.description"/></TD><TD>
+<ww:textarea name="vo.description" cols="30" rows="9" required="true" cssStyle="width:300px"/></TD>
 </TR>
 </table>
+</div>
+				<div class="panel" style="height:25px;text-align:center;">
+					  <input type="submit"  value="<xwohi:i18n text="submit" /> ">
+					  <input type="reset" value="<xwohi:i18n text="reset" />">
+					  <input type="button" value="<xwohi:i18n text="close" />" onclick="_window.closeCurrent()">
+				</div>
 </ww:form>
 </div>
-</html>

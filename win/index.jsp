@@ -56,8 +56,8 @@
 </head>
 
 <body >
-<div id="TopBar" class="panel" style="z-index:10000;position:absolute; left:0;top:0; width:100%;height:30px;"> 
-	<div style=" height:30px;float:right"> 
+<div id="TopBar" class="panel" style="z-index:10000;position:absolute; left:0;top:0; width:100%;height:60px;"> 
+	<div style="position:relative;top:30px; height:30px;float:right"> 
 		<span ><ww:property value="#session.operation_user.name"/></span>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</a>
@@ -130,6 +130,9 @@ $(document).ready(function(){
 	resetMainFrameSize();
 	resizeMenu();
 	_window.init("MainFrame","Taskbar");
+
+	$("#MainPanel" ).css("top",$("#TopBar").outerHeight());
+
 })
 
 $(function() {
@@ -151,6 +154,8 @@ $(function() {
 			var top=parseInt($this.css("top"));
 			left =  Math.floor(left / 80) * 80+20;
 			top =  Math.floor(top / 80) * 80+20;
+			if(left<20)left=20;
+			if(top<20)top=20;
 			$this.css("left",left+"px");
 			$this.css("top",top+"px");
 		}

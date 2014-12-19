@@ -62,10 +62,6 @@ function onSubmit(myform)
 } 
 
 </script> 
-<style>
-
-
-</style>
 <div class="page" >
 <ww:form id="operator_info_form" name="operator_info_form" namespace="/Operator"  action="OperatorModify" method="post" validate="true"  onsubmit="return onSubmit(this);">
 <ww:hidden  name="vo.id"/>
