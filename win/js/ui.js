@@ -132,7 +132,7 @@ function openAlertWindow(content, title, feature,callback)
 }
 function openAlert(content,title,callback)
 {
-	openAlertWindow(content, title, 'maximize=no,minimize=no,resize=no,width=500px,height=150px',callback);
+	openAlertWindow(content, title, 'taskbar=no,maximize=no,minimize=no,resize=no,width=500px,height=150px',callback);
 }
 function openConfirm(data)
 {
@@ -167,11 +167,11 @@ function openDialog(url,title,isFullScreenDialog,width,height)
 	var h=height?height:350;
 	if(isFullScreenDialog==true)
 	{
-		_openWindowDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
+		_openWindowDialog('[url]'+url, title ,'taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
 	}
 	else
 	{
-		_openScreenDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
+		_openScreenDialog('[url]'+url, title ,',taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
 	}
 }
 function openOwneredDialog(url,title,owner,width,height)

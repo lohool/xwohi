@@ -54,9 +54,9 @@ function form_submit(form)
 </TR>
 <TR>
 		</ww:if>
-<TD width="50%"> 
+<TD width="50%" valign="top"> 
 	  <div class="panel" style="height:25px;text-align:left;">
-		<ww:property value="#dglList.index"/>: <ww:property value="name"/> (<ww:property value="%{URI}" /><ww:property value="%{nameSpace}" />)
+		<ww:property value="#dglList.index"/>: <ww:property value="name"/> 
 	  </div>
 	  <div class="panel" style="text-align:left">
 		<ww:action id="cl" name="%{URI}"  namespace="%{nameSpace}" executeResult="false" >

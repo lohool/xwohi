@@ -44,7 +44,7 @@
 				  [
 				  "<ww:property value="id"/>",
 				  "<ww:property value="name"/>",
-				  "<a href='#' onclick='feedback({departmentId:\"<ww:property value="id"/>\",departmentName:\"<ww:property value="name"/>\"})'>Sel</a>"
+				  "<a href='#' onclick='feedback({\"vo.department.id\":\"<ww:property value="id"/>\",departmentName:\"<ww:property value="name"/>\"})'>Sel</a>"
 				  ],
 			   </ww:iterator>
 			  ]

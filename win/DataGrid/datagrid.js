@@ -492,7 +492,7 @@ $.fn.datagrid= function (options){
 					else
 					{
 						if(!target)target="dialog";
-						if(target=="dialog")openDialog(src,text,true,width,height);
+						if(target=="dialog")openDialog(src,text,false,width,height);
 						else openWorkWindow(src,text)
 					}
 				}
@@ -504,7 +504,7 @@ $.fn.datagrid= function (options){
 					}else
 					{
 						if(!target)target="dialog";
-						if(target=="dialog")openDialog(src,text,true,width,height);
+						if(target=="dialog")openDialog(src,text,false,width,height);
 						else openWorkWindow(src,text)
 					}
 				}
@@ -620,7 +620,7 @@ $.fn.datagrid= function (options){
 				else
 				{
 					if(!target)target="dialog";
-					if(target=="dialog")openDialog(src,text,true,width,height);
+					if(target=="dialog")openDialog(src,text,false,width,height);
 					else if(target=="window")openWorkWindow(src,text);
 					else if(target=="self")
 					{

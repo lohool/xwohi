@@ -77,10 +77,9 @@ function onSubmit(myform)
 
 <p><ww:select name="vo.job.id" listKey="id" listValue="name" list="select.job" value="vo.job.id" label="%{getText('Job')}"/></p>
 <p><label class="label"><xwohi:i18n text="Department"/>:</label>
-<ww:select name="vo.department.id" listKey="id" listValue="name" list="select.department" value="vo.department.id"  multiple="multiple"/>
-		<INPUT id="departmentId" TYPE="text" NAME="departmentId" style="width:50px">
-		<INPUT id="departmentName" TYPE="text" NAME="departmentName" style="width:100px">
-		<INPUT TYPE="button" value="Sel" onclick="openDialog('Department/DepartmentSelect.action','Select Department',true,600,350)">
+		<INPUT id="vo.department.id" TYPE="hidden" NAME="vo.department.id" style="width:50px">
+		<INPUT id="departmentName" TYPE="text" NAME="departmentName" readonly="true" style="width:100px">
+		<INPUT TYPE="button" value="Sel..." onclick="openDialog('Department/DepartmentSelect.action','Select Department',true,600,350)">
 </p>
 <p>
 	<label class="label" ><xwohi:i18n text="Operator.roles"/>:</label>
@@ -115,10 +114,3 @@ function onSubmit(myform)
 </div>
 </ww:form>
 </div>
-<script>
-$(document).ready(function(){
-	var	myform = document.getElementById("operator_info_form"); 
-	myform['vo.password'].value="<ww:property value="vo.password" />";
-	myform['vo.password2'].value="<ww:property value="vo.password" />";
-})
-</script>

@@ -38,6 +38,8 @@ function _window(features)
 	this.icon=_window.getFeature(features,"icon")||null;
 	this.callback=null;
 	if(this.onTop=="true")this.zIndex=0;
+	//0--hidden,minimized,1--displayed,3--shrinked all
+	this.status=1;
 }
 
 _window.Version="JS Window V1.00.08.01.03";
@@ -57,6 +59,7 @@ _window.focusWindowId=null;
 _window.parent=null;
 _window.taskbar=null;
 _window.dropdownMenu=null;
+_window.shrinkedAll=false;
 
 _window.init=function(parentPanel,taskbarPanel)
 {
@@ -782,7 +785,7 @@ _window.prototype.Show=function()
 {
 	if(this.oldcase) this.form.appendChild(this.oldcontent);
 	if(this.isModal) this.parent.appendChild(this.modal);
-	if(this.status==0)this.parent.appendChild(this.board);
+	if(this.status==0 || this.status==3)this.parent.appendChild(this.board);
 	this.status=1;
 	this.Focus();
 };
@@ -1198,7 +1201,7 @@ _window.prototype. shrink=function(changedWidth,changedHeight)
 
 _window.prototype. createTaskButton=function()
 {
-	if(_window.taskbar && this.type!=4)
+	if(_window.taskbar && this.type!=4 && this.taskbar=="yes")
 	{
 		this.taskButton=document.createElement("div");
 		this.taskButton.className=_window.ClassName+"_MIN_BAR_FOCUS";
@@ -1234,14 +1237,36 @@ _window.prototype. createTaskButton=function()
 }
 
 
-_window.shrinkAll =function(changedWidth,changedHeight)
+_window.shrinkAll =function()
 {
-	for(var key in _window.windows) 
+	if(_window.shrinkedAll==false)
 	{
-		//alert(key);
-		//_window.windows[key].shrink(changedWidth,changedHeight);
-		var win=_window.windows[key];
-		if(win.status!=0 && win.type==1)win.Hidden();
+		for(var key in _window.windows) 
+		{
+			//alert(key);
+			//_window.windows[key].shrink(changedWidth,changedHeight);
+			var win=_window.windows[key];
+			if(win.status!=0 && win.type==1)
+			{
+				win.Hidden();
+				win.status=3;
+			}
+		}
+		_window.shrinkedAll=true;
+	}
+	else
+	{
+		for(var key in _window.windows) 
+		{
+			//alert(key);
+			//_window.windows[key].shrink(changedWidth,changedHeight);
+			var win=_window.windows[key];
+			if(win.status==3)
+			{
+				win.Show();
+			}
+		}
+		_window.shrinkedAll=false;
 	}
 
 }

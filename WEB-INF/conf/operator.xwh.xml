@@ -57,7 +57,9 @@
       </fields>
    </actions>
    <actions>
-      <action name="RoleList" />
+      <action name="RoleList" >
+		<sql>select obj from Role obj where obj.#name like ?</sql>
+	  </action>
       <action name="RoleAdd" />
       <action name="RoleModify">
 		<pre-sql></pre-sql>
