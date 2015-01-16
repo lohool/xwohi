@@ -79,7 +79,7 @@
     <action name="SecurityCodeImageAction" 
     class="com.xbreeze.framework.xwohi.security.SecurityCodeImageAction">
         <result name="success" type="stream">
-            <param name="contentType">image/png</param>
+            <param name="contentType">image/jpeg</param>
             <param name="inputName">imageStream</param>
             <param name="bufferSize">2048</param>
         </result>

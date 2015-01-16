@@ -1,7 +1,7 @@
-﻿body 
+﻿ body 
 {	
 	
-	background:url("../images/bg.jpg") center fixed no-repeat ;
+	background:url("../images/bg.jpg") no-repeat scroll 0 0 transparent;
 	background-size:cover;-moz-background-size:cover;-webkit-background-size:cover;
 	background-position: 100% 100%;
     font-size: 14px;

@@ -1,12 +1,11 @@
 <%@ page session="true" %>
-<%@ page contentType="text/html;charset=gb2312" %> 
+<%@ page contentType="text/html;charset=utf8" %> 
 <%@ taglib uri="webwork" prefix="ww" %>
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
 <div class="page">
-<br>
-<div align="center">
 <ww:form name="form1" namespace="/Archive" action="ArchiveModify" method="post" validate="true">
+<div align="center">
 <INPUT TYPE="hidden" NAME="vo.parent.id" value="<ww:property value="vo.catalogue.id" />">
 <ww:hidden name="vo.id" />
 
@@ -45,6 +44,7 @@
 <TR>
 <TD bgColor="#ffffff" align="center" colspan="2">
 <xwohi:i18n text="Archive.content"/></TD>
+</TR>
 <tr>
 <TD bgColor="#ffffff" width="100%" colspan="2">
 
@@ -70,8 +70,8 @@
        </TD>
 </TR>
 </table>
-</ww:form>
 </div>
+</ww:form>
 </div>
 
 <script type="text/javascript" src="win/editor/tinymce4/js/tinymce/jquery.tinymce.min.js"></script>
@@ -90,7 +90,7 @@
 
 		menubar: false,
 		toolbar_items_size: 'small',
-		font_formats:"黑体=黑体;宋体=宋体",
+		font_formats:"榛戜綋=榛戜綋;瀹嬩綋=瀹嬩綋",
 		//image_list:"jsp/Archive/image.json",//function(){alert("aaa")},//"/Album/AlbumList.action",
 		image_advtab:true,
 		image_list_src:"Album/FileList.action",

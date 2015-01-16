@@ -71,7 +71,7 @@ subMenu3.addItem(new MenuItem("WeekScheme","/images/open.gif","收文","/Documen
 --------------<br>
 
 <a href="#" onclick="openWorkWindow('Operator/MyselfInfo.action','个人资料')">My Profile</a><br />
-<a href="#" onclick="openWorkWindow('Operator/OperatorPwd.action','修改密码')">Change Password</a><br />
+<a href="#" onclick="openDialog('Operator/OperatorPwd.action','修改密码')">Change Password</a><br />
 
 <a href="#" onclick="openWorkWindow('Customer/Customer.jsp','Customers')">Customers</a><br />
 <ul>

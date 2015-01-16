@@ -620,9 +620,10 @@ _window.prototype.SetTaskBtnPosition=function(tskBtn)
 	{
 		var win =_window.windows[id];
 		if(win.type==4)continue;
+		if(!win.taskButton)continue;
 		if(!findWin)
 		{
-		currentWinIndex++;
+			currentWinIndex++;
 		}
 		winCount++;
 		allTskBtnWidth+=win.taskButton.offsetWidth;
@@ -668,6 +669,7 @@ _window.prototype.SetTaskBtnPosition=function(tskBtn)
 		{
 			var win =_window.windows[id];
 			if(win.type==4)continue;
+			if(!win.taskButton)continue;
 			win.taskButton.style.left=pos+"px";
 		}
 	}

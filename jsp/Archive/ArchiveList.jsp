@@ -38,7 +38,7 @@
 				  "<xwohi:i18n text="createTime" />"
 			  ],
 			  linkedForm:"Archive_list_form",
-			  colwidth:[40,150],
+			  colwidth:[40],
 			  pager:
 				{
 					"total":<ww:property value="resultSize"/>,

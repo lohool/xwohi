@@ -1,6 +1,6 @@
 <#--
 /*
- * $Id: checkbox.ftl 720258 2008-11-24 19:05:16Z musachy $
+ * $Id: checkbox.ftl 1480273 2013-05-08 13:46:05Z lukaszlenart $
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -47,11 +47,11 @@
  class="checkboxLabel"<#rt/>
 </#if>
 >
-<#if parameters.required?default(false) && parameters.requiredposition?default("right") != 'right'>
+<#if parameters.required?default(false) && parameters.requiredPosition?default("right") != 'right'>
         <span class="required">*</span><#t/>
 </#if>
 ${parameters.label?html}<#t/>
-<#if parameters.required?default(false) && parameters.requiredposition?default("right") == 'right'>
+<#if parameters.required?default(false) && parameters.requiredPosition?default("right") == 'right'>
  <span class="required">*</span><#t/>
 </#if>
 :<#t/>
@@ -79,11 +79,11 @@ ${parameters.label?html}<#t/>
  class="checkboxLabel"<#rt/>
 </#if>
 >
-<#if parameters.required?default(false) && parameters.requiredposition?default("right") != 'right'>
+<#if parameters.required?default(false) && parameters.requiredPosition?default("right") != 'right'>
         <span class="required">*</span><#t/>
 </#if>
 ${parameters.label?html}<#t/>
-<#if parameters.required?default(false) && parameters.requiredposition?default("right") == 'right'>
+<#if parameters.required?default(false) && parameters.requiredPosition?default("right") == 'right'>
  <span class="required">*</span><#t/>
 </#if>
 :<#t/>

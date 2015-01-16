@@ -399,6 +399,8 @@ $.fn.datagrid= function (options){
 			var page=$(this).attr("page");
 			jumpToPage ($this,page,opts);
 		});
+
+		//register Click Event for the toobar buttons
 		$this.find('.toolbar span').bind("click",function(){
 			var btnIndex=$(this).attr("btnIndex");
 			var bn=this.className;
@@ -435,13 +437,15 @@ $.fn.datagrid= function (options){
 					src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 				}
 			}
-
+			//if it is java script, execute it.
 			if((/^javascript *:/i).test(src))
 			{
 				var sc=src.replace(/^javascript *:/i,"");
 				eval(sc);
 				return false;
 			}
+			
+			//classfy the buttons by CSS Class name
 			if(className=="Home")
 			{
 				var win =_window.windows[_window.focusWindowId];
@@ -492,7 +496,7 @@ $.fn.datagrid= function (options){
 					else
 					{
 						if(!target)target="dialog";
-						if(target=="dialog")openDialog(src,text,false,width,height);
+						if(target=="dialog")openDialog(src,text,true,width,height);
 						else openWorkWindow(src,text)
 					}
 				}
@@ -504,7 +508,7 @@ $.fn.datagrid= function (options){
 					}else
 					{
 						if(!target)target="dialog";
-						if(target=="dialog")openDialog(src,text,false,width,height);
+						if(target=="dialog")openDialog(src,text,true,width,height);
 						else openWorkWindow(src,text)
 					}
 				}
@@ -534,14 +538,15 @@ $.fn.datagrid= function (options){
 						var ids="";
 						src=opts.toolbar[btnIndex].src;
 						//src=src.replace(new RegExp("\\{ids\\}","g"),ids);
+						//put the selected values into a string by comma
 						for( var i=0;i<selected[0].length; i++)
 						{
 							var rowData="";
 							for( var j=0;j<selected.length; j++)rowData+=selected[j][i]+",";
 							if(rowData.length>0)rowData=rowData.substring(0,rowData.length-1);
 							src=src.replace(new RegExp("\\{"+i+"\\}","g"),rowData);
-						alert(src);
 						}
+						//alert(src)
 						openConfirm({
 							content:JSMsg_Datagrid.confirmDelete,
 							title:'Confirm',
@@ -569,6 +574,7 @@ $.fn.datagrid= function (options){
 					return false;
 
 				}
+				//delete one selected row
 				else
 				{
 					if(opts.nowrow==null)
@@ -608,6 +614,7 @@ $.fn.datagrid= function (options){
 			{
 				openDialog(src,text,true);
 			}
+			//not a pre-defined button
 			else 
 			{
 				//not a pre-defined button
@@ -615,12 +622,12 @@ $.fn.datagrid= function (options){
 				if(re.test(src))
 				{
 					//if still has parameters:"{N}"
-					openAlert(JSMsg_Datagrid.selectOneRow,"Delete",function(btn){return false;});
+					openAlert(JSMsg_Datagrid.selectOneRow,"Error",function(btn){return false;});
 				}
 				else
 				{
 					if(!target)target="dialog";
-					if(target=="dialog")openDialog(src,text,false,width,height);
+					if(target=="dialog")openDialog(src,text,true,width,height);
 					else if(target=="window")openWorkWindow(src,text);
 					else if(target=="self")
 					{
