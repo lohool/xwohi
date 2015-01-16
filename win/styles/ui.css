@@ -31,7 +31,8 @@ div.floatpanel
 	border:outset 0px;
 	border:inset 1px;
 	border:1px solid #C4F9FD;	
-	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	*BORDER-COLOR: threedshadow threedshadow threedhighlight threedhighlight;
+	border:solid 0px;
 	empty-cells: show ;
     border-collapse: collaps;
 	position:relative;
@@ -49,7 +50,8 @@ div.panel .container1
 {
 	BACKGROUND-COLOR:#EDF9FE;
 	border:1px solid #C4F9FD;	
-	BORDER-COLOR: threedshadow threedshadow threedhighlight threedhighlight;
+	*BORDER-COLOR: threedshadow threedshadow threedhighlight threedhighlight;
+	border:solid 0px;
 	empty-cells: show ;
     border-collapse: collaps;
 	position:relative;

@@ -56,8 +56,8 @@
 </head>
 
 <body >
-<div id="TopBar" class="panel" style="z-index:10000;position:absolute; left:0;top:0; width:100%;height:60px;"> 
-	<div style="position:relative;top:30px; height:30px;float:right"> 
+<div id="TopBar" class="panel" style="z-index:10000;position:absolute; left:0;top:0; width:100%;height:60px;background-color:#99CCFF"> 
+	<div style="position:relative;top:0px; height:30px;float:right"> 
 		<span ><ww:property value="#session.operation_user.name"/></span>
 		<a class="separator" ></a>
 		<a href="#" class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</a>
@@ -72,6 +72,17 @@
 		<a class="menuBarButton" href="Logout.action" >Log Out</a> 
 		<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>	
 	</div>
+	<div id="TaskbarPanel" class="panel"  style="width:100%;left:196px;top:38px;height:25px;padding: 0px;border-bottom:solid 1px #99CCFF;background-color:#99CCFF;z-index:10000;"> 
+	<!--
+			<span id="hidenMenuButton" class="hidenMenuButton" style="position:absolute;cursor:hand;z-index:1;left:0px;" onclick="hideMenu()">&lt;&lt;</span><div class="separator" style="float:left;"> </div>
+			<div style="position:absolute;width:2px;height:25px;z-index:1;background-color:#E7F7FE;left:-2px;background:transparent;"></div>
+-->
+		<div class="BLUE_MIN_BAR" onclick="_window.shrinkAll()"><span class="ICON" style="background-image:url(images/png/house.png)" onclick="_window.ShowMenu(event)"></span><span class="TITLE"><nobr>Home</nobr></span></div>
+		<div id="Taskbar"  style="position:absolute;z-index:0;height:25px;border:solid 0px red;left:0px;background:transparent;"></div>
+		<div id="TaskbarFuncPanel" style="position:absolute;width:50px;height:25px;z-index:1;background:transparent;;right:0px;">
+			<span class="panel" style="width:10px;height:20px;cursor:default;border:solid 0px;float:right;" onclick="_window.ShowMenu(event)">▼</span>
+		</div>
+	</div>
 
 </div>
 <div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:42px; z-index:10001; " >
@@ -84,20 +95,8 @@
 </div>
 
 <div id="MainPanel"  class="MainPanel" style="position:absolute; left:200px;padding:0px; top:42px;z-index:0;background:transparent;">
-	<div id="TaskbarPanel" class="panel"  style="width:100%;height:25px;padding: 0px;"> 
-	<!--
-			<span id="hidenMenuButton" class="hidenMenuButton" style="position:absolute;cursor:hand;z-index:1;left:0px;" onclick="hideMenu()">&lt;&lt;</span><div class="separator" style="float:left;"> </div>
-	-->
-		<div style="position:absolute;width:2px;height:25px;z-index:1;background-color:#E7F7FE;left:-2px;"></div>
-		<div id="Taskbar"  style="position:absolute;z-index:0;height:25px;border:solid 0px red;left:0px"> </div>
-		<div id="TaskbarFuncPanel" style="position:absolute;width:50px;height:25px;z-index:1;background-color:#E7F7FE;right:0px;">
-			<span class="panel" style="width:10px;height:20px;cursor:default;border:solid 1px;float:right;" onclick="_window.ShowMenu(event)">▼</span>
-			<span id="minAllWin" class="panel" style="width:10px;height:20px;border:solid 1px;float:right;cursor:default" onclick="_window.shrinkAll()"> </span>
-			<div class="separator" style="float:right"> </div>
-		</div>
-	</div>
 
-	<div id="MainFrame" class="panel" style="padding:0px">
+	<div id="MainFrame" class="panel" style="padding:0px;border-top:0px;">
 <TEXTAREA id="text" NAME="text" ROWS="15" COLS="70" style="position:relative;left:200px;top:20px"></TEXTAREA>
 
 	<a class="draggable" style="position:absolute; border:0;left:20px;top:20px;cursor:hand" ondblclick="openWorkWindow('/NotePad/NotePadList.action','Email')"  ><img src="images/icon/20071208160057107.png" width="60"></a>
@@ -204,12 +203,10 @@ function resetMainFrameSize()
 	$("#Taskbar").css("width",w-$("#TaskbarFuncPanel").width());
 	$("#MainPanel").css("width",w);
 	$("#MainPanel" ).css("left",left+2);
-	$("#MainFrame").css("height",h-$("#TaskbarPanel").outerHeight()-2);
+	//$("#MainFrame").css("height",h-$("#TaskbarPanel").outerHeight()-2);
+	$("#MainFrame").css("height",h);
 	$("#MainFrame").css("width",w+10);
 	$("#accordion-resizer").css("height",h-24);
-	//$("#accordion").css("height",h-30);
-	//leftMenu.style.height=h-4-parseInt($("#LeftMenu").css("padding"))*2-2;
-	//toolbars.style.top=document.documentElement.clientHeight-parseInt(toolbars.style.height);
 	$("#Toolbars").css("top",document.documentElement.clientHeight-parseInt(toolbars.style.height));
 	toolbars.style.left=0;
 	toolbars.style.width="100%";
@@ -255,8 +252,9 @@ function resizeMenu()
 				var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-14;
 				$("#MainFrame").css("width",w+10);
 				$("#TaskbarPanel").css("width",w+10);
-				//$("#MainPanel").css("width",w+10);
+				$("#MainPanel").css("width",w+10);
 				$( "#MainPanel" ).css("left",$( "#LeftMenu" ).width()+2);
+				$("#TaskbarPanel").css("left",$( "#LeftMenu" ).width()-4);
 				//$( "#accordion" ).css("height",height);
 				$( "#accordion" ).accordion( "refresh" );
 			}

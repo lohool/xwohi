@@ -8,15 +8,17 @@
 .BLUE
 {
 	position:absolute;
-	border:1px #94DCFE solid;
+	border:0px #94DCFE solid;
 	background-color:#B4E1FA;
 	overflow:hidden;
+	/*
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
 	border-radius: .3em;
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	*/
 }
 
 
@@ -147,21 +149,21 @@
 {
 	/* 请不要定义margin属性 */
 	padding: 0px 3px 2px 3px;
-	font-weight:bold;
 	text-align: left;
-	color: #ffffff;
+	color: white;
 	height: 22px;
 	line-height: 22px;
 	vertical-align:middle;
 	/*overflow: hidden;*/
 	/*
 	border:solid 0 green;
-	background-color:#F1C5A0 ;
 	*/
+	background-color:#B4CCCC ;
 }
 .BLUE .TITLE.FOCUS
 {
-	background-color:#86B7FF;
+	color: green;
+	background-color:#B4E1FA;
 }
 .BLUE .TITLE .ICON
 {
@@ -185,7 +187,6 @@
 	white-space: nowrap;
 	background-repeat: no-repeat;
 	display:inline-block; 
-	color:#fff;
 	cursor:pointer;
 	float:left;
 }
@@ -340,17 +341,22 @@
 */
 .BLUE_MIN_BAR
 {
+	margin-left:1px;
 	position:relative;
+	BACKGROUND-COLOR:#6699CC;
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
 	vertical-align: baseline;
-	margin: 0 0px;
+	margin-left:1px;
 	outline: none;
 	cursor: default;
 	text-align: left;
 	text-decoration: none;
 	padding: 2px 2px 0px 4px;
+	height:25px;
+	color:white;
+	/*
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
@@ -364,23 +370,30 @@
 	background: -moz-linear-gradient(top,  #fff,  #ededed);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#66CCCC');
 	background:-ms-linear-gradient(top, #ffffff, #66CCCC);
+	*/
 	min-width:100px;
 	}
 .BLUE_MIN_BAR_FOCUS
 {
+	font-weight:bold;
+	empty-cells: show ;
+	white-space: nowrap;
 	position:relative;
-	BACKGROUND-COLOR:#71D0F9;
+	BACKGROUND-COLOR:#B4E1FA;
 	display: inline-block;
-	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	vertical-align: baseline;
-	margin: 0 0px;
+	margin-left:1px;
 	outline: none;
 	cursor: default;
 	text-align: left;
 	text-decoration: none;
 
 	padding: 2px 2px 0px 4px;
+	height:25px;
+	color:Green;
+	/*
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
@@ -397,13 +410,15 @@
 
 	#background:-moz-radial-gradient(red 5%,yellow 25%,#1E90FF 50%);
 	#background:-ms-linear-gradient(-30deg, #D6DAFE 5%, #869ED7,#9193F9);
-
+	*/
 	min-width:100px;
 }
 .BLUE_MIN_BAR:hover,
 .BLUE_MIN_BAR_FOCUS:hover
 {
-	color:#FF0000;
+	BACKGROUND-COLOR:#6699FF;
+	/*
+	color:white;
 	background: #71D0F9;
 	background: -webkit-gradient(linear, left top, left bottom, from(#CCFFFF), to(#3399FF));
 	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
@@ -412,6 +427,7 @@
 
 	#background:-moz-radial-gradient(red 5%,yellow 25%,#1E90FF 50%);
 	#background:-ms-linear-gradient(-30deg, #D6DAFE 5%, #869ED7,#9193F9);
+	*/
 }
 .BLUE_MIN_BAR_FOCUS .ICON,
 .BLUE_MIN_BAR .ICON
@@ -437,7 +453,6 @@
 	background-repeat: no-repeat;
 	display:inline-block; 
 	line-height: 20px;
-	color:#fff;
 	/*font-family:webdings;*/
 	cursor:default;
 	float:left;
@@ -445,6 +460,7 @@
 .BLUE_MIN_BAR_FOCUS .CLOSE,
 .BLUE_MIN_BAR .CLOSE
 {
+	font-weight:bold;
 	position:relative;
 	width:12px;
 	height:12px;

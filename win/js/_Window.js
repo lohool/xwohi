@@ -674,7 +674,12 @@ _window.prototype.SetTaskBtnPosition=function(tskBtn)
 }
 _window.ShowMenu=function(e)
 {
-		//e=e|window.event;
+	 e = e || window.event;  
+	if(e.stopPropagation)
+		e.stopPropagation();  
+	else 
+		e.cancelBubble = true;
+
 	if(_window.dropdownMenu)	
 	{
 		_window.dropdownMenu.menu('show',{
