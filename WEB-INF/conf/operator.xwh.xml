@@ -7,13 +7,16 @@
 		<sql>select obj from Operator obj where obj.#job=?</sql>
 	  </action>
       <action name="OperatorAdd" />
-      <action name="OperatorModify" />
-      <action name="OperatorDelete" />
-      <action name="OperatorDeleteAll" />
+      <action name="OperatorModify"/>
+      <action name="OperatorDelete"/>
+      <action name="OperatorDeleteAll" >
+		<sql>update Operator obj set obj.#name=? where obj.#id in ($ids)</sql>
+	  </action>
       <action name="OperatorInfo" />
       <action name="OperatorShow" />
       <action name="MyselfInfo" />
       <action name="OperatorInput" />
+      <action name="OperatorPwd" />
       <wohi-name>Operator</wohi-name>
       <class>com.lohool.jproject.xwohi.operator.po.Operator</class>
       <fields>

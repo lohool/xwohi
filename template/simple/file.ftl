@@ -1,6 +1,6 @@
 <#--
 /*
- * $Id: file.ftl 720258 2008-11-24 19:05:16Z musachy $
+ * $Id: file.ftl 1500311 2013-07-06 19:00:21Z rgielen $
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -25,9 +25,7 @@
 <#if parameters.get("size")??>
  size="${parameters.get("size")?html}"<#rt/>
 </#if>
-<#if parameters.nameValue??>
- value="<@s.property value="parameters.nameValue"/>"<#rt/>
-</#if>
+ value=""<#rt/>
 <#if parameters.disabled?default(false)>
  disabled="disabled"<#rt/>
 </#if>

@@ -8,12 +8,14 @@
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
 		<INPUT TYPE="hidden" name="vo.state" value="1">
 		Name:<INPUT TYPE="text" NAME="vo.name" />
+		<span>
 		<INPUT TYPE="submit" value="search" class="button biground">
 		<INPUT TYPE="reset" value="reset" class="button biground">
 		<INPUT TYPE="button" value="Refresh" class="button biground" onclick='$("#operator_list").datagrid("refresh")'>
 		<INPUT TYPE="button" value="selected rows" class="button biground" onclick='alert($("#operator_list").datagrid("select"))'>
 		<INPUT TYPE="button" value="resize datagrid" class="button biground" onclick='$("#operator_list").datagrid("resize",500,300)'>
 		<INPUT TYPE="button" value="Owner Win" class="button biground" onclick='openOwneredDialog("help")'>
+		</span>
 	</ww:form>
 </div>
 <div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="32px">
@@ -33,7 +35,7 @@
 				  {"text":"添加用户","btnClass":"Add","src":"Operator/OperatorInput.action","width":600,"height":400},
 				  {"text":"Edit Operator","btnClass":"Edit","src":"Operator/OperatorInfo.action?vo.id={0}","width":600,"height":400},
 				  {"text":"Delete","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
-				  {"text":"Delete Test","btnClass":"Delete","src":"Operator/OperatorDelete.action?vo.id={0}&ids={1}&vo.state=1"},
+				  {"text":"External Update Sql Test","btnClass":"Delete","src":"Operator/OperatorDeleteAll.action?void={0}&ids={0}&vo.state=1&vo.name=Test"},
 				  {"text":"Separator","btnClass":"Separator"},
 				  {"text":"Printer","btnClass":"Printer","src":"Operator/OperatorInput.action","width":500,"height":300},
 				  {"text":"Help","btnClass":"Help","target":"window","src":"Operator/OperatorInfo.action?vo.id=1","width":300,"height":200},

@@ -4,16 +4,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <%String a="A"+(int)(Math.random()*1000);%>
 <div class="page">
-	<div class="panel">
-		<ww:form id="DataGroup_list_form" name="DataGroup_list_form" namespace="/DataGroup"  action="DataGroupList" method="post"  onsubmit="return windowSearch(this);">
-			<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
-			<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
-			Name:<ww:textfield name="vo.name" />
-			<INPUT TYPE="submit" value="search" class="button biground">
-			<INPUT TYPE="reset" value="reset" class="button biground">
-		</ww:form>
-	</div>
-	<div class="datagrid_wraper" layoutHeight="34px">
+	<div class="datagrid_wraper">
 		<div id="DataGroup_list_<%=a%>" class="datagrid">Loading...</div>
 	</div>
 </div>

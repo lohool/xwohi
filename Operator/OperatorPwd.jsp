@@ -1,105 +1,59 @@
-<%@ page contentType="text/html; charset=gbk" %>
+<%@ page contentType="text/html; charset=utf8" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="webwork" prefix="ww" %>
-<HTML>
-<HEAD>
-<TITLE> New Document </TITLE>
-<META NAME="Generator" CONTENT="EditPlus">
-<META NAME="Author" CONTENT="">
-<META NAME="Keywords" CONTENT="">
-<META NAME="Description" CONTENT="">
-</HEAD>
+<%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 
-<BODY>
-
-<TABLE width="100%" border=0  align=center cellPadding=0 cellSpacing=8 >
-  <TBODY>
-    <TR>
-      <TD height=30 bgColor=#FFFFFF><div align="left"></div>
-          <div align="left"><span class="pt9-18"></span>
-              <table width="80%" border="0" cellspacing="0" cellpadding="4">
-                <tr>
-                  <td width="60"><div align="center"><span class="pt9-18"><b><img src="/images/ico_arrow_title.gif" width="13" height="13"></b></span></div></td>
-                  <td width="97%"><span class="pt9-18"><b><span class="title-blank-b"><span class="pt9-18"><b><span class="title-blank-b">修改操作员资料</span></b></span></span></b></span></td>
-                </tr>
-              </table>
-        </div>
-		</TD>
-    </TR>
-    <TR>
-      <TD height=30 bgColor=#FFFFFF><div align="center">
-
-          <TABLE cellSpacing=1 width="80%" cellPadding=1  bgColor=#999999 
-            border=0>
-            <TBODY>
-				<ww:if test="errors!=null && errors.size()>0">
-			<tr>
-                <TD valign="top" bgColor=#ffffff width="100%">  
-				<div align="center">
-                  <TABLE WIDTH="400" BORDER=0 CELLSPACING=1 CELLPADDING=3 bgColor=#F9F9F7>
-				  <tr>
-				  <td>
-				<br>
-				<FONT SIZE="2" COLOR="red">发生错误了:
-				<ww:iterator value="errors">
-				<br>★<ww:property value="value"/> 
-				</ww:iterator> 
-				<br></FONT></br>
-				</td>
-				</tr>
-                  </TABLE>
-
-                </div>
-
-			</td>
-			</tr>
-				</ww:if>
-              <TR>
-                <TD align=middle valign="top" bgColor=#ffffff width="100%">                
-				<div align="center">
-<ww:form name="form1" action="/operator/OperatorModPwd.action" method="POST" validate="true">
-<ww:hidden name="ID"/>
-
-                  <TABLE WIDTH="400" BORDER=0 CELLSPACING=1 CELLPADDING=3 ALIGN=center>
-
-                    <TR BGCOLOR=E6F4FF class="pt9-18">
-                      <TD width="100" bgcolor="#FFD275" CLASS=p9>原密码：</TD>
-                      <TD width="70%" bgcolor="#F9F9F7" CLASS=p9><ww:textfield label="oldPwd" name="oldPwd" required="true"/> </TD>
-                    </TR>
-					<TR BGCOLOR=E6F4FF class="pt9-18">
-                      <TD width="30%" bgcolor="#FFD275" CLASS=p9>密码： </TD>
-                      <TD width="70%" bgcolor="#F9F9F7" CLASS=p9><ww:textfield  label="password" name="password" required="true"/> </TD>
-                    </TR>
-					<TR BGCOLOR=E6F4FF class="pt9-18">
-                      <TD width="30%" bgcolor="#FFD275" CLASS=p9>密码确认： </TD>
-                      <TD width="70%" bgcolor="#F9F9F7" CLASS=p9> <ww:textfield  label="password2" name="password2" required="true"/></TD>
-                    </TR>
-
-                    <TR BGCOLOR=E6F4FF class="pt9-18">
-                      <TD bgcolor="#FFD275"><div align="left"><spacer type=block width=1></div></TD>
-                      <TD CLASS=p9 BGCOLOR=#F9F9F7>
-                        <div align="left">
-                          <input name="reset" type="submit" class="botton" value="修改">
-                          <INPUT name="submit" TYPE="reset" class="botton" value="重填">
-                      </div>
-					  </TD>
-                    </TR>
-
-                  </TABLE>
+<div class="page">
+<ww:form name="operator_mod_pwd" id="operator_mod_pwd" namespace="/Operator" action="OperatorModPwd" method="post"  validate="true" onsubmit="return ajaxSubmit(this);">
+<div class="container" layoutHeight="38">
+<p><label class="label"><xwohi:i18n text="oldPwd"/>:</label><ww:password  name="oldPwd"  /></p>
+<p><label class="label"><xwohi:i18n text="password"/>:</label><ww:password  name="password"  onchange="validateForm_operator_mod_pwd()"/></p>
+<p><label class="label"><xwohi:i18n text="password2"/>:</label><ww:password  name="password2"  /></p>
+</div>
+<div class="panel" style="height:25px;text-align:center;">
+      <input type="submit"  value="<xwohi:i18n text="submit" /> ">
+      <input type="reset" value="<xwohi:i18n text="reset" />">
+      <input type="button" value="<xwohi:i18n text="close" />" onclick="_window.closeCurrent()">
+</div>
 </ww:form>
+</div>
+<script>
+function test()
+{
+	var getFieldValue = function(field) {
+            var type = field.type ? field.type : field[0].type;
+            if (type == 'select-one' || type == 'select-multiple') {
+                return (field.selectedIndex == -1 ? "" : field.options[field.selectedIndex].value);
+            } else if (type == 'checkbox' || type == 'radio') {
+                if (!field.length) {
+                    field = [field];
+                }
+                for (var i = 0; i < field.length; i++) {
+                    if (field[i].checked) {
+                        return field[i].value;
+                    }
+                }
+                return "";
+            }
+            return field.value;
+        }
+var continueValidation=true;
+	form = document.getElementById("operator_mod_pwd");
+	    if (form.elements['password']) 
+		{
+            field = form.elements['password'];
 
-                </div>
-				</TD>
-              </TR>
-            </TBODY>
-          </TABLE>
+            var errors = "test passed";
+            var fieldValue = getFieldValue(field);
+            
+            if (continueValidation && fieldValue != null && !fieldValue.match("(?=(?:.*?\\d){2})(?=.*[a-z])(?=.*[A-Z])")) {
+                errors = "test failed";
+				alert("hehe")
+                addError(field, errors);
+                
+            }
+        }
+		alert(errors)
+}
+</script>
 
-      </div>
-	  
-	  </TD>
-    </TR>
-  </TBODY>
-</TABLE>
-
-</BODY>
-</HTML>

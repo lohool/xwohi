@@ -1,6 +1,6 @@
 <#--
 /*
- * $Id: controlheader-core.ftl 1423607 2012-12-18 19:53:12Z lukaszlenart $
+ * $Id: controlheader-core.ftl 1480273 2013-05-08 13:46:05Z lukaszlenart $
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -57,11 +57,11 @@
         class="label"<#t/>
 </#if>
     ><#t/>
-<#if parameters.required?default(false) && parameters.requiredposition?default("right") != 'right'>
+<#if parameters.required?default(false) && parameters.requiredPosition?default("right") != 'right'>
         <span class="required">*</span><#t/>
 </#if>
 ${parameters.label?html}<#t/>
-<#if parameters.required?default(false) && parameters.requiredposition?default("right") == 'right'>
+<#if parameters.required?default(false) && parameters.requiredPosition?default("right") == 'right'>
  <span class="required">*</span><#t/>
 </#if>
 ${parameters.labelseparator?default(":")?html}<#t/>

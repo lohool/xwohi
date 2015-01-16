@@ -10,6 +10,7 @@
 <bean id="OperatorLock" class="com.lohool.jproject.xwohi.operator.action.OperatorLockAction" singleton="false"></bean>
 <bean id="OperatorUnlock" class="com.lohool.jproject.xwohi.operator.action.OperatorUnlockAction" singleton="false"></bean>
 
+<bean id="BasicAction" class="com.xbreeze.framework.xwohi.common.action.BasicAction" singleton="false"></bean>
 <bean id="BasicList" class="com.xbreeze.framework.xwohi.common.action.BasicListAction" singleton="false"></bean>
 <bean id="BasicAdd" class="com.xbreeze.framework.xwohi.common.action.BasicAddAction" singleton="false"></bean>
 <bean id="BasicDelete" class="com.xbreeze.framework.xwohi.common.action.BasicDeleteAction" singleton="false"></bean>

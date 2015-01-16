@@ -67,7 +67,7 @@ function clearWraperErrorLabelsCSS(wraper) {
         labels = wraper.getElementsByClassName("errorLabel");
         msgs = wraper.getElementsByClassName("errorMessage");
 
-    for (i = 0; i < msgs.length; i++) {
+    for (i =  msgs.length-1; i >=0; i--) {
         var label = msgs[i];
         if (label) {
 
@@ -168,6 +168,7 @@ function addErrorCSS(e, errorText) {
         }
 
         var firstCtrNode = _findWWCtrlNode(enclosingDiv); // either wwctrl_ or wwlbl_
+        var firstChildNode = firstCtrNode.childNodes[0]; // either wwctrl_ or wwlbl_
 
         var error = document.createTextNode(errorText);
         var errorDiv = document.createElement("div");
@@ -177,11 +178,13 @@ function addErrorCSS(e, errorText) {
         errorDiv.setAttribute("errorFor", elem.id);
         errorDiv.appendChild(error);
         if(!firstCtrNode && navigator.appName === 'Microsoft Internet Explorer') {
-          //enclosingDiv.insertBefore(errorDiv);
-          firstCtrNode.appendChild(errorDiv);
+         // enclosingDiv.insertBefore(errorDiv, firstCtrNode);
+          firstCtrNode.insertBefore(errorDiv,firstChildNode);
+          //firstCtrNode.appendChild(errorDiv);
         } else {
           //enclosingDiv.insertBefore(errorDiv, firstCtrNode);
-          firstCtrNode.appendChild(errorDiv);
+          firstCtrNode.insertBefore(errorDiv,firstChildNode);
+          //firstCtrNode.appendChild(errorDiv);
         }
     } catch (err) {
         alert("An exception occurred: " + err.name + ". Error message: " + err.message);

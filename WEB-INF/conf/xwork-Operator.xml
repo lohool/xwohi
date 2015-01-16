@@ -20,7 +20,7 @@
       <action name="OperatorDelete" class="BasicModify">
          <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp</result>
       </action>
-      <action name="OperatorDeleteAll" class="BasicDelete">
+      <action name="OperatorDeleteAll" class="BasicModify">
          <result type="dispatcher" name="success">/Operator/ActionResultWindow.jsp</result>
       </action>
       <action name="OperatorInfo" class="BasicInfo">
@@ -33,8 +33,11 @@
       <action name="OperatorInput" class="BasicInput">
          <result type="dispatcher" name="success">/Operator/OperatorAdd.jsp</result>
       </action>
+      <action name="OperatorPwd" class="BasicInput">
+         <result type="dispatcher" name="success">/Operator/OperatorPwd.jsp</result>
+      </action>
 		<action name="OperatorModPwd" class="OperatorModPwd">
-			<result name="success" type="dispatcher">/Maintain/closeDialog.jsp</result>
+			<result name="success" type="dispatcher">/Operator/ActionResultDialog.jsp</result>
 			<interceptor-ref name="validationStack" /> 
 		</action>
       <action name="MyselfInfo" class="MyselfInfo">

@@ -167,11 +167,13 @@ function openDialog(url,title,isFullScreenDialog,width,height)
 	var h=height?height:350;
 	if(isFullScreenDialog==true)
 	{
+		//open a dialog whose parent is the xWindow's owner
 		_openWindowDialog('[url]'+url, title ,'taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
 	}
 	else
 	{
-		_openScreenDialog('[url]'+url, title ,',taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
+		//open a dialog whose parent is the Body screen
+		_openScreenDialog('[url]'+url, title ,'taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);
 	}
 }
 function openOwneredDialog(url,title,owner,width,height)

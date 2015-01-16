@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="webwork" prefix="ww" %>
-<!DOCTYPE html>
 <html>
 <head runat="server">
 <title>会员管理登录</title>
@@ -25,30 +24,30 @@
 				
 				<table >
 				    <tr>
-					 <td colspan=2>
-					 <ww:property value="errors.class"/>
-						<ww:if test="errors!=null && errors.size()>0">
+					 <td >
+					 </td>
+					 <td >
 						<FONT SIZE="2" COLOR="red">
+						<ww:if test="actionErrors != null && actionErrors.size()>0">
+						<ww:property value="actionErrors" />
+						</ww:if>
+						<br>
+						<ww:property value="errors.class"/>
+						<ww:if test="errors!=null && errors.size()>0">
 						<ww:iterator value="errors">
 						<ww:property value="getText(value[0])" /> <br>
 						</ww:iterator> 
+						</ww:if>
 						</FONT>
-						</ww:if>
-					 <!--
-						<hr width="80%">
-						<ww:if test="actionErrors != null">
-						<ww:property value="actionErrors" />
-						</ww:if>
-					-->
 					 </td>
 				    </tr>
                     <tr>
                         <td width="80" height="35" align="right">帐 号：</td>
-                        <td align="left"><ww:textfield   name="account"  style="width:120px;" /></td>
+                        <td align="left"><ww:textfield   name="account"  style="width:145px;" value="admin"/></td>
                     </tr>
                     <tr>
                         <td width="80" height="35" align="right">密 码：</td>
-                        <td align="left"><ww:password  name="password"  required="true" style="width:120px;"/></td>
+                        <td align="left"><ww:textfield  name="password"  required="true" style="width:145px;" value="admin"/></td>
                     </tr>
                     <tr>
                         <td width="80" height="35" align="right">验证码：</td>
@@ -56,11 +55,12 @@
                             <table >
                                 <tr>
                                     <td  align="left" width="80px">
-                                        <input type="text" id="txtVerifyInput" maxlength="4" class="verify-input" runat="server" >
+                                        <input type="text" name="securityCode" maxlength="4" class="verify-input" runat="server" >
                                     </td>
                                     <td align="left" valign="middle">
-                                        <a href="javascript:void(0);" onclick="window.refresh_verify_code()">
-                                            <img id="imgVerifyCode" src="login/images/VerifyCode.jpg" alt="验证码" width="60" height="25" title="验证码不区分大小写，点击刷新" /><ww:token />
+                                        <a href="javascript:void(0);">
+											<img src="Security/SecurityCodeImageAction.action" id="Verify" width="60" height="25"  style="cursor:hand;" alt="看不清，换一张" title="验证码不区分大小写，点击刷新"/>
+											<ww:token />
                                         </a>
                                     </td>
                                 </tr>
@@ -77,6 +77,14 @@
         </tr>
     </table>
 </div>
+<script>
+window.onload=function(){
+    var verifyObj = document.getElementById("Verify");
+    verifyObj.onclick=function(){
+        this.src="Security/SecurityCodeImageAction.action?timestamp="+new Date().getTime();
+    };
+}
+</script>
 
 </body>
 </html>
