@@ -1121,8 +1121,8 @@ _window.prototype.OnMaximize=function (obj)
 			oimg.src="win/images/max.gif";
 			//obj.removeChild(obj.childNodes[0]);
 			//obj.appendChild(oimg);
-			var w=this.originWidth-parseInt(parent.style.width)-8;
-			var h=this.originHeight+parseInt(this.titleCase.offsetHeight)-parseInt(parent.style.height)-8;
+			var w=this.originWidth-parseInt(parent.style.width)-4;
+			var h=this.originHeight+parseInt(this.titleCase.offsetHeight)-parseInt(parent.style.height)-4;
 			this.ActResizeBy(w,h);
 			this.MoveTo(this.originLeft,this.originTop);
        }
@@ -1141,8 +1141,8 @@ _window.prototype.OnMaximize=function (obj)
 			this.originHeight=this.bodyHeight;
 			this.originLeft=this.left;
 			this.originTop=this.top;
-			var w=parseInt(parent.style.width)-this.bodyWidth-8;
-			var h=parseInt(parent.style.height)-this.bodyHeight-parseInt(this.titleCase.offsetHeight)-8;
+			var w=parseInt(parent.style.width)-this.bodyWidth-4;
+			var h=parseInt(parent.style.height)-this.bodyHeight-parseInt(this.titleCase.offsetHeight)-4;
 			//alert(w+":"+h);
 			this.MoveTo(0,0);
 			this.ActResizeBy(w,h);

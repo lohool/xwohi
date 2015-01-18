@@ -1,8 +1,0 @@
-#c:\jdk1.7\bin\native2ascii -encoding utf8 XBreezeAction_zh.properties.utf8 XBreezeAction_zh.properties
-#validation framework
-validate.requiredstring=* \u4e0d\u80fd\u4e3a\u7a7a
-validate.required_password1=* 密码长度最少大于6小于12
-validate.required_password2=* 密码至少有一个小写字符
-validate.required_password3=* 密码至少有一个大写字符
-validate.required_password4=* 密码至少有2个数字
-validate.match_password=* 两次密码必需保持一致

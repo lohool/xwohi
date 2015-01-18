@@ -22,12 +22,12 @@
 			<INPUT TYPE="submit" class="button biground">
             </ww:form>
 	</div>
-	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;width:200px;height:100%;" layoutHeight="46"> 
+	<div id="customer_group_panel" class="panel" style="position:absolute;left:0px;width:200px;height:100%;" layoutHeight="42"> 
 		<ww:action id="cg" name="CustomerGroupList" namespace="/CustomerGroup" executeResult="true">
 			<ww:param name="pageSize" value="100" />
 		</ww:action>
 	</div>
-	<div id="customer_panel" class="panel" style="position:absolute;left:211px;width:100%;height:100%;" layoutWidth="223" layoutHeight="46"> 
+	<div id="customer_panel" class="panel" style="position:absolute;left:211px;width:100%;height:100%;" layoutWidth="223" layoutHeight="42"> 
 		<div  style="width:100%;height:100%;border:solid 1px #CAE4FF;background-color:#FFFFFF" > </div>
 	</div>
 </div>

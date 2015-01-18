@@ -11,7 +11,7 @@
 		<INPUT TYPE="reset" value="reset" class="button biground">
 	</ww:form>
 </div>
-	<div class="datagrid_wraper" layoutHeight="34px">
+	<div class="datagrid_wraper" layoutHeight="30px">
 		<div id="Privilege_list" class="datagrid">Loading...</div>
 	</div>
 </div>

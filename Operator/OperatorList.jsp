@@ -18,7 +18,7 @@
 		</span>
 	</ww:form>
 </div>
-<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="32px">
+<div id="operator_list_datagrid_wraper" class="datagrid_wraper" style="border:solid 0px red;width:100%;padding:0px" layoutHeight="30px">
 <div id="operator_list" class="datagrid" >Loading...</div>
 </div>
 </div>

@@ -11,7 +11,7 @@
 		<INPUT TYPE="reset" value="reset" class="button">
 		</ww:form>
 	</div>
-	<div class="datagrid_wraper"layoutHeight="32px">
+	<div class="datagrid_wraper"layoutHeight="30px">
 		<div id="Role_list" class="datagrid" >Loading...</div>
 	</div>
 </div>

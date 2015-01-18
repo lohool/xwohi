@@ -413,8 +413,7 @@
 	*/
 	min-width:100px;
 }
-.BLUE_MIN_BAR:hover,
-.BLUE_MIN_BAR_FOCUS:hover
+.BLUE_MIN_BAR:hover
 {
 	BACKGROUND-COLOR:#6699FF;
 	/*
