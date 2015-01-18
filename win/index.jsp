@@ -57,25 +57,27 @@
 </head>
 
 <body >
-<div id="TopBar" class="panel" style="z-index:10001;position:absolute; left:0;top:0; width:100%;height:62px;background-color:#99CCFF"> 
-	<div style="position:relative;top:0px; height:30px;float:right"> 
-		
-		<a href="#" class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</a>
-		<a href="#" class="menuBarButton"  onclick="openWorkWindow('http://www.baidu.com','我的任务')" >Window</a>
-		<a href="#" class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</a>
-		<a href="#" class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog')" >Outer Dialog</a>
-		<a class="separator" ></a>
-		<a href="#" class="menuBarButton"  onclick="openDialog('/crm/FAQList.html','·¢¶ÌÐÅ')" >FAQ</a>
-		<a class="menuBarButton" >Help</a> 
-		<a class="menuBarButton" href="Logout.action" >Log Out</a> 
-		<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>	
+<div id="TopBar" class="panel" style="z-index:10001;position:absolute; left:0;top:0; width:100%;height:62px;background-color:#99CCFF;background-image:url(win/images/Capture.jpg)"> 
+	<div style="position:relative;font-size: 12pt;float:left;top:10px;"><span style="font-family: Elephant;color: #008000;">JIME-XWOHI</span> <span style="color: #808000; font-family: broadway;">DEMO</span></div>
+	<div style="position:relative;top:0px; height:30px;float:right;color:white;"> 
+
+		<span class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</span>
+		<span class="menuBarButton"  onclick="openWorkWindow('http://www.baidu.com','我的任务')" >Window</span>
+		<span class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</span>
+		<span class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</span>
+		<span class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</span>
+		<span class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog')" >Outer Dialog</span>
+		<span class="separator" ></span>
+		<span class="menuBarButton"  onclick="openDialog('/crm/FAQList.html','·¢¶ÌÐÅ')" >FAQ</span>
+		<span class="menuBarButton" >Help</span> 
+		<span class="menuBarButton" href="Logout.action" >Log Out</span> 
 	</div>
-	<div id="TaskbarPanel_Mark" class="panel"  style="position:absolute;left:0px;top:45px;height:27px;width:202px;padding: 0px;border:solid 0px #99CCFF;background-color:#99CCFF;z-index:10001;"> 
-	Logon User:<span ><ww:property value="#session.operation_user.name"/></span>
+	<div id="TaskbarPanel_Mark" class="panel"  style="position:absolute;left:0px;top:45px;height:27px;width:201px;padding: 0px;background:transparent;z-index:10001;border-top:solid 0px #99CCFF"> 
+		<div class="BLUE_MIN_BAR" style="background:transparent;min-width:70px;padding-left:5px;" ><span class="ICON" style="background-image:url(images/png/user_business_boss.png)" ></span><span class="TITLE" style="margin-left:3px;"><nobr><ww:property value="#session.operation_user.name"/> <FONT  COLOR="black">▼</FONT></nobr></span></div>
+		<div class="BLUE_MIN_BAR" style="background:transparent;min-width:70px;color:#FF0000;padding-left:5px;" ><span class="ICON" style="background-image:url(images/png/sound.png)" ></span><span class="TITLE"><nobr>2  <FONT  COLOR="black">新任务</FONT></nobr></span></div>
+		<div class="BLUE_MIN_BAR" style="background:transparent;min-width:20px;color:#FF0000;" ><span class="ICON" style=";background-image:url(images/png/email_open_image.png)" ></span><span class="TITLE"><nobr></nobr></span></div>
 	</div>
-	<div id="TaskbarPanel" class="panel"  style="width:100%;left:196px;top:40px;height:25px;padding: 0px;border:solid 0px #99CCFF;border:solid 0px blue;background-color:#99CCFF;z-index:10000;"> 
+	<div id="TaskbarPanel" class="panel"  style="position:absolute;width:100%;left:201px;top:45px;height:27px;padding: 0px;border:solid 0px #99CCFF;border:solid 0px blue;background:transparent;z-index:10000;"> 
 		<div class="BLUE_MIN_BAR" style="position:absolute;z-index:10001;background-color:#003366;" onclick="_window.shrinkAll()"><span class="ICON" style="background-image:url(images/png/house.png)" onclick="_window.ShowMenu(event)"></span><span class="TITLE"><nobr>Home</nobr></span></div>
 		<div id="Taskbar"  style="position:absolute;left:106px;z-index:0;height:25px;border:solid 0px red;background:transparent;"></div>
 	</div>

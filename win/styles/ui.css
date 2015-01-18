@@ -101,7 +101,7 @@ div.panel .container1
 .menuBarButton,
 .menuBar.menuBarButton
 {
-	border:solid #99CCFF 1px;	
+	/*border:solid #99CCFF 1px;	*/
 	empty-cells: show ;
 	padding:0px 4px;
 	margin:0px;
@@ -111,7 +111,7 @@ div.panel .container1
 	display:inline-block; 
 	line-height: 25px;
 	position:relative;
-
+	cursor:default;
     height:25px;
 	min-width:40px;
 	max-width:100px;
@@ -120,8 +120,9 @@ div.panel .container1
 .menuBarButton:hover,
 .menuBar.menuBarButton:hover
 {
-	border:solid #E7F7FE 1px;	
+	BACKGROUND-COLOR:#009999;
 	/*
+	border:solid #E7F7FE 1px;	
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
 	border-radius: .3em;
