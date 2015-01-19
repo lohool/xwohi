@@ -11,7 +11,7 @@
 	</site>
 	<upload-file>
 		<temp-path>D:/apache-tomcat-7.0.42/webapps/ROOT/temp_file/${USER}/</temp-path>
-		<url>/temp_file</url>
+		<url>temp_file</url>
 	</upload-file>
 	
 <!--

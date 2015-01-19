@@ -8,6 +8,10 @@
 <head>
 <title>JIME Framework</title>
 
+<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT"> 
+<META HTTP-EQUIV="expires" CONTENT="0"> 
 
 <link rel="stylesheet" href="win/styles/ui.css">
 <link rel="stylesheet" type="text/css" href="win/styles/_Window.css" />
@@ -38,6 +42,7 @@
 <script src="win/js/_Window.js" type="text/javascript"></script>
 
 <script src="win/DataGrid/datagrid.js"></script>
+<script src="win/DataGrid/treegrid.js"></script>
 <script src="win/js/resize.js"></script>
 <script src="win/js/ui.js"></script>
 <script src="win/js/util.js"></script>

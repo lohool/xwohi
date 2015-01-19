@@ -4,7 +4,9 @@
 <link type="text/css" rel="stylesheet" href="default/dhdatagrid.css">
 <link type="text/css" rel="stylesheet" href="default/paginate.css">
 	<script type="text/javascript" src="../jQuery/jquery-1.9.1.js"></script>
+<script language="javascript" src="../js/_Window.js"></script>
 <script language="javascript" src="datagrid.js"></script>
+<script language="javascript" src="../js/ui.js"></script>
 </head>
 <body >
 <TEXTAREA id="text" NAME="text" ROWS="15" COLS="70"></TEXTAREA>
@@ -12,21 +14,52 @@
  <div id="dhdatagrid" class="datagrid"> Loading...</div>
  <div id="dhdatagrid2" class="datagrid" >Loading...</div>
 <script>
+var JSMsg_Paginate=
+{
+	total:"total",
+	records:"records",
+	firstPage:"firstPage",
+	lastPage:"lastPage",
+	records:"records",
+	page:"page",
+	everyPage:"everyPage",
+	display:"display"
+}
+
+var JSMsg_Datagrid=
+{
+	selectOneRow:"select_one_row",
+	confirmDelete:"datagrid.confirm_delete"
+}
+
 var i=0;
 	     $(document).ready(function() {
-		 /*
+		 
 	          $("#dhdatagrid").datagrid({
 			  callname: 'dhdg',
 			  width: '100%',
 			  height:240,
 			  multiple:true,
 			  editable:true,
-			  toolbar:['Home','Refresh','Separator','Add','Edit','Delete','Save','Separator','Printer','Help'],
+			  toolbar:[
+				  {"text":"Home","class":"Home","src":"/Operator/OperatorInput.action","width":500,"height":300},
+				  /*
+				  ["Refresh"],
+				  ["Separator"],
+				  ["Add"],
+				  ["Edit"],
+				  ["Delete"],
+				  ["Save"],
+				  ["Separator"],
+				  ["Printer"],
+				  */
+				  {"text":"Help","class":"Help","src":"/Operator/OperatorInfo.action?vo.id=1","width":300,"height":200}
+				  ],
 			  url:"datagrid_data2.json",
 			  index:i++
 			  }
 			  );
-			  */
+			  
 	          $("#dhdatagrid2").datagrid({
 			  callname: 'dhdg2',
 			  width: 400,

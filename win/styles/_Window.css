@@ -2,7 +2,7 @@
 {
 	background-color:#333435;
 	filter:alpha(opacity=5);
-	opacity:0.05;
+	opacity:0.06;
 }
 
 .BLUE
@@ -341,9 +341,9 @@
 */
 .BLUE_MIN_BAR
 {
-	margin-left:1px;
+	margin-left:10px;
 	position:relative;
-	BACKGROUND-COLOR:#339999;
+	BACKGROUND-COLOR:#0488C8;
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;

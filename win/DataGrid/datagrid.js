@@ -194,7 +194,7 @@ $.fn.datagrid= function (options){
 		return bar;
 
 	 }
-	init = function($this,opts){
+	function init ($this,opts){
 		//var $this=$(this);
 		$this.css("width",opts._width);
 		$this.css("height",opts._height);
@@ -1141,7 +1141,7 @@ $.fn.datagrid= function (options){
 
 
 	//加载数据
-	setdata = function($this,opts,arrdata){
+	function setdata ($this,opts,arrdata){
 		if(arrdata){
 			//$this.empty();
 			opts.data = arrdata;
@@ -1150,7 +1150,7 @@ $.fn.datagrid= function (options){
 			reDefineHTMLActions($this.attr("id"));
 		}
 	}
-	loadData = function($this,options,form) {
+	function loadData ($this,options,form) {
 		var param="";
 		var opts=options;
 		if(!opts && !form) form=document.getElementById($this.data("options").linkedForm);
@@ -1187,6 +1187,7 @@ $.fn.datagrid= function (options){
 				});
 				opts.data=[];
 				$.each(data.data, function(i, row) {
+					/*
 					if(i==0)
 					{
 						var index=0;
@@ -1195,23 +1196,29 @@ $.fn.datagrid= function (options){
 						   opts.columns[index++]=j;
 						}
 					}
+					*/
 					var rowData=[];
+					/*
 					for (a=0; a < opts.columns.length; a++) {
 						rowData[a]=row[opts.columns[a]];
-					}	
+					}
+					*/
+					var a=0;
+					for(j in row)
+						{
+						   rowData[a++]=row[j];
+						}
 					opts.data[i]=rowData;
 				});
 				opts.nowrow=null;
 				setdata($this,opts,opts.data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                //alert("Error:"+err);
+                alert("Error:"+err);
 				$this.html(XMLHttpRequest.responseText);
             }
         });
 
 	}
 
-	$.fn.extend({         
-	}); 
 })(jQuery);  

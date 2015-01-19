@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+<!--
+        <property name="hibernate.dialect">net.sf.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/wap</property>
+        <property name="hibernate.connection.username">cqwap</property>
+        <property name="hibernate.connection.password">cqwap</property>
+        <property name="hibernate.connection.pool.size">10</property>
+        <property name="hibernate.show_sql">false</property>
+		<property name="jdbc.fetch_size">50</property>
+		<property name="jdbc.batch_size">25</property>
+		<property name="jdbc.use_scrollable_resultset">false</property>
+
+<property name="hibernate.transaction.factory_class">net.sf.hibernate.transaction.JDBCTransactionFactory </property>
+<property name="hibernate.transaction.factory_class">
+net.sf.hibernate.transaction.JBossTransactionManagerLookup
+</property>
+-->
+
+<!--
+<property name="jta.UserTransaction">
+java:comp/UserTransaction
+</property>
+//-->
+        <!-- Mapping files -->
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Operator.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Privilege.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Resource.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/operator/po/Role.hbm.xml"/>
+
+
+		<mapping resource="com/lohool/jproject/xwohi/po/AddressGroup.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/AddressList.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Notice.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/WeekScheme.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/DayScheme.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Department.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/File.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Document.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/CalendarPlan.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Job.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/NotePad.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/WorkLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/WeekLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/MonthLog.hbm.xml"/>
+
+
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/InBox.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/OutBox.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/TrashBox.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/mail/po/SentBox.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/BussinessItem.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/LoanItem.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/LoanLog.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/ItemType.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/bussinessitem/po/ItemApplication.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/archive/po/Archive.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/archive/po/ArchiveCatalogue.hbm.xml"/>
+
+		<mapping resource="com/lohool/jproject/xwohi/po/KnowledgeCatalogue.hbm.xml"/>
+		<mapping resource="com/lohool/jproject/xwohi/po/Knowledge.hbm.xml"/>
+
+		<mapping resource="com/lohool/sms/increment/po/Message.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/MessageGroup.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/SendSMS.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/SentSMS.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/Customer.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/CustomerGroup.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/TradeLog.hbm.xml"/>
+		<mapping resource="com/lohool/sms/increment/po/Product.hbm.xml"/>
+<!--
+		<mapping resource="com/sxit/wap/log/po/Log.hbm.xml"/>
+		<mapping resource="com/sxit/wap/log/po/Module.hbm.xml"/>
+
+		<mapping resource="com/sxit/wap/numbersegment/po/NumberSegment.hbm.xml"/>
+		<mapping resource="com/sxit/wap/clientelereport/po/ClienteleReport.hbm.xml"/>
+
+		<mapping resource="com/sxit/wap/po/Preferential.hbm.xml"/>
+
+
+        <mapping resource="com/sxit/wap/po/Group.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/MobileUserGroup.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/MobileUser.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/Node.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/Image.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/Cp.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/Channel.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/Area.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/ChannelFee.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/CpChannel.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/FeeType.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/MobileLog.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/MobileType.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/PackageChannel.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/PackageChannelLink.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/SystemChannel.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/Top.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/UserSub.hbm.xml"/>
+        <mapping resource="com/sxit/wap/po/UserSubHis.hbm.xml"/>
+		<mapping resource="com/sxit/wap/po/ChannelType.hbm.xml"/>
+-->
+
+    </session-factory>
+
+</hibernate-configuration>

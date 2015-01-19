@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwohi>
+   <actions>
+      <action name="WorkOrderList">
+	  </action>
+      <action name="WorkOrderSearchInput" />
+      <action name="WorkOrderSearch" >
+		<sql><![CDATA[select obj from WorkOrder obj where (obj.#catalogue=? or obj.#absolutePath like ?)  and obj.#editor=? and obj.#serialNumber=? and obj.#timeLimit=? and obj.#title like ? and obj.#content like ? and obj.#createTime>$beginTime and obj.#createTime<$endTime]]></sql>
+	  </action>
+      <action name="WorkOrderAdd" />
+      <action name="WorkOrderModify" />
+      <action name="WorkOrderDelete" />
+      <action name="WorkOrderInfo" />
+      <wohi-name>WorkOrder</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WorkOrder</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="catalogue" related="catalogueID"/>
+         <field type="field" name="createTime" autowire="ALL"/>
+      </fields>
+   </actions>
+   <actions>
+       <action name="WorkOrderClassList" >
+		 <sql>select obj from WorkOrderClass obj where obj.id!=1 and obj.#parent=$parentId</sql>
+	  </action>      
+      <action name="WorkOrderClassSelectDialog" >
+ 		 <sql>select obj from WorkOrderClass obj where obj.id!=1 and obj.#parent=?</sql>
+	  </action>      
+	  <action name="WorkOrderClassAdd" />
+      <action name="WorkOrderClassModify" />
+      <action name="WorkOrderClassDelete" />
+      <action name="WorkOrderClassInfo" />
+     <action name="WorkOrderClassInput" />
+	  <!--
+		<sql><![CDATA[select obj from WorkOrderClass obj where obj.#id<=$max and obj.#id>$min order by id desc]]></sql>
+	  </action>
+	  -->
+      <action name="ShowPath" />
+      <action name="WorkOrderInput" />
+      <wohi-name>WorkOrderClass</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WorkOrderClass</class>
+      <fields>
+         <field type="primaryKey" name="id" />
+         <field type="relation" name="parent" related="parentID" />
+         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.WorkOrder.po.WorkOrderClass" />
+      </fields>
+   </actions>
+</xwohi>

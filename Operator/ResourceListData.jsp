@@ -11,11 +11,11 @@
 			  "data": [
 			  <ww:iterator value="objList" status="list">
 				  {
-				  "id":"<ww:property value="resourceID"/>",
-				  "name":"<ww:property value="getText(name)"/>",
-				  "nameCode":"<ww:property value="name"/>",
-				  "userType":"<ww:property value="userType"/>",
-				  "description":"<ww:property value="description"/>"
+				  "<xwohi:i18n text="ID" />":"<ww:property value="resourceID"/>",
+				  "<xwohi:i18n text="Resource.name" />":"<ww:property value="getText(name)"/>",
+				  "<xwohi:i18n text="Resource.nameCode" />":"<ww:property value="name"/>",
+				  "<xwohi:i18n text="userType" />":"<ww:property value="userType"/>",
+				  "<xwohi:i18n text="Resource.description" />":"<ww:property value="description"/>"
 				  }<ww:if test="#list.index < objList.size()-1">,</ww:if>
 			   </ww:iterator>
 			  ]

@@ -41,12 +41,10 @@ subMenu6.addItem(new MenuItem("WeekScheme","/images/open.gif","草稿箱",""')">
 subMenu6.addItem(new MenuItem("WeekScheme","/images/open.gif","垃圾箱","/TrashBox/TrashBoxList.action"')">
 </div>
 
-<h3>公文</h3>
+<h3>工单</h3>
 <div>
-
-subMenu3.addItem(new MenuItem("WeekScheme","/images/open.gif","发文","/Document/DocumentInput.action"')">
-subMenu3.addItem(new MenuItem("WeekScheme","/images/open.gif","已发文","/Document/SentedDocumentList.action"')">
-subMenu3.addItem(new MenuItem("WeekScheme","/images/open.gif","收文","/Document/ReceiveDocument.action"')">
+<a href="#" onclick="openWorkWindow('WorkOrder/WorkOrderList.action','工单')">工单</a><br />
+<a href="#" onclick="openWorkWindow('jsp/WorkOrder/WorkOrderClassList.jsp','工单类别')">工单类别</a><br />
 </div>
 
 

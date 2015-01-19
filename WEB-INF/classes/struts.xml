@@ -89,5 +89,6 @@
 <include file="../conf/xwork-Operator.xml"/>
 <include file="../conf/xwork-Customer.xml"/>
 <include file="../conf/xwork-OA.xml"/>
+<include file="../conf/xwork-WorkOrder.xml"/>
 
 </struts>

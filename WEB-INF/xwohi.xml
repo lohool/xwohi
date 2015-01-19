@@ -2,4 +2,5 @@
 <xwohi>
 	<include file="./conf/operator.xwh.xml" />
 	<include file="./conf/oa.xwh.xml" />
+	<include file="./conf/WorkOrder.xwh.xml" />
 </xwohi>

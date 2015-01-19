@@ -5,7 +5,7 @@ data[
 			  <ww:iterator value="objList" status="list">
 				  {
 				  "name":"<ww:property value="name"/>",
-				  "uri":"/temp_file/<ww:property value="#session.operation_user.account"/>/<ww:property value="url"/>"
+				  "uri":"temp_file/<ww:property value="#session.operation_user.account"/>/<ww:property value="url"/>"
 				  }<ww:if test="#list.index < objList.size()-1">,</ww:if>
 			   </ww:iterator>
 			  ]

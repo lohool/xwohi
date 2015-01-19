@@ -84,7 +84,7 @@
    </package>
 
 
-   <package name="Basic" extends="action-default" namespace="/Archive">
+   <package name="Archive" extends="action-default" namespace="/Archive">
       <default-interceptor-ref name="exceptionStack" />
       <action name="ArchiveSearchInput" class="BasicInfo">
          <result type="dispatcher" name="success">/jsp/Archive/ArchiveSearch.jsp</result>
