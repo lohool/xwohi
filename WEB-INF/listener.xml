@@ -4,16 +4,15 @@
 	<listener>
 		<name>WorkOrder Create Listener </name>
 		<description>Create details of work order processes</description>
-		<class>com.lohool.jproject.crm.listener.WorkOrderListener</class>
+		<class>com.lohool.jproject.xwohi.listener.WorkOrderListener</class>
 		<listened-component>com.lohool.jproject.xwohi.po.WorkOrder</listened-component>
 		<listened-action>Create</listened-action>
 	</listener>
 	<listener>
 		<name>WorkOrder Update Listener </name>
 		<description>Modify details of work order processes</description>
-		<class>com.lohool.jproject.crm.listener.WorkOrderListener</class>
+		<class>com.lohool.jproject.xwohi.listener.WorkOrderListener</class>
 		<listened-component>com.lohool.jproject.xwohi.po.WorkOrder</listened-component>
 		<listened-action>Update</listened-action>
-	</listener>
 	</listener>
 </listeners>

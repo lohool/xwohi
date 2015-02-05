@@ -7,7 +7,8 @@ package com.lohool.jproject.xwohi.service;
 
 import com.lohool.jproject.xwohi.po.WorkFlow;
 import com.lohool.jproject.xwohi.po.WorkFlowProcess;
-import com.lohool.jproject.xwohi.po.WorkFlowProcessType;
+import com.lohool.jproject.xwohi.po.WorkFlowType;
+
 import com.lohool.jproject.xwohi.po.WorkOrder;
 import com.lohool.jproject.xwohi.po.WorkOrderClass;
 import com.xwohi.framework.common.dao.OperationManagement;
@@ -55,7 +56,7 @@ public class WorkFlowProcessService implements Service {
         }
 
         vo.setOperator(workorder.getCreator());
-        vo.setProcessType(task.getProcessType());
+        vo.setWorkFlowType(task.getWorkFlowType());
         //WorkOrder wo=new WorkOrder();
         //wo.setId(workorderId);
         vo.setWorkOrder(workorder);
@@ -71,7 +72,7 @@ public class WorkFlowProcessService implements Service {
             this.terminate(workorder.getId(), woc.getRootClassId());
         }
 
-        getDao().modify(WorkFlowProcess.class, vo);
+        getDao().add( vo);
         currentStep = vo;
         currentTaskFlow = task;
         //dao.endTransaction();
@@ -124,8 +125,8 @@ public class WorkFlowProcessService implements Service {
         if(callInUniqueId!=null && !callInUniqueId.trim().equals(""))
         {
             //fix the process type to "来电追加"
-            WorkFlowProcessType type= (WorkFlowProcessType) dao.load(WorkFlowProcessType.class, 1);
-            po.setProcessType(type);
+            WorkFlowType type= (WorkFlowType) dao.load(WorkFlowType.class, 1);
+            po.setWorkFlowType(type);
             
             
         }
@@ -133,13 +134,13 @@ public class WorkFlowProcessService implements Service {
         {
             //if process type is passed from page, means the page is to add a process step after an addition call
             //so the current process type should to be set as it before the addition call
-            if(vo.getProcessType()!=null)
+            if(vo.getWorkFlowType()!=null)
             {
-                po.setProcessType(vo.getProcessType());
+                po.setWorkFlowType(vo.getWorkFlowType());
             }
             else
             {
-                po.setProcessType(currentStep.getProcessType());
+                po.setWorkFlowType(currentStep.getWorkFlowType());
             }
         }
 
@@ -218,7 +219,7 @@ public class WorkFlowProcessService implements Service {
             nextStep.setState(100);
             nextStep.setTaskFlowStep(nextTaskFlowSequence);
             nextStep.setContent(taskFlow.getName());
-            nextStep.setProcessType(taskFlow.getProcessType());
+            nextStep.setWorkFlowType(taskFlow.getWorkFlowType());
             nextStep.setProcessor(currentStep.getProcessor());
             //nextStep.setAssistants(currentStep.getAssistants());
             nextStep.setWorkOrder(currentStep.getWorkOrder());
@@ -252,7 +253,7 @@ public class WorkFlowProcessService implements Service {
             nextStep.setState(0);
             nextStep.setTaskFlowStep(nextTaskFlowSequence);
             nextStep.setContent(taskFlow.getName());
-            nextStep.setProcessType(taskFlow.getProcessType());
+            nextStep.setWorkFlowType(taskFlow.getWorkFlowType());
             nextStep.setOperator(currentStep.getOperator());
             //nextStep.setAssistants(currentStep.getAssistants());
             nextStep.setWorkOrder(currentStep.getWorkOrder());
@@ -308,7 +309,7 @@ public void terminate(int workOrderId, int woClassId) throws Exception {
             nextStep.setState(100);
             nextStep.setTaskFlowStep(currentStep.getTaskFlowStep() );
             nextStep.setContent("结案");
-            nextStep.setProcessType(taskFlow.getProcessType());
+            nextStep.setWorkFlowType(taskFlow.getWorkFlowType());
             nextStep.setOperator(currentStep.getOperator());
             //nextStep.setAssistants(currentStep.getAssistants());
             nextStep.setWorkOrder(currentStep.getWorkOrder());

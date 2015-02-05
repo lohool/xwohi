@@ -161,11 +161,11 @@ function _openWindowDialog(content, title,feature)
 	_window.Dialog(content, title, feature,parent,_window.focusWindowId);
 }
 
-function openDialog(url,title,isFullScreenDialog,width,height)
+function openDialog(url,title,isWindowDialog,width,height)
 {
 	var w=width?width:570;
 	var h=height?height:350;
-	if(isFullScreenDialog==true)
+	if(isWindowDialog==true)
 	{
 		//open a dialog whose parent is the xWindow's owner
 		_openWindowDialog('[url]'+url, title ,'taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h);

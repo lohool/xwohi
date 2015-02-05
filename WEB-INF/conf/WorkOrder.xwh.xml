@@ -53,4 +53,50 @@
 		 -->
       </fields>
    </actions>
+   <actions>
+      <action name="WorkFlowProcessList" >
+	  <sql>
+	   select obj from WorkFlowProcess obj where obj.#workOrder=? order by obj.processTime,obj.id ASC
+	  </sql>
+	  </action>
+      <action name="WorkFlowProcessAdd" />
+      <action name="WorkFlowProcessModify" />
+      <action name="WorkFlowProcessDelete" />
+      <action name="WorkFlowProcessInfo" />
+      <action name="WorkFlowProcessInput" />
+      <wohi-name>WorkFlowProcess</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WorkFlowProcess</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="assistants" type="relation" related="assistantId" relateClass="com.lohool.jproject.xwohi.operator.po.Operator"/>
+      </fields>
+   </actions>
+   <actions>
+      <action name="WorkFlowTypeList" />
+      <action name="WorkFlowTypeAdd" />
+      <action name="WorkFlowTypeModify" />
+      <action name="WorkFlowTypeDelete" />
+      <action name="WorkFlowTypeInfo" />
+      <action name="WorkFlowTypeInput" />
+      <wohi-name>WorkFlowType</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WorkFlowType</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="creator" type="relation" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="WorkFlowList" />
+      <action name="WorkFlowAdd" />
+      <action name="WorkFlowModify" />
+      <action name="WorkFlowDelete" />
+      <action name="WorkFlowInfo" />
+      <action name="WorkFlowInput" />
+      <wohi-name>WorkFlow</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.WorkFlow</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="workorderClass" type="relation" />
+      </fields>
+   </actions>
 </xwohi>

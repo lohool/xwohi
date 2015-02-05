@@ -35,6 +35,13 @@
       <action name="WorkOrderInput" class="BasicInput">
          <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderAdd.jsp</result>
       </action>
+      <action name="WorkOrderProcessAction" class="WorkFlowProcess">
+         <result type="dispatcher" name="saved">/jsp/common/ActionResultWindow.jsp</result>
+         <result name="show-info" type="dispatcher">/jsp/WorkOrder/WorkOrderProcessAdd.jsp</result>
+         <result name="choose-processor" type="dispatcher">/Operator/OperatorSelector/WorkOrderProcessorInfo.jsp</result>
+         <result name="complete" type="dispatcher">/jsp/common/ActionResultWindow.jsp</result>
+         <result name="terminate" type="dispatcher">/jsp/WorkOrder/completeProcess.jsp</result>
+      </action>
    </package>
    <package name="WorkOrderClass" extends="action-default" namespace="/WorkOrderClass">
       <default-interceptor-ref name="exceptionStack" />
@@ -61,6 +68,29 @@
 
       <action name="WorkOrderClassInput" class="BasicInput">
          <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderClassAdd.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="WorkFlowProcess" namespace="/WorkFlowProcess">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="WorkFlowProcessList">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowProcessListData.jsp</result>
+      </action>
+      <action class="BasicAdd" name="WorkFlowProcessAdd">
+         <result name="success" type="dispatcher">/WorkFlowProcess/WorkFlowProcessList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="WorkFlowProcessDelete">
+         <result name="success" type="dispatcher">/WorkFlowProcess/WorkFlowProcessList.action</result>
+      </action>
+      <action class="BasicInfo" name="WorkFlowProcessInfo">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowProcessInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="WorkFlowProcessModify">
+         <result name="success" type="dispatcher">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="WorkFlowProcessInput">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowProcessAdd.jsp</result>
       </action>
    </package>
 

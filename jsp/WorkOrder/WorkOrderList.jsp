@@ -25,7 +25,7 @@
 			  toolbar:[
 				  {"text":"Refresh","btnClass":"Refresh"},
 				  {"text":"Add WorkOrder","btnClass":"Add","src":"WorkOrder/WorkOrderInput.action?targetGrid=WorkOrder_list","width":550,"height":330},
-				  {"text":"工单详细信息","btnClass":"Edit","src":"WorkOrder/WorkOrderInfo.action?vo.id={0}&targetGrid=WorkOrder_list","width":550,"height":330},
+				  {"text":"宸ュ崟璇︾粏淇℃伅","btnClass":"Edit","src":"WorkOrder/WorkOrderInfo.action?vo.id={0}&targetGrid=WorkOrder_list","width":800,"height":330},
 				  {"text":"Delete","btnClass":"Delete","target":"WorkOrder_panel","src":"WorkOrder/WorkOrderDelete.action?vo.id={0}&vo.state=2&groupId=<%=request.getParameter("groupId")%>"},
 				  {"text":"Delete","btnClass":"Delete","target":"WorkOrder_panel","src":"WorkOrder/WorkOrderDelete.action?vo.id={0}&vo.state=1&groupId=<%=request.getParameter("groupId")%>"},
 				  {"text":"WorkOrder Group:<ww:property value="vo.group.name"/>","btnClass":"text"},

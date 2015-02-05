@@ -249,7 +249,8 @@ public class WorkOrderClass
     
     public int getRootClassId()
     {
-        String ids[]=this.classCode.split("/");
-        return Integer.valueOf(ids[1]);
+        //String ids[]=this.classCode.split("/");
+        //return Integer.valueOf(ids[1]);
+        return id;
     }
 }

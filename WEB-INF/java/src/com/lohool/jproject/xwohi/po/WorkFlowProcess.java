@@ -24,7 +24,7 @@ public class WorkFlowProcess
 	@ManyToOne(fetch = FetchType.LAZY)
 	private WorkOrder workOrder;
 	@ManyToOne(fetch = FetchType.LAZY)
-	private WorkFlowProcessType processType;
+	private WorkFlowType workFlowType;
 	/*
 	 * 主处理人
 	 */
@@ -101,9 +101,9 @@ public class WorkFlowProcess
 	{
 		return this.workOrder;
 	}
-	public void setProcessType(WorkFlowProcessType processType)
+	public void setWorkFlowType(WorkFlowType processType)
 	{
-		this.processType = processType;
+		this.workFlowType = processType;
 	}
 	/**
 	* @hibernate.many-to-one
@@ -114,9 +114,9 @@ public class WorkFlowProcess
 	*       lazy="false"
 	*       outer-join="false"
 	 */
-	public WorkFlowProcessType getProcessType( )
+	public WorkFlowType getWorkFlowType( )
 	{
-		return this.processType;
+		return this.workFlowType;
 	}
 	public void setOperator(Operator operator)
 	{

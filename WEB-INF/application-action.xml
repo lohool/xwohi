@@ -19,7 +19,7 @@
 <bean id="BasicInput" class="com.xbreeze.framework.xwohi.common.action.BasicInputAction" singleton="false"></bean>
 <bean id="RoleDataPermissionModify" class="com.lohool.jproject.xwohi.operator.action.RoleDataPermissionSave" singleton="false"></bean>
 
-<bean id="WorkFlowProcess" class="com.lohool.jproject.xwohi.service.WorkFlowProcessService" singleton="false"></bean>
+<bean id="WorkFlowProcess" class="com.lohool.jproject.xwohi.action.WorkFlowProcessAction" singleton="false"></bean>
 
 </beans>
 <!--

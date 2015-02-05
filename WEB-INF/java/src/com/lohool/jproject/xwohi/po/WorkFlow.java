@@ -31,7 +31,7 @@ public class WorkFlow
 	 * 节点类型
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	private WorkFlowProcessType processType;
+	private WorkFlowType workFlowType;
 	@Column(length=500)
 	private String description;
 	/*
@@ -75,9 +75,9 @@ public class WorkFlow
 	{
 		return this.name;
 	}
-	public void setProcessType(WorkFlowProcessType processType)
+	public void setWorkFlowType(WorkFlowType WorkFlowType)
 	{
-		this.processType = processType;
+		this.workFlowType = WorkFlowType;
 	}
 	/**
 	* @hibernate.many-to-one
@@ -88,9 +88,9 @@ public class WorkFlow
 	*       lazy="true"
 	*       outer-join="false"
 	 */
-	public WorkFlowProcessType getProcessType( )
+	public WorkFlowType getWorkFlowType( )
 	{
-		return this.processType;
+		return this.workFlowType;
 	}
 	public void setDescription(String description)
 	{
