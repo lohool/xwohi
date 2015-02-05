@@ -16,7 +16,7 @@ Object obj=stack.findValue("objList");
 <%!
 String listChild(Collection woc)
 {
-	String htmlCode="";
+	String htmlCode=" ";
 	for(Object o: woc)
 	{
 		WorkOrderClass wo=(WorkOrderClass)o;
@@ -27,6 +27,7 @@ String listChild(Collection woc)
 			htmlCode+="\"creator\":\""+wo.getCreator().getName()+"\",";
 			htmlCode+="\"description\":\""+wo.getDescription()+"\",";
 			htmlCode+="\"state\":\""+wo.getState()+"\",";
+			htmlCode+="\"Select\":\"<a href='#' onclick='feedback({\\\"vo.workorderClass.id\\\":\\\""+wo.getId()+"\\\",workorderClass:\\\""+wo.getName()+"\\\"})'>Sel</a>\",";
 			htmlCode+="\"id\":\""+wo.getId()+"\"";			
 			if(wo.getChildren()!=null && wo.getChildren().size()>0)
 			{
@@ -36,7 +37,6 @@ String listChild(Collection woc)
 			htmlCode+=",";
 		}
 	}
-
 	return htmlCode.substring(0,htmlCode.length()-1);
 }
 %>
@@ -49,7 +49,6 @@ if(obj!=null)
 	//System.out.println(listChild(woc));
 }
 %>
-
 {
 			  "pager":
 				{
@@ -57,6 +56,10 @@ if(obj!=null)
 					"current_page":<ww:property value="page"/>,
 					"pagesize":<ww:property value="pageSize"/>
 				},
-			  "data": [<%=listChild(woc)%> ]
+			  "data": [
+					{"name":"根目录","Creator":"Admin","description":"根目录--不能修改","state":"Active","Select":"","id":"1",
+						"children":[<%=listChild(woc)%>]
+					}
+			  ]
 }
 

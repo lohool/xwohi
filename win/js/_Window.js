@@ -1324,18 +1324,43 @@ function loadContentToPanel(panelId,url,data)
 				}
 			});
 */
+//alert($.param(url, true) );
+//url=escape(url);
+//alert(url);
+/*
+	var pos=url.indexOf("?");
+	var src;
+	var param;
+	if(pos>0)
+	{
+	src=url.substring(0,pos);
+	param=url.substring(pos+1,url.length);
+	}
+	else
+	{
+		src=url;
+		param="";
+	}
+	*/
 			$.ajax({ 
+			//url: src+"?"+escape(param), 
 			url: url, 
 			//context: document.body, 
 			data :   data  ,
 			type:"post",
 			//dataType:"json",
+			contentType:'application/x-www-form-urlencoded; charset=utf-8',
 			success: function(data){
 					$('#'+panelId).html(data);
 					//set size for the elements of this window
 					$('#'+panelId+" .datagrid_wraper").each(function(i,ele){
 						$(this).resize(function(){
 							if(this.offsetWidth) $(this).find(".datagrid").datagrid("resize",this.offsetWidth,this.offsetHeight)
+						})
+					})
+					$('#'+panelId+" .treegrid_wraper").each(function(i,ele){
+						$(this).resize(function(){
+							if(this.offsetWidth) $(this).find(".treegrid").treegrid("resize",this.offsetWidth,this.offsetHeight)
 						})
 					})
 					$('#'+panelId+" DIV").each(function(i,ele){

@@ -1,4 +1,4 @@
- (function($) { 
+(function($) { 
 $.fn.treegrid= function (options){
 	var defaults=
 	{
@@ -28,6 +28,7 @@ $.fn.treegrid= function (options){
 	 toolObj:null,//jquery obj
 	 editable:false,
 	 isMSIE : true,
+	 displayLayer:0,//defaylt display which layer of the tree grid
 
 	//改变列宽初始位置
 	 ml : 0,
@@ -96,7 +97,7 @@ $.fn.treegrid= function (options){
 				{
 					//var rowid=row.rowid;
 					var rowid=$(row).attr("rowid");
-					selected[j++]=$this.data("options").data[rowid];
+					selected[j++]=getDataByRowId($this.data("options").data,rowid);
 				}
 			});    
 			return selected;
@@ -161,29 +162,47 @@ $.fn.treegrid= function (options){
 
 
 }
-
-	function parseChildren(opts,children,indent)
+	 function getDataByRowId(data,rowid)
 	 {
-		var r=0;
-		var dgd="";
-		var dgs="";
-
-		var indentString="";
-		for(var i=0;i<indent;i++)
+		 var d=data;
+		 var children=data;
+		 var ids=rowid.split("_");
+		 for(var i=1;i<ids.length;i++)
 		 {
-			indentString+="&nbsp;&nbsp;&nbsp;&nbsp;";
+			 d=children[ids[i]];
+			 children=d[d.length-1];
 		 }
+		 return d;
+	 }
+	var trrowid=0;
+	function parseChildren(opts,children,indent,parentPath)
+	 {
+			var r=0;
+			var dgd="";
+			var dgs="";
+
+			var indentString="";
+			for(var i=0;i<indent;i++)
+			 {
+				indentString+="&nbsp;&nbsp;&nbsp;&nbsp;";
+			 }
 			for(var r=0;r<children.length;r++)
 			{
 				//dgs += '<tr><td>'+(r+1)+'</td></tr>';
 				var children_display='none';
 				var display='none';
-				if(indent==0)
+				if(indent<opts.displayLayer)
 				{
 					children_display='block';
 					display='';
 				}
-				dgd += '<tr children_display="'+children_display+'" parent="p_'+indent+'" self="p_'+(indent+1)+'" style="display:'+display+'">';
+				//the last layer to be showed
+				if(indent==opts.displayLayer)
+				{
+					children_display='none';
+					display='';
+				}
+				dgd += '<tr rowid='+parentPath+'_'+r+' self_display="'+children_display+'" children_display="'+children_display+'" parent="p_'+indent+'" self="p_'+(indent+1)+'" style="display:'+display+'">';
 				if(opts.multiple){
 					dgd += '<td class="checkboxColumn"><input type="checkbox" style="margin:0;" class="dgchkbox"></td>';
 				}
@@ -208,7 +227,14 @@ $.fn.treegrid= function (options){
 						if(c==0)
 						{
 							dgd+=indentString;
-							if(hasChildren)dgd+='<img class=\"treenode\" src="win/DataGrid/image/folder.gif" />';
+							if(hasChildren)
+							{
+								if(indent<opts.displayLayer)
+								{
+									dgd+='<img class=\"treenode\" src="win/DataGrid/image/folder.gif" />';
+								}
+								else dgd+='<img class=\"treenode\" src="win/DataGrid/image/folder-closed.gif" />';
+							}
 							else dgd+='<img class=\"treeleaf\" src="win/DataGrid/image/file.gif"/>';
 						}
 						dgd+=children[r][c];
@@ -216,7 +242,7 @@ $.fn.treegrid= function (options){
 				}
 				if(hasChildren)
 				{
-					childrenRow+=parseChildren(opts,children[r][children[r].length-1],indent+1);
+					childrenRow+=parseChildren(opts,children[r][children[r].length-1],indent+1,parentPath+'_'+r);
 				}
 				dgd += '<td class="lastdata">&nbsp;</td></tr>';
 				if(childrenRow!="")dgd+=childrenRow;
@@ -230,45 +256,53 @@ $.fn.treegrid= function (options){
 		//alert(obj.attributes["children_display"])
 		//var self=$(obj.parentNode);
 		var self=$(obj.parentNode.parentNode);
-		//alert(self.attr("children_display"))
-		self.attr("children_display",self.attr("children_display")=="none"?"block":"none");
-		//if(self.children_display=="block")
+		//whether to display children node,show folder icon
+		var display=self.attr("children_display")=="block"?"none":"block";
+		self.attr("children_display",display);
+		display=self.attr("children_display")=="none"?"none":"";
+		if(display=="none")
 		{
-			var next=null;
-			next=self;
-			//alert(next.prop("outerHTML"));
-			while((next=next.next())!=null)
+			obj.src="win/DataGrid/image/folder-closed.gif";
+		}
+		else
+		{
+			obj.src="win/DataGrid/image/folder.gif";
+		}
+
+		//whether to display self
+		var self_display=self.attr("self_display")=="none"?"none":"";
+
+		var next=null;
+		next=self;
+		//alert(next.prop("outerHTML"));
+		while((next=next.next())!=null)
+		{
+			if(!next.attr("parent"))break;
+			if(next.attr("parent")==self.attr("parent"))break;
+			if(next.attr("parent")==self.attr("self"))
 			{
-				if(!next.attr("parent"))break;
-				if(next.attr("parent")==self.attr("parent"))break;
-				if(next.attr("parent")==self.attr("self"))
+					next.css("display",display);
+					next.attr("self_display",display);
+			}
+			else
+			{
+				//if the node is collapsed, collapse all of its descendant
+				if(display=="none" )
+					next.css("display","none");
+				else 
 				{
-					if(next.css("display")=="none")
-					{
-						next.css("display","");
-						next.attr("children_display","block");
-						obj.src="win/DataGrid/image/folder.gif";
-						//alert(next.prop("outerHTML"));
-					}
-					else
-					{
-						next.css("display","none");
-						next.attr("children_display","none");
-						obj.src="win/DataGrid/image/folder-closed.gif";
-					}
-				}
-				else
-				{
-					//if the node is collapsed, collapse all of its descendant
-					if(self.attr("children_display")=="none")next.css("display","none");
 					//if the node is expent, its descendant should be displayed as their status before they were collapse
-					else next.css("display",next.attr("children_display"));
+					if(next.attr("self_display")=="none")next.css("display","none");
+					else next.css("display","");
 				}
 			}
 	    }
 
 	 }
+	function displayChildrenNode(jqNode,display)
+	{
 
+	}
 	function gen_toolbar(opts)
 	 {
 		if(opts.toolbar.length==0)return null;
@@ -334,7 +368,7 @@ $.fn.treegrid= function (options){
 		
 		if(opts.data.length>0){
 			dgd="<tbody>";
-			dgd+=parseChildren(opts,opts.data,0);
+			dgd+=parseChildren(opts,opts.data,0,"");
 			/*
 			for(var r=0;r<opts.data.length;r++){
 				if(!opts.data[r])continue;
@@ -468,7 +502,7 @@ $.fn.treegrid= function (options){
 			if(opts.onclick)
 			{
 				var rowid=$(this).attr("rowid");
-				var data=opts.data[rowid];
+				var data=getDataByRowId(opts.data,rowid);;
 				opts.onclick(this,data);
 			}
 		});
@@ -477,7 +511,7 @@ $.fn.treegrid= function (options){
 			if(opts.onmouseover)
 			{
 				var rowid=$(this).attr("rowid");
-				var data=opts.data[rowid];
+				var data=getDataByRowId(opts.data,rowid);
 				opts.onmouseover(this,data);
 			}
 		});
@@ -487,7 +521,7 @@ $.fn.treegrid= function (options){
 			if(opts.onmouseout)
 			{
 				var rowid=$(this).attr("rowid");
-				var data=opts.data[rowid];
+				var data=getDataByRowId(opts.data,rowid);
 				opts.onmouseout(this,data);
 			}
 		});
@@ -551,10 +585,11 @@ $.fn.treegrid= function (options){
 			{
 				rowid=$(opts.dataobj.rows[opts.nowrow ]).attr("rowid");
 			}
-			var row=opts.data[rowid];
 			if(rowid && rowid!="" && src)
 			{
-				for( var i=0;i<opts.data[rowid].length; i++)
+				//var row=opts.data[rowid];
+				var row=getDataByRowId(opts.data,rowid);
+				for( var i=0;i<row.length; i++)
 				{
 					src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 				}
@@ -566,7 +601,7 @@ $.fn.treegrid= function (options){
 				eval(sc);
 				return false;
 			}
-			
+			//src=encodeURI(src);
 			//classfy the buttons by CSS Class name
 			if(className=="Home")
 			{
@@ -607,7 +642,7 @@ $.fn.treegrid= function (options){
 						{
 							//var rowid=row.rowid;
 							var rowid=$(row).attr("rowid");
-							selected[j++]=opts.data[rowid];
+							selected[j++]=getDataByRowId(opts.data,rowid);;
 							nowrow=row;
 						}
 					});    
@@ -648,7 +683,7 @@ $.fn.treegrid= function (options){
 						{
 							//var rowid=row.rowid;
 							var rowid=$(row).attr("rowid");
-							selected[j++]=opts.data[rowid];
+							selected[j++]=getDataByRowId(opts.data,rowid);;
 						}
 					});    
 					if(selected.length<=0)

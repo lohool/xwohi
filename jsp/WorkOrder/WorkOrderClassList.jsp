@@ -6,8 +6,8 @@
 		<INPUT TYPE="hidden" name="pageSize" value="-1">
 		<INPUT TYPE="hidden" name="parentId" value="1">
 	</ww:form>
-	<div class="datagrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
-		<div id="WorkOrderClass_list" class="datagrid" style="border:solid 0px red;">Loading...</div>
+	<div class="treegrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
+		<div id="WorkOrderClass_list" class="treegrid" style="border:solid 0px red;">Loading...</div>
 	</div>
 <script>
 	     $(document).ready(function() {
@@ -17,9 +17,10 @@
 			  //height:300,
 				//minus_height:40,
 			  //multiple:true,
+			  displayLayer:1,
 			  toolbar:[
 				  {"text":"Refresh","btnClass":"Refresh"},
-				  {"text":"Add User","btnClass":"Add","src":"WorkOrderClass/WorkOrderClassInput.action","width":550,"height":230},
+				  {"text":"Add User","btnClass":"Add","src":"WorkOrderClass/WorkOrderClassInput.action?vo.id={5}&vo.parent.name={0}&vo.parent.description={2}","width":550,"height":230},
 				  {"text":"Edit WorkOrderClass Info","btnClass":"Edit","src":"WorkOrderClass/WorkOrderClassInfo.action?vo.id={1}","width":550,"height":230},
 				  {"text":"Delete","btnClass":"Delete","src":"WorkOrderClass/WorkOrderClassDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
 				  ],

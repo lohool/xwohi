@@ -5,6 +5,7 @@
 	height:100%;
 	width:100%;
 }
+.treegrid, 
 .datagrid 
 {
 	position:relative;/** must be relative*/
@@ -37,6 +38,7 @@
 	margin:2px 1px;
 }
 */
+.treegrid .datapanel,
 .datagrid .datapanel
 {
 	position:relative;
@@ -50,11 +52,13 @@
 }
 
 /*datagrid 表格全局样式 Download by http://down.liehuo.net */
+.treegrid table, 
 .datagrid table 
 {
 table-layout:fixed;
 margin:0px;
 }
+.treegrid table td, 
 .datagrid table td 
 {
 	cursor:default;
@@ -69,16 +73,25 @@ margin:0px;
 	text-overflow: ellipsis; 
 	height:20px;
 }
+.treegrid table td .arrow, 
 .datagrid table td .arrow 
 {
 font-size:8px;
 color:#808080;
 }
+.treegrid table .lastdata, 
 .datagrid table .lastdata 
 {
 	border-right:none;
 }
 
+.treegrid table .title,
+.treegrid table .column,
+.treegrid table .checkbox-column,
+.treegrid table .title .over, 
+.treegrid table .firstcolumn, 
+.treegrid table .sortdown, 
+.treegrid table .lastcolumn, 
 .datagrid table .title,
 .datagrid table .column,
 .datagrid table .checkbox-column,
@@ -99,6 +112,7 @@ color:#808080;
 	text-align:center;
 	height:30px;
 }
+.treegrid table .checkboxColumn,
 .datagrid table .checkboxColumn
 {
 	width:30px;
@@ -108,6 +122,7 @@ color:#808080;
 	text-align:center;
 	background-color:white;
 }
+.treegrid table .title .over, 
 .datagrid table .title .over 
 {
 
@@ -116,18 +131,21 @@ color:#808080;
 	text-indent:0;
 	text-align:center;
 }
+.treegrid table .firstcolumn, 
 .datagrid table .firstcolumn 
 {
 	width:30px;
 	text-indent:0px;
 	border-left:0px dotted #404040;
 }
+.treegrid table .lastcolumn, 
 .datagrid table .lastcolumn 
 {
 	border-right:0px dotted #404040;
 }
 
 
+.treegrid table .sortdown, 
 .datagrid table .sortdown 
 {
 	cursor:default;
@@ -135,17 +153,20 @@ color:#808080;
 	text-indent:0;
 	text-align:center;
 }
+.treegrid table .dataover ,
 .datagrid table .dataover 
 {
 	background:#FAFAFA;
 }
 /*datagrid 选定行样式*/
+.treegrid table .selectedrow, 
 .datagrid table .selectedrow 
 {
 	background:#AED7FF;
 	color:blue;
 }
 /*datagrid 表头样式*/
+.treegrid .titlecolumn ,
 .datagrid .titlecolumn 
 {
 	width:100%;
@@ -154,6 +175,7 @@ color:#808080;
 	left:0px;
 	z-index:3;
 }
+.treegrid .titlecolumn_mask, 
 .datagrid .titlecolumn_mask 
 {
 	BACKGROUND-COLOR:#EBF3FD;
@@ -169,6 +191,7 @@ color:#808080;
 	BORDER-COLOR:0 0 threedshadow 0;
 }
 /*datagrid 左边栏样式*/
+.treegrid .slidecolumn, 
 .datagrid .slidecolumn 
 {
 	width:30px;
@@ -177,6 +200,7 @@ color:#808080;
 	left:0px;
 	z-index:2;
 }
+.treegrid .slidecolumn td ,
 .datagrid .slidecolumn td 
 {
 	width:30px;
@@ -189,6 +213,7 @@ color:#808080;
 	border-left:1px dotted #fff;
 }
 /*datagrid 内容表体样式*/
+.treegrid .datacolumn, 
 .datagrid .datacolumn 
 {
 width:100%;
@@ -196,12 +221,14 @@ width:100%;
 top:0px;
 left:0px;
 }
+.treegrid .datacolumn tbody .over, 
 .datagrid .datacolumn tbody .over 
 {
 	background:#D0E5F5;
 }
 
 /*datagrid 原点样式*/
+.treegrid .zero ,
 .datagrid .zero 
 {
 width:30px;
@@ -223,6 +250,7 @@ color:#A19F92;
 }
 
 
+.treegrid .toolbar,
 .datagrid .toolbar
 {
 	BACKGROUND-COLOR: #EBF3FD;
@@ -240,7 +268,9 @@ color:#A19F92;
 	z-index:10;
 
 }
-.datagrid .toolbar .Separator{
+.treegrid .toolbar .Separator,
+.datagrid .toolbar .Separator
+{
 	float:left;
 	height:26px;
 	border-left:1px dotted #ccc;
@@ -249,6 +279,18 @@ color:#A19F92;
 	width:1px;
 	margin:0 2 0 2;
 }
+.treegrid .toolbar .Home,
+.treegrid .toolbar .Full_page,
+.treegrid .toolbar .Refresh,
+.treegrid .toolbar .Edit,
+.treegrid .toolbar .Add,
+.treegrid .toolbar .Remove,
+.treegrid .toolbar .Delete,
+.treegrid .toolbar .Save,
+.treegrid .toolbar .Reset,
+.treegrid .toolbar .Find,
+.treegrid .toolbar .Printer,
+.treegrid .toolbar .Help,
 .datagrid .toolbar .Home,
 .datagrid .toolbar .Full_page,
 .datagrid .toolbar .Refresh,
@@ -278,6 +320,19 @@ color:#A19F92;
 	line-height:24px;
 }
 
+.treegrid .toolbar .Home:hover,
+.treegrid .toolbar .Full_page:hover,
+.treegrid .toolbar .Refresh:hover,
+.treegrid .toolbar .Edit:hover,
+.treegrid .toolbar .Add:hover,
+.treegrid .toolbar .Remove:hover,
+.treegrid .toolbar .Delete:hover,
+.treegrid .toolbar .Save:hover,
+.treegrid .toolbar .Reset:hover,
+.treegrid .toolbar .Find:hover,
+.treegrid .toolbar .Printer:hover,
+.treegrid .toolbar .Help:hover,
+.treegrid .toolbar span:hover,
 .datagrid .toolbar .Home:hover,
 .datagrid .toolbar .Full_page:hover,
 .datagrid .toolbar .Refresh:hover,
@@ -295,6 +350,7 @@ color:#A19F92;
 	BORDER:1px  solid;
 	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
 }
+.treegrid .toolbar span,
 .datagrid .toolbar span
 {
 	BACKGROUND-COLOR: #EBF3FD;
@@ -312,60 +368,75 @@ color:#A19F92;
 	line-height:24px;
 	cursor:default;
 }
+.treegrid .toolbar .display_text,
 .datagrid .toolbar .display_text
 {
 	padding-left:26px;
 	padding-right:2px;
 }
 
+.treegrid .toolbar .Refresh,
 .datagrid .toolbar .Refresh
 {
 	background:url('../../../images/blue_round/refresh.png') no-repeat;
 }
+.treegrid .toolbar .Edit,
 .datagrid .toolbar .Edit
 {
 	background:url('../../../images/blue_round/edit.png') no-repeat;
 }
+.treegrid .toolbar .Add,
 .datagrid .toolbar .Add
 {
 	background:url('../../../images/blue_round/add.png') no-repeat;
 }
+.treegrid .toolbar .Remove,
 .datagrid .toolbar .Remove
 {
 	background:url('../../../images/blue_round/remove.png') no-repeat;
 }
+.treegrid .toolbar .Delete,
 .datagrid .toolbar .Delete
 {
 	background:url('../../../images/blue_round/trash.png') no-repeat;
 }
+.treegrid .toolbar .Home,
 .datagrid .toolbar .Home
 {
 	background:url('../../../images/blue_round/home.png') no-repeat;
 }
+.treegrid .toolbar .Full_page,
 .datagrid .toolbar .Full_page
 {
 	background:url('../../../images/blue_round/full_page.png') no-repeat;
 }
+.treegrid .toolbar .Save,
 .datagrid .toolbar .Save
 {
 	background:url('../../../images/blue_round/save.png') no-repeat;
 }
+.treegrid .toolbar .Reset,
 .datagrid .toolbar .Reset
 {
 	background:url('../../../images/blue_round/reset.png') no-repeat;
 }
+.treegrid .toolbar .Find,
 .datagrid .toolbar .Find
 {
 	background:url('../../../images/blue_round/find.png') no-repeat;
 }
+.treegrid .toolbar .Printer,
 .datagrid .toolbar .Printer
 {
 	background:url('../../../images/blue_round/printer.png') no-repeat;
 }
+.treegrid .toolbar .Help,
 .datagrid .toolbar .Help
 {
 	background:url('../../../images/blue_round/help.png') no-repeat;
-}.datagrid .toolbar .Help
+}
+.treegrid .toolbar .Help,
+.datagrid .toolbar .Help
 {
 	background:url('../../../images/blue_round/help.png') no-repeat;
 }

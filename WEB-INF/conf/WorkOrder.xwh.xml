@@ -15,13 +15,18 @@
       <class>com.lohool.jproject.xwohi.po.WorkOrder</class>
       <fields>
          <field type="primaryKey" name="id" />
-         <field type="relation" name="catalogue" related="catalogueID"/>
          <field type="field" name="createTime" autowire="ALL"/>
+         <field type="field" name="creator" autowire="Create"/>
+         <field type="field" name="updator" autowire="ALL"/>
+         <field type="field" name="updateTime" autowire="ALL"/>
       </fields>
    </actions>
    <actions>
        <action name="WorkOrderClassList" >
-		 <sql>select obj from WorkOrderClass obj where obj.id!=1 and obj.#parent=$parentId</sql>
+		 <sql>select obj from WorkOrderClass obj where  obj.#parent=$parentId</sql>
+	  </action>      
+       <action name="WorkOrderClassListChildren" >
+		 <sql>select obj from WorkOrderClass obj where obj.#parent=$parentId</sql>
 	  </action>      
       <action name="WorkOrderClassSelectDialog" >
  		 <sql>select obj from WorkOrderClass obj where obj.id!=1 and obj.#parent=?</sql>
@@ -42,7 +47,10 @@
       <fields>
          <field type="primaryKey" name="id" />
          <field type="relation" name="parent" related="parentID" />
-         <field type="relation" name="children" related="childrenID" relateClass="com.lohool.jproject.xwohi.WorkOrder.po.WorkOrderClass" />
+         <field type="field" name="creator" autowire="Create"/>
+		 <!--
+         <field type="relation" name="children" related="id" relateClass="com.lohool.jproject.xwohi.po.WorkOrderClass" />
+		 -->
       </fields>
    </actions>
 </xwohi>

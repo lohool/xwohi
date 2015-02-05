@@ -294,7 +294,8 @@ function ajaxDatagridSubmit(form,targetGrid,callback)
 
 function datagridSearch(form,gridId,callback)
 {
-		$("#"+gridId).datagrid("search",form);
+		if($("#"+gridId).attr("class")=="treegrid")$("#"+gridId).treegrid("search",form);
+		else $("#"+gridId).datagrid("search",form);
 		if(callback)callback();
 		return false;
 }
@@ -391,7 +392,11 @@ function parseJsonResponse(data,targetGrid,form)
 		var win =_window.windows[_window.focusWindowId];
 		if(data.message && data.message!=""){ openAlert(data.message,"Successful Message");}
 		if(data.refresh && data.refresh!="")targetGrid=data.refresh;
-		if(targetGrid)	{$("#"+targetGrid).datagrid("refresh")}
+		if(targetGrid)	
+		{
+			if($("#"+targetGrid).attr("class")=="treegrid")$("#"+targetGrid).treegrid("refresh")
+			else $("#"+targetGrid).datagrid("refresh")
+		}
 		var target=data.target;
 		if(target && target!="")
 		{
