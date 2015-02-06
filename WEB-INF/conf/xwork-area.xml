@@ -1,0 +1,161 @@
+<!DOCTYPE struts PUBLIC     
+ "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"  
+   "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<?xml-stylesheet type="text/xsl" href="xwork1.xsl"?>
+
+<struts>
+
+   <package extends="action-default" name="Area" namespace="/Area">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="AreaList">
+         <result name="success" type="dispatcher">/Area/AreaList.jsp</result>
+      </action>
+     
+      <action class="BasicAdd" name="AreaAdd">
+         <result name="input" type="dispatcher">/Area/AreaAdd.jsp</result>
+         <result name="success" type="dispatcher">/Area/AreaList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="AreaDelete">
+         <result name="success" type="dispatcher">/Area/AreaList.action</result>
+      </action>
+      <action class="BasicInfo" name="AreaInfo">
+         <result name="success" type="dispatcher">/Area/AreaInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="AreaModify">
+         <result name="input" type="dispatcher">/Area/AreaInfo.jsp</result>
+         <result name="success" type="dispatcher">/Area/AreaList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="AreaInput">
+         <result name="success" type="dispatcher">/Area/AreaAdd.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="Province" namespace="/Province">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="ProvinceList">
+         <result name="success" type="dispatcher">/Province/ProvinceList.jsp</result>
+      </action>
+      <action class="BasicList" name="ProvinceSelectList">
+         <result name="success" type="dispatcher">/jsp/common/AreaSelect.jsp</result>
+      </action>
+      <action class="BasicList" name="ProvinceSearchSelectList">
+         <result name="success" type="dispatcher">/jsp/common/AreaSearchSelect.jsp</result>
+      </action>
+      <action class="BasicAdd" name="ProvinceAdd">
+         <result name="input" type="dispatcher">/Province/ProvinceAdd.jsp</result>
+         <result name="success" type="dispatcher">/Province/ProvinceList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="ProvinceDelete">
+         <result name="success" type="dispatcher">/Province/ProvinceList.action</result>
+      </action>
+      <action class="BasicInfo" name="ProvinceInfo">
+         <result name="success" type="dispatcher">/Province/ProvinceInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="ProvinceModify">
+         <result name="input" type="dispatcher">/Province/ProvinceInfo.jsp</result>
+         <result name="success" type="dispatcher">/Province/ProvinceList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="ProvinceInput">
+         <result name="success" type="dispatcher">/Province/ProvinceAdd.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="City" namespace="/City">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="CityList">
+         <result name="success" type="dispatcher">/City/CityList.jsp</result>
+      </action>
+      <action class="BasicList" name="CitySelectList">
+         <result name="success" type="dispatcher">/jsp/common/AreaSelect.jsp</result>
+      </action>
+      <action class="BasicList" name="CitySearchSelectList">
+         <result name="success" type="dispatcher">/jsp/common/AreaSearchSelect.jsp</result>
+      </action>
+      <action class="BasicAdd" name="CityAdd">
+         <result name="input" type="dispatcher">/City/CityAdd.jsp</result>
+         <result name="success" type="dispatcher">/City/CityList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="CityDelete">
+         <result name="success" type="dispatcher">/City/CityList.action</result>
+      </action>
+      <action class="BasicInfo" name="CityInfo">
+         <result name="success" type="dispatcher">/City/CityInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="CityModify">
+         <result name="input" type="dispatcher">/City/CityInfo.jsp</result>
+         <result name="success" type="dispatcher">/City/CityList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="CityInput">
+         <result name="success" type="dispatcher">/City/CityAdd.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="Town" namespace="/Town">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="TownList">
+         <result name="success" type="dispatcher">/Town/TownList.jsp</result>
+      </action>
+      <action class="BasicList" name="TownSelectList">
+         <result name="success" type="dispatcher">/jsp/common/AreaSelect.jsp</result>
+      </action>
+      <action class="BasicList" name="TownSearchSelectList">
+         <result name="success" type="dispatcher">/jsp/common/AreaSearchSelect.jsp</result>
+      </action>
+      <action class="BasicAdd" name="TownAdd">
+         <result name="input" type="dispatcher">/Town/TownAdd.jsp</result>
+         <result name="success" type="dispatcher">/Town/TownList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="TownDelete">
+         <result name="success" type="dispatcher">/Town/TownList.action</result>
+      </action>
+      <action class="BasicInfo" name="TownInfo">
+         <result name="success" type="dispatcher">/Town/TownInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="TownModify">
+         <result name="input" type="dispatcher">/Town/TownInfo.jsp</result>
+         <result name="success" type="dispatcher">/Town/TownList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="TownInput">
+         <result name="success" type="dispatcher">/Town/TownAdd.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="Mobile" namespace="/Mobile">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="MobileList">
+         <result name="success" type="dispatcher">/jsp/Vehicle/SalesClueInfo.jsp</result>
+      </action>
+   </package>
+   <package extends="action-default" name="CallHistory" namespace="/CallHistory">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="CallHistoryList">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/CallHistoryList.jsp</result>
+      </action>
+      <action class="BasicList" name="CommunicateList">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/CommunicateList.jsp</result>
+      </action>
+      <action class="BasicAdd" name="CallHistoryAdd">
+		   <param name="number">${vo.callNumber}</param>
+         <result name="success" type="chain">
+		   <param name="actionName">WorkOrderListByNumber</param>
+		   <param name="namespace">/WorkOrder</param>
+		   <param name="number">${vo.callNumber}</param>
+		 </result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="CallHistoryAction" name="CallHistoryAnswer">
+		   <param name="number">${vo.callNumber}</param>
+         <result name="success" type="chain">
+		   <param name="actionName">WorkOrderListByNumber</param>
+		   <param name="namespace">/WorkOrder</param>
+		   <param name="number">${vo.callNumber}</param>
+		 </result>
+         <interceptor-ref name="validationStack" />
+      </action>
+   </package>
+
+</struts>

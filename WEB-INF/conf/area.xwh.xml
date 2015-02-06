@@ -1,0 +1,92 @@
+<xwohi>
+   <actions>
+      <action name="AreaList" />
+      <action name="AreaList_ex" />
+      <action name="AreaAdd" />
+      <action name="AreaModify" />
+      <action name="AreaDelete" />
+      <action name="AreaInfo" />
+      <action name="AreaInput" />
+      <wohi-name>Area</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Area</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="ProvinceList" />
+      <action name="ProvinceSelectList" >
+		<sql>select obj from Province obj where obj.#area=?</sql>
+	  </action>
+      <action name="ProvinceSearchSelectList" >
+		<sql>select obj from Province obj where obj.#area=$area</sql>
+	  </action>
+      <action name="ProvinceAdd" />
+      <action name="ProvinceModify" />
+      <action name="ProvinceDelete" />
+      <action name="ProvinceInfo" />
+      <action name="ProvinceInput" />
+      <wohi-name>Province</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Province</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="area" type="relation" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="CityList" />
+      <action name="CitySelectList" >
+		<sql>select obj from City obj where obj.#province=?</sql>
+	  </action>
+      <action name="CitySearchSelectList" >
+		<sql>select obj from City obj where obj.#province=$province</sql>
+	  </action>
+      <action name="CityAdd" />
+      <action name="CityModify" />
+      <action name="CityDelete" />
+      <action name="CityInfo" />
+      <action name="CityInput" />
+      <wohi-name>City</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.City</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="province" type="relation" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="TownList" />
+      <action name="TownSelectList" >
+		<sql>select obj from Town obj where obj.#city=?</sql>
+	  </action>
+      <action name="TownSearchSelectList" >
+		<sql>select obj from Town obj where obj.#city=$city</sql>
+	  </action>
+      <action name="TownAdd" />
+      <action name="TownModify" />
+      <action name="TownDelete" />
+      <action name="TownInfo" />
+      <action name="TownInput" />
+      <wohi-name>Town</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Town</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+         <field name="city" type="relation" />
+      </fields>
+   </actions>
+   <actions>
+      <action name="MobileList" >
+	  <sql>select obj from Mobile obj where obj.#code = ? or obj.#areaCode=?</sql>
+	  </action>
+      <action name="MobileAdd" />
+      <action name="MobileModify" />
+      <action name="MobileDelete" />
+      <action name="MobileInfo" >
+	  </action>
+      <action name="MobileInput" />
+      <wohi-name>Mobile</wohi-name>
+      <class>com.lohool.jproject.xwohi.po.Mobile</class>
+      <fields>
+         <field name="id" type="primaryKey" />
+      </fields>
+   </actions>
+</xwohi>

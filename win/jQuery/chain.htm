@@ -1,0 +1,25 @@
+<html><head>  <title></title>  
+<style type="text/css">    
+*{margin:0;padding:0;}    
+.select{ width:120px; height:30px; margin-right:5px;}  
+</style>
+<script src="jquery-1.9.1.js" type="text/javascript"></script> 
+<script src="chainselect.js" type="text/javascript"></script> 
+</head><body>  
+<!--容器-->   
+<select class="CascadingSelect" id="box" refId="box1" refUrl="test.json?id={val}">
+<option value="1">Op 1</option>
+<option value="2">Op 2</option>
+</select>    
+<select class="CascadingSelect" id="box1" refId="box2" refUrl="test.json"></select>    
+<select class="CascadingSelect" id="box2" refId="box3" refUrl="test.json"></select>    
+<select class="CascadingSelect" id="box3" ></select>    
+
+<script type="text/javascript">  
+$(document).ready(function(){
+$(".CascadingSelect").CascadingSelect(); //设置初始值为0,1,4 
+})
+
+</script>
+</body>
+</html>

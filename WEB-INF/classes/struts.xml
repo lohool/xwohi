@@ -90,5 +90,6 @@
 <include file="../conf/xwork-Customer.xml"/>
 <include file="../conf/xwork-OA.xml"/>
 <include file="../conf/xwork-WorkOrder.xml"/>
+<include file="../conf/xwork-area.xml"/>
 
 </struts>
