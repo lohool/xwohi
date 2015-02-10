@@ -47,8 +47,10 @@
 <script src="win/js/ui.js"></script>
 <script src="win/js/util.js"></script>
 <script src="template/css_xhtml/validation.js"></script>
+<script src="template/css_xhtml/validation.js"></script>
 
 <script src="win/jQuery/jquery-ui-timepicker-addon.js"></script>
+<script src="win/js/CascadingSelect.js"></script>
 
 
 <style>

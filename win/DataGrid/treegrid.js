@@ -592,6 +592,7 @@ $.fn.treegrid= function (options){
 				for( var i=0;i<row.length; i++)
 				{
 					src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+					text=text.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 				}
 			}
 			//if it is java script, execute it.

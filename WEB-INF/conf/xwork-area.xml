@@ -130,32 +130,5 @@
          <result name="success" type="dispatcher">/jsp/Vehicle/SalesClueInfo.jsp</result>
       </action>
    </package>
-   <package extends="action-default" name="CallHistory" namespace="/CallHistory">
-      <default-interceptor-ref name="exceptionStack" />
-      <action class="BasicList" name="CallHistoryList">
-         <result name="success" type="dispatcher">/jsp/WorkOrder/CallHistoryList.jsp</result>
-      </action>
-      <action class="BasicList" name="CommunicateList">
-         <result name="success" type="dispatcher">/jsp/WorkOrder/CommunicateList.jsp</result>
-      </action>
-      <action class="BasicAdd" name="CallHistoryAdd">
-		   <param name="number">${vo.callNumber}</param>
-         <result name="success" type="chain">
-		   <param name="actionName">WorkOrderListByNumber</param>
-		   <param name="namespace">/WorkOrder</param>
-		   <param name="number">${vo.callNumber}</param>
-		 </result>
-         <interceptor-ref name="validationStack" />
-      </action>
-      <action class="CallHistoryAction" name="CallHistoryAnswer">
-		   <param name="number">${vo.callNumber}</param>
-         <result name="success" type="chain">
-		   <param name="actionName">WorkOrderListByNumber</param>
-		   <param name="namespace">/WorkOrder</param>
-		   <param name="number">${vo.callNumber}</param>
-		 </result>
-         <interceptor-ref name="validationStack" />
-      </action>
-   </package>
 
 </struts>

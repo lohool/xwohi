@@ -435,6 +435,7 @@ $.fn.datagrid= function (options){
 				for( var i=0;i<opts.data[rowid].length; i++)
 				{
 					src=src.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
+					text=text.replace(new RegExp("\\{"+i+"\\}","g"),row[i]);
 				}
 			}
 			//if it is java script, execute it.
@@ -647,7 +648,7 @@ $.fn.datagrid= function (options){
 		});
 	}
 
-		setSize = function($this,opts,w,h){
+		function setSize ($this,opts,w,h){
 			opts._width=w;
 			opts._height=h;
 			$this.css("width",opts._width);
@@ -756,6 +757,57 @@ $.fn.datagrid= function (options){
                 pager+=("<a class=\"navigator\"><span class=\"ico\">4</span></a>");
            }
             pager+=("<a class=\"navigator_longstring\" page=\"" + (pages - 1) +  "\">"+JSMsg_Paginate.lastPage +"<span class=\"ico\">:</span></a>");
+        }
+        
+        pager+=("</span></td></tr></tbody></table>") ;
+
+		return pager;
+	 }
+	 function paginate_short(currentPage,pagesize, totalRecords)
+	 {
+		var pager="";
+        if (totalRecords<0)
+            totalRecords = 0;
+        if (currentPage<0)
+            currentPage = 0;
+        if (pagesize <=0 )
+            pagesize=10;
+        var pages = Math.ceil(totalRecords / pagesize) ;
+        pager+=("<table id='paginate' class='paginate'><tbody><tr><td>") ;
+        var pageSel="<select id='paginate_pagesize' class='pagesize'>";
+		var sizes=[2, 5, 10, 20, 50, 100];
+        for(var i in sizes)
+		{
+			var selected="";
+			if(sizes[i]==pagesize)selected="selected";
+			pageSel+="<option value='"+sizes[i]+"' "+selected+">"+sizes[i]+"</option>";
+		}
+		pageSel+="</select>";
+
+		pager+=("<span class=\"string\">"+ pageSel+ JSMsg_Paginate.everyPage+"</span><span class='navigator_panel'>");
+
+        pager+=("<a class=\"navigator\" page=\"0\"><span class=\"ico\">9</span></a>");
+		//pages before current
+        for(var i=currentPage-2>=0?currentPage-2:0;i<currentPage;i++)
+        {
+            pager+="<a class=\"navigator\" page=\""+i+"\">"+(i+1)+"</a>";
+        }
+		//current page
+        pager+="<a class=\"navigator_current\">"+(currentPage+1)+"</a>";
+        //pages after current
+        for(var i=Number(currentPage)+1;i<currentPage+3 && i<pages;i++)
+        {
+            pager+="<a class=\"navigator\" page=\""+i+"\">"+(i+1)+"</a>";
+        }
+		//the last page
+        if (currentPage >= pages - 1) 
+        {
+            pager+=("<a class=\"navigator\"><span class=\"ico\">4</span></a>");
+            pager+=("<a class=\"navigator\"><span class=\"ico\">:</span></a>");
+        } 
+        else 
+        {
+            pager+=("<a class=\"navigator\" page=\"" + (pages - 1) +  "\"><span class=\"ico\">:</span></a>");
         }
         
         pager+=("</span></td></tr></tbody></table>") ;
@@ -1112,7 +1164,7 @@ $.fn.datagrid= function (options){
 			rowsobjB = null;
 		}
 	}
-	jumpToPage = function($this,page,opts){
+	function jumpToPage  ($this,page,opts){
 		if(page)
 		{
 			opts.pager.current_page=page;
