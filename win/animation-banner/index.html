@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="keywords" content="JS代码,焦点图,JS广告代码,JS特效代码" />
+<meta name="description" content="此代码内容为带动画效果的Devrama slider焦点图代码，属于站长常用代码，更多焦点图代码请访问建站模板源码网JS代码频道。" />
+<title>带动画效果的Devrama slider焦点图代码_建站模板源码网</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.devrama.slider.js"></script>
+<style type="text/css">
+	.navigation
+	{
+		position:relative;
+		Abackground-color:blue;
+		color:gray;
+		width:100%;
+		display:inline-block;
+		top:-40px;
+		text-align:center;
+		height:20px;
+	}
+	.navigation .nav-link 
+	{
+		color:gray;
+		font-size:16px;
+		Abackground-color:blue;
+		cursor:default;
+		margin-left:3px;
+	}
+	.navigation .nav-link:hover,
+	.navigation .active 
+	{
+		color:white;
+		font-size:16px;
+	}
+</style>
+</head>
+<body>
+<!-- 代码 开始 -->
+<div class="example-animation">
+	<div data-lazy-background="images/1.jpg">
+		<h3 data-pos="['0%', '110%', '0%', '5%']" data-duration="700" data-effect="spint-up" >
+			Moving
+		</h3>
+		<div data-pos="['-30%', '25%', '40%', '25%']" data-duration="700" data-effect="move">
+			Text
+		</div>
+		<div data-pos="['56%', '-40%', '56%', '11%']" data-duration="700" data-effect="move">
+			and Image
+		</div>
+		<div data-pos="['23%', '110%', '23%', '42%']" data-duration="700" data-effect="move">
+			<img data-lazy-src="images/add.jpg"/>
+		</div>
+	</div>
+	<div data-lazy-background="images/2.jpg" data-lazy-url="http://www.baidu.com">
+		<h3 data-pos="['0%', '8%']" data-duration="1000" data-effect="fadein" style="color:white;font-size:40px;">
+			Fadein
+		</h3>
+		<div data-pos="['44%', '15%']" data-duration="700" data-effect="fadein">
+			Text
+		</div>
+		<div data-pos="['66%', '11%']" data-duration="700" data-effect="fadein">
+			and Image
+		</div>
+		<div data-pos="['29%', '46%']" data-duration="700" data-delay="500" data-effect="fadein">
+			<img data-lazy-src="images/add.jpg"/>
+		</div>
+	</div>	 
+	<div data-lazy-background="images/2.jpg">
+		<h3 data-pos="['0%', '8%']" data-duration="1000" data-effect="fadein">
+			Fadein
+		</h3>
+		<div data-pos="['44%', '15%']" data-duration="700" data-effect="fadein">
+			Text
+		</div>
+		<div data-pos="['66%', '11%']" data-duration="700" data-effect="fadein">
+			and Image
+		</div>
+		<div data-pos="['29%', '46%']" data-duration="700" data-delay="500" data-effect="fadein">
+			<img data-lazy-src="images/add.jpg"/>
+		</div>
+	</div>	 
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.example-animation').DrSlider(); //Yes! that's it!
+});
+</script>
+</body>
+</html>

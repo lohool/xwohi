@@ -39,9 +39,9 @@ function form_submit(form)
 
 
 <body leftmargin="0" topmargin="0" >
-<div class="page">
-<div class="panel">Grant data group permissions to the current role.</div>
-<div class="panel">
+<div >
+<div >Grant data group permissions to the current role.</div>
+<div >
 <ww:form name="form1" namespace="/Role" action="RoleDataPermissionModify" method="post" validate="true" onsubmit="return form_submit(this)">
 <ww:hidden  name="vo.roleID"/>
 <table width="100%" align="center" cellspacing="0" cellpadding="0" id="input_table" >
@@ -55,10 +55,10 @@ function form_submit(form)
 <TR>
 		</ww:if>
 <TD width="50%" valign="top"> 
-	  <div class="panel" style="height:25px;text-align:left;">
+	  <div  style="height:25px;text-align:left;">
 		<ww:property value="#dglList.index"/>: <ww:property value="name"/> 
 	  </div>
-	  <div class="panel" style="text-align:left">
+	  <div  style="text-align:left">
 		<ww:action id="cl" name="%{URI}"  namespace="%{nameSpace}" executeResult="false" >
 			<ww:param name="pageSize" value="100" />
 		</ww:action>

@@ -1,12 +1,10 @@
 body ,html
 
 {
-	font-size: 90%;	
-	font-size: 9pt;	
+	font-size: 0.9em;
 	font-family:  "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
 	overflow:hidden; 
 }
-
 TABLE {
 CURSOR: default;  MARGIN: 0px
 }
@@ -24,7 +22,6 @@ div.page .content
 {
 padding:5px;
 }
-
 div.panel,
 div.floatpanel 
 {
@@ -42,6 +39,10 @@ div.floatpanel
 	white-space: nowrap;
 
 
+}
+.easyui-accordion div.panel
+{
+	padding:0px;
 }
 div.floatpanel 
 {
@@ -254,7 +255,29 @@ span.wwlbl
 .errorMessage
 {
 	color:red;
-	font-size:12px;
+	*font-size:12px;
 	font-style:italic;
 
+}
+
+/*JQuery UI Theme*/
+.accordion,
+.tabs
+{
+	font-size: 90%;
+}
+.tabs,
+.tabs ul
+{
+	-webkit-border-radius: 0em; 
+	-moz-border-radius: 0em;
+	border-radius: 0em;
+	border:0px;
+	border-bottom:solid 1px #99CCFF;
+	background:transparent;
+}
+.tabs
+{
+padding:0px;
+	border-bottom:solid 0px #99CCFF;
 }

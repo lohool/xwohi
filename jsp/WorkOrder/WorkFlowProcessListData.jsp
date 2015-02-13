@@ -11,10 +11,10 @@
 			  "data": [
 			  <ww:iterator value="objList" status="list">
 				  {
-				  "id":"<ww:property value="id"/>",
 				  "step":"<ww:property value="taskFlowStep"/>",
 				  "Date":"<ww:property value="processTime"/>",
 				  "content":"<ww:property value="content"/>",
+				  "id":"<ww:property value="id"/>",
 				  "state":"<ww:property value="state"/>"
 				  }<ww:if test="#list.index < objList.size()-1">,</ww:if>
 			   </ww:iterator>

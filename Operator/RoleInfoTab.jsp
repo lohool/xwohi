@@ -1,11 +1,11 @@
-<div id="tabs">
+<div id="tabs" class="tabs" >
 	<ul>
 		<li><a href="Role/RoleInfo.action?vo.roleID=<%=request.getParameter("vo.roleID")%>">Basic Info</a></li>
 		<li><a href="Role/RoleDataPermission.action?vo.roleID=<%=request.getParameter("vo.roleID")%>">Data Permission</a></li>
-		<li><a href="#tabs-1">Description</a></li>
+		<li><a href="#tabs-1">Help</a></li>
 	</ul>
 	<div id="tabs-1">
-		<p>Data Permission settings.</p>
+		Data Permission settings.
 	</div>
 </div>
 

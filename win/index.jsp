@@ -13,14 +13,14 @@
 <META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT"> 
 <META HTTP-EQUIV="expires" CONTENT="0"> 
 
-<link rel="stylesheet" href="win/styles/ui.css">
 <link rel="stylesheet" type="text/css" href="win/styles/_Window.css" />
 <link type="text/css" rel="stylesheet" href="win/DataGrid/default/dhdatagrid.css"/>
 <link type="text/css" rel="stylesheet" href="win/DataGrid/default/paginate.css"/>
-<link rel="stylesheet" href="win/jqueryui/themes/cupertino/jquery-ui.min.css" />
+<link rel="stylesheet" href="win/jqueryui/themes/redmond/jquery-ui.min.css" />
 
 <link type="text/css" rel="stylesheet" href="win/jquery-easyui/themes/default/menu.css"/>
 <link rel="stylesheet" media="all" type="text/css" href="win/styles/timepicker.css" />
+<link rel="stylesheet" href="win/styles/ui.css">
 
 <script src="win/jsMessage.jsp" type="text/javascript"></script>
 
@@ -56,7 +56,7 @@
 <style>
 	#accordion-resizer {
 		padding: 10px;
-		width: 180px;
+		width: 200px;
 		height: 400px;
 	}
 
@@ -70,7 +70,7 @@
 
 		<span class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</span>
 		<span class="menuBarButton"  onclick="openWorkWindow('http://www.baidu.com','我的任务')" >Window</span>
-		<span class="menuBarButton"  onclick="openAlert('Alert Test!','Alert')" >Alert</span>
+		<span class="menuBarButton"  onclick="openAlert('Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>','Alert')" >Alert</span>
 		<span class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</span>
 		<span class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</span>
 		<span class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog')" >Outer Dialog</span>
@@ -89,9 +89,9 @@
 		<div id="Taskbar"  style="position:absolute;left:106px;z-index:0;height:25px;border:solid 0px red;background:transparent;"></div>
 	</div>
 </div>
-<div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:42px; z-index:10001; " >
-	<div id="accordion-resizer" class="container" style="background:transparent;">
-		<div id="accordion" >
+<div id="LeftMenu"  class="panel" style="display:block;position:absolute; padding:0px; left:0px;top:42px; z-index:10001; border-right:solid 1px #99CCFF" >
+	<div id="accordion-resizer" class="container" style="background:transparent;padding:0px;">
+		<div id="accordion" class="accordion">
 		</div>
 	</div>
 	<div id="hidenMenuButton"  style="position:absolute;width:6px;height:100%;top:0px;right:0px;padding:0px;">
@@ -210,7 +210,7 @@ function resetMainFrameSize()
 	//$("#MainFrame").css("height",h-$("#TaskbarPanel").outerHeight()-2);
 	$("#MainFrame").css("height",h);
 	$("#MainFrame").css("width",w+12);
-	$("#accordion-resizer").css("height",h-24);
+	$("#accordion-resizer").css("height",h-4);
 	$("#Toolbars").css("top",document.documentElement.clientHeight-parseInt(toolbars.style.height));
 	toolbars.style.left=0;
 	toolbars.style.width="100%";
@@ -236,7 +236,7 @@ $(window).resize(function(){
 function resizeMenu()
 {
 	//var height=$(window).height()-$("#Toolbars").height()-$("#TopBar").height()-parseInt($("#LeftMenu").css("padding"))*2-parseInt($("#TopBar").css("padding"))*2-parseInt($("#accordion-resizer").css("padding"))*2-10;
-	var height=$(window).height()-$("#TopBar").outerHeight()-24;
+	var height=$(window).height()-$("#TopBar").outerHeight()-14;
 	var toolbars=document.getElementById("Toolbars");
 	if(	toolbars.style.display!="none")
 	{
@@ -246,13 +246,13 @@ function resizeMenu()
 	$( "#accordion-resizer" ).resizable({
 			minHeight: height,
 			maxHeight: height,
-			minWidth: 180,
+			minWidth: 200,
 			resize: function() {
 				//$("#LeftMenu").css("height",height);
 
 				//$( "#LeftMenu" ).css("width",$( "#accordion" ).width()+20);
 				//$( "#LeftMenu" ).css("height",height);
-				var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-14;
+				var w=document.documentElement.clientWidth-parseInt($("#LeftMenu").css("width"))-4;
 				$("#MainFrame").css("width",w+10);
 				$("#TaskbarPanel_Mark").css("width",$( "#LeftMenu" ).width()+2);
 				$("#TaskbarPanel").css("width",w+10);

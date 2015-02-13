@@ -14,8 +14,6 @@ String a="A"+(int)(Math.random()*1000);
 <INPUT TYPE="hidden" NAME="vo.state" value="1">
 <div class="container" layoutHeight="36" >
 	<div class="content" style="position:relative;width:50%;float:left;top:0px;">
-		<p><ww:textfield  name="vo.account" label="%{getText('WorkOrder.account')}" /></p>
-		<p><ww:textfield  name="vo.name" label="%{getText('WorkOrder.name')}" /></p>
 		<p><label class="label"><xwohi:i18n text="Class"/>:</label>
 				<INPUT  TYPE="hidden" NAME="vo.workorderClass.id" style="width:50px" value="<ww:property value="vo.workorderClass.id" />">
 				<INPUT  TYPE="text" NAME="workorderClass" readonly="true" style="width:100px" value="<ww:property value="vo.workorderClass.name" />">
@@ -42,13 +40,17 @@ String a="A"+(int)(Math.random()*1000);
 			<select class="combox" name="vo.city.id" id="w_combox_wo_city_<%=a%>" >
 				<option value="-1">----</option>
 			</select>
+			<input name="signin_mile" type="text" value="<ww:property  value="vo.city.name" />" readonly="readonly"/>
 		</p>
 		<p><label class="label" style="vertical-align:top;"><xwohi:i18n text="WorkOrder.content"/>:</label><ww:textarea  name="vo.content" cols="25" rows="7"/></p>
 	</div>
-	<div id="worklog_panel" style="position:absolute;float:right;top:0px;right:0px;width:50%;height:100%" layoutHeight="0">
+	<div id="worklog_panel" style="position:absolute;float:right;top:0px;right:0px;width:50%;border:solid 1px #66CCCC" layoutHeight="150">
 		<div id="worklog_list_datagrid_wraper" class="datagrid_wraper" >
 		<div id="worklog_list_<%=a%>" class="datagrid" >Loading...</div>
 		</div>
+	</div>
+	<div  style="position:absolute;float:right;bottom:36px;;right:0px;height:150px;width:50%;border:solid 1px #66CCCC" >
+		<TEXTAREA id="worklog_panel_detail_<%=a%>" NAME="" ROWS="" COLS="" style="height:100%;width:99%;border:solid 0px #66CCCC"></TEXTAREA>
 	</div>
 </div>
 <div class="panel" style="height:25px;text-align:center;">
@@ -77,7 +79,7 @@ String a="A"+(int)(Math.random()*1000);
 </ww:form>
 <script type="text/javascript">  
 $(document).ready(function(){
-$(".combox").CascadingSelect(); //ÉèÖÃ³õÊ¼ÖµÎª0,1,4 
+	$(".combox").CascadingSelect();
 })
 
 </script>
@@ -107,14 +109,15 @@ function addWorkLog(woId,classId)
 	          $("#worklog_list_<%=a%>").datagrid({
 			  callname: 'worklog_list_<%=a%>',
 			  columns:[
-				  "<xwohi:i18n text="ID" />",
+				  "<xwohi:i18n text="WorkOrder.step" />",
 				  "<xwohi:i18n text="WorkOrder.workorderClass" />",
-				  "<xwohi:i18n text="WorkOrder.content" />",
-				  "<xwohi:i18n text="WorkOrder.state" />"
+				  "<xwohi:i18n text="WorkOrder.content" />"
 			  ],
 			  linkedForm:"WorkFlow_list_form_<%=a%>",
-			  //colwidth:[30,120,200],
-			  url:"WorkFlowProcess/WorkFlowProcessList.action"
+			  colwidth:[30,100],
+			  params:"vo.workOrder.id=<ww:property value="vo.id" />",
+			  url:"WorkFlowProcess/WorkFlowProcessList.action",
+			  onclick:function(row,data){$("#worklog_panel_detail_<%=a%>").val(data[2])}
 			  }
 			  );
 	     });

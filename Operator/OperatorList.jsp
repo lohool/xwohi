@@ -52,7 +52,6 @@
 				  "<xwohi:i18n text="Job" />"
 			  ],
 			  linkedForm:"operator_list_form",
-			  params:"vo.name=<ww:property value="vo.name" />",
 			  url:"Operator/OperatorList.action?vo.state=1"
 			  }
 			  );

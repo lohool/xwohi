@@ -128,7 +128,8 @@ callback: example:function(btn){if(btn=="OK"){alert("OK");}}
 */
 function openAlertWindow(content, title, feature,callback)
 {
-	_window.Alert(content, title, feature,null,null,callback);
+	var con="<div class='alert_content'>"+content+"</div>";
+	_window.Alert(con, title, feature,null,null,callback);
 }
 function openAlert(content,title,callback)
 {

@@ -1207,8 +1207,6 @@ $.fn.datagrid= function (options){
 		var opts=options;
 		if(!opts && !form) form=document.getElementById($this.data("options").linkedForm);
 		if(opts && opts.pager)param="page="+(opts.pager.current_page)+"&pagesize="+opts.pager.pagesize;
-		if(opts && opts.params)param= param +"&"+opts.params; 
-
 		var url=""
 		if(opts)url=opts.url;
 		else if(form)
@@ -1217,6 +1215,7 @@ $.fn.datagrid= function (options){
 			param=$(form).find(":input").serialize();
 		}
 		if(!opts)opts=$this.data("options");
+		if(opts && opts.params)param= param +"&"+opts.params; 
 		jQuery.ajax({
             type: "post",
             async: false,
