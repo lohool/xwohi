@@ -765,6 +765,7 @@ _window.prototype.Close=function()
 		this.parent.removeChild(this.modal);
 		this.isModal=null;
 	}
+
 	//$("#window_dropdown_menu").menu('removeItem',"_M_"+this.id);
 	_window.dropdownMenu.menu('removeItem',$("#_M_"+this.id)[0]);
 	delete _window.windows[this.id];
@@ -1372,6 +1373,8 @@ function loadContentToPanel(panelId,url,data)
 						if(layoutHeight)$this.css("height",parentNode.clientHeight-parseInt(layoutHeight));
 						if(layoutWidth)$this.css("width",parentNode.clientWidth-parseInt(layoutWidth));
 					})
+					createEditTextarea(panelId+" textarea.editor");
+					createSimpleEditTextarea(panelId+" textarea.simpleEditor");
 					reDefineHTMLActions(panelId);
 
 			},

@@ -566,6 +566,8 @@ $.fn.treegrid= function (options){
 			var width=opts.toolbar[btnIndex].width;
 			var height=opts.toolbar[btnIndex].height;
 			var target=opts.toolbar[btnIndex].target;
+			var feature=opts.toolbar[btnIndex].feature;
+			if(!feature)feature="";
 			var rowid=null;
 			if(opts.multiple==true)
 			{
@@ -654,7 +656,7 @@ $.fn.treegrid= function (options){
 					else
 					{
 						if(!target)target="dialog";
-						if(target=="dialog")openDialog(src,text,true,width,height);
+						if(target=="dialog")openDialog(src,text,true,width,height,feature);
 						else openWorkWindow(src,text)
 					}
 				}
@@ -666,7 +668,7 @@ $.fn.treegrid= function (options){
 					}else
 					{
 						if(!target)target="dialog";
-						if(target=="dialog")openDialog(src,text,true,width,height);
+						if(target=="dialog")openDialog(src,text,true,width,height,feature);
 						else openWorkWindow(src,text)
 					}
 				}
@@ -785,7 +787,7 @@ $.fn.treegrid= function (options){
 				else
 				{
 					if(!target)target="dialog";
-					if(target=="dialog")openDialog(src,text,true,width,height);
+					if(target=="dialog")openDialog(src,text,true,width,height,feature);
 					else if(target=="window")openWorkWindow(src,text);
 					else if(target=="self")
 					{

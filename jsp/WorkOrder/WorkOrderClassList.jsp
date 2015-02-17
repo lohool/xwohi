@@ -4,7 +4,6 @@
 	<ww:form id="WorkOrderClass_list_form" name="WorkOrderClass_list_form" namespace="/WorkOrderClass"  action="WorkOrderClassList" method="post"   onsubmit="return windowSearch(this);">
 		<INPUT TYPE="hidden" name="page" value="0">
 		<INPUT TYPE="hidden" name="pageSize" value="-1">
-		<INPUT TYPE="hidden" name="parentId" value="1">
 	</ww:form>
 	<div class="treegrid_wraper" style="border:solid 0px red;height:100%;width:100%;" >
 		<div id="WorkOrderClass_list" class="treegrid" style="border:solid 0px red;">Loading...</div>
@@ -21,8 +20,8 @@
 			  toolbar:[
 				  {"text":"Refresh","btnClass":"Refresh"},
 				  {"text":"Add User","btnClass":"Add","src":"WorkOrderClass/WorkOrderClassInput.action?vo.id={5}&vo.parent.name={0}&vo.parent.description={2}","width":550,"height":230},
-				  {"text":"Edit WorkOrderClass Info","btnClass":"Edit","src":"WorkOrderClass/WorkOrderClassInfo.action?vo.id={1}","width":550,"height":230},
-				  {"text":"Delete","btnClass":"Delete","src":"WorkOrderClass/WorkOrderClassDelete.action?vo.id={0}&vo.name={1}&vo.state=2"},
+				  {"text":"Edit WorkOrderClass Info","btnClass":"Edit","src":"jsp/WorkOrder/WorkOrderClassInfoTab.jsp?vo.id={5}","width":600,"height":430,"feature":"resize=no"},
+				  {"text":"Delete","btnClass":"Delete","src":"WorkOrderClass/WorkOrderClassDelete.action?vo.id={5}&vo.name={1}&vo.state=2"},
 				  ],
 			  columns:[
 				  "<xwohi:i18n text="WorkOrderClass.name" />",

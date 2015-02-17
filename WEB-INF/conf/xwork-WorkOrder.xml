@@ -93,5 +93,28 @@
          <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowProcessAdd.jsp</result>
       </action>
    </package>
+   <package extends="action-default" name="WorkFlow" namespace="/WorkFlow">
+      <default-interceptor-ref name="exceptionStack" />
+      <action class="BasicList" name="WorkFlowList">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowListData.jsp</result>
+      </action>
+      <action class="BasicAdd" name="WorkFlowAdd">
+         <result name="success" type="dispatcher">/WorkFlow/WorkFlowList.action</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicDelete" name="WorkFlowDelete">
+         <result name="success" type="dispatcher">/WorkFlow/WorkFlowList.action</result>
+      </action>
+      <action class="BasicInfo" name="WorkFlowInfo">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowInfo.jsp</result>
+      </action>
+      <action class="BasicModify" name="WorkFlowModify">
+         <result name="success" type="dispatcher">/jsp/common/ActionResultDialog.jsp</result>
+         <interceptor-ref name="validationStack" />
+      </action>
+      <action class="BasicInput" name="WorkFlowInput">
+         <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowAdd.jsp</result>
+      </action>
+   </package>
 
 </struts>

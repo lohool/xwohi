@@ -42,7 +42,7 @@ String a="A"+(int)(Math.random()*1000);
 			</select>
 			<input name="signin_mile" type="text" value="<ww:property  value="vo.city.name" />" readonly="readonly"/>
 		</p>
-		<p><label class="label" style="vertical-align:top;"><xwohi:i18n text="WorkOrder.content"/>:</label><ww:textarea  name="vo.content" cols="25" rows="7"/></p>
+		<p><label class="label" style="vertical-align:top;"><xwohi:i18n text="WorkOrder.content"/>:</label><ww:textarea id="" cssClass="simpleEditor" name="vo.content" cols="25" rows="12"/></p>
 	</div>
 	<div id="worklog_panel" style="position:absolute;float:right;top:0px;right:0px;width:50%;border:solid 1px #66CCCC" layoutHeight="150">
 		<div id="worklog_list_datagrid_wraper" class="datagrid_wraper" >
@@ -50,7 +50,7 @@ String a="A"+(int)(Math.random()*1000);
 		</div>
 	</div>
 	<div  style="position:absolute;float:right;bottom:36px;;right:0px;height:150px;width:50%;border:solid 1px #66CCCC" >
-		<TEXTAREA id="worklog_panel_detail_<%=a%>" NAME="" ROWS="" COLS="" style="height:100%;width:99%;border:solid 0px #66CCCC"></TEXTAREA>
+		<TEXTAREA   NAME="" ROWS="" COLS="" style="height:100%;width:99%;border:solid 0px #66CCCC" ></TEXTAREA>
 	</div>
 </div>
 <div class="panel" style="height:25px;text-align:center;">
@@ -67,7 +67,7 @@ String a="A"+(int)(Math.random()*1000);
 	   <ww:if test="#session.operation_user.isAccess(\"/WorkOrder/WorkOrderDelete.action\")==true">
 
 	  <input type="button"  value="<xwohi:i18n text="Add Work Log" />" onclick="addWorkLog(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
-      <input type="button"  value="<xwohi:i18n text="complete" />" onclick="makesure(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
+      <input type="button"  value="<xwohi:i18n text="Next" />" onclick="makesure(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
 	  </ww:if>
 	</span>
 </div>
@@ -91,7 +91,7 @@ openConfirm({
 	title:"Confirm",
 	content:"是否确定要完成处理，提交后该事务不能回退。",
 	ok:function(){
-		openDialog("WorkOrder/WorkOrderProcessAction.action?event=3&workorderId="+woId+"&workorderClassId="+classId+"&s=<%=a%>");
+		openDialog("WorkOrder/WorkOrderProcessAction.action?event=3&workorderId="+woId+"&workorderClassId="+classId+"&s=<%=a%>","选择处理人",true,550,450,"close=no");
 	}
 
 });
@@ -102,7 +102,6 @@ function addWorkLog(woId,classId)
 		openDialog("WorkOrder/WorkOrderProcessAction.action?event=1&workorderId="+woId+"&workorderClassId="+classId+"&s=<%=a%>","处理过程信息添加");
 }
 </script>
-
 <script>
 
 	     $(document).ready(function() {
@@ -120,6 +119,7 @@ function addWorkLog(woId,classId)
 			  onclick:function(row,data){$("#worklog_panel_detail_<%=a%>").val(data[2])}
 			  }
 			  );
+			  
 	     });
-
+//createSimpleEditTextarea($('textarea.simpleEditor"));
 </script>

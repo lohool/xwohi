@@ -52,6 +52,8 @@
 <script src="win/jQuery/jquery-ui-timepicker-addon.js"></script>
 <script src="win/js/CascadingSelect.js"></script>
 
+<script type="text/javascript" src="win/editor/tinymce4/js/tinymce/jquery.tinymce.min.js"></script>
+<script type="text/javascript" src="win/editor/tinymce4/js/tinymce/tinymce.min.js"></script>
 
 <style>
 	#accordion-resizer {

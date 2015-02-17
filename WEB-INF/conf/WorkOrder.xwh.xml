@@ -86,7 +86,11 @@
       </fields>
    </actions>
    <actions>
-      <action name="WorkFlowList" />
+      <action name="WorkFlowList">
+	  <sql>
+	   select obj from WorkFlow obj where obj.#workorderClass=? order by obj.sequence ASC
+	  </sql>
+	  </action>
       <action name="WorkFlowAdd" />
       <action name="WorkFlowModify" />
       <action name="WorkFlowDelete" />
@@ -96,7 +100,6 @@
       <class>com.lohool.jproject.xwohi.po.WorkFlow</class>
       <fields>
          <field name="id" type="primaryKey" />
-         <field name="workorderClass" type="relation" />
       </fields>
    </actions>
 </xwohi>

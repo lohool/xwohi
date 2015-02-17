@@ -33,7 +33,6 @@
 			  columns:[
 				  "<xwohi:i18n text="ID" />",
 				  "<xwohi:i18n text="WorkOrder.workorderClass" />",
-				  "<xwohi:i18n text="WorkOrder.content" />",
 				  "<xwohi:i18n text="WorkOrder.state" />"
 			  ],
 			  linkedForm:"WorkOrder_list_form",
@@ -50,7 +49,6 @@
 				  [
 				  "<ww:property value="id"/>",
 				  "<ww:property value="workorderClass.name"/>",
-				  "<ww:property value="content"/>",
 				  "<ww:property value="state"/>"
 				  ],
 			   </ww:iterator>

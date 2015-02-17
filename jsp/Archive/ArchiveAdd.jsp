@@ -69,7 +69,7 @@ String listChild2(ArchiveCatalogue parent)
 <TR >
 <TD align="right" colspan="6">
 
-<textarea class="editor" style="height:368px;width:100%" id="content" name="vo.content" wrap="off"></textarea>
+<textarea class="editor" style="height:368px;width:100%" name="vo.content" wrap="off"></textarea>
 </TD>
 </TR>
 </table>
@@ -149,7 +149,7 @@ String listChild2(ArchiveCatalogue parent)
         <a href="javascript:;" onmousedown="$('#content').tinymce().execCommand('mceReplaceContent',false,'<b>{$selection}</b>');">[Replace selection]</a>
 </form>
 -->
-
+<!--
 
 <script type="text/javascript" src="win/editor/tinymce4/js/tinymce/jquery.tinymce.min.js"></script>
 <script type="text/javascript" src="win/editor/tinymce4/js/tinymce/tinymce.min.js"></script>
@@ -186,3 +186,4 @@ String listChild2(ArchiveCatalogue parent)
 		]
 	});
 </script>
+-->
