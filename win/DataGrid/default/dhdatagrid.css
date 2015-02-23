@@ -367,6 +367,16 @@ color:#A19F92;
 	line-height:24px;
 	cursor:default;
 }
+.treegrid .toolbar span.default,
+.datagrid .toolbar span.default
+{
+	padding-left:4px;
+	padding-right:4px;
+}
+.treegrid .toolbar span.ico,
+.datagrid .toolbar span.ico
+{
+}
 .treegrid .toolbar .display_text,
 .datagrid .toolbar .display_text
 {
@@ -438,4 +448,26 @@ color:#A19F92;
 .datagrid .toolbar .Help
 {
 	background:url('../../../images/blue_round/help.png') no-repeat;
+}
+
+.treegrid .toolbar span.disabled,
+.datagrid .toolbar span.disabled,
+.treegrid .toolbar span.disabled:hover,
+.datagrid .toolbar span.disabled:hover
+{
+	background-color: #C3C3C3;
+	color:black;
+	border:solid 1px #E0F8FE;
+	border-color:solid ipx #66CCFF; 
+	TEXT-DECORATION:none;
+	MARGIN:1px;
+	height:24px;
+	text-align:center;
+	vertical-align:middle;
+	float:left;
+	line-height:24px;
+	cursor:default;
+	filter:alpha(opacity=40); /*IE*/
+	-moz-opacity:0.4; /*Firefox*/
+	opacity:0.4;
 }

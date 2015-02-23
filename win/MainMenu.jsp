@@ -43,7 +43,7 @@ subMenu6.addItem(new MenuItem("WeekScheme","/images/open.gif","垃圾箱","/Tras
 
 <h3>工单</h3>
 <div>
-<a href="#" onclick="openWorkWindow('WorkOrder/WorkOrderList.action','工单')">工单</a><br />
+<a href="#" onclick="openWorkWindow('jsp/WorkOrder/WorkOrderTab.jsp','工单')">工单</a><br />
 <a href="#" onclick="openWorkWindow('jsp/WorkOrder/WorkOrderClassList.jsp','工单类别')">工单类别</a><br />
 </div>
 

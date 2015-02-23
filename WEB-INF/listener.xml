@@ -9,10 +9,10 @@
 		<listened-action>Create</listened-action>
 	</listener>
 	<listener>
-		<name>WorkOrder Update Listener </name>
-		<description>Modify details of work order processes</description>
-		<class>com.lohool.jproject.xwohi.listener.WorkOrderListener</class>
-		<listened-component>com.lohool.jproject.xwohi.po.WorkOrder</listened-component>
+		<name>WorkFlowProcess Update Listener </name>
+		<description>Set current processor to the workorder</description>
+		<class>com.lohool.jproject.xwohi.listener.WorkFlowProcessListener</class>
+		<listened-component>com.lohool.jproject.xwohi.po.WorkFlowProcess</listened-component>
 		<listened-action>Update</listened-action>
 	</listener>
 </listeners>

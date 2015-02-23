@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xwohi>
    <actions>
-      <action name="WorkOrderList">
+      <action name="MyOpenedWorkOrderList">
+		<sql><![CDATA[select obj from WorkOrder obj left join obj.workFlowStep pr  left join pr.assistants ass  where obj.state!=2 and pr.state=0 and (obj.processor=$$USER or ass.id=$$USER) and obj.#createTime>$beginTime and obj.#createTime<$endTime and obj.#title like ?]]></sql>
+	  </action>
+      <action name="AllOpenedWorkOrderList">
+		<sql><![CDATA[select obj from WorkOrder obj   where obj.state!=2 ]]></sql>
+	  </action>
+      <action name="AllMyWorkOrderList">
+		<sql><![CDATA[select obj from WorkOrder obj left join obj.workFlowStep pr  left join pr.assistants ass  where  (pr.state=0 or pr.state=100) and (obj.processor=$$USER or ass.id=$$USER)]]></sql>
+	  </action>
+      <action name="AllWorkOrderList">
 	  </action>
       <action name="WorkOrderSearchInput" />
       <action name="WorkOrderSearch" >
-		<sql><![CDATA[select obj from WorkOrder obj where (obj.#catalogue=? or obj.#absolutePath like ?)  and obj.#editor=? and obj.#serialNumber=? and obj.#timeLimit=? and obj.#title like ? and obj.#content like ? and obj.#createTime>$beginTime and obj.#createTime<$endTime]]></sql>
+		<sql><![CDATA[select obj from WorkOrder obj where obj.#absolutePath like ?  and obj.#editor=? and obj.#serialNumber=? and obj.#timeLimit=? and obj.#title like ? and obj.#content like ? and obj.#createTime>$beginTime and obj.#createTime<$endTime]]></sql>
 	  </action>
       <action name="WorkOrderAdd" />
       <action name="WorkOrderModify" />
@@ -19,6 +28,7 @@
          <field type="field" name="creator" autowire="Create"/>
          <field type="field" name="updator" autowire="ALL"/>
          <field type="field" name="updateTime" autowire="ALL"/>
+         <field type="field" name="processor" autowire="Create"/>
       </fields>
    </actions>
    <actions>

@@ -27,8 +27,9 @@ String listChild(Collection woc)
 			htmlCode+="\"creator\":\""+wo.getCreator().getName()+"\",";
 			htmlCode+="\"description\":\""+wo.getDescription()+"\",";
 			htmlCode+="\"state\":\""+wo.getState()+"\",";
-			htmlCode+="\"Select\":\"<a href='#' onclick='feedback({\\\"vo.workorderClass.id\\\":\\\""+wo.getId()+"\\\",workorderClass:\\\""+wo.getName()+"\\\"})'>Sel</a>\",";
-			htmlCode+="\"id\":\""+wo.getId()+"\"";			
+			htmlCode+="\"Select\":\"<a href='#' onclick='feedback({\\\"vo.workorderClass.id\\\":\\\""+wo.getId()+"\\\",workorderClass:\\\""+wo.getName()+"\\\",classCode:\\\""+wo.getClassCode()+"/"+wo.getId()+"\\\"})'>Sel</a>\",";
+			htmlCode+="\"id\":\""+wo.getId()+"\",";			
+			htmlCode+="\"classCode\":\""+wo.getClassCode()+"\"";			
 			if(wo.getChildren()!=null && wo.getChildren().size()>0)
 			{
 				htmlCode+=",\"children\":["+listChild(wo.getChildren())+"]";
@@ -57,7 +58,7 @@ if(obj!=null)
 					"pagesize":<ww:property value="pageSize"/>
 				},
 			  "data": [
-					{"name":"根目录","Creator":"Admin","description":"根目录--不能修改","state":"Active","Select":"","id":"1",
+					{"name":"Root","Creator":"Admin","description":"Root--uneditable","state":"Active","Select":"","id":"1","classCode":"/1",
 						"children":[<%=listChild(woc)%>]
 					}
 			  ]

@@ -178,12 +178,12 @@ function openDialog(url,title,isWindowDialog,width,height,feature)
 		_openScreenDialog('[url]'+url, title ,'taskbar=no,maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h+","+feature);
 	}
 }
-function openOwneredDialog(url,title,owner,width,height)
+function openOwneredDialog(url,title,width,height,feature)
 {
 	var w=width?width:570;
 	var h=height?height:350;
 	var win=_window.windows[_window.focusWindowId];
-	_window.InnerDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h,win.contentCase,_window.focusWindowId);
+	_window.InnerDialog('[url]'+url, title ,'maximize=no,minimize=no,width='+w+'px,height='+h+'px,minWidth='+w+',minHeight='+h+","+feature,win.contentCase,_window.focusWindowId);
 }
 
 /** 
@@ -242,8 +242,8 @@ function ajaxSubmit(form,callback)
 			type:"post",
 			dataType:"json",
 			success: function(data){
-				parseJsonResponse(data,null,form);
 				if(callback)callback();
+				parseJsonResponse(data,null,form);
 
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) 
@@ -263,7 +263,8 @@ function ajaxSubmit(form,callback)
 }
 
 /**
-	the result will be mapped to the target data grid
+	the result will be mapped to the target data grid.
+	the new data will replace the old data grid
 */
 function ajaxDatagridSubmit(form,targetGrid,callback)
 {
@@ -274,8 +275,8 @@ function ajaxDatagridSubmit(form,targetGrid,callback)
 			type:"post",
 			dataType:"json",
 			success: function(data){
+				if(callback)callback(data);
 				parseJsonResponse(data,targetGrid,form);
-				if(callback)callback();
 
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) 
@@ -502,7 +503,7 @@ function createSimpleEditTextarea(textareaEleId)
 						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 						"table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
 				 ],
-		toolbar1: "code  | bold italic underline | alignleft aligncenter alignright alignjustify |  fontsizeselect | bullist numlist | forecolor backcolor | table image",
+		toolbar1: "code | bold italic underline | alignleft aligncenter alignright alignjustify |  fontsizeselect | bullist numlist | forecolor backcolor | table image",
 		menubar: false,
 		toolbar_items_size: 'small',
 		image_advtab:true,

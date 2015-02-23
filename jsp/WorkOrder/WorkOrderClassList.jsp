@@ -19,7 +19,7 @@
 			  displayLayer:1,
 			  toolbar:[
 				  {"text":"Refresh","btnClass":"Refresh"},
-				  {"text":"Add User","btnClass":"Add","src":"WorkOrderClass/WorkOrderClassInput.action?vo.id={5}&vo.parent.name={0}&vo.parent.description={2}","width":550,"height":230},
+				  {"text":"Add User","btnClass":"Add","src":"WorkOrderClass/WorkOrderClassInput.action?vo.id={5}&vo.parent.classCode={6}&vo.parent.name={0}&vo.parent.description={2}","width":550,"height":230},
 				  {"text":"Edit WorkOrderClass Info","btnClass":"Edit","src":"jsp/WorkOrder/WorkOrderClassInfoTab.jsp?vo.id={5}","width":600,"height":430,"feature":"resize=no"},
 				  {"text":"Delete","btnClass":"Delete","src":"WorkOrderClass/WorkOrderClassDelete.action?vo.id={5}&vo.name={1}&vo.state=2"},
 				  ],
