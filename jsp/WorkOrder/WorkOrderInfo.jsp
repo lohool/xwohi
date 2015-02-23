@@ -64,10 +64,13 @@ String a="A"+(int)(Math.random()*1000);
       <input type="button" value="<xwohi:i18n text="close window" />" onclick="_window.closeCurrent()">
 	</span>
 	<span  class="content" style="display:inline-block;width:30%;" >
-	   <ww:if test="#session.operation_user.isAccess(\"/WorkOrder/WorkOrderDelete.action\")==true">
-
-	  <input type="button"  value="<xwohi:i18n text="Add Work Log" />" onclick="addWorkLog(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
-      <input type="button"  value="<xwohi:i18n text="Next" />" onclick="makesure(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
+	   <ww:if test="#session.operation_user.isAccess(\"/WorkOrder/WorkOrderModify.action\")==true ">
+	   
+		  <input type="button"  value="<xwohi:i18n text="Add Work Log" />" <ww:if test="vo.state==2">disabled="true" class="disabled"</ww:if> onclick="addWorkLog(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
+	  
+	   
+		  <input type="button"  id="next" value="<xwohi:i18n text="Next" />" <ww:if test="vo.state==2 || vo.processor.id!=#session.operation_user.id">disabled="true" class="disabled"</ww:if> onclick="makesure(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
+	  
 	  </ww:if>
 	</span>
 </div>
@@ -91,7 +94,12 @@ openConfirm({
 	title:"Confirm",
 	content:"是否确定要完成处理，提交后该事务不能回退。",
 	ok:function(){
+		//alert(_window.focusWindowId)
 		openDialog("WorkOrder/WorkOrderProcessAction.action?event=3&workorderId="+woId+"&workorderClassId="+classId+"&s=<%=a%>","选择处理人",true,550,450,"close=no");
+		//alert(_window.focusWindowId)
+	},
+	cancel:function(){
+		alert(_window.focusWindowId)
 	}
 
 });

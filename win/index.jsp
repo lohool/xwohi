@@ -79,7 +79,7 @@
 		<span class="separator" ></span>
 		<span class="menuBarButton"  onclick="openDialog('/crm/FAQList.html','·¢¶ÌÐÅ')" >FAQ</span>
 		<span class="menuBarButton" >Help</span> 
-		<span class="menuBarButton" href="Logout.action" >Log Out</span> 
+		<a class="menuBarButton" href="Logout.action" style="color:white">Log Out</a> 
 	</div>
 	<div id="TaskbarPanel_Mark" class="panel"  style="position:absolute;left:0px;top:45px;height:27px;width:201px;padding: 0px;background:transparent;z-index:10001;border-top:solid 0px #99CCFF"> 
 		<div class="BLUE_MIN_BAR" style="background:transparent;min-width:70px;padding-left:5px;" ><span class="ICON" style="background-image:url(images/png/user_business_boss.png)" ></span><span class="TITLE" style="margin-left:3px;"><nobr><ww:property value="#session.operation_user.name"/> <FONT  COLOR="black">▼</FONT></nobr></span></div>

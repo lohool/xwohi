@@ -154,7 +154,7 @@ input[type=file]:hover,
 select
 {
 	BORDER:1px solid;
-	padding:1px 4px;
+	padding:2px 8px;
 	border-color: #66CCFF; 
 	background: #FFFFFF;
 	-webkit-border-radius: .3em; 
@@ -184,6 +184,21 @@ input[type=radio]
 	#height:12px;
 	border: 1px solid white; 
 	background:transparent;
+}
+input.disabled
+{
+	background-color: #C3C3C3;
+	color: black;
+	padding:2px 8px;
+	border-color:solid ipx #66CCFF; 
+	filter:alpha(opacity=40); /*IE*/
+	-moz-opacity:0.4; /*Firefox*/
+	opacity:0.4;
+	border-radius: .3em;
+	-webkit-border-radius: .3em; 
+	-moz-border-radius: .3em;
+	border-radius: .3em;
+
 }
 
 .button
@@ -278,6 +293,12 @@ span.wwlbl
 }
 .tabs
 {
-padding:0px;
+	padding:0px;
 	border-bottom:solid 0px #99CCFF;
+}
+.tabs .ui-tabs-panel
+{
+	padding:0px;
+	height:100%;
+	width:100%;
 }

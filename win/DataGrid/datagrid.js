@@ -1,3 +1,4 @@
+/* added disable enable dunction for toolbar buttons*/
  (function($) { 
 $.fn.datagrid= function (options){
 	var defaults=
@@ -123,6 +124,26 @@ $.fn.datagrid= function (options){
 			$this=$(this);
 			jumpToPage($this,page,$this.data("options"));
 		},
+		disableButton:function(btnClass)
+		{
+			$this=$(this);
+			disableButton($this,btnClass);
+		},
+		enableButton:function(btnClass)
+		{
+			$this=$(this);
+			enableButton($this,btnClass);
+		},
+		disableAllButton:function()
+		{
+			$this=$(this);
+			disableAllButton($this);
+		},
+		enableAllButton:function()
+		{
+			$this=$(this);
+			enableAllButton($this);
+		},
 		resize : function(w,h){
 			var sw=w;
 			var sh=h;//$(this).height();
@@ -181,13 +202,16 @@ $.fn.datagrid= function (options){
 					//only has button text, but no ico
 					value=opts.toolbar[i].text;
 				}
-				else if(opts.showToolbarText==true)
+				if(opts.showToolbarText==true)
 				{
 					//show ico and text
 					value=opts.toolbar[i].text;
 					className+=" display_text";
 				}
-				bar+="<span  class=\""+className+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"'>"+value+"</span>";
+				value=value.replace(/\[[\s\S]*\]/g,"");
+				var ico="";
+				if(opts.toolbar[i].ico)ico="style=\"background:url('"+opts.toolbar[i].ico+"') no-repeat;\"";
+				bar+="<span  class=\"btn "+className+"\" btnIndex='"+i+"' title='"+opts.toolbar[i].text+"' "+ico+">"+value+"</span>";
 			}
 		 }
 		bar+="</div>";
@@ -253,7 +277,7 @@ $.fn.datagrid= function (options){
 		
 		var toolbar_html=gen_toolbar(opts);
 		var toolbar=null;
-		if(toolbar_html!=null)toolbar=$(gen_toolbar(opts));
+		if(toolbar_html!=null)toolbar=$(toolbar_html);
 
 		//datagrid frame 
 		var mainframe=$this;
@@ -405,6 +429,7 @@ $.fn.datagrid= function (options){
 			var btnIndex=$(this).attr("btnIndex");
 			var bn=this.className;
 			var text=opts.toolbar[btnIndex].text;
+			text=text.replace(new RegExp("\\[|\\]","g"),"");
 			var className=opts.toolbar[btnIndex].btnClass;
 			var src=opts.toolbar[btnIndex].src;
 			var width=opts.toolbar[btnIndex].width;
@@ -649,7 +674,36 @@ $.fn.datagrid= function (options){
 			
 		});
 	}
+		function disableButton($this,btnClass)
+		 {
+			var btn=$this.find("DIV ."+btnClass);
+			//var btnClass=btn.attr("class")
+			btn.attr('disabled','disabled');
+			//btn.removeClass(btnClass);
+			btn.addClass('disabled');
+		 }
+		function enableButton($this,btnClass)
+		 {
+			var btn=$this.find("DIV ."+btnClass);
+			btn.removeAttr('disabled');
+			//btn.removeClass(btnClass);
+			btn.removeClass('disabled');
+		 }
+		function enableAllButton($this)
+		 {
+			$this.find("DIV.toolbar .btn").each(function(){
+				$(this).removeAttr('disabled');
+				$(this).removeClass('disabled');
+			});
+		 }
 
+		function disableAllButton($this)
+		 {
+			$this.find("DIV.toolbar .btn").each(function(){
+				$(this).attr('disabled','disabled');
+				$(this).addClass('disabled');
+			});
+		 }
 		function setSize ($this,opts,w,h){
 			opts._width=w;
 			opts._height=h;

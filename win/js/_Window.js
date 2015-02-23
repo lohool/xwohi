@@ -440,6 +440,13 @@ _window.prototype.SetContent=function(content,data)
 				if(parentNode.tagName=="FORM")parentNode=parentNode.parentNode;
 				if(layoutHeight)$this.css("height",parentNode.clientHeight-parseInt(layoutHeight));
 				if(layoutWidth)$this.css("width",parentNode.clientWidth-parseInt(layoutWidth));
+
+						$( '#'+id+" DIV.tabs .ui-tabs-panel" ).each(function(){
+							$this=$(this);
+							$this.css("height",$this.parent().height()-$( '#'+id+ " DIV.tabs .header").outerHeight());
+							//alert($this.parent().height())
+						});
+
 				})
 			})
 			//this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
@@ -1353,6 +1360,31 @@ function loadContentToPanel(panelId,url,data)
 			contentType:'application/x-www-form-urlencoded; charset=utf-8',
 			success: function(data){
 					$('#'+panelId).html(data);
+					$( '#'+panelId+" .tabs" ).tabs({
+						cache: false,
+						beforeLoad: function( event, ui ) {
+							ui.jqXHR.error(function() {
+								ui.panel.html(
+									"Couldn't load this tab. We'll try to fix this as soon as possible. "  );
+							});
+						},
+						load:function(event,ui)
+						{
+							//set size for the elements of this window
+							$('#'+panelId+" .tabs .datagrid_wraper").each(function(i,ele){
+								$(this).resize(function(){
+									if(this.offsetWidth) $(this).find(".datagrid").datagrid("resize",this.offsetWidth,this.offsetHeight)
+								})
+							})
+							$('#'+panelId+" .tabs .treegrid_wraper").each(function(i,ele){
+								$(this).resize(function(){
+									if(this.offsetWidth) $(this).find(".treegrid").treegrid("resize",this.offsetWidth,this.offsetHeight)
+								})
+							})
+
+						}
+					});
+
 					//set size for the elements of this window
 					$('#'+panelId+" .datagrid_wraper").each(function(i,ele){
 						$(this).resize(function(){
@@ -1364,6 +1396,8 @@ function loadContentToPanel(panelId,url,data)
 							if(this.offsetWidth) $(this).find(".treegrid").treegrid("resize",this.offsetWidth,this.offsetHeight)
 						})
 					})
+
+
 					$('#'+panelId+" DIV").each(function(i,ele){
 						var $this=$(this);
 						var layoutHeight=$this.attr("layoutHeight");
@@ -1372,7 +1406,18 @@ function loadContentToPanel(panelId,url,data)
 						if(parentNode.tagName=="FORM")parentNode=parentNode.parentNode;
 						if(layoutHeight)$this.css("height",parentNode.clientHeight-parseInt(layoutHeight));
 						if(layoutWidth)$this.css("width",parentNode.clientWidth-parseInt(layoutWidth));
+
+						//	alert($( "#tabs .header").outerHeight())
+						$( '#'+panelId+" DIV.tabs .ui-tabs-panel" ).each(function(){
+							$this=$(this);
+							$this.css("height",$this.parent().height()-$( '#'+panelId+ " DIV.tabs .header").outerHeight());
+							//alert($this.parent().height())
+						});
 					})
+
+
+
+
 					createEditTextarea(panelId+" textarea.editor");
 					createSimpleEditTextarea(panelId+" textarea.simpleEditor");
 					reDefineHTMLActions(panelId);
@@ -1431,4 +1476,21 @@ _window.closeParent=function ()
 	var	win =_window.windows[_window.focusWindowId];
 	win=_window.windows[win.parentWindowId];
 	if(win)win.Close();
+}
+
+_window.prototype.disableElement=function(eleId)
+{
+			var id="_F"+this.id;
+			alert(id)
+			$('#'+id).find("#"+eleId).attr('disabled','disabled');
+
+}
+_window.prototype.disableButton=function(eleId)
+{
+			var id="_F"+this.id;
+			$('#'+id).find("#"+eleId).each(function(){
+				$(this).attr('disabled',true);
+				$(this).addClass("disabled");
+			});
+
 }

@@ -15,8 +15,17 @@
       <action name="WorkOrderClassSelectDialog" class="BasicList">
          <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderClassSelectDialog.jsp</result>
       </action>
-      <action name="WorkOrderList" class="BasicList">
-         <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderList.jsp</result>
+      <action name="MyOpenedWorkOrderList" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderListData.jsp</result>
+      </action>
+      <action name="AllOpenedWorkOrderList" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderListData.jsp</result>
+      </action>
+      <action name="AllMyWorkOrderList" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderListData.jsp</result>
+      </action>
+      <action name="AllWorkOrderList" class="BasicList">
+         <result type="dispatcher" name="success">/jsp/WorkOrder/WorkOrderListData.jsp</result>
       </action>
       <action name="WorkOrderAdd" class="BasicAdd">
          <result type="redirect" name="success">/jsp/common/ActionResultDialog.jsp</result>
@@ -86,7 +95,7 @@
          <result name="success" type="dispatcher">/jsp/WorkOrder/WorkFlowProcessInfo.jsp</result>
       </action>
       <action class="BasicModify" name="WorkFlowProcessModify">
-         <result name="success" type="dispatcher">/jsp/common/ActionResultDialog.jsp</result>
+         <result name="success" type="dispatcher">/jsp/WorkOrder/completeProcessResult.jsp</result>
          <interceptor-ref name="validationStack" />
       </action>
       <action class="BasicInput" name="WorkFlowProcessInput">

@@ -9,14 +9,14 @@
 <INPUT TYPE="hidden" NAME="vo.state" value="1">
 <div class="container" layoutHeight="36">
 <div class="content" >
-<p><ww:textfield  name="vo.account" label="%{getText('WorkOrder.account')}" /></p>
-<p><ww:textfield  name="vo.name" label="%{getText('WorkOrder.name')}" /></p>
+<p><ww:textfield  name="vo.title" label="%{getText('WorkOrder.title')}" style="width:300px"/></p>
 
 
 
 <p><label class="label"><xwohi:i18n text="Class"/>:</label>
 		<INPUT  TYPE="text" NAME="vo.workorderClass.id" style="width:50px">
 		<INPUT  TYPE="text" NAME="workorderClass" readonly="true" style="width:100px">
+		<INPUT  TYPE="text" NAME="classCode" readonly="true">
 		<INPUT TYPE="button" value="Sel..." onclick="openDialog('jsp/WorkOrder/WorkOrderClassSelect.jsp','Select WorkOrderClass',true,600,350)">
 </p>
 <P><label class="label"><xwohi:i18n text="Area"/>:</label>

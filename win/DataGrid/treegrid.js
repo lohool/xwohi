@@ -399,7 +399,7 @@ $.fn.treegrid= function (options){
 		
 		var toolbar_html=gen_toolbar(opts);
 		var toolbar=null;
-		if(toolbar_html!=null)toolbar=$(gen_toolbar(opts));
+		if(toolbar_html!=null)toolbar=$(toolbar_html);
 
 		//datagrid frame 
 		var mainframe=$this;

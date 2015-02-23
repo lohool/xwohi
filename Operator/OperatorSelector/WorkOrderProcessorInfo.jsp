@@ -8,7 +8,7 @@
 	<form method="post" name="operator_sel_form" id="operator_sel_form" action="WorkFlowProcess/WorkFlowProcessModify.action" class="pageForm required-validate" onsubmit="return send_operator_form(this)">
 	<INPUT TYPE="hidden" NAME="vo.id" value="<ww:property value="vo.id"/>">
 	<INPUT TYPE="hidden" NAME="workorderId" value="<%=request.getParameter("workorderId")%>">
-<INPUT TYPE="hidden" NAME="vo.state" value="1">
+	<INPUT TYPE="hidden" NAME="s" value="<%=request.getParameter("s")%>">
 <div class="container" layoutHeight="36">
 <div class="content" >
 <p><ww:textfield  name="vo.account" label="%{getText('WorkOrder.account')}" /></p>
@@ -48,7 +48,16 @@ function send_operator_form(form)
 		return false;
 	}
 	//return ajaxDatagridSubmit(form,"worklog_list",function callback(){$("#WorkOrderInfo_form").find("#btn_save").attr("disabled",true); ;});
-	return ajaxDatagridSubmit(form,"worklog_list_<%=request.getParameter("s")%>");
+	return ajaxDatagridSubmit(form,"worklog_list_<%=request.getParameter("s")%>",function(data){
+		if(data.processor!=<ww:property value="#session.operation_user.id" />)
+		{
+			//disable Next button on workorder info tab
+			var	win =_window.windows[_window.focusWindowId];
+			win=_window.windows[win.parentWindowId];
+			win.disableButton("next");
+
+		}
+	});
 
 }
 </script>
