@@ -59,7 +59,7 @@
                                     </td>
                                     <td align="left" valign="middle">
                                         <a href="javascript:void(0);">
-											<img src="Security/SecurityCodeImageAction.action" id="Verify" width="60" height="25"  style="cursor:hand;" alt="看不清，换一张" title="验证码不区分大小写，点击刷新"/>
+											<img src="Security/SecurityCodeImageAction.action" id="Verify" width="60" height="25"  style="cursor:hand;border:0" alt="看不清，换一张" title="验证码不区分大小写，点击刷新"/>
 											<ww:token />
                                         </a>
                                     </td>

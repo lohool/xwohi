@@ -502,7 +502,7 @@ function createSimpleEditTextarea(textareaEleId)
 						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 						"table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
 				 ],
-		toolbar1: "code | undo redo | bold italic underline | alignleft aligncenter alignright alignjustify |  fontsizeselect | bullist numlist | forecolor backcolor | table image",
+		toolbar1: "code  | bold italic underline | alignleft aligncenter alignright alignjustify |  fontsizeselect | bullist numlist | forecolor backcolor | table image",
 		menubar: false,
 		toolbar_items_size: 'small',
 		image_advtab:true,

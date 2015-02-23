@@ -13,6 +13,7 @@
 				  {
 				  "step":"<ww:property value="taskFlowStep"/>",
 				  "Date":"<ww:property value="processTime"/>",
+				  "processor.name":"<ww:property value="processor.name"/>",
 				  "content":"<ww:property value="content"/>",
 				  "id":"<ww:property value="id"/>",
 				  "state":"<ww:property value="state"/>"
