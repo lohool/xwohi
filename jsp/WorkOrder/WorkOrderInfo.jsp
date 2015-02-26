@@ -14,12 +14,12 @@ String a="A"+(int)(Math.random()*1000);
 <INPUT TYPE="hidden" NAME="vo.state" value="1">
 <div class="container" layoutHeight="36" >
 	<div class="content" style="position:relative;width:50%;float:left;top:0px;">
-		<p><label class="label"><xwohi:i18n text="Class"/>:</label>
+		<p><label><xwohi:i18n text="Class"/>:</label>
 				<INPUT  TYPE="hidden" NAME="vo.workorderClass.id" style="width:50px" value="<ww:property value="vo.workorderClass.id" />">
 				<INPUT  TYPE="text" NAME="workorderClass" readonly="true" style="width:100px" value="<ww:property value="vo.workorderClass.name" />">
 				<INPUT TYPE="button" value="Sel..." onclick="openDialog('jsp/WorkOrder/WorkOrderClassSelect.jsp','Select WorkOrderClass',true,600,350)">
 		</p>
-		<P><label class="label"><xwohi:i18n text="Area"/>:</label>
+		<P><label><xwohi:i18n text="Area"/>:</label>
 			<select class="combox" name="vo.area.id" refId="w_combox_wo_province_<%=a%>" refUrl="Province/ProvinceSelectList.action?vo.area.id={val}&pageSize=-1">
 				<option value="-1">----</option>
 				<ww:action id="cl" name="AreaList" namespace="/Area" executeResult="false" >
@@ -29,20 +29,18 @@ String a="A"+(int)(Math.random()*1000);
 					<option value="<ww:property value="id" />"><ww:property value="name" /></option>
 				</ww:iterator>
 			</select>
-		</p>
-		<p><label class="label"><xwohi:i18n text="Province"/>:</label>
+			<label><xwohi:i18n text="Province"/>:</label>
 			<select class="combox" name="vo.province.id" id="w_combox_wo_province_<%=a%>" refId="w_combox_wo_city_<%=a%>" refUrl="City/CitySelectList.action?vo.province.id={val}&pageSize=-1" >
 				<option value="-1">----</option>
 			</select>
-		</p>
-		<p>
-			<label class="label"><xwohi:i18n text="City"/>:</label>
+			<label><xwohi:i18n text="City"/>:</label>
 			<select class="combox" name="vo.city.id" id="w_combox_wo_city_<%=a%>" >
 				<option value="-1">----</option>
 			</select>
 			<input name="signin_mile" type="text" value="<ww:property  value="vo.city.name" />" readonly="readonly"/>
 		</p>
-		<p><label class="label" style="vertical-align:top;"><xwohi:i18n text="WorkOrder.content"/>:</label><ww:textarea id="" cssClass="simpleEditor" name="vo.content" cols="25" rows="12"/></p>
+		<p><label style="vertical-align:top;"><xwohi:i18n text="WorkOrder.content"/>:</label></p>
+		<p><ww:textarea id="" cssClass="simpleEditor" name="vo.content" cols="25" rows="12"/></p>
 	</div>
 	<div id="worklog_panel" style="position:absolute;float:right;top:0px;right:0px;width:50%;border:solid 1px #66CCCC" layoutHeight="150">
 		<div id="worklog_list_datagrid_wraper" class="datagrid_wraper" >
@@ -118,10 +116,11 @@ function addWorkLog(woId,classId)
 			  columns:[
 				  "<xwohi:i18n text="WorkOrder.step" />",
 				  "<xwohi:i18n text="WorkOrder.workorderClass" />",
+				  "<xwohi:i18n text="WorkOrder.processor" />",
 				  "<xwohi:i18n text="WorkOrder.content" />"
 			  ],
 			  linkedForm:"WorkFlow_list_form_<%=a%>",
-			  colwidth:[30,100],
+			  colwidth:[30,120,80],
 			  params:"vo.workOrder.id=<ww:property value="vo.id" />",
 			  url:"WorkFlowProcess/WorkFlowProcessList.action",
 			  onclick:function(row,data){$("#worklog_panel_detail_<%=a%>").val(data[2])}
@@ -129,5 +128,4 @@ function addWorkLog(woId,classId)
 			  );
 			  
 	     });
-//createSimpleEditTextarea($('textarea.simpleEditor"));
 </script>
