@@ -16,8 +16,6 @@
 <include file="struts-validation.xml"></include>
 
 
-	<include file="action-default.xml" />
-
 	<package extends="struts-default" name="action-default">
 	  <global-results>
 		<result type="dispatcher" name="access_rejected">/exception/notlimit.jsp</result>
@@ -31,7 +29,6 @@
 
 	<package extends="action-default" name="default">
       <default-interceptor-ref name="defaultStack" />
-
 	  	<action name="Login" class="Login">
 			<result name="error" type="dispatcher">/login/index.jsp</result>
 			<result name="input" type="dispatcher">/login/index.jsp</result>
@@ -40,7 +37,7 @@
 	  	<action name="Logout" class="Logout">
 			<result name="success" type="dispatcher">login/index.jsp</result>
 		</action>
-<!--
+		<!--
 		<action name="CustomerLogin" class="CustomerLogin">
 			<result name="error" type="dispatcher">/login/error.jsp</result>
 			<result name="input" type="dispatcher">/vrshop/login.jsp</result>
@@ -48,43 +45,15 @@
 		</action>
 		-->
    </package>
-   <!--
-      <package extends="action-default" name="LoginHistory" namespace="/LoginHistory">
-      <default-interceptor-ref name="exceptionStack" />
-      <action class="BasicList" name="LoginHistoryList">
-         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.jsp</result>
-      </action>
-      <action class="BasicAdd" name="LoginHistoryAdd">
-         <result name="input" type="dispatcher">/LoginHistory/LoginHistoryAdd.jsp</result>
-         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.action</result>
-         <interceptor-ref name="validationStack" />
-      </action>
-      <action class="BasicDelete" name="LoginHistoryDelete">
-         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.action</result>
-      </action>
-      <action class="BasicInfo" name="LoginHistoryInfo">
-         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryInfo.jsp</result>
-      </action>
-      <action class="BasicModify" name="LoginHistoryModify">
-         <result name="input" type="dispatcher">/LoginHistory/LoginHistoryInfo.jsp</result>
-         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryList.action</result>
-         <interceptor-ref name="validationStack" />
-      </action>
-      <action class="BasicInput" name="LoginHistoryInput">
-         <result name="success" type="dispatcher">/LoginHistory/LoginHistoryAdd.jsp</result>
-      </action>
-   </package>
--->
-<package name="Security" namespace="/Security" extends="action-default">
-    <action name="SecurityCodeImageAction" 
-    class="com.xbreeze.framework.xwohi.security.SecurityCodeImageAction">
-        <result name="success" type="stream">
-            <param name="contentType">image/png</param>
-            <param name="inputName">imageStream</param>
-            <param name="bufferSize">2048</param>
-        </result>
-    </action>
-</package>
+	<package name="Security" namespace="/Security" extends="action-default">
+		<action name="SecurityCodeImageAction" class="com.xbreeze.framework.xwohi.security.SecurityCodeImageAction">
+			<result name="success" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+	</package>
 
 <include file="../conf/xwork-Operator.xml"/>
 <include file="../conf/xwork-Customer.xml"/>

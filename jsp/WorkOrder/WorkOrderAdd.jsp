@@ -3,9 +3,13 @@
 <%@ taglib uri="webwork" prefix="ww" %>
 
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
+<%
+	String type=request.getParameter("type");
+	request.setAttribute("type",type);
+%>
 
 <div class="page">
-<ww:form name="WorkOrder_add_form" id="WorkOrder_add_form" namespace="/WorkOrder" action="WorkOrderAdd" method="post" validate="true" onsubmit="return ajaxDatagridSubmit(this,'WorkOrder_list');">
+<ww:form name="WorkOrder_add_form" id="WorkOrder_add_form" namespace="/WorkOrder" action="WorkOrderAdd" method="post" validate="true" onsubmit="return ajaxDatagridSubmit(this,'WorkOrder_list_%{#request.type}');">
 <INPUT TYPE="hidden" NAME="vo.state" value="1">
 <div class="container" layoutHeight="36">
 <div class="content" >

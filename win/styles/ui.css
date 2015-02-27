@@ -154,7 +154,7 @@ input[type=file]:hover,
 select
 {
 	BORDER:1px solid;
-	padding:2px 8px;
+	padding:1px 8px;
 	border-color: #66CCFF; 
 	background: #FFFFFF;
 	-webkit-border-radius: .3em; 
@@ -189,7 +189,7 @@ input.disabled
 {
 	background-color: #C3C3C3;
 	color: black;
-	padding:2px 8px;
+	padding:1px 8px;
 	border-color:solid ipx #66CCFF; 
 	filter:alpha(opacity=40); /*IE*/
 	-moz-opacity:0.4; /*Firefox*/
@@ -302,3 +302,30 @@ span.wwlbl
 	height:100%;
 	width:100%;
 }
+
+/** for Alert and Confirm dialog **/
+	 div.alert { 
+	 display:table;  
+	 position:absolute; 
+	 vertical-align:middle; 
+	 height:99%;
+	 width:99%;
+ } 
+  div.alert .ico
+  {
+	  position:absolute;
+	  display:table;
+	  width: 100px;
+	  height: 99%;
+  }
+ div.alert .wrap { 
+	 position:absolute; 
+	 display:table-cell; 
+	 vertical-align:middle;
+	 left:104px;
+	 padding:10px;
+	 overflow-x:auto;
+	 overflow-y:auto;
+	 overflow:auto;
+
+ } 

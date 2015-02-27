@@ -63,6 +63,8 @@
 	}
 
 </style>
+ <style type="text/css"> 
+ </style> 
 </head>
 
 <body >
@@ -72,7 +74,7 @@
 
 		<span class="menuBarButton"  onclick="alert(_window.focusWindowId)" >Focus Win</span>
 		<span class="menuBarButton"  onclick="openWorkWindow('http://www.baidu.com','我的任务')" >Window</span>
-		<span class="menuBarButton"  onclick="openAlert('Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>Alert Test!<br>','Alert')" >Alert</span>
+		<span class="menuBarButton"  onclick="openAlert('Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>Alert Test,Content is here!<br>','Alert')" >Alert</span>
 		<span class="menuBarButton"  onclick="openConfirm({content:'Confirm?',title:'Confirm',ok:function(){alert('Callback:Ok')},cancel:function(){alert('Callback:Cancel')}})" >Confirm</span>
 		<span class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog',true)" >Inner Dialog</span>
 		<span class="menuBarButton"  onclick="openDialog('Operator/OperatorList.jsp','Modal Dialog')" >Outer Dialog</span>
@@ -104,6 +106,7 @@
 
 	<div id="MainFrame" class="panel" style="padding:0px;">
 	<TEXTAREA id="text" NAME="text" ROWS="15" COLS="70" style="position:relative;left:200px;top:20px"></TEXTAREA>
+
 
 	<a class="draggable" style="position:absolute; border:0;left:20px;top:20px;cursor:hand" ondblclick="openWorkWindow('/NotePad/NotePadList.action','Email')"  ><img src="images/icon/20071208160057107.png" width="60"></a>
 

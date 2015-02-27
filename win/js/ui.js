@@ -128,8 +128,30 @@ callback: example:function(btn){if(btn=="OK"){alert("OK");}}
 */
 function openAlertWindow(content, title, feature,callback)
 {
-	var con="<div class='alert_content'>"+content+"</div>";
+	/*
+	<div class='alert' layoutHeight='2' layoutWidth='2' id='"+wrapId+"' >
+	<div style='position:absolute;display:table;width: 100px;height: 99%; border:solid 1px red;'>
+		<div style='display:table-cell;vertical-align: middle;text-align:center;' layoutWidth='102'>
+			<img src='images/icon/20071127133923221.png' width='60'>
+			</div>
+		</div>
+	</div>
+	<div class=\'wrap\'  id='"+contentId+"'>
+		<div class=\'content\' >"+content+"</div>
+	</div>
+	</div>
+	*/
+	var wrapId="_Alert_Wrapper_"+Math.floor(Math.random()*100); 　
+	var contentId="_Alert_content_"+Math.floor(Math.random()*100); 　
+	var icoId="_Alert_Ico_"+Math.floor(Math.random()*100); 　
+	var con="<div class='alert' layoutHeight='2' layoutWidth='2' id='"+wrapId+"' ><div class='ico'><div style='display:table-cell;vertical-align: middle;text-align:center;'><img src='win/images/alert.png' width='60'></div></div><div class=\'wrap\'  id='"+contentId+"'>"+content+"</div></div>";
 	_window.Alert(con, title, feature,null,null,callback);
+	var content=$("#"+contentId);
+	var wrapper=$("#"+wrapId);
+	var contentHeight=content.height();
+	if(contentHeight>wrapper.height())content.css("height",wrapper.height()-parseInt(content.css('padding-top'))*2);
+	content.css("width",wrapper.width()-wrapper.find(".ico").width()-parseInt(content.css('padding-left'))*2);
+	content.css("top",(wrapper.height()-content.height())/2-parseInt(content.css('padding-top')));
 }
 function openAlert(content,title,callback)
 {
@@ -139,7 +161,14 @@ function openConfirm(data)
 {
 	var feature='maximize=no,minimize=no,resize=no,width=500px,height=150px';
 	if(data.feature)feature=feature+","+data.feature;
-	_window.Confirm(data.content, data.title, feature,null,null,function(btn){
+
+	var wrapId="_Alert_Wrapper_"+Math.floor(Math.random()*100); 　
+	var contentId="_Alert_content_"+Math.floor(Math.random()*100); 　
+	var icoId="_Alert_Ico_"+Math.floor(Math.random()*100); 　
+	var content="<div class='alert' layoutHeight='2' layoutWidth='2' id='"+wrapId+"' ><div class='ico'><div style='display:table-cell;vertical-align: middle;text-align:center;'><img src='win/images/confirm1.jpg' width='60'></div></div><div class=\'wrap\'  id='"+contentId+"'>"+data.content+"</div></div>";
+
+
+	_window.Confirm(content, data.title, feature,null,null,function(btn){
 		if(btn=="OK")
 		{
 			if(data.ok)data.ok();
@@ -150,6 +179,13 @@ function openConfirm(data)
 		}
 
 	});
+
+	var content=$("#"+contentId);
+	var wrapper=$("#"+wrapId);
+	var contentHeight=content.height();
+	if(contentHeight>wrapper.height())content.css("height",wrapper.height()-parseInt(content.css('padding-top'))*2);
+	content.css("width",wrapper.width()-wrapper.find(".ico").width()-parseInt(content.css('padding-left'))*2);
+	content.css("top",(wrapper.height()-content.height())/2-parseInt(content.css('padding-top')));
 }
 
 function _openScreenDialog(content, title,feature)
@@ -232,6 +268,17 @@ function windowSearch(form,callback)
 	return false;
 }
 
+/**
+ uses data grid's search function to search data by the linked Form element
+*/
+function datagridSearch(form,gridId,callback)
+{
+		if($("#"+gridId).attr("class")=="treegrid")$("#"+gridId).treegrid("search",form);
+		else $("#"+gridId).datagrid("search",form);
+		if(callback)callback();
+		return false;
+}
+
 
 function ajaxSubmit(form,callback)
 {
@@ -265,6 +312,19 @@ function ajaxSubmit(form,callback)
 /**
 	the result will be mapped to the target data grid.
 	the new data will replace the old data grid
+	The returned result is JSON data:
+	{
+		"code":"200",
+		"message":"Successful",
+		"forwardUrl":"",
+		"refresh":"",
+		"targetType":"parent",
+		"target":"",
+		"callback":"",
+		"confirmMsg":"",
+		"action":"close"
+	}
+	The target grid defined in the Function parameter table or in the result data.target will be refreshed after gotten the result,.
 */
 function ajaxDatagridSubmit(form,targetGrid,callback)
 {
@@ -293,14 +353,6 @@ function ajaxDatagridSubmit(form,targetGrid,callback)
 	  });
 		
 	return false;
-}
-
-function datagridSearch(form,gridId,callback)
-{
-		if($("#"+gridId).attr("class")=="treegrid")$("#"+gridId).treegrid("search",form);
-		else $("#"+gridId).datagrid("search",form);
-		if(callback)callback();
-		return false;
 }
 
 /**

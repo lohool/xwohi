@@ -325,7 +325,7 @@
                 </interceptor-ref>
             </interceptor-stack>
             <interceptor-stack name="exceptionStack">
-               <!-- <interceptor-ref name="login"/>-->
+                <!--<interceptor-ref name="login"/>-->
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
             <interceptor-stack name="validationStack">

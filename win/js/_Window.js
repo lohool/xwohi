@@ -409,25 +409,6 @@ _window.prototype.SetContent=function(content,data)
 		this.oldcase.appendChild(this.oldcontent);
 		this.oldcase = null;
 	}
-	if(type=="[url]")
-	{
-		if(this.iframe)
-		{
-			if(this.contentCase.firstChild!=this.iframe) this.contentCase.replaceChild(this.iframe,this.contentCase.firstChild);
-			this.iframe.src=tent;
-		}
-		else
-		/*
-		{
-			var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
-			var id="_F"+this.id;
-			this.contentCase.innerHTML="<iframe id=\""+id+"\" name=\""+id+"\" "+str+" onfocus=\""+this.string+".Focus()\" src=\""+tent+"\" scrolling='auto' frameBorder='0' marginHeight='0' marginWidth='0' width='100%' height='100%'></iframe>";
-			if(this.bodyHeight<0) this.bodyHeight=1;
-			this.iframe=document.getElementById(id);
-			this.frame=eval(id);
-		}
-		*/
-		{
 			var id="_F"+this.id;
 			this.contentCase.id=id;
 			//this.contentCase.name="_Win_Content_Case";
@@ -449,71 +430,29 @@ _window.prototype.SetContent=function(content,data)
 
 				})
 			})
-			//this.contentCase.innerHTML="<div id='"+id+"' name='"+id+"' width='100%' height='100%' class='CONTENT' style='height:100%;'></div>";
-			/*
-			if(new RegExp("^http:").test (tent))  
-			{
-				//load a external page to a iframe
-				var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
-				var id="_F"+this.id;
-				this.contentCase.innerHTML="<iframe id=\""+id+"\" name=\""+id+"\" "+str+" onfocus=\""+this.string+".Focus()\" src=\""+tent+"\" scrolling='auto' frameBorder='0' style='width:100%;height:100%;border:0px;padding:0px;margin:0px;'></iframe>";
-				if(this.bodyHeight<0) this.bodyHeight=1;
-				this.iframe=document.getElementById(id);
-				this.frame=eval(id);
-			}
-			else
-			*/
+	if(type=="[url]")
+	{
+		if(this.iframe)
+		{
+			if(this.contentCase.firstChild!=this.iframe) this.contentCase.replaceChild(this.iframe,this.contentCase.firstChild);
+			this.iframe.src=tent;
+		}
+		else
+		/*
+		{
+			var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
+			var id="_F"+this.id;
+			this.contentCase.innerHTML="<iframe id=\""+id+"\" name=\""+id+"\" "+str+" onfocus=\""+this.string+".Focus()\" src=\""+tent+"\" scrolling='auto' frameBorder='0' marginHeight='0' marginWidth='0' width='100%' height='100%'></iframe>";
+			if(this.bodyHeight<0) this.bodyHeight=1;
+			this.iframe=document.getElementById(id);
+			this.frame=eval(id);
+		}
+		*/
+		{
 			{
 				//open a page inside this site
 				loadContentToPanel(id,tent,data);
 			}
-
-
-/*
-			$('#'+id).load(tent,data,function(response,status,xhr){
-				if(xhr.status!=200)
-				{
-				//alert("Error code:"+xhr.status);
-				$('#'+id).html(xhr.responseText);
-				}
-				else
-				{
-					//set size for the elements of this window
-					
-				}
-			});
-			*/
-				/*
-			var str=(this.bodyHeight<0)?"onload=\"if("+this.string+".bh<2)"+this.string+".ResizeBy(0,frames[frames.length-1].document.documentElement.scrollHeight);\"":"";
-			var xmlhttp;
-			if (window.XMLHttpRequest)
-			{// code for IE7+, Firefox, Chrome, Opera, Safari
-			  xmlhttp=new XMLHttpRequest();
-			}
-			else
-			{// code for IE6, IE5
-			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			} 
-			var contentCase=this.contentCase;
-			xmlhttp.onreadystatechange=function()
-			  {
-			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-				{
-				 
-				//contentCase.innerHTML=xmlhttp.responseText;
-				//contentCase.innerHTML="<div id=\""+id+"\" name=\""+id+"\" width='100%' height='100%' class='CONTENT' style='height:100%;border:solid 1px red'>"+xmlhttp.responseText+"<TEXTAREA id='test_id' ></TEXTAREA></div>";
-				contentCase.innerHTML="<div id=\""+id+"\" name=\""+id+"\" width='100%' height='100%' class='CONTENT' style='height:100%;border:solid 1px red'>"+xmlhttp.responseText+"</div>";
-				//setInnerHTML(contentCase,"<div  width='100%' height='100%' class='CONTENT' style='height:100%;'>"+xmlhttp.responseText+"</div>")
-				//document.getElementById("test_id").innerText=(contentCase.parentElement.parentElement.parentElement.innerHTML)
-				$('#'+id).load('loadContent2.htm');
-
-				}
-			  }
-			xmlhttp.open("GET",tent+ '?d='+ new Date().getTime(),true);
-			xmlhttp.send();
-			*/
-
-			
 		}
 	}
 	

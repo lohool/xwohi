@@ -6,7 +6,9 @@
       <action name="JobWorkerList" >
 		<sql>select obj from Operator obj where obj.#job=?</sql>
 	  </action>
-      <action name="OperatorSelectList" />
+      <action name="OperatorSelectList" >
+		<sql>select obj from Operator obj where obj.#name like ? and obj.state=1</sql>
+	  </action>
       <action name="OperatorAdd" />
       <action name="OperatorModify"/>
       <action name="OperatorDelete"/>

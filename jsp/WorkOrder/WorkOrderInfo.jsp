@@ -64,7 +64,8 @@ String a="A"+(int)(Math.random()*1000);
 	<span  class="content" style="display:inline-block;width:30%;" >
 	   <ww:if test="#session.operation_user.isAccess(\"/WorkOrder/WorkOrderModify.action\")==true ">
 	   
-		  <input type="button"  value="<xwohi:i18n text="Add Work Log" />" <ww:if test="vo.state==2">disabled="true" class="disabled"</ww:if> onclick="addWorkLog(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
+		  <input type="button" id="addlog" value="<xwohi:i18n text="Add Work Log" />" <ww:if test="vo.state==2">disabled="true" class="disabled"</ww:if> onclick="addWorkLog(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
+		  <input type="button" id="Forward" value="<xwohi:i18n text="Forward" />" <ww:if test="vo.state==2">disabled="true" class="disabled"</ww:if> onclick="Forward(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
 	  
 	   
 		  <input type="button"  id="next" value="<xwohi:i18n text="Next" />" <ww:if test="vo.state==2 || vo.processor.id!=#session.operation_user.id">disabled="true" class="disabled"</ww:if> onclick="makesure(<ww:property value="vo.id" />,<ww:property value="vo.workorderClass.id" />)">
@@ -106,6 +107,10 @@ openConfirm({
 function addWorkLog(woId,classId)
 {
 		openDialog("WorkOrder/WorkOrderProcessAction.action?event=1&workorderId="+woId+"&workorderClassId="+classId+"&s=<%=a%>","处理过程信息添加");
+}
+function Forward(woId,classId)
+{
+		openDialog("WorkOrder/WorkOrderProcessAction.action?event=1&workorderId="+woId+"&workorderClassId="+classId+"&s=<%=a%>","Forward");
 }
 </script>
 <script>

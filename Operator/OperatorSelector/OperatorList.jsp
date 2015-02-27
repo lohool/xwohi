@@ -3,7 +3,7 @@
 <%@ taglib uri="/WEB-INF/xwohi.tld" prefix="xwohi" %>
 <div class="page">
 <div id="aa" class="panel">
-	<ww:form id="operator_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorList" method="post"   onsubmit="return datagridSearch(this,'operator_list');">
+	<ww:form id="operator_sel_list_form" name="operator_info_form" namespace="/Operator"  action="OperatorSelectList" method="post"   onsubmit="return datagridSearch(this,'operator_Sel_list');">
 		<INPUT TYPE="hidden" name="page" value="<ww:property value="page" />">
 		<INPUT TYPE="hidden" name="pageSize" value="<ww:property value="pageSize" />">
 		<INPUT TYPE="hidden" name="vo.state" value="1">
@@ -33,7 +33,7 @@
 				  "<xwohi:i18n text="Job" />",
 				  "<xwohi:i18n text="Sel" />"
 			  ],
-			  linkedForm:"operator_list_form",
+			  linkedForm:"operator_sel_list_form",
 			  //params:"vo.name=<ww:property value="vo.name" />",
 			  url:"Operator/OperatorSelectList.action?vo.state=1"
 			  }

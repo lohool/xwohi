@@ -18,5 +18,12 @@
       <input type="button" value="<xwohi:i18n text="OK" />" onclick="_window.closeCurrent()">
 </div>
 </form>
+<script>
+			var	win =_window.windows[_window.focusWindowId];
+			win=_window.windows[win.parentWindowId];
+			win.disableButton("next");
+			win.disableButton("addlog");
+
+</script>
 </div>
 

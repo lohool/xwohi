@@ -78,7 +78,6 @@ $.fn.datagrid= function (options){
 			}
 			$(this).css("width",opts._width);
 			$(this).css("height",opts._height);
-
 			if(opts.url)
 			{
 				loadData($(this),opts);
@@ -1272,7 +1271,7 @@ $.fn.datagrid= function (options){
 		}
 		if(!opts)opts=$this.data("options");
 		if(opts && opts.params)param= param +"&"+opts.params; 
-		jQuery.ajax({
+		$.ajax({
             type: "post",
             async: false,
             url: url,
@@ -1321,7 +1320,7 @@ $.fn.datagrid= function (options){
 				setdata($this,opts,opts.data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Error:"+err);
+                //alert("Error:"+errorThrown);
 				$this.html(XMLHttpRequest.responseText);
             }
         });

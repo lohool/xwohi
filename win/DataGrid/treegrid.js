@@ -1392,7 +1392,7 @@ $.fn.treegrid= function (options){
 				setdata($this,opts,opts.data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Error:"+errorThrown);
+                //alert("Error:"+errorThrown);
 				$this.html(XMLHttpRequest.responseText);
             }
         });
